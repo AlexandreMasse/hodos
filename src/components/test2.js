@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text, View, Button} from 'react-native';
 import {connect} from 'react-redux';
-import {incrementCounter, decrementCounter} from "../store/actions/actions";
+import {incrementChapter, incrementSlide} from "../store/actions/actions";
 
 class Test2 extends React.Component {
 
@@ -12,9 +12,10 @@ class Test2 extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.text}>{this.props.counter}</Text>
-        <Button title="Plus" onPress={this.props.increment}/>
-        <Button title="Moins" onPress={this.props.decrement}/>
+        <Text style={styles.text}>Chapitre - {this.props.chapter}</Text>
+        <Text style={styles.text}>Slide - {this.props.slide}</Text>
+        <Button title="Nouveau chapitre" onPress={this.props.incrementChapterHandler}/>
+        <Button title="Nouvelle slide" onPress={this.props.incrementSlideHandler}/>
       </View>
     );
   }
@@ -22,17 +23,18 @@ class Test2 extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    counter: state
+    chapter: state.chapter,
+    slide: state.slide
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    increment: () => {
-      dispatch(incrementCounter())
+    incrementChapterHandler: () => {
+      dispatch(incrementChapter())
     },
-    decrement: () => {
-      dispatch(decrementCounter())
+    incrementSlideHandler: () => {
+      dispatch(incrementSlide())
     }
   }
 }
@@ -48,6 +50,5 @@ const styles = StyleSheet.create({
     color: 'green'
   }
 });
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(Test2)

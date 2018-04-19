@@ -1,0 +1,4 @@
+export const actionTypes = {
+  INCREMENT_CHAPTER: 'INCREMENT_CHAPTER',
+  INCREMENT_SLIDE: 'INCREMENT_SLIDE'
+}

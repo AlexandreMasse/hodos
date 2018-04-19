@@ -1,10 +1,13 @@
-export const incrementCounter = () => {
-    return {
-        type: 'INCREMENT'
-    }
+import { actionTypes } from './actionTypes'
+
+export const incrementChapter = () => {
+  return {
+    type: actionTypes.INCREMENT_CHAPTER
+  }
 }
-export const decrementCounter = () => {
-    return {
-        type: 'DECREMENT'
-    }
+
+export const incrementSlide = () => {
+  return {
+    type: actionTypes.INCREMENT_SLIDE
+  }
 }

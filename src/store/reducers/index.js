@@ -1,4 +1,4 @@
 import {createStore} from "redux";
-import counter from './counter'
+import chapterProgress from './progress'
 
-export const store = createStore(counter)
+export const store = createStore(chapterProgress)
