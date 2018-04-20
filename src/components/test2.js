@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text, View, Button, FlatList} from 'react-native';
 import {connect} from 'react-redux';
-import {incrementChapter, incrementSlide, unlockPlace} from "../store/actions/actions";
+import {incrementChapter, incrementSlide, unlockPlace, unlockChapter} from "../store/actions/actions";
 
 class Test2 extends React.Component {
 
@@ -35,6 +35,7 @@ class Test2 extends React.Component {
 const mapStateToProps = state => {
   return {
     chapter: state.progress.chapter,
+    chapters: state.chapterList,
     slide: state.progress.slide,
     places: state.placeList
   }
@@ -50,6 +51,9 @@ const mapDispatchToProps = dispatch => {
     },
     _unlockPlaceHandler: (id) => {
       dispatch(unlockPlace(id))
+    },
+    _unlockChapterHandler: (id) => {
+      dispatch(unlockChapter(id))
     }
   }
 }

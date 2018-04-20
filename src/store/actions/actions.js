@@ -18,3 +18,12 @@ export const unlockPlace = (id) => {
     id
   }
 }
+
+export const unlockChapter = (id) => {
+  return {
+    type: actionTypes.CHAPTER_UNLOCK,
+    id
+  }
+}
+
+
