@@ -29,7 +29,7 @@ const placeList = (state = initialState, action) => {
       return state.map((place) => {
         if (place.id === action.id) {
           return {
-            ...state,
+            ...place,
             isLocked: false
           }
         }

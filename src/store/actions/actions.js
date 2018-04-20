@@ -26,4 +26,19 @@ export const unlockChapter = (id) => {
   }
 }
 
+export const unlockCharacter = (id) => {
+  return {
+    type: actionTypes.CHARACTER_UNLOCK,
+    id
+  }
+}
+
+export const addCharacterToMap = (id) => {
+  return {
+    type: actionTypes.CHARACTER_ADD_TO_MAP,
+    id
+  }
+}
+
+
 
