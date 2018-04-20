@@ -11,3 +11,10 @@ export const incrementSlide = () => {
     type: actionTypes.PROGRESS_INCREMENT_SLIDE
   }
 }
+
+export const unlockPlace = (id) => {
+  return {
+    type: actionTypes.PLACE_UNLOCK,
+    id
+  }
+}

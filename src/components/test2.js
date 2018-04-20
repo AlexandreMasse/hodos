@@ -1,7 +1,7 @@
 import React from 'react';
-import {StyleSheet, Text, View, Button} from 'react-native';
+import {StyleSheet, Text, View, Button, FlatList} from 'react-native';
 import {connect} from 'react-redux';
-import {incrementChapter, incrementSlide} from "../store/actions/actions";
+import {incrementChapter, incrementSlide, unlockPlace} from "../store/actions/actions";
 
 class Test2 extends React.Component {
 
@@ -14,8 +14,19 @@ class Test2 extends React.Component {
       <View style={styles.container}>
         <Text style={styles.text}>Chapitre - {this.props.chapter}</Text>
         <Text style={styles.text}>Slide - {this.props.slide}</Text>
-        <Button title="Nouveau chapitre" onPress={this.props.incrementChapterHandler}/>
-        <Button title="Nouvelle slide" onPress={this.props.incrementSlideHandler}/>
+        <Button title="Nouveau chapitre" onPress={this.props._incrementChapterHandler}/>
+        <Button title="Nouvelle slide" onPress={this.props._incrementSlideHandler}/>
+        <Text syle={styles.listText}>{this.props.places[0].name}</Text>
+        <FlatList
+          data={this.props.places}
+          renderItem={({item}) => (
+            <View>
+              <Text>{ item.isLocked ? 'Bloqué' : 'Débloqué' }</Text>
+              <Button title="Débloquer le lieu" onPress={ () => this.props._unlockPlaceHandler(item.id) }></Button>
+            </View>
+          )}
+          keyExtractor={(item, index) => String(index)}
+        />
       </View>
     );
   }
@@ -23,18 +34,22 @@ class Test2 extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    chapter: state.chapter,
-    slide: state.slide
+    chapter: state.progress.chapter,
+    slide: state.progress.slide,
+    places: state.placeList
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    incrementChapterHandler: () => {
-      dispatch(incrementChapter())
+    _incrementChapterHandler: () => {
+      dispatch(incrementChapter)
     },
-    incrementSlideHandler: () => {
-      dispatch(incrementSlide())
+    _incrementSlideHandler: () => {
+      dispatch(incrementSlide)
+    },
+    _unlockPlaceHandler: (id) => {
+      dispatch(unlockPlace(id))
     }
   }
 }
@@ -48,6 +63,12 @@ const styles = StyleSheet.create({
   },
   text: {
     color: 'green'
+  },
+  flatlist: {
+    position: 'absolute'
+  },
+  listText: {
+    color: 'red'
   }
 });
 
