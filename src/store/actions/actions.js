@@ -1,23 +1,6 @@
 import { actionTypes } from './actionTypes'
 
-export const incrementChapter = () => {
-  return {
-    type: actionTypes.PROGRESS_INCREMENT_CHAPTER
-  }
-}
-
-export const incrementSlide = () => {
-  return {
-    type: actionTypes.PROGRESS_INCREMENT_SLIDE
-  }
-}
-
-export const unlockPlace = (id) => {
-  return {
-    type: actionTypes.PLACE_UNLOCK,
-    id
-  }
-}
+// CHAPTER
 
 export const unlockChapter = (id) => {
   return {
@@ -25,6 +8,9 @@ export const unlockChapter = (id) => {
     id
   }
 }
+
+
+// CHARACTER
 
 export const unlockCharacter = (id) => {
   return {
@@ -39,6 +25,49 @@ export const addCharacterToMap = (id) => {
     id
   }
 }
+
+
+// PROGRESS
+
+export const incrementChapter = () => {
+  return {
+    type: actionTypes.PROGRESS_INCREMENT_CHAPTER
+  }
+}
+
+export const incrementSlide = () => {
+  return {
+    type: actionTypes.PROGRESS_INCREMENT_SLIDE
+  }
+}
+
+
+// PLACE
+
+export const unlockPlace = (id) => {
+  return {
+    type: actionTypes.PLACE_UNLOCK,
+    id
+  }
+}
+
+
+// API
+
+export const getPlaceList = (placeList) => ({
+  type: actionTypes.GET_PLACELIST,
+  placeList
+});
+
+export const getCharacterList = (characterList) => ({
+  type: actionTypes.GET_CHARACTERLIST,
+  characterList
+});
+
+export const getChapterList = (chapterList) => ({
+  type: actionTypes.GET_CHAPTERLIST,
+  chapterList
+});
 
 
 

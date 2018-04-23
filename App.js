@@ -3,8 +3,16 @@ import {StyleSheet, View} from 'react-native';
 import {store} from './src/store/reducers/index'
 import {Provider} from 'react-redux'
 import Test2 from './src/components/test2'
+import { API } from "./src/store/api";
 
 class App extends React.Component {
+
+  componentWillMount () {
+    API.getPlaceList()
+    API.getCharacterList()
+    API.getChapterList()
+  }
+
   render() {
     return (
       <Provider store={store}>

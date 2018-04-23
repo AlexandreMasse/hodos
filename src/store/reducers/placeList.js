@@ -1,27 +1,6 @@
 import { actionTypes } from '../actions/actionTypes'
 
-const initialState = [
-  {
-    id: 1,
-    name: 'Londres',
-    isLocked: true
-  },
-  {
-    id: 2,
-    name: 'Paris',
-    isLocked: true
-  },
-  {
-    id: 3,
-    name: 'Tokyo',
-    isLocked: true
-  },
-  {
-    id: 4,
-    name: 'Amsterdam',
-    isLocked: true
-  }
-]
+const initialState = []
 
 const placeList = (state = initialState, action) => {
   switch (action.type) {
@@ -34,6 +13,13 @@ const placeList = (state = initialState, action) => {
           }
         }
         return place
+      })
+    case actionTypes.GET_PLACELIST:
+      return action.placeList.map((place) => {
+        return {
+          ...place,
+          isLocked: true
+        }
       })
     default:
       return state

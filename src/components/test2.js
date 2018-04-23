@@ -24,7 +24,7 @@ class Test2 extends React.Component {
               <View>
                 <Text>{ item.name }</Text>
                 <Text>{ item.isLocked ? 'Bloqué' : 'Débloqué' }</Text>
-                <Button title="Débloquer le lieu" onPress={ () => this.props._unlockPlaceHandler(item.id) }></Button>
+                <Button title="Débloquer le lieu" onPress={ () => this.props._unlockPlaceHandler(item.id) }/>
               </View>
             )}
             keyExtractor={(item, index) => String(index)}
@@ -43,11 +43,11 @@ class Test2 extends React.Component {
                   console.log(this.props.characters)
                   this.props._unlockCharacterHandler(item.id)
                   console.log(this.props.characters)
-                }}></Button>
+                }}/>
                 <Button title="Ajouter à la map" onPress={ () => {
                   console.log(this.props.characters)
                   this.props._addCharacterToMapHandler(item.id)
-                } }></Button>
+                } }/>
               </View>
             )}
             keyExtractor={(item, index) => String(index)}

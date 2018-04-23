@@ -1,27 +1,6 @@
 import { actionTypes } from '../actions/actionTypes'
 
-const initialState = [
-  {
-    id: 1,
-    name: "Chapitre 1",
-    isLocked: true,
-  },
-  {
-    id: 2,
-    name: "Chapitre 2",
-    isLocked: true,
-  },
-  {
-    id: 3,
-    name: "Chapitre 3",
-    isLocked: true,
-  },
-  {
-    id: 4,
-    name: "Chapitre 4",
-    isLocked: true,
-  }
-]
+const initialState = []
 
 const chapterList = (state = initialState, action) => {
   switch (action.type) {
@@ -34,6 +13,13 @@ const chapterList = (state = initialState, action) => {
           }
         }
         return chapter
+      })
+    case actionTypes.GET_CHAPTERLIST:
+      return action.chapterList.map((chapter) => {
+        return {
+          ...chapter,
+          isLocked: true,
+        }
       })
     default:
       return state
