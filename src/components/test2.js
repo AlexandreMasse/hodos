@@ -40,12 +40,9 @@ class Test2 extends React.Component {
                 <Text>{ item.isLocked ? 'Bloqué' : 'Débloqué' }</Text>
                 <Text>{ item.isAddedToMap ? 'Ajouté' : 'Pas ajouté' }</Text>
                 <Button title="Débloquer le personnage" onPress={ () => {
-                  console.log(this.props.characters)
                   this.props._unlockCharacterHandler(item.id)
-                  console.log(this.props.characters)
                 }}/>
                 <Button title="Ajouter à la map" onPress={ () => {
-                  console.log(this.props.characters)
                   this.props._addCharacterToMapHandler(item.id)
                 } }/>
               </View>
