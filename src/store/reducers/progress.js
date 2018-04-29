@@ -18,7 +18,7 @@ const progress = (state = initialState, action) => {
         ...state,
         slide: state.slide + 1
       }
-    case actionTypes.GET_PROGRESS:
+    case actionTypes.SET_PROGRESS:
       return action.progress
     default:
       return state

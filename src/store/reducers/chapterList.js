@@ -14,7 +14,7 @@ const chapterList = (state = initialState, action) => {
         }
         return chapter
       })
-    case actionTypes.GET_CHAPTERLIST:
+    case actionTypes.SET_CHAPTERLIST:
       return action.chapterList.map((chapter) => {
         return {
           ...chapter,

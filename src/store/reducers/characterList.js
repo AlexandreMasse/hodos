@@ -51,7 +51,7 @@ const characterList = (state = initialState, action) => {
         return character
       })
       break;
-    case actionTypes.GET_CHARACTERLIST:
+    case actionTypes.SET_CHARACTERLIST:
       return action.characterList.map((character) => {
         return {
           ...character,

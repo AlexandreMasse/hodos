@@ -14,7 +14,7 @@ const placeList = (state = initialState, action) => {
         }
         return place
       })
-    case actionTypes.GET_PLACELIST:
+    case actionTypes.SET_PLACELIST:
       return action.placeList.map((place) => {
         return {
           ...place,

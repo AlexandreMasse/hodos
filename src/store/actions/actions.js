@@ -51,23 +51,23 @@ export const unlockPlace = (id) => {
 
 
 // API & Storage
-export const getPlaceList = (placeList) => ({
-  type: actionTypes.GET_PLACELIST,
+export const setPlaceList = (placeList) => ({
+  type: actionTypes.SET_PLACELIST,
   placeList
 });
 
-export const getCharacterList = (characterList) => ({
-  type: actionTypes.GET_CHARACTERLIST,
+export const setCharacterList = (characterList) => ({
+  type: actionTypes.SET_CHARACTERLIST,
   characterList
 });
 
-export const getChapterList = (chapterList) => ({
-  type: actionTypes.GET_CHAPTERLIST,
+export const setChapterList = (chapterList) => ({
+  type: actionTypes.SET_CHAPTERLIST,
   chapterList
 });
 
-export const getProgress = (progress) => ({
-  type: actionTypes.GET_PROGRESS,
+export const setProgress = (progress) => ({
+  type: actionTypes.SET_PROGRESS,
   progress
 });
 

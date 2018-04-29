@@ -1,5 +1,5 @@
 import { store } from './reducers/index'
-import { getChapterList, getPlaceList, getProgress, getCharacterList} from './actions/actions'
+import { setChapterList, setPlaceList, setProgress, setCharacterList} from './actions/actions'
 import { API } from './api/index'
 import { Storage } from './storage/index'
 
@@ -12,16 +12,16 @@ class StorageSessionManager {
       if (data) {
         console.log('retrieves data from storage')
         Storage.getCharacterList().then( characterList => {
-          store.dispatch(getCharacterList(characterList))
+          store.dispatch(setCharacterList(characterList))
         })
         Storage.getPlaceList().then( placeList => {
-          store.dispatch(getPlaceList(placeList))
+          store.dispatch(setPlaceList(placeList))
         })
         Storage.getChapterList().then( chapterList => {
-          store.dispatch(getPlaceList(chapterList))
+          store.dispatch(setPlaceList(chapterList))
         })
         Storage.getProgress().then( progress => {
-          store.dispatch(getProgress(progress))
+          store.dispatch(setProgress(progress))
         })
       } else {
         console.log('retrieves data from API')
