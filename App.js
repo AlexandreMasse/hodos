@@ -2,15 +2,13 @@ import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {store} from './src/store/reducers/index'
 import {Provider} from 'react-redux'
+import storageSessionManager from './src/store/StorageSessionManager'
 import Test2 from './src/components/test2'
-import { API } from "./src/store/api";
 
 class App extends React.Component {
 
   componentWillMount () {
-    API.getPlaceList()
-    API.getCharacterList()
-    API.getChapterList()
+    storageSessionManager.setDataForSession()
   }
 
   render() {

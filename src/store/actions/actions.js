@@ -28,7 +28,6 @@ export const addCharacterToMap = (id) => {
 
 
 // PROGRESS
-
 export const incrementChapter = () => {
   return {
     type: actionTypes.PROGRESS_INCREMENT_CHAPTER
@@ -41,7 +40,6 @@ export const incrementSlide = () => {
   }
 }
 
-
 // PLACE
 
 export const unlockPlace = (id) => {
@@ -52,8 +50,7 @@ export const unlockPlace = (id) => {
 }
 
 
-// API
-
+// API & Storage
 export const getPlaceList = (placeList) => ({
   type: actionTypes.GET_PLACELIST,
   placeList
@@ -67,6 +64,11 @@ export const getCharacterList = (characterList) => ({
 export const getChapterList = (chapterList) => ({
   type: actionTypes.GET_CHAPTERLIST,
   chapterList
+});
+
+export const getProgress = (progress) => ({
+  type: actionTypes.GET_PROGRESS,
+  progress
 });
 
 

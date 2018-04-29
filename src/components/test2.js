@@ -16,8 +16,7 @@ class Test2 extends React.Component {
         <Text style={styles.text}>Slide - {this.props.slide}</Text>
         <Button title="Nouveau chapitre" onPress={this.props._incrementChapterHandler}/>
         <Button title="Nouvelle slide" onPress={this.props._incrementSlideHandler}/>
-
-        <View>
+        {/* <View>
           <FlatList
             data={this.props.places}
             renderItem={({item}) => (
@@ -29,7 +28,7 @@ class Test2 extends React.Component {
             )}
             keyExtractor={(item, index) => String(index)}
           />
-        </View>
+        </View> */}
 
         <View>
           <FlatList
@@ -69,10 +68,10 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     _incrementChapterHandler: () => {
-      dispatch(incrementChapter)
+      dispatch(incrementChapter())
     },
     _incrementSlideHandler: () => {
-      dispatch(incrementSlide)
+      dispatch(incrementSlide())
     },
     _unlockPlaceHandler: (id) => {
       dispatch(unlockPlace(id))

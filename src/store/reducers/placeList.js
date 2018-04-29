@@ -18,7 +18,7 @@ const placeList = (state = initialState, action) => {
       return action.placeList.map((place) => {
         return {
           ...place,
-          isLocked: true
+          isLocked: place.isLocked !== undefined  ? place.isLocked : true,
         }
       })
     default:

@@ -8,6 +8,16 @@ const PLACELIST_KEY = '@HODOS:PLACELIST_LIST'
 const PROGRESS_KEY = '@HODOS:PROGRESS_LIST'
 
 export const Storage = {
+  async hasSavedData() {
+    try {
+      const storage = await AsyncStorage.getAllKeys()
+      if (storage.length)
+        return true
+      return false
+    } catch (error) {
+      console.log(err)
+    }
+  },
   async setPlaceList(placeList) {
     try {
       await AsyncStorage.setItem(PLACELIST_KEY, JSON.stringify(placeList))
@@ -61,7 +71,6 @@ export const Storage = {
   async getChapterList() {
     try {
       const chapterList =  await AsyncStorage.getItem(CHAPTERLIST_KEY)
-
       if (chapterList !== null)
         return JSON.parse(chapterList)
 

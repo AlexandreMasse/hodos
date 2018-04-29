@@ -55,8 +55,8 @@ const characterList = (state = initialState, action) => {
       return action.characterList.map((character) => {
         return {
           ...character,
-          isLocked: true,
-          isAddedToMap: false,
+          isLocked: character.isLocked !== undefined ? character.isLocked : true,
+          isAddedToMap: character.isAddedToMap !== undefined ? character.isAddedToMap : false,
         }
       })
     default:

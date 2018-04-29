@@ -18,7 +18,7 @@ const chapterList = (state = initialState, action) => {
       return action.chapterList.map((chapter) => {
         return {
           ...chapter,
-          isLocked: true,
+          isLocked: chapter.isLocked !== undefined ? chapter.isLocked : true,
         }
       })
     default:
