@@ -1,5 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text, View, Button, FlatList} from 'react-native';
+import {StackNavigator} from 'react-navigation';
 import {connect} from 'react-redux';
 import {incrementChapter, incrementSlide, unlockPlace, unlockChapter, unlockCharacter, addCharacterToMap} from "../store/actions/actions";
 

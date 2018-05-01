@@ -1,5 +1,6 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
+import {StackNavigator} from 'react-navigation';
 import {store} from './src/store/reducers/index'
 import {Provider} from 'react-redux'
 import storageSessionManager from './src/store/StorageSessionManager'
@@ -17,16 +18,27 @@ class App extends React.Component {
   render() {
     return (
       <Provider store={store}>
-        <View style={styles.container}>
-          {/*<Test2/>*/}
-          <HomeScreen/>
-          <Map/>
-          <Chapter/>
-        </View>
+        <AppNavigator/>
       </Provider>
     );
   }
 }
+
+
+const AppNavigator = StackNavigator({
+  HomeScreen: {
+    screen: HomeScreen
+  },
+  Map: {
+    screen: Map
+  },
+  Chapter : {
+    screen: Chapter
+  }
+},{
+  initialRouteName: "HomeScreen"
+})
+
 
 const styles = StyleSheet.create({
   container: {
