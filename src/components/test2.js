@@ -55,6 +55,29 @@ class Test2 extends React.Component {
   }
 }
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 0,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  text: {
+    color: 'green'
+  },
+  flatlist: {
+    position: 'absolute'
+  },
+  listText: {
+    color: 'red'
+  },
+  wrapper: {
+    borderWidth: 0.5,
+    borderColor: '#d6d7da',
+  }
+});
+
+
 const mapStateToProps = state => {
   return {
     chapter: state.progress.chapter,
@@ -88,26 +111,5 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 0,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  text: {
-    color: 'green'
-  },
-  flatlist: {
-    position: 'absolute'
-  },
-  listText: {
-    color: 'red'
-  },
-  wrapper: {
-    borderWidth: 0.5,
-    borderColor: '#d6d7da',
-  }
-});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Test2)
