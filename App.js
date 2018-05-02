@@ -8,20 +8,60 @@ import Test2 from './src/components/test2'
 import HomeScreen from './src/components/HomeScreen/HomeScreen'
 import Map from './src/components/Map/Map'
 import Chapter from './src/components/Chapter/Chapter'
+import { Asset, AppLoading } from 'expo';
 
 class App extends React.Component {
 
+  state = {
+    isReady: false,
+  };
+
   componentWillMount () {
     storageSessionManager.setDataForSession()
+
+    /*setTimeout(() => {
+      this.setState({
+        isReady: true,
+      })
+    }, 2000)*/
   }
 
   render() {
-    return (
-      <Provider store={store}>
-        <AppNavigator/>
-      </Provider>
-    );
+
+    if (!this.state.isReady) {
+        return (
+          <AppLoading startAsync={this._cacheResourcesAsync}
+                      onFinish={this._handleFinishLoading}
+                      onError={console.warn}
+          />
+        )
+    } else {
+      return (
+        <Provider store={store}>
+          <AppNavigator/>
+        </Provider>
+      )
+    }
+
   }
+
+  async _cacheResourcesAsync() {
+    const images = [
+      require('./src/assets/logo.png'),
+      require('./src/assets/map.png'),
+    ];
+
+    const cacheImages = images.map((image) => {
+      return Asset.fromModule(image).downloadAsync();
+    });
+    return Promise.all(cacheImages)
+
+  }
+
+  _handleFinishLoading = () => {
+    console.log("finish loading assets");
+    this.setState({ isReady: true })
+  };
 }
 
 

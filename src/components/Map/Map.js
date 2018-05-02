@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View, Text, Button, Image, TouchableHighlight, Dimensions } from 'react-native'
+import { StyleSheet, View, Text, Button, Image, TouchableHighlight, Dimensions, Animated } from 'react-native'
 import {connect} from 'react-redux';
 
 class Map extends React.Component {
@@ -60,13 +60,10 @@ const styles = StyleSheet.create({
   },
   map: {
     flex: 1,
-    resizeMode: 'center',
     position: 'absolute',
     width: '100%',
     height: '100%',
-    justifyContent: 'center',
-    width: '100%',
-    height: '100%'
+    justifyContent: 'center'
   },
   button: {
     position: 'absolute',

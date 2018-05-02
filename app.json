@@ -1,5 +1,17 @@
 {
   "expo": {
-    "sdkVersion": "26.0.0"
+    "name": "Hodos",
+    "slug": "hodos",
+    "sdkVersion": "26.0.0",
+    "orientation": "landscape",
+    "ios": {
+      "supportsTablet": true,
+      "isTabletOnly": true,
+      "splash": {
+        "resizeMode": "cover",
+        "image": "./src/assets/splash/splash.png",
+        "tabletImage": "./src/assets/splash/splash.png"
+      }
+    }
   }
 }
