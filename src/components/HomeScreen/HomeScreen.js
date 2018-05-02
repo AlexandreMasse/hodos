@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View, Text, Button } from 'react-native'
+import { StyleSheet, View, Text, TouchableHighlight, Image } from 'react-native'
 import {connect} from 'react-redux';
 
 class HomeScreen extends React.Component {
@@ -8,8 +8,10 @@ class HomeScreen extends React.Component {
     return (
       <View style={styles.container}>
         <Text style={styles.text}>HomeScreen</Text>
-        <Button title={'Lient vers Map'} onPress={() => this.props.navigation.navigate('Map')}/>
-        <Button title={'Lient vers Chapter'} onPress={() => this.props.navigation.navigate('Chapter')}/>
+        <Image source={require('./../../assets/logo.png')} style={styles.logo} />
+        <TouchableHighlight onPress={() => this.props.navigation.navigate('Map')} style={styles.button} underlayColor='#077bd0'>
+          <Text style={styles.buttonText}> Commencer l'aventure </Text>
+        </TouchableHighlight>
       </View>
     )
   }
@@ -19,12 +21,31 @@ class HomeScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'red'
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   text: {
     fontSize: 36,
     fontWeight: 'bold',
-    color: "white"
+    color: "white",
+  },
+  button: {
+    width: 300,
+    backgroundColor: '#8cd7ff',
+    borderColor: '#8cd7ff',
+    borderRadius: 50,
+    borderWidth: 5,
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 21,
+    padding: 10,
+    textAlign: 'center',
+  },
+  logo: {
+    width: 250,
+    height: 250,
+    marginBottom: 30
   }
 })
 

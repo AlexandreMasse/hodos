@@ -36,7 +36,8 @@ const AppNavigator = StackNavigator({
     screen: Chapter
   }
 },{
-  initialRouteName: "HomeScreen"
+  initialRouteName: "HomeScreen",
+  headerMode: 'none'
 })
 
 
