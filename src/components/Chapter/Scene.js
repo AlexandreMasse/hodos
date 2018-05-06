@@ -11,12 +11,16 @@ export default class Scene extends React.Component {
 
     const windowHeight = this.props.windowHeight
 
+    console.log(windowHeight)
+
     this.state = {
       styles: {
         height: windowHeight,
         width: (windowHeight / this.sourceInfo.height) * this.sourceInfo.width,
       }
     }
+
+    console.log([styles.scene, this.state.styles ])
   }
 
   render () {
@@ -28,7 +32,7 @@ export default class Scene extends React.Component {
 
 const styles = StyleSheet.create({
   scene: {
-    flex: 1,
+    // flex: 1,
     resizeMode: 'cover'
   }
 })

@@ -21,6 +21,8 @@ class App extends React.Component {
       require('./src/assets/images/logo.png'),
       require('./src/assets/images/map.png'),
       require('./src/assets/images/Chap27_part1.png'),
+      require('./src/assets/images/Chap27_palais.png'),
+      require('./src/assets/images/Chap27_rochers.png'),
     ];
 
     const cacheImages = images.map((image) => {

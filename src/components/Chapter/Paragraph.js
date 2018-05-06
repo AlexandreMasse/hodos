@@ -9,7 +9,7 @@ export default class Paragraph extends React.Component {
       styles: {
         color: this.props.color,
         left: this.props.x,
-        top: this.props.y
+        top: '20%'
       }
     }
   }

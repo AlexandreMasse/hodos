@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 3189.46 1067.81">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #010316;
+      }
+
+      .cls-2 {
+        opacity: 0.19;
+      }
+
+      .cls-3 {
+        fill: #8777af;
+      }
+
+      .cls-4 {
+        fill: url(#Dégradé_sans_nom_295);
+      }
+
+      .cls-5 {
+        fill: url(#Dégradé_sans_nom_54);
+      }
+    </style>
+    <linearGradient id="Dégradé_sans_nom_295" data-name="Dégradé sans nom 295" x1="1613.75" y1="-580.97" x2="1577.75" y2="1559.03" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#8777af"/>
+      <stop offset="0.02" stop-color="#8374aa" stop-opacity="0.97"/>
+      <stop offset="0.18" stop-color="#60557d" stop-opacity="0.71"/>
+      <stop offset="0.36" stop-color="#3e3750" stop-opacity="0.46"/>
+      <stop offset="0.54" stop-color="#231f2d" stop-opacity="0.26"/>
+      <stop offset="0.71" stop-color="#100e14" stop-opacity="0.12"/>
+      <stop offset="0.87" stop-color="#040405" stop-opacity="0.03"/>
+      <stop offset="1" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="Dégradé_sans_nom_54" data-name="Dégradé sans nom 54" x1="3002.53" y1="295.41" x2="1998.03" y2="471.57" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#000100"/>
+      <stop offset="1" stop-color="#080b35" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <title>Chap27_rochers</title>
+  <g id="Calque_2" data-name="Calque 2">
+    <g id="Rochers">
+      <g>
+        <polygon class="cls-1" points="0 33.37 110.01 0 202.62 15.44 291.59 85.34 409.62 430.48 630.25 488.58 665.66 537.61 758.27 555.77 1323.26 499.48 1452.57 523.08 1853.22 488.58 1953.1 257.97 2038.44 236.18 2125.6 96.36 2350.77 16.46 2448.82 69.12 2694.94 405.2 3189.46 1065.31 3.37 1067.81 0 33.37"/>
+        <g class="cls-2">
+          <polygon class="cls-3" points="1953.1 257.97 2298.11 432.29 2038.44 236.18 1953.1 257.97"/>
+          <polygon class="cls-3" points="665.66 537.61 476.81 613.88 758.27 555.77 665.66 537.61"/>
+          <polygon class="cls-3" points="202.62 15.44 44.64 168.87 291.59 85.34 202.62 15.44"/>
+        </g>
+        <polygon class="cls-4" points="0 33.37 110.01 0 202.62 15.44 291.59 85.34 409.62 430.48 630.25 488.58 665.66 537.61 758.27 555.77 1323.26 499.48 1452.57 523.08 1853.22 488.58 1953.1 257.97 2038.44 236.18 2125.6 96.36 2350.77 16.46 2448.82 69.12 2694.94 405.2 3189.46 1065.31 3.37 1067.81 0 33.37"/>
+        <polygon class="cls-5" points="0 33.37 110.01 0 202.62 15.44 291.59 85.34 409.62 430.48 630.25 488.58 665.66 537.61 758.27 555.77 1323.26 499.48 1452.57 523.08 1853.22 488.58 1953.1 257.97 2038.44 236.18 2125.6 96.36 2350.77 16.46 2448.82 69.12 2694.94 405.2 3189.46 1065.31 3.37 1067.81 0 33.37"/>
+      </g>
+    </g>
+  </g>
+</svg>

@@ -5,8 +5,6 @@ export default class ParallaxedImage extends React.Component {
 
   constructor(props) {
     super(props)
-    this.source = require(`./../../assets/images/logo.png`)
-
     this.state = {
       styles: {
         top: this.props.y,
@@ -19,7 +17,7 @@ export default class ParallaxedImage extends React.Component {
 
   render () {
     return (
-      <Image style={[styles.image, this.state.styles ]} source={this.source} />
+      <Image style={[styles.image, this.state.styles ]} source={this.props.src} />
     )
   }
 }
