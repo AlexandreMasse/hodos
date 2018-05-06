@@ -26,11 +26,19 @@ class StorageSessionManager {
         })
       } else {
         //If there's no local storage (1st app launch), gets data from API
-        API.getPlaceList()
-        API.getCharacterList()
-        API.getChapterList()
+        this.getDataFromApi()
       }
     })
+  }
+
+  clearStorage() {
+    Storage.clearStorage()
+  }
+
+  getDataFromApi() {
+    API.getPlaceList()
+    API.getCharacterList()
+    API.getChapterList()
   }
 }
 

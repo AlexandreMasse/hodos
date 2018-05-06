@@ -88,5 +88,13 @@ export const Storage = {
     } catch (error) {
       console.log(err)
     }
+  },
+  async clearStorage() {
+    try {
+      const keys = [CHAPTERLIST_KEY, PROGRESS_KEY, CHARACTERLIST_KEY, PLACELIST_KEY]
+      AsyncStorage.multiRemove(keys)
+    } catch (error) {
+      console.log(err)
+    }
   }
 }

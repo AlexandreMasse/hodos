@@ -1,14 +1,20 @@
 import React from 'react'
-import { StyleSheet, View, Text, TouchableHighlight, Image } from 'react-native'
+import { StyleSheet, View, Text, TouchableHighlight, Image, Button } from 'react-native'
 import {connect} from 'react-redux';
-
+import storageSessionManager from './../../store/StorageSessionManager'
+import StorageSessionManager from './../../store/StorageSessionManager';
 class HomeScreen extends React.Component {
 
   render () {
     return (
       <View style={styles.container}>
         <Text style={styles.text}>HomeScreen</Text>
-        <Image source={require('./../../assets/logo.png')} style={styles.logo} />
+        <Button title="empty Local Storage" style={styles.buttonStorage} onPress={ () => StorageSessionManager.clearStorage()} />
+        <Button title="get Data from API" style={styles.buttonStorage} onPress={ () => {
+          StorageSessionManager.getDataFromApi()
+          console.log()
+        } } />
+        <Image source={require('./../../assets/logo.png')} style={styles.logo} onPress={() => this.props.navigation.navigate('Map')} />
         <TouchableHighlight onPress={() => this.props.navigation.navigate('Map')} style={styles.button} underlayColor='#077bd0'>
           <Text style={styles.buttonText}> Commencer l'aventure </Text>
         </TouchableHighlight>
@@ -46,6 +52,11 @@ const styles = StyleSheet.create({
     width: 250,
     height: 250,
     marginBottom: 30
+  },
+  buttonStorage: {
+    position: 'absolute',
+    right: 0,
+    top: 0
   }
 })
 
