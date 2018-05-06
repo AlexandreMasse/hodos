@@ -14,6 +14,7 @@ export default class PinchZoomView extends Component {
     scalable: PropTypes.bool,
     maxScale: PropTypes.number,
     minScale: PropTypes.number,
+    childWidth: PropTypes.number.isRequired,
   };
 
   static defaultProps = {
@@ -27,11 +28,12 @@ export default class PinchZoomView extends Component {
     this.state = {
       scale: 1,
       lastScale: 1,
-      offsetX: 0,
+      offsetX: windowWidth / 2 - this.props.childWidth / 2,
       offsetY: 0,
       offsetLimite: {
         left: 0,
         top: 0,
+        right: 0,
       },
       measure: {
         x: 0,
@@ -41,7 +43,7 @@ export default class PinchZoomView extends Component {
         px: 0,
         py: 0
       },
-      lastX: 0,
+      lastX: windowWidth / 2 - this.props.childWidth / 2,
       lastY: 0,
       lastMovePinch: false
     },
@@ -84,11 +86,49 @@ export default class PinchZoomView extends Component {
   }
 
   _handlePanResponderEnd = (e, gestureState) => {
+
+    // Left limite
+    // if(this.state.measure.px > 0) {
+    //   this.setState({
+    //     offsetX: this.state.offsetX - this.state.measure.px,
+    //     lastX: this.state.offsetX - this.state.measure.px,
+    //     lastY: this.state.offsetY,
+    //     lastScale: this.state.scale
+    //   });
+    // } else {
+    //   this.setState({
+    //     offsetX: this.state.offsetX,
+    //     lastX: this.state.offsetX,
+    //     lastY: this.state.offsetY,
+    //     lastScale: this.state.scale
+    //   });
+    // }
+
+    // console.log(windowWidth * this.state.scale );
+    var offsetX = this.state.offsetX
+
+
+    // Right
+    if(this.state.measure.px + this.state.measure.w > windowWidth - this.state.offsetLimite.right) {
+      console.log("good");
+
+    } else {
+      console.log("pas bon");
+    }
+
     this.setState({
-      lastX: this.state.offsetX,
+      offsetX: this.state.measure.px > this.state.offsetLimite.left ? this.state.offsetX - this.state.measure.px : this.state.offsetX,
+      lastX: this.state.measure.px > this.state.offsetLimite.left ? this.state.offsetX - this.state.measure.px : this.state.offsetX,
       lastY: this.state.offsetY,
       lastScale: this.state.scale
-    });
+    })
+
+   /* console.log(this.state.offsetX);
+    this.setState({
+      lastX: this.state.offsetX - this.state.measure.px - 1,
+      lastY: this.state.offsetY,
+      lastScale: this.state.scale
+    });*/
   }
 
   _handlePanResponderMove = (e, gestureState) => {
@@ -106,7 +146,6 @@ export default class PinchZoomView extends Component {
       }
 
       this.updateMeasure()
-      console.log(this.state.measure);
     }
 
     // translate
@@ -121,24 +160,27 @@ export default class PinchZoomView extends Component {
       // console.log(offsetX);
       // console.log(this.state.scale);
 
+      //this.setState({offsetX: offsetX, offsetY, lastMovePinch: false});
+
+      /*if ((this.state.measure.px * this.state.scale) + offsetX <= this.state.offsetLimite.left) {
+        this.setState({offsetX: offsetX, offsetY, lastMovePinch: false});
+      }*/
+
+      /*if ((this.state.measure.px * this.state.scale) + offsetX <= this.state.offsetLimite.left) {
+        this.setState({offsetX: offsetX, offsetY, lastMovePinch: false});
+      }*/
+
       this.updateMeasure()
-      this.setState({offsetX: offsetX, offsetY, lastMovePinch: false});
 
+      this.el.measure((x, y, w, h, px, py) => {
+        // Left Limit
+        if(px <= this.state.offsetLimite.left) {
+          this.setState({offsetX, offsetY, lastMovePinch: false });
+        } else {
+          this.setState({offsetY, lastMovePinch: false });
+        }
 
-      /*if ((this.state.measure.px * this.state.scale) + offsetX <= this.state.offsetLimite.left) {
-        this.setState({offsetX: offsetX, offsetY, lastMovePinch: false});
-      }*/
-      /*if ((this.state.measure.px * this.state.scale) + offsetX <= this.state.offsetLimite.left) {
-        this.setState({offsetX: offsetX, offsetY, lastMovePinch: false});
-      }*/
-
-      /*
-       if(this.state.measure.px <= this.state.offsetLimite.left) {
-         this.setState({ offsetX, offsetY, lastMovePinch: false });
-       } else {
-         this.setState({lastMovePinch: false });
-       }*/
-
+      })
     }
   }
 
@@ -157,11 +199,12 @@ export default class PinchZoomView extends Component {
         <View ref={this._handleComponentMount}
           {...this.gestureHandlers.panHandlers}
           style={[styles.container, this.props.style, {
+            width: this.props.childWidth,
             transform: [
               {scaleX: this.state.scale},
               {scaleY: this.state.scale},
               {translateX: this.state.offsetX},
-              {translateY: this.state.offsetY}
+              {translateY: this.state.offsetY},
             ]
           }]}>
           {this.props.children}
@@ -169,12 +212,12 @@ export default class PinchZoomView extends Component {
     );
   }
 }
-console.log(Dimensions.get('window'));
+
 const windowHeight = Dimensions.get('window').height;
 const windowWidth = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
  container: {
-    flex: 1,
+    //flex: 1,
  }
 });

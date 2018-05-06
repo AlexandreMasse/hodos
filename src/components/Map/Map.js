@@ -4,9 +4,11 @@ import {connect} from 'react-redux';
 import PinchZoomView from '../../lib/PinchZoomView'
 import Scene from './../Chapter/Scene'
 import colors from './../../assets/colors'
+import resolveAssetSource from 'resolveAssetSource'
 
+const windowHeight = Dimensions.get('window').height
 
-const height = Dimensions.get('window').height
+import mapImage from '../../assets/images/map.png'
 
 class Map extends React.Component {
 
@@ -16,18 +18,17 @@ class Map extends React.Component {
       showPlace: false,
       fadeAnim: new Animated.Value(0)
     }
+
   }
 
   render () {
     return (
       <View style={styles.container}>
-        <PinchZoomView>
-          <View style={styles.container}>
-            <Scene src={require('./../../assets/images/map.png')} windowHeight={height}/>
+        <PinchZoomView childWidth={this.getMapImageWidth()}>
+            <Scene src={mapImage}/>
             <TouchableHighlight onPress={() => {this._showInfo()} } style={styles.button} underlayColor={null}>
               <View />
             </TouchableHighlight>
-          </View>
         </PinchZoomView>
           <TouchableHighlight onPress={() => this.props.navigation.navigate('Chapter')} style={[styles.whiteButton, styles.buttonRead]} underlayColor={'#fff'}>
             <View style={styles.whiteButtonWrapper}>
@@ -68,6 +69,11 @@ class Map extends React.Component {
     this.setState({
       showPlace: !this.state.showPlace
     });
+  }
+
+  getMapImageWidth() {
+    const originalSize = resolveAssetSource(mapImage)
+    return (windowHeight / originalSize.height) * originalSize.width
   }
 
 
