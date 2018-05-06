@@ -8,6 +8,7 @@ import HomeScreen from './src/components/HomeScreen/HomeScreen'
 import Map from './src/components/Map/Map'
 import Chapter from './src/components/Chapter/Chapter'
 import { Asset, AppLoading } from 'expo';
+import SvgTest from "./src/components/SvgTest";
 
 class App extends React.Component {
 
@@ -66,6 +67,9 @@ const AppNavigator = StackNavigator({
   },
   Chapter : {
     screen: Chapter
+  },
+  Svg: {
+    screen: SvgTest
   }
 },{
   initialRouteName: "HomeScreen",

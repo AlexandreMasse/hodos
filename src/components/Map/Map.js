@@ -1,6 +1,7 @@
 import React from 'react'
 import { StyleSheet, View, Text, Button, Image, TouchableHighlight, Dimensions, Animated } from 'react-native'
 import {connect} from 'react-redux';
+import PinchZoomView from '../../lib/PinchZoomView'
 
 class Map extends React.Component {
 
@@ -15,15 +16,19 @@ class Map extends React.Component {
   render () {
     return (
       <View style={styles.container}>
-        <Image source={require('./../../assets/map.png')} style={styles.map} />
-        <TouchableHighlight onPress={() => {this._toggleReadBtn()} } style={styles.button}>
-          <View />
-        </TouchableHighlight>
-        <Text style={styles.text}>Map</Text>
-        <Button title={'Retour'} onPress={() => this.props.navigation.goBack()}/>
-        {this._renderReadBtn()}
-
+        <PinchZoomView>
+          <View style={styles.container}>
+            <Image source={require('./../../assets/map.png')} style={styles.map} />
+            <TouchableHighlight onPress={() => {this._toggleReadBtn()} } style={styles.button}>
+              <View />
+            </TouchableHighlight>
+            <Text style={styles.text}>Map</Text>
+            <Button title={'Retour'} onPress={() => this.props.navigation.goBack()}/>
+            {this._renderReadBtn()}
+          </View>
+        </PinchZoomView>
       </View>
+
     )
   }
 
