@@ -3,21 +3,29 @@ import { StyleSheet, View, Text, TouchableHighlight, Image, Button } from 'react
 import {connect} from 'react-redux';
 import storageSessionManager from './../../store/StorageSessionManager'
 import StorageSessionManager from './../../store/StorageSessionManager';
+import { LinearGradient } from 'expo'
+
 class HomeScreen extends React.Component {
 
   render () {
     return (
       <View style={styles.container}>
-        <Text style={styles.text}>HomeScreen</Text>
-        <Button title="empty Local Storage" style={styles.buttonStorage} onPress={ () => StorageSessionManager.clearStorage()} />
-        <Button title="get Data from API" style={styles.buttonStorage} onPress={ () => {
-          StorageSessionManager.getDataFromApi()
-          console.log()
-        } } />
-        <Image source={require('./../../assets/images/logo.png')} style={styles.logo} onPress={() => this.props.navigation.navigate('Map')} />
-        <TouchableHighlight onPress={() => this.props.navigation.navigate('Map')} style={styles.button} underlayColor='#077bd0'>
-          <Text style={styles.buttonText}> Commencer l'aventure </Text>
+        <Image source={require('./../../assets/splash/splash.png')} style={styles.splashImage} />
+        <View style={styles.buttonStorage} >
+          <Button title="empty Local Storage" onPress={ () => StorageSessionManager.clearStorage()} />
+          <Button title="get Data from API" onPress={ () => {
+            StorageSessionManager.getDataFromApi()
+            console.log()
+          } } />
+        </View>
+        <LinearGradient
+          start={[0, 0]} end={[1, 0]}
+          colors={['rgba(0, 101, 206, 0)','#0065CE']}
+          style={styles.buttonContainer}>
+          <TouchableHighlight onPress={() => this.props.navigation.navigate('Map')} style={styles.button} underlayColor='#fff'>
+            <Text style={styles.buttonText}> Commencer l'aventure </Text>
         </TouchableHighlight>
+        </LinearGradient>
       </View>
     )
   }
@@ -30,23 +38,41 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  splashImage: {
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+    resizeMode: 'cover'
+  },
   text: {
     fontSize: 36,
     fontWeight: 'bold',
     color: "white",
   },
-  button: {
+  buttonContainer: {
     width: 300,
-    backgroundColor: '#8cd7ff',
-    borderColor: '#8cd7ff',
-    borderRadius: 50,
-    borderWidth: 5,
+    height: 60,
+    alignItems: 'center',
+    borderRadius: 5,
+    position: 'absolute',
+    top: '65%',
+    justifyContent: 'center',
+  },
+  button: {
+    marginLeft: 1,
+    marginRight: 1,
+    width: 298,
+    height: 58,
+    borderRadius: 5,
+    backgroundColor: '#fff',
+    alignItems: 'center'
   },
   buttonText: {
-    color: '#fff',
+    color: '#0065CE',
     fontSize: 21,
-    padding: 10,
+    alignItems: 'center',
     textAlign: 'center',
+    padding: 15,
   },
   logo: {
     width: 250,
@@ -55,8 +81,9 @@ const styles = StyleSheet.create({
   },
   buttonStorage: {
     position: 'absolute',
-    right: 0,
-    top: 0
+    bottom: 5,
+    right: 5,
+    flex: 1,
   }
 })
 

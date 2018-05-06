@@ -8,7 +8,7 @@
       "supportsTablet": true,
       "isTabletOnly": true,
       "splash": {
-        "resizeMode": "cover",
+        "resizeMode": "contain",
         "image": "./src/assets/splash/splash.png",
         "tabletImage": "./src/assets/splash/splash.png"
       }
