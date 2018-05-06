@@ -3,6 +3,7 @@ import { StyleSheet, View, Text, Button, Image, TouchableHighlight, Dimensions, 
 import {connect} from 'react-redux';
 import PinchZoomView from '../../lib/PinchZoomView'
 import Scene from './../Chapter/Scene'
+import colors from './../../assets/colors'
 
 
 const height = Dimensions.get('window').height
@@ -12,7 +13,7 @@ class Map extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      showReadBtn: false,
+      showInfo: false,
       fadeAnim: new Animated.Value(0)
     }
   }
@@ -23,31 +24,35 @@ class Map extends React.Component {
         <PinchZoomView>
           <View style={styles.container}>
             <Scene src={require('./../../assets/images/map.png')} windowHeight={height}/>
-            <TouchableHighlight onPress={() => {this._toggleReadBtn()} } style={styles.button}>
+            <TouchableHighlight onPress={() => {this._showInfo()} } style={styles.button}>
               <View />
             </TouchableHighlight>
           </View>
         </PinchZoomView>
-            <Button title={'Retour'} onPress={() => this.props.navigation.goBack()}/>
-            {this._renderReadBtn()}
+          <TouchableHighlight onPress={() => this.props.navigation.navigate('Chapter')} style={styles.buttonRead}>
+            <View style={styles.buttonReadWrapper}>
+                <Text style={styles.buttonReadText}>Reprendre la lecture</Text>
+                <Image source={require('./../../assets/images/arrow-reading.png')} style={styles.arrowReading}/>
+            </View>
+          </TouchableHighlight>
+          <Button title={'Retour'} onPress={() => this.props.navigation.goBack()}/>
+          {this._renderInfo()}
       </View>
 
     )
   }
 
-  _renderReadBtn () {
-    if (this.state.showReadBtn) {
-      return (
-        <TouchableHighlight onPress={() => this.props.navigation.navigate('Chapter')} style={styles.buttonRead}>
-          <Text style={styles.buttonReadText}>Reprendre la lecture</Text>
-        </TouchableHighlight>
-      );
+  _renderInfo () {
+    if (this.state.showInfo) {
+      // return (
+
+      // );
     }
   }
 
-  _toggleReadBtn () {
+  _showInfo () {
     this.setState({
-      showReadBtn: !this.state.showReadBtn
+      showReadBtn: !this.state.showInfo
     });
   }
 
@@ -58,7 +63,8 @@ const windowWidth = Dimensions.get('window').width
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    backgroundColor: colors.paleGreen
   },
   text: {
     fontSize: 36,
@@ -83,20 +89,32 @@ const styles = StyleSheet.create({
   },
   buttonRead: {
     position: 'absolute',
-    bottom: 50,
-    left: '50%',
-    width: 400,
-    transform: [{translateX:  -200}],
-    backgroundColor: '#8cd7ff',
-    borderColor: '#8cd7ff',
-    borderRadius: 50,
-    borderWidth: 5,
+    top: 50,
+    right: 15,
+    width: 300,
+    backgroundColor: '#fff',
+    borderRadius: 15,
+    shadowColor: '#38373b',
+    shadowOffset: { width: 0, height: 5 },
+    shadowOpacity: 0.3,
+    shadowRadius: 10,
+  },
+  buttonReadWrapper: {
+    flex: 1,
   },
   buttonReadText: {
-    color: '#fff',
+    color: colors.paleGreen,
     fontSize: 20,
-    padding: 10,
-    textAlign: 'center'
+    padding: 15,
+    textAlign: 'left'
+  },
+  arrowReading: {
+    position: 'absolute',
+    right: 20,
+    top: 18,
+    width: 50,
+    height: 20,
+    resizeMode: 'contain',
   }
 })
 
