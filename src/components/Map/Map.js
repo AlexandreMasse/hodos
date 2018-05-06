@@ -18,7 +18,7 @@ class Map extends React.Component {
       <View style={styles.container}>
         <PinchZoomView>
           <View style={styles.container}>
-            <Image source={require('./../../assets/map.png')} style={styles.map} />
+            <Image source={require('./../../assets/images/map.png')} style={styles.map} />
             <TouchableHighlight onPress={() => {this._toggleReadBtn()} } style={styles.button}>
               <View />
             </TouchableHighlight>

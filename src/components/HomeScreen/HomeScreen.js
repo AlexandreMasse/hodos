@@ -14,7 +14,7 @@ class HomeScreen extends React.Component {
           StorageSessionManager.getDataFromApi()
           console.log()
         } } />
-        <Image source={require('./../../assets/logo.png')} style={styles.logo} onPress={() => this.props.navigation.navigate('Map')} />
+        <Image source={require('./../../assets/images/logo.png')} style={styles.logo} onPress={() => this.props.navigation.navigate('Map')} />
         <TouchableHighlight onPress={() => this.props.navigation.navigate('Map')} style={styles.button} underlayColor='#077bd0'>
           <Text style={styles.buttonText}> Commencer l'aventure </Text>
         </TouchableHighlight>

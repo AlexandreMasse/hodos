@@ -18,9 +18,9 @@ class App extends React.Component {
 
   async _cacheResourcesAsync() {
     const images = [
-      require('./src/assets/logo.png'),
-      require('./src/assets/map.png'),
-      require('./src/assets/Chap27_part1.png'),
+      require('./src/assets/images/logo.png'),
+      require('./src/assets/images/map.png'),
+      require('./src/assets/images/Chap27_part1.png'),
     ];
 
     const cacheImages = images.map((image) => {
@@ -73,7 +73,7 @@ const AppNavigator = StackNavigator({
     screen: SvgTest
   }
 },{
-  initialRouteName: "HomeScreen",
+  initialRouteName: 'Chapter',
   headerMode: 'none'
 })
 
