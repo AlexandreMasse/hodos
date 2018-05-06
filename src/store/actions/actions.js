@@ -1,7 +1,6 @@
 import { actionTypes } from './actionTypes'
 
 // CHAPTER
-
 export const unlockChapter = (id) => {
   return {
     type: actionTypes.CHAPTER_UNLOCK,
@@ -9,9 +8,7 @@ export const unlockChapter = (id) => {
   }
 }
 
-
 // CHARACTER
-
 export const unlockCharacter = (id) => {
   return {
     type: actionTypes.CHARACTER_UNLOCK,
@@ -25,7 +22,6 @@ export const addCharacterToMap = (id) => {
     id
   }
 }
-
 
 // PROGRESS
 export const incrementChapter = () => {
@@ -41,14 +37,12 @@ export const incrementSlide = () => {
 }
 
 // PLACE
-
 export const unlockPlace = (id) => {
   return {
     type: actionTypes.PLACE_UNLOCK,
     id
   }
 }
-
 
 // API & Storage
 export const setPlaceList = (placeList) => ({

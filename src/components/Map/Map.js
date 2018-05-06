@@ -35,7 +35,7 @@ class Map extends React.Component {
   _renderReadBtn () {
     if (this.state.showReadBtn) {
       return (
-        <TouchableHighlight onPress={() => '' } style={styles.buttonRead}>
+        <TouchableHighlight onPress={() => this.props.navigation.navigate('Chapter')} style={styles.buttonRead}>
           <Text style={styles.buttonReadText}>Reprendre la lecture</Text>
         </TouchableHighlight>
       );

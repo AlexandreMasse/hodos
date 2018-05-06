@@ -8,9 +8,10 @@ class StorageSessionManager {
 
   }
   setDataForSession() {
+    //When App launches, check if there's local storage
     Storage.hasSavedData().then( data => {
+      //If so, we use it by passing sending an action that will be interpreted into the reducer
       if (data) {
-        console.log('retrieves data from storage')
         Storage.getCharacterList().then( characterList => {
           store.dispatch(setCharacterList(characterList))
         })
@@ -24,7 +25,7 @@ class StorageSessionManager {
           store.dispatch(setProgress(progress))
         })
       } else {
-        console.log('retrieves data from API')
+        //If there's no local storage (1st app launch), gets data from API
         API.getPlaceList()
         API.getCharacterList()
         API.getChapterList()

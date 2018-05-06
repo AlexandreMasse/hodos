@@ -6,6 +6,10 @@ import characterList from './characterList'
 import { createSelector } from 'reselect'
 import { Storage } from './../storage/index'
 
+
+/**
+ * Combines all reducers to make one
+ */
 const reducers = combineReducers({
   progress,
   placeList,
@@ -15,19 +19,18 @@ const reducers = combineReducers({
 
 export const store = createStore(reducers)
 
+/**
+ * Creates selectors on a reducer
+ */
 let charactersSelector = createSelector([state => state.characterList], (characterList) => {
-  // console.log('update character list')
   Storage.setCharacterList(characterList)
-  //Storage.getCharacterList().then(characterList => console.log(characterList))
 })
 
 let placesSelector = createSelector([state => state.placeList], (placeList) => {
-  // console.log('update de places')
   Storage.setPlaceList(placeList)
 })
 
 let chaptersSelector = createSelector([state => state.chapterList], (chapterList) => {
-  // console.log('update de chapters')
   Storage.setChapterList(chapterList)
 })
 
@@ -35,6 +38,9 @@ let progressSelector = createSelector([state => state.progress], (progress) => {
   Storage.setProgress(progress)
 })
 
+/**
+ * Subscribe to listen to updates in reducer
+ */
 store.subscribe( () => {
   charactersSelector(store.getState())
   placesSelector(store.getState())
