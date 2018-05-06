@@ -6,8 +6,7 @@ export default class Scene extends React.Component {
 
   constructor(props) {
     super(props)
-    this.source = require(`./../../assets/images/Chap27_part1.png`)
-    this.sourceInfo = resolveAssetSource(this.source)
+    this.sourceInfo = resolveAssetSource(this.props.src)
 
     const windowHeight = this.props.windowHeight
 
@@ -25,7 +24,7 @@ export default class Scene extends React.Component {
 
   render () {
     return (
-      <Image style={[styles.scene, this.state.styles ]} source={this.source} />
+      <Image style={[styles.scene, this.state.styles ]} source={this.props.src} />
     )
   }
 }

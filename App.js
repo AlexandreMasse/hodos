@@ -76,7 +76,7 @@ const AppNavigator = StackNavigator({
     screen: SvgTest
   }
 },{
-  initialRouteName: 'HomeScreen',
+  initialRouteName: 'Map',
   headerMode: 'none'
 })
 

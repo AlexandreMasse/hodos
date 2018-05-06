@@ -2,6 +2,10 @@ import React from 'react'
 import { StyleSheet, View, Text, Button, Image, TouchableHighlight, Dimensions, Animated } from 'react-native'
 import {connect} from 'react-redux';
 import PinchZoomView from '../../lib/PinchZoomView'
+import Scene from './../Chapter/Scene'
+
+
+const height = Dimensions.get('window').height
 
 class Map extends React.Component {
 
@@ -18,15 +22,14 @@ class Map extends React.Component {
       <View style={styles.container}>
         <PinchZoomView>
           <View style={styles.container}>
-            <Image source={require('./../../assets/images/map.png')} style={styles.map} />
+            <Scene src={require('./../../assets/images/map.png')} windowHeight={height}/>
             <TouchableHighlight onPress={() => {this._toggleReadBtn()} } style={styles.button}>
               <View />
             </TouchableHighlight>
-            <Text style={styles.text}>Map</Text>
-            <Button title={'Retour'} onPress={() => this.props.navigation.goBack()}/>
-            {this._renderReadBtn()}
           </View>
         </PinchZoomView>
+            <Button title={'Retour'} onPress={() => this.props.navigation.goBack()}/>
+            {this._renderReadBtn()}
       </View>
 
     )
@@ -72,10 +75,10 @@ const styles = StyleSheet.create({
   },
   button: {
     position: 'absolute',
-    left: 170,
-    top: 150,
-    width: 150,
-    height: 150,
+    left: 650,
+    top: 220,
+    width: 125,
+    height: 100,
     backgroundColor: 'rgba(127, 63, 191, 0.36)',
   },
   buttonRead: {
