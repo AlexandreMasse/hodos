@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, Button, Image, TouchableHighlight, Dimensions, 
 import {connect} from 'react-redux';
 import PinchZoomView from '../../lib/PinchZoomView'
 import Scene from './../Chapter/Scene'
-import colors from './../../assets/colors'
+import {colors} from '../../assets/variables'
 import resolveAssetSource from 'resolveAssetSource'
 import mapData from './../../store/datas/map.json'
 import mapImage from './../../assets/images/map/map.png'
@@ -178,7 +178,8 @@ const styles = StyleSheet.create({
     color: colors.paleGreen,
     fontSize: 24,
     padding: 15,
-    textAlign: 'left'
+    textAlign: 'left',
+    fontFamily: 'rubik-light'
   },
   arrowReading: {
     position: 'absolute',
