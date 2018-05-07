@@ -20,14 +20,13 @@ _cacheImages = (images) => {
   }
 
   _cacheFonts = (fonts) => {
-    // return fonts.map( font => {
-    //   const name = font.name
-    //   const fontSrc = font.font
-    //   console.log(name, fontSrc)
-    //   Font.loadAsync({name: fontSrc})
-    // })
-    return Font.loadAsync({
-      'rubik-light': require('./src/assets/fonts/Rubik/Rubik-Light.ttf'),
+    return fonts.map( font => {
+      const name = font.name
+      const fontSrc = font.font
+
+      let fontObject = {}
+      fontObject[name] = fontSrc
+      Font.loadAsync(fontObject)
     })
   }
 
@@ -62,7 +61,6 @@ class App extends React.Component {
 
     await Promise.all([...imageAssets, ...fontAssets]);
 
-    // return Promise.all(cacheImages)
   }
   _handleFinishLoading = () => {
     console.log("finish loading assets")
