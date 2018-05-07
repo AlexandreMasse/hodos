@@ -25,8 +25,8 @@ class Chapter extends React.Component {
   }
 
   _handleScroll(e) {
-    console.log(e)
-    console.log('ayo')
+    console.log(e.nativeEvent)
+    console.log(e.nativeEvent.contentOffset.x);
   }
 
 }

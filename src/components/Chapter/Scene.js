@@ -1,16 +1,26 @@
 import React from 'react'
-import { StyleSheet, Image } from 'react-native'
+import PropType from 'prop-types'
+import {StyleSheet, Image, Dimensions} from 'react-native'
 import resolveAssetSource from 'resolveAssetSource'
+import PinchZoomView from "../../lib/PinchZoomView";
 
 export default class Scene extends React.Component {
+
+  static propTypes = {
+    windowHeight: PropType.number,
+    src: PropType.any.isRequired
+  }
+
+  static defaultProps = {
+    windowHeight: Dimensions.get('window').height
+  }
+
 
   constructor(props) {
     super(props)
     this.sourceInfo = resolveAssetSource(this.props.src)
 
     const windowHeight = this.props.windowHeight
-
-    console.log(windowHeight)
 
     this.state = {
       styles: {

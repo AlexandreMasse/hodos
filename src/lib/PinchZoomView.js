@@ -33,7 +33,7 @@ export default class PinchZoomView extends Component {
       offsetLimite: {
         left: 0,
         top: 0,
-        right: 0,
+        right: 100,
       },
       measure: {
         x: 0,
@@ -104,21 +104,23 @@ export default class PinchZoomView extends Component {
     //   });
     // }
 
-    // console.log(windowWidth * this.state.scale );
+
     var offsetX = this.state.offsetX
 
-
-    // Right
-    if(this.state.measure.px + this.state.measure.w > windowWidth - this.state.offsetLimite.right) {
-      console.log("good");
-
-    } else {
-      console.log("pas bon");
+    // Left
+    if (this.state.measure.px > this.state.offsetLimite.left) {
+      offsetX = this.state.offsetX - this.state.measure.px
     }
 
+    // Right
+    if(this.state.measure.px + this.state.measure.w < windowWidth + this.state.offsetLimite.right) {
+      offsetX = this.state.offsetX - (this.state.measure.px + this.state.measure.w - windowWidth - this.state.offsetLimite.right)
+    }
+
+
     this.setState({
-      offsetX: this.state.measure.px > this.state.offsetLimite.left ? this.state.offsetX - this.state.measure.px : this.state.offsetX,
-      lastX: this.state.measure.px > this.state.offsetLimite.left ? this.state.offsetX - this.state.measure.px : this.state.offsetX,
+      offsetX: offsetX,
+      lastX: offsetX,
       lastY: this.state.offsetY,
       lastScale: this.state.scale
     })
@@ -157,6 +159,8 @@ export default class PinchZoomView extends Component {
       let offsetX = this.state.lastX + gestureState.dx / this.state.scale;
       let offsetY = this.state.lastY + gestureState.dy / this.state.scale;
 
+      console.log(gestureState.vx);
+
       // console.log(offsetX);
       // console.log(this.state.scale);
 
@@ -173,12 +177,29 @@ export default class PinchZoomView extends Component {
       this.updateMeasure()
 
       this.el.measure((x, y, w, h, px, py) => {
+
+        let leftLimite = px >= this.state.offsetLimite.left && gestureState.vx > 0
+        let rightLimite = px + w < windowWidth + this.state.offsetLimite.right && gestureState.vx < 0
+
         // Left Limit
-        if(px <= this.state.offsetLimite.left) {
-          this.setState({offsetX, offsetY, lastMovePinch: false });
-        } else {
-          this.setState({offsetY, lastMovePinch: false });
+        if(leftLimite) {
+          // this.setState({offsetX: this.state.offsetX - px, offsetY, lastX: this.state.offsetX - px ,  lastMovePinch: true });
+          this.setState({offsetX: this.state.offsetX, offsetY, lastX: this.state.offsetX, lastMovePinch: true });
         }
+
+        if(rightLimite) {
+          this.setState({offsetX: this.state.offsetX, offsetY, lastX: this.state.offsetX, lastMovePinch: true });
+          // this.setState({offsetY, lastMovePinch: false });
+        }
+
+        // No limit crossed
+        if(!leftLimite && !rightLimite) {
+          this.setState({offsetX, offsetY, lastMovePinch: false});
+        }
+
+
+
+
 
       })
     }
