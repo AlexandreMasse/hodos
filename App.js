@@ -7,35 +7,66 @@ import storageSessionManager from './src/store/StorageSessionManager'
 import HomeScreen from './src/components/HomeScreen/HomeScreen'
 import Map from './src/components/Map/Map'
 import Chapter from './src/components/Chapter/Chapter'
-import { Asset, AppLoading } from 'expo';
-import SvgTest from "./src/components/SvgTest";
+import { Asset, AppLoading, Font } from 'expo';
+
+_cacheImages = (images) => {
+    return images.map(image => {
+      if (typeof image === 'string') {
+        return Image.prefetch(image);
+      } else {
+        return Asset.fromModule(image).downloadAsync()
+      }
+    })
+  }
+
+  _cacheFonts = (fonts) => {
+    // return fonts.map( font => {
+    //   const name = font.name
+    //   const fontSrc = font.font
+    //   console.log(name, fontSrc)
+    //   Font.loadAsync({name: fontSrc})
+    // })
+    return Font.loadAsync({
+      'rubik-light': require('./src/assets/fonts/Rubik/Rubik-Light.ttf'),
+    })
+  }
 
 class App extends React.Component {
 
   state = {
-    isReady: false,
+    isReady: false
   };
 
-  async _cacheResourcesAsync() {
-    const images = [
+  async _loadAssetsAsync() {
+    const imageAssets = _cacheImages([
       require('./src/assets/images/logo.png'),
       require('./src/assets/splash/splash.png'),
-      require('./src/assets/images/map.png'),
-      require('./src/assets/images/arrow-reading.png'),
-      require('./src/assets/images/Chap27_part1.png'),
-      require('./src/assets/images/Chap27_palais.png'),
-      require('./src/assets/images/Chap27_rochers.png'),
-    ];
+      require('./src/assets/images/map/map.png'),
+      require('./src/assets/images/green-arrow-right.png'),
+      require('./src/assets/images/white-arrow-right.png'),
+      require('./src/assets/images/white-arrow-left.png'),
+      require('./src/assets/images/chapters/Chap27_part1.png'),
+      require('./src/assets/images/chapters/Chap27_palais.png'),
+      require('./src/assets/images/chapters/Chap27_rochers.png'),
+    ]);
 
-    const cacheImages = images.map((image) => {
-      return Asset.fromModule(image).downloadAsync();
-    });
-    return Promise.all(cacheImages)
+
+    const fontAssets = _cacheFonts([
+      {name: 'alcubierre', font: require('./src/assets/fonts/Alcubierre/Alcubierre.otf')},
+      {name: 'rubik-black', font: require('./src/assets/fonts/Rubik/Rubik-Black.ttf')},
+      {name: 'rubik-bold', font: require('./src/assets/fonts/Rubik/Rubik-Bold.ttf')},
+      {name: 'rubik-medium', font: require('./src/assets/fonts/Rubik/Rubik-Medium.ttf')},
+      {name: 'rubik-regular', font: require('./src/assets/fonts/Rubik/Rubik-Regular.ttf')},
+      {name: 'rubik-light', font: require('./src/assets/fonts/Rubik/Rubik-Light.ttf')}
+    ]);
+
+    await Promise.all([...imageAssets, ...fontAssets]);
+
+    // return Promise.all(cacheImages)
   }
-
   _handleFinishLoading = () => {
-    console.log("finish loading assets");
-    this.setState({ isReady: true })
+    console.log("finish loading assets")
+    this.setState({ isReady: true})
   };
 
   componentWillMount () {
@@ -45,7 +76,7 @@ class App extends React.Component {
   render() {
     if (!this.state.isReady) {
       return (
-        <AppLoading startAsync={this._cacheResourcesAsync}
+        <AppLoading startAsync={this._loadAssetsAsync}
                     onFinish={this._handleFinishLoading}
                     onError={console.warn}
         />
@@ -53,7 +84,7 @@ class App extends React.Component {
     } else {
       return (
         <Provider store={store}>
-          <AppNavigator/>
+          <AppNavigator />
         </Provider>
       )
     }
@@ -72,13 +103,13 @@ const AppNavigator = StackNavigator({
   },
   Chapter : {
     screen: Chapter
-  },
-  Svg: {
-    screen: SvgTest
   }
 },{
   initialRouteName: 'Map',
-  headerMode: 'none'
+  headerMode: 'none',
+  navigationOptions: {
+    gesturesEnabled: false,
+  },
 })
 
 

@@ -5,10 +5,12 @@ import PinchZoomView from '../../lib/PinchZoomView'
 import Scene from './../Chapter/Scene'
 import colors from './../../assets/colors'
 import resolveAssetSource from 'resolveAssetSource'
+import mapData from './../../store/datas/map.json'
+import mapImage from './../../assets/images/map/map.png'
+import HeaderPlace from './HeaderPlace'
 
 const windowHeight = Dimensions.get('window').height
 
-import mapImage from '../../assets/images/map.png'
 
 class Map extends React.Component {
 
@@ -16,31 +18,41 @@ class Map extends React.Component {
     super(props)
     this.state = {
       showPlace: false,
+      showReadingButton: true,
+      activePlace: {
+        id: '',
+        name: ''
+      },
       fadeAnim: new Animated.Value(0)
     }
 
   }
 
-  render () {
-    return (
-      <View style={styles.container}>
-        <PinchZoomView childWidth={this.getMapImageWidth()}>
-            <Scene src={mapImage}/>
-            <TouchableHighlight onPress={() => {this._showInfo()} } style={styles.button} underlayColor={null}>
-              <View />
-            </TouchableHighlight>
-        </PinchZoomView>
-          <TouchableHighlight onPress={() => this.props.navigation.navigate('Chapter')} style={[styles.whiteButton, styles.buttonRead]} underlayColor={'#fff'}>
+  _renderReadingButton() {
+    if (this.state.showReadingButton) {
+      return (
+        <TouchableHighlight onPress={() => this.props.navigation.navigate('Chapter')} style={[styles.whiteButton, styles.buttonRead]} underlayColor={'#fff'}>
             <View style={styles.whiteButtonWrapper}>
                 <Text style={styles.whiteButtonText}>Reprendre la lecture</Text>
-                <Image source={require('./../../assets/images/arrow-reading.png')} style={styles.arrowReading}/>
+                <Image source={require('./../../assets/images/green-arrow-right.png')} style={styles.arrowReading}/>
             </View>
           </TouchableHighlight>
-          <Button title={'Retour'} onPress={() => this.props.navigation.goBack()}/>
-          {this._renderPlace()}
-      </View>
+      );
+    }
+  }
 
-    )
+  _renderTouchablePlace() {
+      return mapData.map((mapPlace, index) => {
+        return(
+          <TouchableHighlight
+            key={'map_'+index}
+            onPress={() => {this._showHeader(mapPlace)} }
+            style={[styles.button, {top: mapPlace.y, left: mapPlace.x, width: mapPlace.width, height: mapPlace.height}]}
+            underlayColor={null}>
+            <View />
+          </TouchableHighlight>
+        )
+      })
   }
 
   _renderPlace () {
@@ -49,26 +61,37 @@ class Map extends React.Component {
         <TouchableHighlight onPress={() => {}} style={[styles.whiteButton, styles.placeButton]} underlayColor={'#fff'}>
           <View style={styles.whiteButtonWrapper}>
               <Text style={styles.whiteButtonText}>Accéder au lieu</Text>
-              <Image source={require('./../../assets/images/arrow-reading.png')} style={styles.arrowReading}/>
+              <Image source={require('./../../assets/images/green-arrow-right.png')} style={styles.arrowReading}/>
           </View>
         </TouchableHighlight>
       );
     }
   }
 
-  _renderInfo () {
-    if (this.state.showInfo) {
-      // return (
-
-      // );
+  _renderHeader () {
+    if (this.state.showPlace) {
+      return (
+        <HeaderPlace placeName={this.state.activePlace.name} onHideHeader={this._hideHeader} />
+      )
     }
   }
 
-  _showInfo () {
-    console.log('show info')
+  _showHeader (mapPlace) {
     this.setState({
-      showPlace: !this.state.showPlace
-    });
+      showPlace: true,
+      showReadingButton: false,
+      activePlace: {
+        id: '',
+        name: mapPlace.name
+      }
+    })
+  }
+
+  _hideHeader = () => {
+    this.setState({
+      showPlace: false,
+      showReadingButton: true
+    })
   }
 
   getMapImageWidth() {
@@ -76,7 +99,24 @@ class Map extends React.Component {
     return (windowHeight / originalSize.height) * originalSize.width
   }
 
+  render () {
+    return (
+      <View style={styles.container}>
+        <PinchZoomView childWidth={this.getMapImageWidth()}>
+          <Scene src={mapImage}/>
+          <TouchableHighlight style={styles.mapTouchable} onPress={() => this._hideHeader()}  underlayColor={'transparent'}>
+            <View />
+          </TouchableHighlight>
+          { this._renderTouchablePlace() }
+        </PinchZoomView>
+          {this._renderReadingButton()}
+        <Button title={'Retour'} onPress={() => this.props.navigation.goBack()}/>
+        {this._renderPlace()}
+        {this._renderHeader()}
+      </View>
 
+    )
+  }
 }
 
 const windowWidth = Dimensions.get('window').width
@@ -92,6 +132,13 @@ const styles = StyleSheet.create({
     color: 'white',
     textAlign: 'center'
   },
+  mapTouchable: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+  },
   map: {
     flex: 1,
     position: 'absolute',
@@ -101,10 +148,6 @@ const styles = StyleSheet.create({
   },
   button: {
     position: 'absolute',
-    left: 650,
-    top: 220,
-    width: 125,
-    height: 100,
     backgroundColor: 'rgba(127, 63, 191, 0.36)',
   },
   buttonRead: {
@@ -133,7 +176,7 @@ const styles = StyleSheet.create({
   },
   whiteButtonText: {
     color: colors.paleGreen,
-    fontSize: 20,
+    fontSize: 24,
     padding: 15,
     textAlign: 'left'
   },

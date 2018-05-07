@@ -1,0 +1,30 @@
+[
+  {
+    "name": "Le palais de Chronos",
+    "x": "42.7%",
+    "y": "29%",
+    "width": "8%",
+    "height": "13%"
+  },
+  {
+    "name": "L'olympe",
+    "x": "61%",
+    "y": "20%",
+    "width": "9.7%",
+    "height": "21%"
+  },
+  {
+    "name": "Le mont Parnasse",
+    "x": "38%",
+    "y": "48.8%",
+    "width": "12%",
+    "height": "14%"
+  },
+  {
+    "name": "La caverne des Cyclopes",
+    "x": "57%",
+    "y": "10%",
+    "width": "5%",
+    "height": "8%"
+  }
+]
