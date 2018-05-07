@@ -105,7 +105,7 @@ const AppNavigator = StackNavigator({
     screen: Chapter
   }
 },{
-  initialRouteName: 'Map',
+  initialRouteName: 'HomeScreen',
   headerMode: 'none',
   navigationOptions: {
     gesturesEnabled: false,

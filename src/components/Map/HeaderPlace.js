@@ -1,6 +1,7 @@
 import React from 'react'
 import PropType from 'prop-types'
 import { StyleSheet, Text, View, TouchableHighlight, Image} from 'react-native'
+import BackToMapButton from './BackToMapButton'
 
 export default class HeaderPlace extends React.Component {
 
@@ -24,12 +25,7 @@ export default class HeaderPlace extends React.Component {
   render () {
     return (
       <View style={[styles.headerView]}>
-        <TouchableHighlight style={[styles.button, styles.buttonLeft]} onPress={this._handleHideHeader}>
-          <View style={[styles.buttonWrapper]}>
-            <Image source={require('./../../assets/images/white-arrow-left.png')} style={[styles.arrow, styles.arrowLeft]} />
-            <Text style={[styles.text, styles.textRight]}> Retour au plan </Text>
-          </View>
-        </TouchableHighlight>
+        <BackToMapButton styles={{button: styles.button, buttonWrapper: styles.buttonWrapper, text: styles.text, arrow: styles.arrow}} callParentHandler={this._handleHideHeader} />
         <TouchableHighlight style={[styles.button, styles.buttonRight]}>
           <View style={[styles.buttonWrapper]}>
             <Image source={require('./../../assets/images/white-arrow-right.png')} style={[styles.arrow, styles.arrowRight]} />
@@ -37,7 +33,6 @@ export default class HeaderPlace extends React.Component {
           </View>
         </TouchableHighlight>
         <Text style={[styles.placeTitle]}>{this.props.placeName.toUpperCase()}</Text>
-
       </View>
     )
   }
@@ -67,9 +62,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 20,
   },
-  buttonLeft: {
-    left: 20,
-  },
   buttonRight: {
     right: 20,
     bottom: 30,
@@ -84,9 +76,6 @@ const styles = StyleSheet.create({
     width: 60,
     resizeMode: 'contain'
   },
-  arrowLeft: {
-    left: 0,
-  },
   arrowRight: {
     right: 0,
   },
@@ -97,8 +86,5 @@ const styles = StyleSheet.create({
   },
   textLeft: {
     marginRight: 70
-  },
-  textRight: {
-    marginLeft: 70
   }
 })
