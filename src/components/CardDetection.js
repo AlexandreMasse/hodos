@@ -322,9 +322,12 @@ export default class CardDetection extends React.Component {
    * @returns {Object} character
    */
   getMatchingCharacter(patternId) {
+    console.log('get matching character')
+    console.log(this.characters)
     for (let i = 0; i < this.characters.length; i++) {
       const patterns = this.characters[i].patterns;
-      if (patterns.indexOf(patternId) != -1) {
+      if (patterns.indexOf(patternId) !== -1) {
+        console.log('yes', patterns.indexOf(patternId))
         return this.characters[i]
       }
     }
@@ -349,9 +352,13 @@ export default class CardDetection extends React.Component {
     console.log('touchedPattern', touchedPattern)
     console.log('touchedPattern', touchedPattern)
     console.log('pattern', patternId)
-    if (patternId) {
+    if (patternId >= 0) {
+      console.log('i have a patternId')
       const character = this.getMatchingCharacter(patternId);
-      this.setState({characterName: character.name})
+      console.log(character)
+      if (character) {
+        this.setState({characterName: character.name})
+      }
     }
   }
 
@@ -375,7 +382,8 @@ export default class CardDetection extends React.Component {
 
   renderCharacterName() {
     if (this.state.characterName.length > 0) {
-      return <Text style={style.characterName} >{this.state.characterName}</Text>
+      console.log(this.state.characterName)
+      return (<Text style={style.characterName} >{this.state.characterName}</Text>)
     }
   }
 
@@ -389,8 +397,8 @@ export default class CardDetection extends React.Component {
 
     return (
       <View style={style.cardZone} onStartShouldSetResponder={ (evt) => {this._onTouch(evt)} } pointerEvents="box-only">
-        <Image style={style.background} source={ require('../assets/backgroundCharacter.jpg')}></Image>
-        {/* <Image style={style.patternGrid} source={ require('../assets/patternGrid.png')}></Image> */}
+        <Image style={style.background} source={ require('./../assets/images/backgroundCharacter.jpg')}></Image>
+        <Image style={style.patternGrid} source={ require('./../assets/images/patternGrid.png')}></Image>
         {this.renderPoints()}
         {this.renderCharacterName()}
       </View>
@@ -428,8 +436,8 @@ const style = StyleSheet.create({
   },
   patternGrid: {
     position: 'absolute',
-    width: 250,
-    height: 250,
+    width: 700,
+    height: 700,
     left: 50,
     top: 100,
     transform: [{rotate : '180deg'}]

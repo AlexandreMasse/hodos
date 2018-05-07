@@ -58,7 +58,7 @@ class Map extends React.Component {
   _renderPlace () {
     if (this.state.showPlace) {
       return (
-        <TouchableHighlight onPress={() => {}} style={[styles.whiteButton, styles.placeButton]} underlayColor={'#fff'}>
+        <TouchableHighlight onPress={() => this.props.navigation.navigate('Place')} style={[styles.whiteButton, styles.placeButton]} underlayColor={'#fff'} >
           <View style={styles.whiteButtonWrapper}>
               <Text style={styles.whiteButtonText}>Accéder au lieu</Text>
               <Image source={require('./../../assets/images/green-arrow-right.png')} style={styles.arrowReading}/>
@@ -71,9 +71,13 @@ class Map extends React.Component {
   _renderHeader () {
     if (this.state.showPlace) {
       return (
-        <HeaderPlace placeName={this.state.activePlace.name} onHideHeader={this._hideHeader} />
+        <HeaderPlace placeName={this.state.activePlace.name} onHideHeader={this._hideHeader} onNavigateChapter={this._navigateChapter} />
       )
     }
+  }
+
+  _navigateChapter = () => {
+    this.props.navigation.navigate('Chapter')
   }
 
   _showHeader (mapPlace) {

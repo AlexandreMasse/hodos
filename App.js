@@ -7,6 +7,7 @@ import storageSessionManager from './src/store/StorageSessionManager'
 import HomeScreen from './src/components/HomeScreen/HomeScreen'
 import Map from './src/components/Map/Map'
 import Chapter from './src/components/Chapter/Chapter'
+import Place from './src/components/Place/Place'
 import { Asset, AppLoading, Font } from 'expo';
 
 _cacheImages = (images) => {
@@ -47,6 +48,9 @@ class App extends React.Component {
       require('./src/assets/images/chapters/Chap27_part1.png'),
       require('./src/assets/images/chapters/Chap27_palais.png'),
       require('./src/assets/images/chapters/Chap27_rochers.png'),
+      require('./src/assets/images/Chapter1.png'),
+      require('./src/assets/images/patternGrid.png'),
+      require('./src/assets/images/backgroundCharacter.jpg'),
     ]);
 
 
@@ -101,6 +105,9 @@ const AppNavigator = StackNavigator({
   },
   Chapter : {
     screen: Chapter
+  },
+  Place: {
+    screen: Place
   }
 },{
   initialRouteName: 'HomeScreen',
