@@ -30,9 +30,10 @@ export const incrementChapter = () => {
   }
 }
 
-export const incrementSlide = () => {
+export const currentOffsetProgress = (currentOffset) => {
   return {
-    type: actionTypes.PROGRESS_INCREMENT_SLIDE
+    type: actionTypes.PROGRESS_CURRENT_OFFSET,
+    currentOffset
   }
 }
 

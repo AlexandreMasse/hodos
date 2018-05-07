@@ -4,7 +4,8 @@ import {
   View,
   StyleSheet,
   PanResponder,
-  Dimensions
+  Dimensions,
+  Animated
 } from 'react-native';
 
 export default class PinchZoomView extends Component {

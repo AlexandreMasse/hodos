@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, Text, View, Button, FlatList} from 'react-native';
 import {StackNavigator} from 'react-navigation';
 import {connect} from 'react-redux';
-import {incrementChapter, incrementSlide, unlockPlace, unlockChapter, unlockCharacter, addCharacterToMap} from "../store/actions/actions";
+import {incrementChapter, currentOffsetProgress, unlockPlace, unlockChapter, unlockCharacter, addCharacterToMap} from "../store/actions/actions";
 
 class Test2 extends React.Component {
 
@@ -95,7 +95,7 @@ const mapDispatchToProps = dispatch => {
       dispatch(incrementChapter())
     },
     _incrementSlideHandler: () => {
-      dispatch(incrementSlide())
+      dispatch(currentOffsetProgress())
     },
     _unlockPlaceHandler: (id) => {
       dispatch(unlockPlace(id))

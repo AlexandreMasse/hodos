@@ -39,7 +39,7 @@ export default class HeaderPlace extends React.Component {
         </TouchableHighlight>
       )
     } else {
-      <Image source={require('./../../assets/images/logo.png')} style={[style.imageRight]}/>
+      return <Image source={require('./../../assets/images/logo.png')} style={[styles.imageRight]}/>
     }
   }
 
@@ -47,7 +47,7 @@ export default class HeaderPlace extends React.Component {
     return (
       <View style={[styles.headerView]}>
         <BackToMapButton styles={{button: styles.button, buttonWrapper: styles.buttonWrapper, text: styles.text, arrow: styles.arrow}} callParentHandler={this._handleHideHeader} />
-        {this._renderRightElement}
+        {this._renderRightElement()}
         <Text style={[styles.placeTitle]}>{this.props.placeName.toUpperCase()}</Text>
       </View>
     )

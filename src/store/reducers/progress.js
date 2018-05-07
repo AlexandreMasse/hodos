@@ -2,7 +2,7 @@ import { actionTypes } from '../actions/actionTypes'
 
 const initialState = {
   chapter: 0,
-  slide: 0,
+  currentOffset: 0
 }
 
 const progress = (state = initialState, action) => {
@@ -11,12 +11,12 @@ const progress = (state = initialState, action) => {
       return {
         ...state,
         chapter: state.chapter + 1,
-        slide: 0
+        currentOffset: 0
       }
-    case actionTypes.PROGRESS_INCREMENT_SLIDE:
+    case actionTypes.PROGRESS_CURRENT_OFFSET:
       return {
         ...state,
-        slide: state.slide + 1
+        currentOffset: action.currentOffset
       }
     case actionTypes.SET_PROGRESS:
       return action.progress
