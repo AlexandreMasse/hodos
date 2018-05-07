@@ -104,8 +104,10 @@ export default class PinchZoomView extends Component {
     //   });
     // }
 
+    //TODO : add animated for transition
 
     var offsetX = this.state.offsetX
+    var offsetY = this.state.offsetY
 
     // Left
     if (this.state.measure.px > this.state.offsetLimite.left) {
@@ -117,11 +119,17 @@ export default class PinchZoomView extends Component {
       offsetX = this.state.offsetX - (this.state.measure.px + this.state.measure.w - windowWidth - this.state.offsetLimite.right)
     }
 
+    // Top
+    if (this.state.measure.py > this.state.offsetLimite.top) {
+      offsetY = this.state.offsetY - this.state.measure.py
+    }
+
 
     this.setState({
       offsetX: offsetX,
+      offsetY: offsetY,
       lastX: offsetX,
-      lastY: this.state.offsetY,
+      lastY: offsetY,
       lastScale: this.state.scale
     })
 
@@ -159,8 +167,6 @@ export default class PinchZoomView extends Component {
       let offsetX = this.state.lastX + gestureState.dx / this.state.scale;
       let offsetY = this.state.lastY + gestureState.dy / this.state.scale;
 
-      console.log(gestureState.vx);
-
       // console.log(offsetX);
       // console.log(this.state.scale);
 
@@ -178,22 +184,27 @@ export default class PinchZoomView extends Component {
 
       this.el.measure((x, y, w, h, px, py) => {
 
+        console.log(gestureState.vy);
         let leftLimite = px >= this.state.offsetLimite.left && gestureState.vx > 0
         let rightLimite = px + w < windowWidth + this.state.offsetLimite.right && gestureState.vx < 0
+        let topLimite = py >= this.state.offsetLimite.top && gestureState.vy > 0
 
+        // console.log(topLimite);
         // Left Limit
         if(leftLimite) {
           // this.setState({offsetX: this.state.offsetX - px, offsetY, lastX: this.state.offsetX - px ,  lastMovePinch: true });
           this.setState({offsetX: this.state.offsetX, offsetY, lastX: this.state.offsetX, lastMovePinch: true });
         }
-
         if(rightLimite) {
           this.setState({offsetX: this.state.offsetX, offsetY, lastX: this.state.offsetX, lastMovePinch: true });
-          // this.setState({offsetY, lastMovePinch: false });
+        }
+
+        if(topLimite) {
+          this.setState({offsetY: this.state.offsetY, offsetX, lastY: this.state.offsetY, lastMovePinch: true });
         }
 
         // No limit crossed
-        if(!leftLimite && !rightLimite) {
+        if(!leftLimite && !rightLimite && !topLimite) {
           this.setState({offsetX, offsetY, lastMovePinch: false});
         }
 
