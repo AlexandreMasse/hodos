@@ -20,20 +20,21 @@ export default class PinchZoomView extends Component {
   static defaultProps = {
     scalable: true,
     maxScale: 2,
-    minScale: 1,
+    minScale: 1.1,
   };
 
   constructor(props) {
     super(props);
     this.state = {
-      scale: 1,
-      lastScale: 1,
+      scale: 1.1,
+      lastScale: 1.1,
       offsetX: windowWidth / 2 - this.props.childWidth / 2,
       offsetY: 0,
       offsetLimite: {
         left: 0,
-        top: 0,
         right: 100,
+        top: 0,
+        bottom: 0
       },
       measure: {
         x: 0,
@@ -124,6 +125,10 @@ export default class PinchZoomView extends Component {
       offsetY = this.state.offsetY - this.state.measure.py
     }
 
+    // Bottom
+    if (this.state.measure.py + this.state.measure.h < windowHeight + this.state.offsetLimite.bottom) {
+      offsetY = this.state.offsetY - (this.state.measure.py + this.state.measure.h - windowHeight - this.state.offsetLimite.bottom)
+    }
 
     this.setState({
       offsetX: offsetX,
@@ -184,33 +189,30 @@ export default class PinchZoomView extends Component {
 
       this.el.measure((x, y, w, h, px, py) => {
 
-        console.log(gestureState.vy);
         let leftLimite = px >= this.state.offsetLimite.left && gestureState.vx > 0
         let rightLimite = px + w < windowWidth + this.state.offsetLimite.right && gestureState.vx < 0
         let topLimite = py >= this.state.offsetLimite.top && gestureState.vy > 0
+        let bottomLimite = py + h < windowHeight + this.state.offsetLimite.bottom && gestureState.vy < 0
 
-        // console.log(topLimite);
-        // Left Limit
-        if(leftLimite) {
-          // this.setState({offsetX: this.state.offsetX - px, offsetY, lastX: this.state.offsetX - px ,  lastMovePinch: true });
-          this.setState({offsetX: this.state.offsetX, offsetY, lastX: this.state.offsetX, lastMovePinch: true });
-        }
-        if(rightLimite) {
-          this.setState({offsetX: this.state.offsetX, offsetY, lastX: this.state.offsetX, lastMovePinch: true });
+        // Left & Right Limit
+        if(leftLimite || rightLimite) {
+          this.setState({
+            offsetX: this.state.offsetX,
+            offsetY,
+            lastX: this.state.offsetX,
+            lastY: offsetY,
+            lastMovePinch: true });
         }
 
-        if(topLimite) {
-          this.setState({offsetY: this.state.offsetY, offsetX, lastY: this.state.offsetY, lastMovePinch: true });
+        // Top & Bottom limit
+        if(topLimite || bottomLimite){
+          this.setState({offsetY: this.state.offsetY, offsetX, lastX: offsetX, lastY: this.state.offsetY, lastMovePinch: true });
         }
 
         // No limit crossed
-        if(!leftLimite && !rightLimite && !topLimite) {
+        if(!leftLimite && !rightLimite && !topLimite && !bottomLimite) {
           this.setState({offsetX, offsetY, lastMovePinch: false});
         }
-
-
-
-
 
       })
     }
