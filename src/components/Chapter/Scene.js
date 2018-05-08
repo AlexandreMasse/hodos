@@ -15,7 +15,6 @@ export default class Scene extends React.Component {
     windowHeight: Dimensions.get('window').height
   }
 
-
   constructor(props) {
     super(props)
     this.sourceInfo = resolveAssetSource(this.props.src)

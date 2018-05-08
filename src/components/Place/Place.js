@@ -6,13 +6,29 @@ import HeaderPlace from './../Map/HeaderPlace'
 import CardDetection from './../CardDetection'
 import PlaceCard from './PlaceCard'
 
-class Map extends React.Component {
+class Place extends React.Component {
 
   constructor(props) {
     super(props)
     this.state = {
       tab: true,
+      place: {
+        name: ' '
+      }
     }
+  }
+
+  componentWillMount() {
+    var place = {}
+    this.props.placeList.map(val => {
+      if (val.id == this.props.navigation.state.params.placeId) {
+        place = val;
+      }
+    })
+    this.setState({
+      place: place
+    })
+
   }
 
   _hideHeader = () => {
@@ -60,9 +76,10 @@ class Map extends React.Component {
   }
 
   render () {
+    console.log(this.state)
     return (
       <View style={styles.container}>
-        <HeaderPlace placeName={this.props.navigation.state.params.place.name} onHideHeader={this._hideHeader}/>
+        <HeaderPlace placeName={this.state.place && this.state.place.name ? this.state.place.name : ''} onHideHeader={this._hideHeader}/>
         <View style={[styles.placeWrapper]}>
             {this._renderTabHeader()}
           <ScrollView style={[styles.placeContent]}>
@@ -126,6 +143,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
   return {
+    placeList: state.placeList
   }
 }
 
@@ -133,4 +151,4 @@ const mapDispatchToProps = dispatch => {
   return {
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Map)
+export default connect(mapStateToProps, mapDispatchToProps)(Place)

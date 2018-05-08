@@ -58,7 +58,7 @@ class Map extends React.Component {
   _renderPlace () {
     if (this.state.showPlace) {
       return (
-        <TouchableHighlight onPress={() => this.props.navigation.navigate('Place', {place: this.state.activePlace})} style={[styles.whiteButton, styles.placeButton]} underlayColor={'#fff'} >
+        <TouchableHighlight onPress={() => this.props.navigation.navigate('Place', {placeId: this.state.activePlace.id})} style={[styles.whiteButton, styles.placeButton]} underlayColor={'#fff'} >
           <View style={styles.whiteButtonWrapper}>
               <Text style={styles.whiteButtonText}>Accéder au lieu</Text>
               <Image source={require('./../../assets/images/green-arrow-right.png')} style={styles.arrowReading}/>
@@ -85,7 +85,7 @@ class Map extends React.Component {
       showPlace: true,
       showReadingButton: false,
       activePlace: {
-        id: '',
+        id: mapPlace.id,
         name: mapPlace.name
       }
     })
