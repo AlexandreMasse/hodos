@@ -34,7 +34,7 @@ export default class PinchZoomView extends Component {
       lastScale: this.props.initialScale ? this.props.initialScale : 1,
       offsetX: windowWidth * 0.5 - this.props.childWidth * 0.5,
       offsetY: windowHeight * 0.5 - this.props.childHeight * 0.5,
-      lastX: windowWidth / 2 - this.props.childWidth / 2,
+      lastX: windowWidth * 0.5 - this.props.childWidth * 0.5,
       lastY: windowHeight * 0.5 - this.props.childHeight * 0.5,
       offsetLimite: {
         left: 100,

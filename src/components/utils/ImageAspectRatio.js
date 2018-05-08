@@ -5,8 +5,8 @@ import {Image } from 'react-native'
 export default class ImageAspectRatio extends React.Component {
 
   static propTypes = {
-    width: PropTypes.number,
-    height: PropTypes.number,
+    width: PropTypes.any,
+    height: PropTypes.any,
     src: PropTypes.any.isRequired,
     styles: PropTypes.any
   }
