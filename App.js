@@ -135,6 +135,7 @@ YellowBox.ignoreWarnings([
   'Warning: componentWillMount is deprecated',
   'Warning: componentWillReceiveProps is deprecated',
   'Warning: componentWillUpdate is deprecated',
+  'Remote debugger is in a background tab'
 ]);
 
 

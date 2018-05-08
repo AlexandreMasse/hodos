@@ -15,27 +15,32 @@ export default class PinchZoomView extends Component {
     scalable: PropTypes.bool,
     maxScale: PropTypes.number,
     minScale: PropTypes.number,
+    initialScale: PropTypes.number,
     childWidth: PropTypes.number.isRequired,
+    childHeight: PropTypes.number.isRequired,
   };
 
   static defaultProps = {
     scalable: true,
     maxScale: 2,
-    minScale: 1.1,
+    minScale: 1,
+    initialScale: null
   };
 
   constructor(props) {
     super(props);
     this.state = {
-      scale: 1.1,
-      lastScale: 1.1,
-      offsetX: windowWidth / 2 - this.props.childWidth / 2,
-      offsetY: 0,
+      scale: this.props.initialScale ? this.props.initialScale : 1,
+      lastScale: this.props.initialScale ? this.props.initialScale : 1,
+      offsetX: windowWidth * 0.5 - this.props.childWidth * 0.5,
+      offsetY: windowHeight * 0.5 - this.props.childHeight * 0.5,
+      lastX: windowWidth / 2 - this.props.childWidth / 2,
+      lastY: windowHeight * 0.5 - this.props.childHeight * 0.5,
       offsetLimite: {
-        left: 0,
+        left: 100,
         right: 100,
-        top: 0,
-        bottom: 0
+        top: 50,
+        bottom: 50
       },
       measure: {
         x: 0,
@@ -45,8 +50,6 @@ export default class PinchZoomView extends Component {
         px: 0,
         py: 0
       },
-      lastX: windowWidth / 2 - this.props.childWidth / 2,
-      lastY: 0,
       lastMovePinch: false
     },
     this.distant = 150;
@@ -154,8 +157,9 @@ export default class PinchZoomView extends Component {
       let dy = Math.abs(e.nativeEvent.touches[0].pageY - e.nativeEvent.touches[1].pageY);
       let distant = Math.sqrt(dx * dx + dy * dy);
       let scale = distant / this.distant * this.state.lastScale;
-
+      console.log(scale);
       if(scale > this.props.minScale && scale < this.props.maxScale) {
+
         this.setState({ scale, lastMovePinch: true });
       } else {
         this.setState({lastMovePinch: true });
@@ -190,9 +194,9 @@ export default class PinchZoomView extends Component {
 
       this.el.measure((x, y, w, h, px, py) => {
 
-        let leftLimite = px >= this.state.offsetLimite.left && gestureState.vx > 0
+        let leftLimite = px >= -this.state.offsetLimite.left && gestureState.vx > 0
         let rightLimite = px + w < windowWidth + this.state.offsetLimite.right && gestureState.vx < 0
-        let topLimite = py >= this.state.offsetLimite.top && gestureState.vy > 0
+        let topLimite = py >= -this.state.offsetLimite.top && gestureState.vy > 0
         let bottomLimite = py + h < windowHeight + this.state.offsetLimite.bottom && gestureState.vy < 0
 
         // Left & Right Limit
