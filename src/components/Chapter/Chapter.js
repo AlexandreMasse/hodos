@@ -32,8 +32,8 @@ class Chapter extends React.Component {
         }>
           <Scene src={imageList.chapters.chap27} windowHeight={height}/>
           {/* <Paragraph text={'lorem ipsum'} color={'red'} key="1" x={300} y={100} />*/}
-          <ParallaxedImage x={100} y={50} width={700} height={650} src={imageList.chapters.palais}/>
-          <ParallaxedImage x={0} y={480} width={1000} height={300} src={imageList.chapters.rochers} />
+          <ParallaxedImage x={100} y={50} height={600} src={imageList.chapters.palais}/>
+          <ParallaxedImage x={0} y={480} width={600} src={imageList.chapters.rochers} />
         </ScrollView>
         <View style={styles.absoluteContent}>
           <Button title={'< Retour'} onPress={() => this.props.navigation.goBack()}/>
@@ -63,7 +63,8 @@ const styles = StyleSheet.create({
   },
   absoluteContent: {
     top: 50,
-    left: 10,
+    left: 20,
+    alignItems: 'flex-start',
     position: 'absolute',
   },
   textTop: {
