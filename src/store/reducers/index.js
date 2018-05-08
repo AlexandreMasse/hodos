@@ -27,6 +27,7 @@ let charactersSelector = createSelector([state => state.characterList], (charact
 })
 
 let placesSelector = createSelector([state => state.placeList], (placeList) => {
+  console.log('set to local storage')
   Storage.setPlaceList(placeList)
 })
 
