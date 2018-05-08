@@ -106,7 +106,7 @@ class Map extends React.Component {
   render () {
     return (
       <View style={styles.container}>
-        <PinchZoomView initialScale={1.3} minScale={1.3} maxScale={2.5} childHeight={windowHeight} childWidth={this.getMapImageWidth()}>
+        <PinchZoomView initialScale={2.5} minScale={2} maxScale={3.5} childHeight={windowHeight} childWidth={this.getMapImageWidth()}>
           <Scene src={mapImage}/>
           <TouchableHighlight style={styles.mapTouchable} onPress={() => this._hideHeader()}  underlayColor={'transparent'}>
             <View />

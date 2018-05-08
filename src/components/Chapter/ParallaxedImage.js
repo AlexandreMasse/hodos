@@ -2,12 +2,14 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { StyleSheet, Image } from 'react-native'
 import ImageAspectRatio from '../utils/ImageAspectRatio'
+import ImageScalingRatio from '../utils/ImageScalingRatio'
 
 export default class ParallaxedImage extends React.Component {
 
   static propTypes = {
     x: PropTypes.number,
     y: PropTypes.number,
+    scalingRatio: PropTypes.number,
     width: PropTypes.number,
     height: PropTypes.number,
   }
@@ -15,6 +17,7 @@ export default class ParallaxedImage extends React.Component {
   static defaultProps = {
     x: 0,
     y: 0,
+    scalingRatio: 0.5,
     width: undefined,
     height: undefined,
   }
@@ -31,7 +34,7 @@ export default class ParallaxedImage extends React.Component {
 
   render () {
     return (
-      <ImageAspectRatio width={this.props.width} height={this.props.height} styles={[this.state.styles, styles.image]} source={this.props.src} src={this.props.src}/>
+      <ImageScalingRatio scalingRatio={this.props.scalingRatio} styles={[this.state.styles, styles.image]} src={this.props.src}/>
     )
   }
 }
