@@ -106,9 +106,9 @@ const styles = StyleSheet.create({
   },
   imageRight: {
     position: 'absolute',
-    right: 0,
+    right: 40,
     bottom: 0,
-    width: 50,
-    height: 70,
+    width: 80,
+    height: 100,
   }
 })

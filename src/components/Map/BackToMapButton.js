@@ -25,7 +25,7 @@ export default class BackToMapButton extends React.Component {
 
   render () {
     return (
-      <TouchableHighlight style={[this.props.styles.button, styles.buttonLeft]} onPress={this._handleCallParent}>
+      <TouchableHighlight style={[this.props.styles.button, styles.buttonLeft]} onPress={this._handleCallParent} underlayColor={'transparent'}>
         <View style={[this.props.styles.buttonWrapper]}>
           <Image source={require('./../../assets/images/white-arrow-left.png')} style={[this.props.styles.arrow, styles.arrowLeft]} />
           <Text style={[this.props.styles.text, styles.textRight]}> Retour au plan </Text>

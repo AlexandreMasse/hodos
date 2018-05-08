@@ -4,54 +4,72 @@ import {connect} from 'react-redux'
 import {fonts, colors} from './../../assets/variables'
 import HeaderPlace from './../Map/HeaderPlace'
 import CardDetection from './../CardDetection'
+import PlaceCard from './PlaceCard'
 
 class Map extends React.Component {
 
   constructor(props) {
     super(props)
-    this.state = {}
+    this.state = {
+      tab: true,
+    }
   }
 
   _hideHeader = () => {
     this.props.navigation.navigate('Map')
   }
 
+  _renderTabHeader() {
+    return (
+      <View style={[styles.placeTabWrapper]}>
+        <TouchableHighlight onPress={this._handleTabChange} underlayColor='transparent'  style={[
+          styles.placeTab,
+          this.state.tab ? styles.placeActiveTab: styles.placeUnactiveTab]}>
+          <Text style={[
+            styles.placeTabTitle,
+            this.state.tab ? styles.placeActiveTabTitle : styles.placeUnactiveTabTitle]}>Chapitres</Text>
+        </TouchableHighlight>
+        <TouchableHighlight onPress={this._handleTabChange} underlayColor='transparent'  style={[
+          styles.placeTab,
+          !this.state.tab ? styles.placeActiveTab : styles.placeUnactiveTab]}>
+          <Text style={[styles.placeTabTitle,
+            !this.state.tab ? styles.placeActiveTabTitle : styles.placeUnactiveTabTitle]}>Personnages</Text>
+        </TouchableHighlight>
+      </View>
+    )
+  }
+
+  _renderContent() {
+    if (this.state.tab) {
+      const chapterList = ['Chapitre XX', 'Chapitre IV', 'Chapitre XXV']
+      return chapterList.map(function(chapter, index) {
+        return <PlaceCard title={chapter} key={index} description="Où Hermès découvre la vie"/>
+      })
+    } else {
+      const charactersList = ['Hermes', 'Cronos', 'Hadès']
+      return charactersList.map(function(character, index) {
+        return <PlaceCard title={character} key={index} description={`Carte n°${index}`}/>
+      })
+    }
+  }
+
+  _handleTabChange = () => {
+    this.setState({
+      tab: !this.state.tab
+    })
+  }
+
   render () {
     return (
       <View style={styles.container}>
-        <HeaderPlace placeName={'Nom du Lieu à afficher'} onHideHeader={this._hideHeader}/>
+        <HeaderPlace placeName={this.props.navigation.state.params.place.name} onHideHeader={this._hideHeader}/>
         <View style={[styles.placeWrapper]}>
-          <View style={[styles.placeTabWrapper]}>
-            <TouchableHighlight onPress={() => {}} underlayColor='transparent'  style={[styles.placeTab]}>
-              <Text style={[styles.placeTabTitle]}>Chapitres</Text>
-            </TouchableHighlight>
-            <TouchableHighlight onPress={() => {}} underlayColor='transparent'  style={[styles.placeTab]}>
-              <Text style={[styles.placeTabTitle]}>Personnages</Text>
-            </TouchableHighlight>
-          </View>
-          <ScrollView>
-            <TouchableHighlight onPress={() => {}} underlayColor='transparent'  style={[]}>
-              <View style={[styles.placeCard]}>
-                <Image source={require('./../../assets/images/Chapter1.png')} style={[styles.thumbnail]}/>
-                  <View style={[styles.placeCardText]}>
-                    <Text style={[styles.placeCardTitle]}>Chapitre IV</Text>
-                    <Text style={[styles.placeCardDescription]}>Où Hermès découvre le palais de son père</Text>
-                  </View>
-              </View>
-            </TouchableHighlight>
-            <TouchableHighlight onPress={() => {}} underlayColor='transparent'  style={[]}>
-              <View style={[styles.placeCard]}>
-                <Image source={require('./../../assets/images/Chapter1.png')} style={[styles.thumbnail]}/>
-                  <View style={[styles.placeCardText]}>
-                    <Text style={[styles.placeCardTitle]}>Chapitre IV</Text>
-                    <Text style={[styles.placeCardDescription]}>Où Hermès découvre le palais de son père</Text>
-                  </View>
-              </View>
-            </TouchableHighlight>
+            {this._renderTabHeader()}
+          <ScrollView style={[styles.placeContent]}>
+            {this._renderContent()}
           </ScrollView>
         </View>
       </View>
-
     )
   }
 }
@@ -67,17 +85,25 @@ const styles = StyleSheet.create({
     marginRight: 20,
     marginBottom: 20,
     height: 550,
-    borderWidth: 1,
-    borderColor: '#fff',
   },
   placeTabWrapper: {
     flexDirection: 'row',
     height: 50,
   },
   placeTab: {
-    borderWidth: 2,
-    borderColor: 'yellow',
+    borderWidth: 1,
+    borderColor: '#fff',
     width: '50%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  placeActiveTab: {
+    borderBottomColor: 'transparent'
+  },
+  placeUnactiveTab: {
+    borderTopColor: 'rgba(255, 255, 255, 0.3)',
+    borderRightColor: 'rgba(255, 255, 255, 0.3)',
+    borderLeftColor: 'rgba(255, 255, 255, 0.3)'
   },
   placeTabTitle: {
     fontSize: 28,
@@ -85,32 +111,16 @@ const styles = StyleSheet.create({
     color: '#fff',
     textAlign: 'center'
   },
-  thumbnail: {
-    width: '45%',
-    height: '78%',
-    marginLeft: '2.5%',
-    marginTop: '2.5%',
-    borderRadius: 10,
-  },
-  placeCard: {
-    height: 200,
-    flex: 1,
-    marginBottom: '5%',
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  placeCardText: {
-    marginLeft: '2.5%',
-  },
-  placeCardTitle: {
-    fontFamily: fonts.RubikRegular,
+  placeActiveTabTitle: {
     color: '#fff',
-    fontSize: 28
   },
-  placeCardDescription: {
-    fontFamily: fonts.RubikLight,
-    color: '#fff',
-    fontSize: 24
+  placeUnactiveTabTitle: {
+    color: 'rgba(255, 255, 255, 0.3)',
+  },
+  placeContent: {
+    borderWidth: 1,
+    borderColor: '#fff',
+    borderTopColor: 'transparent'
   },
 })
 
