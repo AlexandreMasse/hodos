@@ -1,12 +1,22 @@
 import React from 'react'
 import { StyleSheet, View, Text, Button, Image, TouchableHighlight, Dimensions, Animated, ScrollView } from 'react-native'
-import {connect} from 'react-redux'
+import PropType from 'prop-types'
 import {fonts, colors} from './../../assets/variables'
 import HeaderPlace from './../Map/HeaderPlace'
-import CardDetection from './../CardDetection'
 import PlaceCard from './PlaceCard'
+import ButtonWhite from './../ButtonWhite'
 
-class Place extends React.Component {
+export default class Place extends React.Component {
+
+  static propTypes = {
+    onBackToMap: PropType.func,
+    onReading: PropType.func
+  }
+
+  static defaultProps = {
+    id: null
+  }
+
 
   constructor(props) {
     super(props)
@@ -18,39 +28,42 @@ class Place extends React.Component {
     }
   }
 
-  componentWillMount() {
-    var place = {}
-    this.props.placeList.map(val => {
-      if (val.id == this.props.navigation.state.params.placeId) {
-        place = val;
-      }
-    })
-    this.setState({
-      place: place
-    })
-
+  _handleBackToMap = () => {
+    this.props.onBackToMap()
   }
 
-  _hideHeader = () => {
-    this.props.navigation.navigate('Map')
+  _handleReading = () => {
+    this.props.onReading()
   }
 
   _renderTabHeader() {
     return (
       <View style={[styles.placeTabWrapper]}>
-        <TouchableHighlight onPress={this._handleTabChange} underlayColor='transparent'  style={[
-          styles.placeTab,
-          this.state.tab ? styles.placeActiveTab: styles.placeUnactiveTab]}>
-          <Text style={[
-            styles.placeTabTitle,
-            this.state.tab ? styles.placeActiveTabTitle : styles.placeUnactiveTabTitle]}>Chapitres</Text>
-        </TouchableHighlight>
-        <TouchableHighlight onPress={this._handleTabChange} underlayColor='transparent'  style={[
-          styles.placeTab,
-          !this.state.tab ? styles.placeActiveTab : styles.placeUnactiveTab]}>
-          <Text style={[styles.placeTabTitle,
-            !this.state.tab ? styles.placeActiveTabTitle : styles.placeUnactiveTabTitle]}>Personnages</Text>
-        </TouchableHighlight>
+        <View style={styles.buttonLeft} src={require('./../../assets/images/arrow-left.png')}>
+          <ButtonWhite text={'Retour au plan'} hasImage={true} imageLeft={true} onTouch={this._handleBackToMap}/>
+        </View>
+        <View style={styles.buttonRight} src={require('./../../assets/images/arrow-right.png')}>
+            <ButtonWhite text={'Reprendre la lecture'} hasImage={true} imageLeft={false} onTouch={this._handleReading} />
+        </View>
+        <View style={styles.placeHeader}>
+          <Text style={styles.placeName}>{this.props.place.name}</Text>
+          <Text style={styles.placeDescription}>{this.props.place.description}</Text>
+        </View>
+        <View style={styles.placeTabs}>
+          <TouchableHighlight onPress={this._handleTabChange} underlayColor='transparent'  style={[
+            styles.placeTab,
+            this.state.tab ? styles.placeActiveTab: styles.placeUnactiveTab]}>
+            <Text style={[
+              styles.placeTabTitle,
+              this.state.tab ? styles.placeActiveTabTitle : styles.placeUnactiveTabTitle]}>Chapitres</Text>
+          </TouchableHighlight>
+          <TouchableHighlight onPress={this._handleTabChange} underlayColor='transparent'  style={[
+            styles.placeTab,
+            !this.state.tab ? styles.placeActiveTab : styles.placeUnactiveTab]}>
+            <Text style={[styles.placeTabTitle,
+              !this.state.tab ? styles.placeActiveTabTitle : styles.placeUnactiveTabTitle]}>Personnages</Text>
+          </TouchableHighlight>
+        </View>
       </View>
     )
   }
@@ -76,10 +89,8 @@ class Place extends React.Component {
   }
 
   render () {
-    console.log(this.state)
     return (
       <View style={styles.container}>
-        <HeaderPlace placeName={this.state.place && this.state.place.name ? this.state.place.name : ''} onHideHeader={this._hideHeader}/>
         <View style={[styles.placeWrapper]}>
             {this._renderTabHeader()}
           <ScrollView style={[styles.placeContent]}>
@@ -94,18 +105,42 @@ class Place extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.blue
+    backgroundColor: '#fff',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    height: '80%',
+    position: 'absolute'
+  },
+  placeHeader: {
+    // flex: 1,
+    width: '100%',
+    marginTop: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 60,
+  },
+  placeName: {
+    textAlign: 'center',
+    color: colors.grey,
+    fontSize: 30,
+    fontFamily: fonts.RubikMedium
+  },
+  placeDescription: {
+    textAlign: 'center',
+    color: colors.grey,
+    fontSize: 18,
+    fontFamily: fonts.RubikLight
   },
   placeWrapper: {
-    marginTop: 180,
     marginLeft: 20,
     marginRight: 20,
     marginBottom: 20,
     height: 550,
   },
   placeTabWrapper: {
-    flexDirection: 'row',
-    height: 50,
+    width: '100%',
+    marginTop: 30,
   },
   placeTab: {
     borderWidth: 1,
@@ -113,6 +148,11 @@ const styles = StyleSheet.create({
     width: '50%',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  placeTabs: {
+    marginTop: 20,
+    flexDirection: 'row',
+    height: 50,
   },
   placeActiveTab: {
     borderBottomColor: 'transparent'
@@ -125,30 +165,29 @@ const styles = StyleSheet.create({
   placeTabTitle: {
     fontSize: 28,
     fontFamily: fonts.RubikRegular,
-    color: '#fff',
+    color: colors.grey,
     textAlign: 'center'
   },
   placeActiveTabTitle: {
-    color: '#fff',
+    color: colors.grey,
   },
   placeUnactiveTabTitle: {
     color: 'rgba(255, 255, 255, 0.3)',
   },
   placeContent: {
+    marginTop: 30,
     borderWidth: 1,
     borderColor: '#fff',
     borderTopColor: 'transparent'
   },
+  buttonLeft: {
+    position: 'absolute',
+    top: -50,
+    left: 20
+  },
+  buttonRight: {
+    position: 'absolute',
+    top: -50,
+    right: 20
+  }
 })
-
-const mapStateToProps = state => {
-  return {
-    placeList: state.placeList
-  }
-}
-
-const mapDispatchToProps = dispatch => {
-  return {
-  }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(Place)

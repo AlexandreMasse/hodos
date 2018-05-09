@@ -7,7 +7,7 @@ import storageSessionManager from './src/store/StorageSessionManager'
 import HomeScreen from './src/components/HomeScreen/HomeScreen'
 import Map from './src/components/Map/Map'
 import Chapter from './src/components/Chapter/Chapter'
-import Place from './src/components/Place/Place'
+import Previously from './src/components/Chapter/Previously'
 import { Asset, AppLoading, Font } from 'expo';
 
 _cacheImages = (images) => {
@@ -62,9 +62,16 @@ class App extends React.Component {
       require('./src/assets/images/chapters/27/Chap27_scene03_pilier.png'),
       require('./src/assets/images/chapters/27/Chap27_scene04_storm.png'),
 
+      require('./src/assets/images/arrow-left.png'),
+      require('./src/assets/images/arrow-right.png'),
+      require('./src/assets/images/chapters/Chap27_part1.png'),
+      require('./src/assets/images/chapters/Chap27_palais.png'),
+      require('./src/assets/images/chapters/Chap27_rochers.png'),
       require('./src/assets/images/Chapter1.png'),
       require('./src/assets/images/patternGrid.png'),
       require('./src/assets/images/backgroundCharacter.jpg'),
+      require('./src/assets/images/chapters/previously.png'),
+      require('./src/assets/images/menu.png'),
     ]);
 
 
@@ -120,8 +127,8 @@ const AppNavigator = StackNavigator({
   Chapter : {
     screen: Chapter
   },
-  Place: {
-    screen: Place
+  Previously: {
+    screen: Previously
   }
 },{
   initialRouteName: 'Chapter',

@@ -1,7 +1,7 @@
 import React from 'react'
 import PropType from 'prop-types'
 import { StyleSheet, Text, View, TouchableHighlight, Image} from 'react-native'
-import { fonts } from './../../assets/variables'
+import { fonts, colors } from './../../assets/variables'
 
 export default class PlaceCard extends React.Component {
 
@@ -64,12 +64,12 @@ const styles = StyleSheet.create({
   },
   placeCardTitle: {
     fontFamily: fonts.RubikRegular,
-    color: '#fff',
+    color: colors.grey,
     fontSize: 28
   },
   placeCardDescription: {
     fontFamily: fonts.RubikLight,
-    color: '#fff',
+    color: colors.grey,
     fontSize: 24
   },
 })
