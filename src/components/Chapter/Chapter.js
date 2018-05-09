@@ -62,15 +62,15 @@ class Chapter extends React.Component {
           <Scene src={imageList.chapters.chap27_part5} windowHeight={windowHeight}/>
           {/* <Paragraph text={'lorem ipsum'} color={'red'} key="1" x={300} y={100} />*/}
 
-          <ParallaxedImage left={"0.43%"} top={'3%'} speed={-15} scalingRatio={this.state.scalingRatio} scrollX={this.scrollX} src={imageList.chapters.Chap27_scene01_palais}/>
-          <ParallaxedImage left={0} bottom={0} speed={15} scalingRatio={this.state.scalingRatio} scrollX={this.scrollX} src={imageList.chapters.Chap27_scene01_rochers}/>
-          <ParallaxedImage left={'3.8%'} bottom={0} speed={-10} scalingRatio={this.state.scalingRatio} scrollX={this.scrollX} src={imageList.chapters.Chap27_scene01_pilier}/>
-          <ParallaxedImage left={'4.4%'} bottom={0} speed={2} scalingRatio={this.state.scalingRatio} scrollX={this.scrollX} src={imageList.chapters.Chap27_scene02_zeus}/>
+          <ParallaxedImage left={"0.43%"} top={'3%'} speed={1} scalingRatio={this.state.scalingRatio} scrollX={this.scrollX} src={imageList.chapters.Chap27_scene01_palais}/>
+          <ParallaxedImage left={0} bottom={0} speed={20} scalingRatio={this.state.scalingRatio} scrollX={this.scrollX} src={imageList.chapters.Chap27_scene01_rochers}/>
+          <ParallaxedImage left={'3.8%'} bottom={0} speed={-30} scalingRatio={this.state.scalingRatio} scrollX={this.scrollX} src={imageList.chapters.Chap27_scene01_pilier}/>
+          <ParallaxedImage left={'4.4%'} bottom={0} speed={10} scalingRatio={this.state.scalingRatio} scrollX={this.scrollX} src={imageList.chapters.Chap27_scene02_zeus}/>
           <ParallaxedImage left={'9.4%'} bottom={0} speed={-7} scalingRatio={this.state.scalingRatio} scrollX={this.scrollX} src={imageList.chapters.Chap27_scene02_pilier1}/>
           <ParallaxedImage left={'9.05%'} top={0} speed={7.8} scalingRatio={this.state.scalingRatio + 0.007} scrollX={this.scrollX} src={imageList.chapters.Chap27_scene03_chronos}/>
           <ParallaxedImage left={'9.1%'} bottom={0} speed={1} scalingRatio={this.state.scalingRatio} scrollX={this.scrollX} src={imageList.chapters.Chap27_scene02_pilier2}/>
           <ParallaxedImage left={'15.1%'} top={0} speed={-12} scalingRatio={this.state.scalingRatio} scrollX={this.scrollX} src={imageList.chapters.Chap27_scene03_pilier}/>
-          <ParallaxedImage left={'18.5%'} top={'-7%'} speed={-17} scalingRatio={this.state.scalingRatio} scrollX={this.scrollX} src={imageList.chapters.Chap27_scene04_storm}/>
+          <ParallaxedImage left={'18.5%'} top={'-7%'} speed={-20} scalingRatio={this.state.scalingRatio} scrollX={this.scrollX} src={imageList.chapters.Chap27_scene04_storm}/>
 
           <Text style={styles.textIntro}>C’est un soir d'orage que Zeus et Rhéa décidèrent d'agir contre Cronos. Ce soir-là, l'orage était terriblement violent. Cronos ne cessait d'aller et venir dans sa chambre.</Text>
         </ScrollView>

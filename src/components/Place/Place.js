@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     marginRight: 20,
     marginBottom: 20,
-    height: 550,
+    height: '100%',
   },
   placeTabWrapper: {
     width: '100%',
@@ -172,7 +172,7 @@ const styles = StyleSheet.create({
     color: colors.grey,
   },
   placeUnactiveTabTitle: {
-    color: 'rgba(255, 255, 255, 0.3)',
+    color: '#b3afbe',
   },
   placeContent: {
     marginTop: 30,
