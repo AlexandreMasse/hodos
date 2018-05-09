@@ -8,7 +8,7 @@ export default class HeaderPlace extends React.Component {
 
   static propTypes = {
     placeName: PropType.string,
-    onHideHeader: PropType.func.isRequired,
+    onHideHeader: PropType.func,
     onNavigateChapter: PropType.func
   }
 

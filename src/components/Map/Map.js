@@ -8,6 +8,8 @@ import resolveAssetSource from 'resolveAssetSource'
 import mapData from './../../store/datas/map.json'
 import mapImage from './../../assets/images/map/map.png'
 import HeaderPlace from './HeaderPlace'
+import ButtonWhite from './../ButtonWhite'
+import Place from './../Place/Place'
 
 const windowHeight = Dimensions.get('window').height
 
@@ -18,6 +20,7 @@ class Map extends React.Component {
     super(props)
     this.state = {
       showPlace: false,
+      showPlaceInfo: false,
       showReadingButton: true,
       activePlace: {
         id: '',
@@ -28,15 +31,41 @@ class Map extends React.Component {
 
   }
 
+  _handleReading = () => {
+    this.props.navigation.navigate('Previously')
+  }
+
+  _handleNavigationPlace = () => {
+    this.setState({
+      showPlaceInfo: true,
+      showPlace: false
+    })
+    // this.props.navigation.navigate('Place', {placeId: this.state.activePlace.id})
+  }
+
+  _handleBackToMap = () => {
+    this.setState({
+      showPlaceInfo: false,
+      showPlace: true
+    })
+  }
+
+  _renderPlaceInfo() {
+    console.log(this.state.showPlaceInfo)
+    if (this.state.showPlaceInfo) {
+      console.log('is shown');
+      return(
+        <Place place={this.state.activePlace} onBackToMap={this._handleBackToMap} onReading={this._handleReading} style={styles.placeInfo} />
+      )
+    }
+  }
+
   _renderReadingButton() {
     if (this.state.showReadingButton) {
       return (
-        <TouchableHighlight onPress={() => this.props.navigation.navigate('Chapter')} style={[styles.whiteButton, styles.buttonRead]} underlayColor={'#fff'}>
-            <View style={styles.whiteButtonWrapper}>
-                <Text style={styles.whiteButtonText}>Reprendre la lecture</Text>
-                <Image source={require('./../../assets/images/green-arrow-right.png')} style={styles.arrowReading}/>
-            </View>
-          </TouchableHighlight>
+        <View  style={styles.buttonRead} src={require('./../../assets/images/arrow-right.png')}>
+          <ButtonWhite text={'Reprendre la lecture'} hasImage={true} imageLeft={false} onTouch={this._handleReading} />
+        </View>
       );
     }
   }
@@ -58,12 +87,9 @@ class Map extends React.Component {
   _renderPlace () {
     if (this.state.showPlace) {
       return (
-        <TouchableHighlight onPress={() => this.props.navigation.navigate('Place', {placeId: this.state.activePlace.id})} style={[styles.whiteButton, styles.placeButton]} underlayColor={'#fff'} >
-          <View style={styles.whiteButtonWrapper}>
-              <Text style={styles.whiteButtonText}>Accéder au lieu</Text>
-              <Image source={require('./../../assets/images/green-arrow-right.png')} style={styles.arrowReading}/>
-          </View>
-        </TouchableHighlight>
+        <View style={styles.placeButton} src={require('./../../assets/images/arrow-right.png')}>
+          <ButtonWhite text={'Accéder au lieu'} hasImage={true} imageLeft={false} onTouch={this._handleNavigationPlace} />
+        </View>
       );
     }
   }
@@ -77,23 +103,34 @@ class Map extends React.Component {
   }
 
   _navigateChapter = () => {
-    this.props.navigation.navigate('Chapter')
+    this.props.navigation.navigate('Previously')
   }
 
-  _showHeader (mapPlace) {
+  _showHeader = (mapPlace) => {
+    var place = {}
+    const id = mapPlace.id
+
+    // console.log(this.props.placeList)
+
+    this.props.placeList.map(val => {
+      if (val.id == id) {
+        place = val;
+      }
+    })
+
     this.setState({
       showPlace: true,
       showReadingButton: false,
-      activePlace: {
-        id: mapPlace.id,
-        name: mapPlace.name
-      }
+      activePlace: place
     })
+
+    // console.log(place)
   }
 
   _hideHeader = () => {
     this.setState({
       showPlace: false,
+      showPlaceInfo: false,
       showReadingButton: true
     })
   }
@@ -117,6 +154,7 @@ class Map extends React.Component {
         <Button title={'Retour'} onPress={() => this.props.navigation.goBack()}/>
         {this._renderPlace()}
         {this._renderHeader()}
+        {this._renderPlaceInfo()}
       </View>
 
     )
@@ -152,20 +190,18 @@ const styles = StyleSheet.create({
   },
   button: {
     position: 'absolute',
-    backgroundColor: 'rgba(127, 63, 191, 0.36)',
+    backgroundColor: 'transparent',
   },
   buttonRead: {
     position: 'absolute',
     top: 50,
     right: 15,
-    width: 300,
   },
   placeButton: {
     position: 'absolute',
     bottom: 50,
-    width: 250,
     left: '50%',
-    transform: [{'translateX': -125}]
+    transform: [{'translateX': -100}]
   },
   whiteButton: {
     backgroundColor: '#fff',
@@ -192,11 +228,19 @@ const styles = StyleSheet.create({
     width: 50,
     height: 20,
     resizeMode: 'contain',
+  },
+  placeInfo: {
+    position: 'absolute',
+    zIndex: 40,
+    width: 700,
+    height: 400,
+    flex: 1
   }
 })
 
 const mapStateToProps = state => {
   return {
+    placeList: state.placeList
   }
 }
 
