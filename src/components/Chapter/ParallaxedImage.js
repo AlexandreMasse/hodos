@@ -7,27 +7,25 @@ import ImageScalingRatio from '../utils/ImageScalingRatio'
 export default class ParallaxedImage extends React.Component {
 
   static propTypes = {
-    x: PropTypes.number,
-    y: PropTypes.number,
+    left: PropTypes.any,
+    top: PropTypes.any,
     scalingRatio: PropTypes.number,
-    width: PropTypes.number,
-    height: PropTypes.number,
   }
 
   static defaultProps = {
-    x: 0,
-    y: 0,
-    scalingRatio: 0.5,
-    width: undefined,
-    height: undefined,
+    left: undefined,
+    top: undefined,
+    bottom: undefined,
+    scalingRatio: 1,
   }
 
   constructor(props) {
     super(props)
     this.state = {
       styles: {
-        top: this.props.y,
-        left: this.props.x,
+        top: this.props.top,
+        left: this.props.left,
+        bottom: this.props.bottom,
       },
     }
   }
@@ -42,6 +40,6 @@ export default class ParallaxedImage extends React.Component {
 const styles = StyleSheet.create({
   image: {
     position: 'absolute',
-    flex: 1,
+    //flex: 1,
   }
 })

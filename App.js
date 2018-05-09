@@ -45,9 +45,23 @@ class App extends React.Component {
       require('./src/assets/images/green-arrow-right.png'),
       require('./src/assets/images/white-arrow-right.png'),
       require('./src/assets/images/white-arrow-left.png'),
-      require('./src/assets/images/chapters/Chap27_part1.png'),
-      require('./src/assets/images/chapters/Chap27_palais.png'),
-      require('./src/assets/images/chapters/Chap27_rochers.png'),
+      //Chap27
+      require('./src/assets/images/chapters/27/Chap27_part1.png'),
+      require('./src/assets/images/chapters/27/Chap27_part2.png'),
+      require('./src/assets/images/chapters/27/Chap27_part3.png'),
+      require('./src/assets/images/chapters/27/Chap27_part4.png'),
+      require('./src/assets/images/chapters/27/Chap27_part5.png'),
+      require('./src/assets/images/chapters/27/Chap27_scene01_palais.png'),
+      require('./src/assets/images/chapters/27/Chap27_scene01_rochers.png'),
+      require('./src/assets/images/chapters/27/Chap27_scene01_pilier.png'),
+      require('./src/assets/images/chapters/27/Chap27_scene02_pilier1.png'),
+      require('./src/assets/images/chapters/27/Chap27_scene02_pilier2.png'),
+      require('./src/assets/images/chapters/27/Chap27_scene02_storm.png'),
+      require('./src/assets/images/chapters/27/Chap27_scene02_zeus.png'),
+      require('./src/assets/images/chapters/27/Chap27_scene03_chronos.png'),
+      require('./src/assets/images/chapters/27/Chap27_scene03_pilier.png'),
+      require('./src/assets/images/chapters/27/Chap27_scene04_storm.png'),
+
       require('./src/assets/images/Chapter1.png'),
       require('./src/assets/images/patternGrid.png'),
       require('./src/assets/images/backgroundCharacter.jpg'),
@@ -110,7 +124,7 @@ const AppNavigator = StackNavigator({
     screen: Place
   }
 },{
-  initialRouteName: 'HomeScreen',
+  initialRouteName: 'Chapter',
   headerMode: 'none',
   navigationOptions: {
     gesturesEnabled: false,

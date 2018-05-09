@@ -20,12 +20,12 @@ class Chapter extends React.Component {
   }
 
   componentWillUnmount() {
-    console.log('unmount');
+    this.props._setCurrentOffsetProgress(this.scrollX._value)
   }
 
   componentWillMount() {
     //Calcul scaling ratio from original height
-    const sourceBackground = Image.resolveAssetSource(imageList.chapters.chap27)
+    const sourceBackground = Image.resolveAssetSource(imageList.chapters.chap27_part1)
 
     this.setState({scalingRatio: windowHeight / sourceBackground.height})
   }
@@ -44,8 +44,7 @@ class Chapter extends React.Component {
   render () {
     return (
       <View style={styles.container}>
-        <ScrollView ref={this._scrollViewRef} horizontal={true} style={styles.scrollView} scrollEventThrottle={1} onScroll={ Animated.event(
-          //scrollX = e.nativeEvent.contentOffset.x
+        <ScrollView ref={this._scrollViewRef} horizontal={true} style={styles.scrollView} scrollEventThrottle={1} onScroll={Animated.event(
           [{ nativeEvent: {
               contentOffset: {
                 x: this.scrollX
@@ -53,10 +52,24 @@ class Chapter extends React.Component {
             }
           }]
         )}>
-          <Scene src={imageList.chapters.chap27} windowHeight={windowHeight}/>
+          <ParallaxedImage left={'5.2%'} top={"2%"} scalingRatio={this.state.scalingRatio + 0.005} src={imageList.chapters.Chap27_scene02_storm}/>
+          <Scene src={imageList.chapters.chap27_part1} windowHeight={windowHeight}/>
+          <Scene src={imageList.chapters.chap27_part2} windowHeight={windowHeight}/>
+          <Scene src={imageList.chapters.chap27_part3} windowHeight={windowHeight}/>
+          <Scene src={imageList.chapters.chap27_part4} windowHeight={windowHeight}/>
+          <Scene src={imageList.chapters.chap27_part5} windowHeight={windowHeight}/>
           {/* <Paragraph text={'lorem ipsum'} color={'red'} key="1" x={300} y={100} />*/}
-          <ParallaxedImage x={100} y={50} scalingRatio={this.state.scalingRatio} src={imageList.chapters.palais}/>
-          <ParallaxedImage x={0} y={480} width={600} src={imageList.chapters.rochers} />
+
+          <ParallaxedImage left={"0.42%"} top={'3%'} scalingRatio={this.state.scalingRatio} src={imageList.chapters.Chap27_scene01_palais}/>
+          <ParallaxedImage left={0} bottom={0} scalingRatio={this.state.scalingRatio} src={imageList.chapters.Chap27_scene01_rochers}/>
+          <ParallaxedImage left={'3.5%'} bottom={0} scalingRatio={this.state.scalingRatio} src={imageList.chapters.Chap27_scene01_pilier}/>
+          <ParallaxedImage left={'4.4%'} bottom={0} scalingRatio={this.state.scalingRatio} src={imageList.chapters.Chap27_scene02_zeus}/>
+          <ParallaxedImage left={'8.85%'} bottom={0} scalingRatio={this.state.scalingRatio} src={imageList.chapters.Chap27_scene02_pilier1}/>
+          <ParallaxedImage left={'9.7%'} top={0} scalingRatio={this.state.scalingRatio + 0.007} src={imageList.chapters.Chap27_scene03_chronos}/>
+          <ParallaxedImage left={'9.1%'} bottom={0} scalingRatio={this.state.scalingRatio} src={imageList.chapters.Chap27_scene02_pilier2}/>
+          <ParallaxedImage left={'13.7%'} top={0} scalingRatio={this.state.scalingRatio} src={imageList.chapters.Chap27_scene03_pilier}/>
+          <ParallaxedImage left={'16.1%'} top={'-7%'} scalingRatio={this.state.scalingRatio} src={imageList.chapters.Chap27_scene04_storm}/>
+
           <Animated.View shouldRasterizeIOS style={{
             position: 'absolute',
             flex: 1,
@@ -83,14 +96,6 @@ class Chapter extends React.Component {
         </View>
       </View>
     )
-  }
-
-  _handleScroll = (e) => {
-    console.log(e.nativeEvent)
-    console.log(e.nativeEvent.contentOffset.x);
-    this.props._setCurrentOffsetProgress(e.nativeEvent.contentOffset.x)
-
-    console.log(this.scrollX);
   }
 
 }
