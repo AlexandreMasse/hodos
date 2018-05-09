@@ -6,8 +6,10 @@ import Paragraph from './Paragraph'
 import Scene from './Scene'
 import ParallaxedImage from './ParallaxedImage'
 import imageList from './../../assets/ImagesList'
+import ButtonWhite from "../ButtonWhite";
 
 const windowHeight = Dimensions.get('window').height
+const windowWidth = Dimensions.get('window').width
 
 class Chapter extends React.Component {
 
@@ -52,7 +54,7 @@ class Chapter extends React.Component {
             }
           }]
         )}>
-          <ParallaxedImage left={'5.2%'} top={"2%"} scalingRatio={this.state.scalingRatio + 0.005} src={imageList.chapters.Chap27_scene02_storm}/>
+          <ParallaxedImage left={'5.9%'} top={"2%"} speed={-10} scalingRatio={this.state.scalingRatio + 0.005} scrollX={this.scrollX} src={imageList.chapters.Chap27_scene02_storm}/>
           <Scene src={imageList.chapters.chap27_part1} windowHeight={windowHeight}/>
           <Scene src={imageList.chapters.chap27_part2} windowHeight={windowHeight}/>
           <Scene src={imageList.chapters.chap27_part3} windowHeight={windowHeight}/>
@@ -60,39 +62,22 @@ class Chapter extends React.Component {
           <Scene src={imageList.chapters.chap27_part5} windowHeight={windowHeight}/>
           {/* <Paragraph text={'lorem ipsum'} color={'red'} key="1" x={300} y={100} />*/}
 
-          <ParallaxedImage left={"0.42%"} top={'3%'} scalingRatio={this.state.scalingRatio} src={imageList.chapters.Chap27_scene01_palais}/>
-          <ParallaxedImage left={0} bottom={0} scalingRatio={this.state.scalingRatio} src={imageList.chapters.Chap27_scene01_rochers}/>
-          <ParallaxedImage left={'3.5%'} bottom={0} scalingRatio={this.state.scalingRatio} src={imageList.chapters.Chap27_scene01_pilier}/>
-          <ParallaxedImage left={'4.4%'} bottom={0} scalingRatio={this.state.scalingRatio} src={imageList.chapters.Chap27_scene02_zeus}/>
-          <ParallaxedImage left={'8.85%'} bottom={0} scalingRatio={this.state.scalingRatio} src={imageList.chapters.Chap27_scene02_pilier1}/>
-          <ParallaxedImage left={'9.7%'} top={0} scalingRatio={this.state.scalingRatio + 0.007} src={imageList.chapters.Chap27_scene03_chronos}/>
-          <ParallaxedImage left={'9.1%'} bottom={0} scalingRatio={this.state.scalingRatio} src={imageList.chapters.Chap27_scene02_pilier2}/>
-          <ParallaxedImage left={'13.7%'} top={0} scalingRatio={this.state.scalingRatio} src={imageList.chapters.Chap27_scene03_pilier}/>
-          <ParallaxedImage left={'16.1%'} top={'-7%'} scalingRatio={this.state.scalingRatio} src={imageList.chapters.Chap27_scene04_storm}/>
+          <ParallaxedImage left={"0.43%"} top={'3%'} speed={-15} scalingRatio={this.state.scalingRatio} scrollX={this.scrollX} src={imageList.chapters.Chap27_scene01_palais}/>
+          <ParallaxedImage left={0} bottom={0} speed={15} scalingRatio={this.state.scalingRatio} scrollX={this.scrollX} src={imageList.chapters.Chap27_scene01_rochers}/>
+          <ParallaxedImage left={'3.8%'} bottom={0} speed={-10} scalingRatio={this.state.scalingRatio} scrollX={this.scrollX} src={imageList.chapters.Chap27_scene01_pilier}/>
+          <ParallaxedImage left={'4.4%'} bottom={0} speed={2} scalingRatio={this.state.scalingRatio} scrollX={this.scrollX} src={imageList.chapters.Chap27_scene02_zeus}/>
+          <ParallaxedImage left={'9.4%'} bottom={0} speed={-7} scalingRatio={this.state.scalingRatio} scrollX={this.scrollX} src={imageList.chapters.Chap27_scene02_pilier1}/>
+          <ParallaxedImage left={'9.05%'} top={0} speed={7.8} scalingRatio={this.state.scalingRatio + 0.007} scrollX={this.scrollX} src={imageList.chapters.Chap27_scene03_chronos}/>
+          <ParallaxedImage left={'9.1%'} bottom={0} speed={1} scalingRatio={this.state.scalingRatio} scrollX={this.scrollX} src={imageList.chapters.Chap27_scene02_pilier2}/>
+          <ParallaxedImage left={'15.1%'} top={0} speed={-12} scalingRatio={this.state.scalingRatio} scrollX={this.scrollX} src={imageList.chapters.Chap27_scene03_pilier}/>
+          <ParallaxedImage left={'18.5%'} top={'-7%'} speed={-17} scalingRatio={this.state.scalingRatio} scrollX={this.scrollX} src={imageList.chapters.Chap27_scene04_storm}/>
 
-          <Animated.View shouldRasterizeIOS style={{
-            position: 'absolute',
-            flex: 1,
-            height: '100%',
-            justifyContent: 'center',
-            left: 500,
-            transform: [{
-              translateX: this.scrollX.interpolate({
-                inputRange:[0, 100],
-                outputRange: [0, 50]
-              })
-            }
-            ]
-          }}>
-            <Text style={{
-              color:'white',
-              fontSize:40,
-            }}>Texte Paralax</Text>
-          </Animated.View>
+          <Text style={styles.textIntro}>C’est un soir d'orage que Zeus et Rhéa décidèrent d'agir contre Cronos. Ce soir-là, l'orage était terriblement violent. Cronos ne cessait d'aller et venir dans sa chambre.</Text>
         </ScrollView>
         <View style={styles.absoluteContent}>
-          <Button title={'< Retour'} onPress={() => this.props.navigation.goBack()}/>
-          <Text style={styles.textTop}> Current offsetX : {this.props.currentOffset}</Text>
+          {/*<Button title={'< Retour'} onPress={() => this.props.navigation.goBack()}/>*/}
+          <ButtonWhite text={'Retour au plan'} hasImage={true} imageLeft={true} onTouch={() => this.props.navigation.goBack()}/>
+          {/*<Text style={styles.textTop}> Current offsetX : {this.props.currentOffset}</Text>*/}
         </View>
       </View>
     )
@@ -104,14 +89,14 @@ class Chapter extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white'
+    backgroundColor: 'black'
   },
   scrollView: {
     height: '100%',
     width: '100%'
   },
   absoluteContent: {
-    top: 50,
+    top: 20,
     left: 20,
     alignItems: 'flex-start',
     position: 'absolute',
@@ -119,6 +104,16 @@ const styles = StyleSheet.create({
   textTop: {
     fontSize: 30,
     color: 'white'
+  },
+  textIntro: {
+    fontSize: 26,
+    color: 'white',
+    width: windowWidth * 0.7,
+    position: 'absolute',
+    left: windowWidth * 0.15,
+    bottom: '10%',
+    textAlign: 'center',
+    zIndex: 3
   }
 })
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { StyleSheet, Image } from 'react-native'
+import { StyleSheet, Image, Animated } from 'react-native'
 import ImageAspectRatio from '../utils/ImageAspectRatio'
 import ImageScalingRatio from '../utils/ImageScalingRatio'
 
@@ -10,6 +10,8 @@ export default class ParallaxedImage extends React.Component {
     left: PropTypes.any,
     top: PropTypes.any,
     scalingRatio: PropTypes.number,
+    scrollX: PropTypes.any,
+    speed: PropTypes.number
   }
 
   static defaultProps = {
@@ -17,6 +19,7 @@ export default class ParallaxedImage extends React.Component {
     top: undefined,
     bottom: undefined,
     scalingRatio: 1,
+    speed: 0
   }
 
   constructor(props) {
@@ -25,14 +28,24 @@ export default class ParallaxedImage extends React.Component {
       styles: {
         top: this.props.top,
         left: this.props.left,
-        bottom: this.props.bottom,
-      },
+        bottom: this.props.bottom
+      }
     }
   }
 
   render () {
     return (
-      <ImageScalingRatio scalingRatio={this.props.scalingRatio} styles={[this.state.styles, styles.image]} src={this.props.src}/>
+      <Animated.View shouldRasterizeIOS style={[{
+        transform: [{
+          translateX: this.props.scrollX.interpolate({
+            inputRange:[0, 100],
+            outputRange: [0, this.props.speed]
+          })
+        }]},
+        this.state.styles, styles.image]}
+      >
+        <ImageScalingRatio scalingRatio={this.props.scalingRatio} src={this.props.src}/>
+      </Animated.View>
     )
   }
 }

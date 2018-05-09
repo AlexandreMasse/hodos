@@ -51,10 +51,9 @@ export default class ButtonWhite extends React.Component {
       )
     }
   }
-
   render () {
     return (
-      <TouchableHighlight onPress={ () => this._handleTouch()} underlayColor={'transparent'} style={styles.button}>
+      <TouchableHighlight onPress={ () => this._handleTouch()} underlayColor={'white'} style={styles.button}>
         <View style={styles.wrapper}>
           {this._renderImage()}
           {this._renderText()}

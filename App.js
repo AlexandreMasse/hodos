@@ -64,9 +64,7 @@ class App extends React.Component {
 
       require('./src/assets/images/arrow-left.png'),
       require('./src/assets/images/arrow-right.png'),
-      require('./src/assets/images/chapters/Chap27_part1.png'),
-      require('./src/assets/images/chapters/Chap27_palais.png'),
-      require('./src/assets/images/chapters/Chap27_rochers.png'),
+
       require('./src/assets/images/Chapter1.png'),
       require('./src/assets/images/patternGrid.png'),
       require('./src/assets/images/backgroundCharacter.jpg'),
@@ -131,7 +129,7 @@ const AppNavigator = StackNavigator({
     screen: Previously
   }
 },{
-  initialRouteName: 'Chapter',
+  initialRouteName: 'HomeScreen',
   headerMode: 'none',
   navigationOptions: {
     gesturesEnabled: false,
