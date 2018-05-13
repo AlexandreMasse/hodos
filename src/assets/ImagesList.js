@@ -1,6 +1,7 @@
 export default imageList = {
   chapters: {
     chapter27: {
+      'thumbnail': require('./images/Chapter1.png'),
       'chap27_part1': require('./images/chapters/27/Chap27_part1.png'),
       'chap27_part2': require('./images/chapters/27/Chap27_part2.png'),
       'chap27_part3': require('./images/chapters/27/Chap27_part3.png'),
@@ -18,6 +19,8 @@ export default imageList = {
       'Chap27_scene04_storm': require('./images/chapters/27/Chap27_scene04_storm.png'),
     },
   },
-
+  characters: {
+    'zeus': require('./images/characters/zeus.png'),
+  }
 };
 

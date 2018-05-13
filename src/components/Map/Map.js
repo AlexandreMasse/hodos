@@ -40,7 +40,6 @@ class Map extends React.Component {
       showPlaceInfo: true,
       showPlace: false
     })
-    // this.props.navigation.navigate('Place', {placeId: this.state.activePlace.id})
   }
 
   _handleBackToMap = () => {
@@ -111,7 +110,6 @@ class Map extends React.Component {
     const id = mapPlace.id
 
     // console.log(this.props.placeList)
-
     this.props.placeList.map(val => {
       if (val.id == id) {
         place = val;

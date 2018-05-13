@@ -6,6 +6,7 @@ import HeaderPlace from './../Map/HeaderPlace'
 import PlaceCard from './PlaceCard'
 import Title from './../Title'
 import ButtonWhite from './../ButtonWhite'
+import imageList from './../../assets/ImagesList'
 
 export default class Place extends React.Component {
 
@@ -22,7 +23,6 @@ export default class Place extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      tab: true,
       place: {
         name: ' '
       }
@@ -39,15 +39,15 @@ export default class Place extends React.Component {
 
   _renderTabHeader() {
     return (
-      <View style={[styles.placeTabWrapper]}>
+      <View style={[styles.placeHeaderWrapper]}>
         <View style={styles.buttonLeft} src={require('./../../assets/images/arrow-left.png')}>
           <ButtonWhite text={'Retour au plan'} hasImage={true} imageLeft={true} onTouch={this._handleBackToMap}/>
         </View>
         <View style={styles.buttonRight} src={require('./../../assets/images/arrow-right.png')}>
-            <ButtonWhite text={'Reprendre la lecture'} hasImage={true} imageLeft={false} onTouch={this._handleReading} />
+          <ButtonWhite text={'Reprendre la lecture'} hasImage={true} imageLeft={false} onTouch={this._handleReading} />
         </View>
         <Title title={this.props.place.name} subTitle={this.props.place.description} style={styles.placeHeader} />
-        <View style={styles.placeTabs}>
+        {/* <View style={styles.placeTabs}>
           <TouchableHighlight onPress={this._handleTabChange} underlayColor='transparent'  style={[
             styles.placeTab,
             this.state.tab ? styles.placeActiveTab: styles.placeUnactiveTab]}>
@@ -61,28 +61,42 @@ export default class Place extends React.Component {
             <Text style={[styles.placeTabTitle,
               !this.state.tab ? styles.placeActiveTabTitle : styles.placeUnactiveTabTitle]}>Personnages</Text>
           </TouchableHighlight>
-        </View>
+        </View> */}
       </View>
     )
   }
 
-  _renderContent() {
-    if (this.state.tab) {
-      const chapterList = ['Chapitre XX', 'Chapitre IV', 'Chapitre XXV']
-      return chapterList.map(function(chapter, index) {
-        return <PlaceCard title={chapter} key={index} description="Où Hermès découvre la vie"/>
-      })
-    } else {
-      const charactersList = ['Hermes', 'Cronos', 'Hadès']
-      return charactersList.map(function(character, index) {
-        return <PlaceCard title={character} key={index} description={`Carte n°${index}`}/>
-      })
-    }
+  _renderChapterList() {
+    const chapterList = [
+      {name: 'Chapitre XX', description: 'Où Hermès découvre le palais de son père', numberInt: '27'},
+      {name: 'Chapitre IV', description: 'Où Hermès rencontre Zeus, son père', numberInt: '27'},
+      {name: 'Chapitre XXV', description: 'Où Hermès découvre qu’il peut voler', numberInt: '27'},
+      {name: 'Chapitre XV', description: 'Où Hermès découvre qu’il peut voler', numberInt: '27'}
+    ]
+    return chapterList.map(function(chapter, index) {
+      return (
+        <View key={index} style={[styles.listElement]}>
+          <View style={[styles.listThumbnailWrapper,  styles.listChapterThumbnailWrapper]}>
+            <Image source={imageList.chapters['chapter'+chapter.numberInt].thumbnail} style={[styles.listChapterThumbnailWrapper, styles.listThumbnail]} />
+          </View>
+          <Text style={[styles.listSubTitle]}>{chapter.name}</Text>
+          <Text style={styles.listDescription}>{chapter.description}</Text>
+        </View>
+      )
+    })
   }
 
-  _handleTabChange = () => {
-    this.setState({
-      tab: !this.state.tab
+  _renderCharacterList() {
+    const charactersList = ['Hermes', 'Cronos', 'Hadès']
+    return charactersList.map(function(character, index) {
+      return (
+        <View key={index} style={[styles.listElement]}>
+          <View style={[styles.listThumbnailWrapper, styles.listCharacterThumbnailWrapper]}>
+            <Image source={imageList.characters['zeus']} style={[styles.listCharacterThumbnailWrapper, styles.listThumbnail]} />
+          </View>
+          <Text style={[styles.listSubTitle, styles.listCharacterSubtitle]}>{character}</Text>
+        </View>
+      )
     })
   }
 
@@ -90,10 +104,21 @@ export default class Place extends React.Component {
     return (
       <View style={styles.container}>
         <View style={[styles.placeWrapper]}>
-            {this._renderTabHeader()}
-          <ScrollView style={[styles.placeContent]}>
-            {this._renderContent()}
-          </ScrollView>
+          {this._renderTabHeader()}
+          <View style={[styles.placeContent]}>
+            <View>
+              <Text style={styles.listTitle}>Chapitres</Text>
+              <ScrollView horizontal={true} style={styles.listContent}>
+                {this._renderChapterList()}
+              </ScrollView>
+            </View>
+            <View>
+              <Text style={styles.listTitle}>Personnages</Text>
+              <ScrollView horizontal={true} style={styles.listContent}>
+              {this._renderCharacterList()}
+              </ScrollView>
+            </View>
+          </View>
         </View>
       </View>
     )
@@ -107,7 +132,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-    height: '80%',
+    height: '85%',
     position: 'absolute'
   },
   placeHeader: {
@@ -120,47 +145,53 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     height: '100%',
   },
-  placeTabWrapper: {
+  placeHeaderWrapper: {
     width: '100%',
     marginTop: 30,
   },
-  placeTab: {
-    borderWidth: 1,
-    borderColor: '#fff',
-    width: '50%',
-    justifyContent: 'center',
-    alignItems: 'center',
+  listElement: {
+    width: 180,
+    flexWrap: 'wrap',
+    marginRight: 20,
+    marginBottom: 20,
+    borderRadius: 10,
+    shadowColor: '#c8cbce',
+    shadowOffset: { width: 5, height: 5 },
+    shadowOpacity: 0.3,
+    shadowRadius: 2,
   },
-  placeTabs: {
-    marginTop: 20,
-    flexDirection: 'row',
-    height: 50,
+  listTitle: {
+    fontFamily: fonts.RubikMedium,
+    fontSize: 30,
+    marginBottom: 15,
   },
-  placeActiveTab: {
-    borderBottomColor: 'transparent'
+  listSubTitle: {
+    fontFamily: fonts.RubikMedium,
+    fontSize: 22,
+    marginTop: 10
   },
-  placeUnactiveTab: {
-    borderTopColor: 'rgba(255, 255, 255, 0.3)',
-    borderRightColor: 'rgba(255, 255, 255, 0.3)',
-    borderLeftColor: 'rgba(255, 255, 255, 0.3)'
-  },
-  placeTabTitle: {
-    fontSize: 28,
+  listDescription: {
     fontFamily: fonts.RubikRegular,
-    color: colors.grey,
+    fontSize: 18,
+    marginTop: 10,
+    marginBottom: 20,
+  },
+  listThumbnail: {
+    width: 180,
+    resizeMode: 'cover',
+    borderRadius: 10,
+  },
+  listThumbnailWrapper: {
+    width: 180,
+  },
+  listChapterThumbnailWrapper: {
+    height: 120,
+  },
+  listCharacterThumbnailWrapper: {
+    height: 200,
+  },
+  listCharacterSubtitle: {
     textAlign: 'center'
-  },
-  placeActiveTabTitle: {
-    color: colors.grey,
-  },
-  placeUnactiveTabTitle: {
-    color: '#b3afbe',
-  },
-  placeContent: {
-    marginTop: 30,
-    borderWidth: 1,
-    borderColor: '#fff',
-    borderTopColor: 'transparent'
   },
   buttonLeft: {
     position: 'absolute',
