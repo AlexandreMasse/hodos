@@ -15,7 +15,6 @@ class HomeScreen extends React.Component {
           <Button title="empty Local Storage" onPress={ () => StorageSessionManager.clearStorage()} />
           <Button title="get Data from API" onPress={ () => {
             StorageSessionManager.getDataFromApi()
-            console.log()
           } } />
         </View>
         <LinearGradient

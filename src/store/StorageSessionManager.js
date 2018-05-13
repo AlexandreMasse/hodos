@@ -13,7 +13,7 @@ class StorageSessionManager {
     Storage.hasSavedData().then( data => {
       //If so, we use it by passing sending an action that will be interpreted into the reducer
       if (data) {
-        console.log('get data from storage')
+        console.log('StorageSessionManager : get data from storage')
         Storage.getCharacterList().then( characterList => {
           store.dispatch(setCharacterList(characterList))
         })
@@ -38,7 +38,7 @@ class StorageSessionManager {
   }
 
   getDataFromApi() {
-    console.log('get data from api')
+    console.log('StorageSessionManager : get data from api')
     API.getPlaceList()
     API.getCharacterList()
     API.getChapterList()

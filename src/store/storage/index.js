@@ -15,35 +15,35 @@ export const Storage = {
         return true
       return false
     } catch (error) {
-      console.log(err)
+      console.log('AsyncStorage : error in hasSavedData => ', error)
     }
   },
   async setPlaceList(placeList) {
     try {
       await AsyncStorage.setItem(PLACELIST_KEY, JSON.stringify(placeList))
     } catch (error) {
-      console.log(err)
+      console.log('AsyncStorage : error in setPlaceList => ', error)
     }
   },
   async setCharacterList(characterList) {
     try {
       await AsyncStorage.setItem(CHARACTERLIST_KEY, JSON.stringify(characterList))
     } catch (error) {
-      console.log(err)
+      console.log('AsyncStorage : error in setCharacterList => ', error)
     }
   },
   async setChapterList(chapterList) {
     try {
       await AsyncStorage.setItem(CHAPTERLIST_KEY, JSON.stringify(chapterList))
     } catch (error) {
-      console.log(err)
+      console.log('AsyncStorage : error in setChapterList => ', error)
     }
   },
   async setProgress(progress) {
     try {
       await AsyncStorage.setItem(PROGRESS_KEY, JSON.stringify(progress))
     } catch (error) {
-      console.log(err)
+      console.log('AsyncStorage : error in setProgress => ', error)
     }
   },
   async getPlaceList () {
@@ -54,7 +54,7 @@ export const Storage = {
         return JSON.parse(placeList)
 
     } catch (error) {
-      console.log(err)
+      console.log('AsyncStorage : error in getPlaceList => ', error)
     }
   },
   async getCharacterList() {
@@ -65,7 +65,7 @@ export const Storage = {
         return JSON.parse(characterList)
 
     } catch (error) {
-      console.log(err)
+      console.log('AsyncStorage : error in getCharacterList => ', error)
     }
   },
   async getChapterList() {
@@ -75,7 +75,7 @@ export const Storage = {
         return JSON.parse(chapterList)
 
     } catch (error) {
-      console.log(err)
+      console.log('AsyncStorage : error in getChapterList => ', error)
     }
   },
   async getProgress() {
@@ -86,7 +86,7 @@ export const Storage = {
         return JSON.parse(progress)
 
     } catch (error) {
-      console.log(err)
+      console.log('AsyncStorage : error in getProgress => ', error)
     }
   },
   async clearStorage() {
@@ -94,7 +94,7 @@ export const Storage = {
       const keys = [CHAPTERLIST_KEY, PROGRESS_KEY, CHARACTERLIST_KEY, PLACELIST_KEY]
       AsyncStorage.multiRemove(keys)
     } catch (error) {
-      console.log(err)
+      console.log('AsyncStorage : error in clearStorage => ', error)
     }
   }
 }

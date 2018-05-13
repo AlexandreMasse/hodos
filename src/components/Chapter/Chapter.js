@@ -35,7 +35,7 @@ class Chapter extends React.Component {
   componentDidMount() {
     // Go to last OffsetX
     this.scrollView.scrollTo({x: this.props.currentOffset, animated: true})
-    console.log(this.state);
+    console.log('Chapter : State on mount => ', this.state);
 
   }
 
@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
 })
 
 const mapStateToProps = state => {
-  console.log(state);
+  console.log('Chapter: state in mapstatetoprops => ', state);
   return {
     currentOffset: state.progress.currentOffset
   }

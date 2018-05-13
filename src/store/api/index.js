@@ -10,21 +10,21 @@ export const API = {
     axios.get('http://leatanda.fr/hodos-api/api/places').then(response => {
       store.dispatch(setPlaceList(response.data))
     }).catch(err => {
-      console.log(err)
+      console.log('API CALL : error in getPlaceList =>', err)
     })
   },
   getCharacterList() {
     axios.get('http://leatanda.fr/hodos-api/api/characters').then(response => {
       store.dispatch(setCharacterList(response.data))
     }).catch(err => {
-      console.log(err)
+      console.log('API CALL : error in getCharacterList => ', err)
     })
   },
   getChapterList() {
       axios.get('http://leatanda.fr/hodos-api/api/chapters').then(response => {
         store.dispatch(setChapterList(response.data))
       }).catch(err => {
-        console.log(err)
+        console.log('API CALL : error in getChapterList => ', err)
       })
     },
 

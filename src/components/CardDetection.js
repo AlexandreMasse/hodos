@@ -322,12 +322,12 @@ export default class CardDetection extends React.Component {
    * @returns {Object} character
    */
   getMatchingCharacter(patternId) {
-    console.log('get matching character')
-    console.log(this.characters)
+    console.log('CardDetection : get matching character')
+    console.log('CardDetection : all Characters => ', this.characters)
     for (let i = 0; i < this.characters.length; i++) {
       const patterns = this.characters[i].patterns;
       if (patterns.indexOf(patternId) !== -1) {
-        console.log('yes', patterns.indexOf(patternId))
+        console.log('CardDetection : Matching character found => ', patterns.indexOf(patternId))
         return this.characters[i]
       }
     }
@@ -337,7 +337,7 @@ export default class CardDetection extends React.Component {
    * @param {Array} touches
    */
   checkPattern(touches) {
-    console.log('touches', touches)
+    console.log('CardDetection : Detected touches in CheckPattern => ', touches)
     const touchedCoords = this.getTouchedCoords(touches)
     const mostDistantPoints = this.getMarkpointsCoords(touchedCoords)
     const touchedMatrixWidth = this.getMatrixWidth(mostDistantPoints[0], mostDistantPoints[1])
@@ -349,13 +349,12 @@ export default class CardDetection extends React.Component {
     const matrixPixelsCoords = this.convertMatrixUnitToPixelUnit(matrixCellWidth)
     const touchedPattern = this.getTouchedPattern(matrixPixelsCoords, matrixCellWidth, rotatedTouches)
     const patternId = this.getMatchingPatternId(touchedPattern, this.patternsList)
-    console.log('touchedPattern', touchedPattern)
-    console.log('touchedPattern', touchedPattern)
-    console.log('pattern', patternId)
+    console.log('CardDetection : touchedPattern => ', touchedPattern)
+    console.log('CardDetection : patternId => ', patternId)
     if (patternId >= 0) {
-      console.log('i have a patternId')
+      console.log('CardDetection : i have a patternId')
       const character = this.getMatchingCharacter(patternId);
-      console.log(character)
+      console.log('CardDetection : matching Character Id => ',character)
       if (character) {
         this.setState({characterName: character.name})
       }
@@ -364,7 +363,7 @@ export default class CardDetection extends React.Component {
 
   _onTouch (evt) {
     const touches =  evt.nativeEvent.touches;
-    console.log('touches-evt',touches)
+    console.log('CardDetection : Detected touches => ', touches)
     if (touches.length >= 2) {
       this.setState({characterName: ''})
       const character = this.checkPattern(touches);
@@ -382,7 +381,7 @@ export default class CardDetection extends React.Component {
 
   renderCharacterName() {
     if (this.state.characterName.length > 0) {
-      console.log(this.state.characterName)
+      console.log('CardDetection : state characterName => ', this.state.characterName)
       return (<Text style={style.characterName} >{this.state.characterName}</Text>)
     }
   }

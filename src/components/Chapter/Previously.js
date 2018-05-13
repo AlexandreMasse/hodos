@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
 })
 
 const mapStateToProps = state => {
-  console.log(state.chapterList)
+  console.log('Previously : state => ', state.chapterList)
   return {
     progress: state.progress,
     chapters: state.chapterList

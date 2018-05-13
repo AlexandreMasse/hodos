@@ -86,7 +86,7 @@ class App extends React.Component {
 
   }
   _handleFinishLoading = () => {
-    console.log("finish loading assets")
+    console.log('App : finish loading assets')
     this.setState({ isReady: true})
   };
 

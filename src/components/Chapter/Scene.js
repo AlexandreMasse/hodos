@@ -28,7 +28,7 @@ export default class Scene extends React.Component {
       }
     }
 
-    console.log([styles.scene, this.state.styles ])
+    console.log('Scene: styles => ', [styles.scene, this.state.styles ])
   }
 
   render () {

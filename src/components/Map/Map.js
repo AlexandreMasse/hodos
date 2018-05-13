@@ -51,9 +51,9 @@ class Map extends React.Component {
   }
 
   _renderPlaceInfo() {
-    console.log(this.state.showPlaceInfo)
+    console.log('Map : state showPlaceInfo ', this.state.showPlaceInfo)
     if (this.state.showPlaceInfo) {
-      console.log('is shown');
+      console.log('Map: showPlaceInfo (true) => is shown');
       return(
         <Place place={this.state.activePlace} onBackToMap={this._handleBackToMap} onReading={this._handleReading} style={styles.placeInfo} />
       )

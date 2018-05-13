@@ -19,7 +19,7 @@ class Previously extends React.Component {
   }
 
   componentWillUnmount() {
-    console.log('unmount');
+    console.log('Paragraph : unmount');
   }
 
   componentWillMount() {

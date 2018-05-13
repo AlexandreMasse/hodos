@@ -157,7 +157,7 @@ export default class PinchZoomView extends Component {
       let dy = Math.abs(e.nativeEvent.touches[0].pageY - e.nativeEvent.touches[1].pageY);
       let distant = Math.sqrt(dx * dx + dy * dy);
       let scale = distant / this.distant * this.state.lastScale;
-      console.log(scale);
+      console.log('PinchZoomView: scale => ', scale);
       if(scale > this.props.minScale && scale < this.props.maxScale) {
 
         this.setState({ scale, lastMovePinch: true });
