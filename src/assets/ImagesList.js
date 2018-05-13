@@ -16,5 +16,4 @@ export default imageList = {
     'Chap27_scene03_pilier': require('./images/chapters/27/Chap27_scene03_pilier.png'),
     'Chap27_scene04_storm': require('./images/chapters/27/Chap27_scene04_storm.png'),
   }
-};
-
+}

@@ -51,7 +51,7 @@ class Map extends React.Component {
   }
 
   _renderPlaceInfo() {
-    console.log('Map : state showPlaceInfo ', this.state.showPlaceInfo)
+    console.log('Map : state showPlaceInfo => ', this.state.showPlaceInfo)
     if (this.state.showPlaceInfo) {
       console.log('Map: showPlaceInfo (true) => is shown');
       return(

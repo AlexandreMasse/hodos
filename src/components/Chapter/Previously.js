@@ -3,6 +3,7 @@ import { StyleSheet, View, Text, Button, Image, TouchableHighlight, Dimensions, 
 import {connect} from 'react-redux'
 import { colors, fonts } from './../../assets/variables'
 import ButtonWhite from './../ButtonWhite'
+import Title from './../Title'
 
 class Previously extends React.Component {
 
@@ -47,19 +48,19 @@ class Previously extends React.Component {
           <Image source={require('./../../assets/images/menu.png')} source={styles.menu}/>
         </View>
         <View style={styles.previouslyWrapper}>
-          <View>
-            <Text style={styles.previouslyNumber}>Chapitre {this.state.chapter.numberRoman}</Text>
-            <Text style={styles.previouslyTitle}>{this.state.chapter.title}</Text>
+          <View style={styles.previouslyTitle}>
+            <Title title={'Chapitre '+this.state.chapter.numberRoman}  subTitle={this.state.chapter.title} />
           </View>
           <View style={styles.previouslyContent}>
-            <Text style={styles.previouslyInfo}>Résumé de l'épisode précédent :</Text>
-            <Text style={styles.previouslyDescription}>{this.state.chapter.previously}</Text>
+            <View style={styles.previouslyText}>
+              <Text style={styles.previouslyInfo}>Résumé de l'épisode précédent :</Text>
+              <Text style={styles.previouslyDescription}>{this.state.chapter.previously}</Text>
+            </View>
           </View>
-          <View  style={styles.buttonRight} src={require('./../../assets/images/arrow-right.png')}>
+          <View style={styles.buttonRight}>
             <ButtonWhite text={'Reprendre la lecture'} hasImage={true} imageLeft={false} onTouch={this._handleReading} />
           </View>
         </View>
-
       </View>
 
     )
@@ -82,37 +83,30 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     height: '55%',
     width: '100%',
-    alignItems: 'center',
-  },
-  previouslyNumber: {
-    textAlign: 'center',
-    color: colors.grey,
-    fontFamily: fonts.RubikRegular,
-    fontSize: 32,
-    marginTop: 80,
   },
   previouslyTitle: {
-    textAlign: 'center',
-    color: colors.grey,
-    fontFamily: fonts.RubikRegular,
-    fontSize: 15,
-    marginTop: 10
+    marginTop: 70,
+    marginBottom: 90,
   },
   previouslyContent: {
-    justifyContent: 'center',
-    width: '70%',
-    marginTop: 70
+    flex: 1,
+    alignItems: 'center',
+    position: 'relative',
+  },
+  previouslyText: {
+    width: '50%'
   },
   previouslyInfo: {
     textAlign: 'left',
+    width: '100%',
     color: colors.grey,
     fontFamily: fonts.RubikMedium,
-    fontSize: 18
+    fontSize: 18,
   },
   previouslyDescription: {
     color: colors.grey,
     fontFamily: fonts.RubikRegular,
-    fontSize: 14,
+    fontSize: 16,
     textAlign: 'left',
     marginTop: 15,
   },
@@ -124,7 +118,9 @@ const styles = StyleSheet.create({
   },
   buttonRight: {
     position: 'absolute',
-    bottom: -15
+    width: '100%',
+    alignItems: 'center',
+    bottom: -25
   },
   menuWrapper: {
     position: 'absolute',

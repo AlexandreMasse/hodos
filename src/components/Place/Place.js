@@ -4,6 +4,7 @@ import PropType from 'prop-types'
 import {fonts, colors} from './../../assets/variables'
 import HeaderPlace from './../Map/HeaderPlace'
 import PlaceCard from './PlaceCard'
+import Title from './../Title'
 import ButtonWhite from './../ButtonWhite'
 
 export default class Place extends React.Component {
@@ -45,10 +46,7 @@ export default class Place extends React.Component {
         <View style={styles.buttonRight} src={require('./../../assets/images/arrow-right.png')}>
             <ButtonWhite text={'Reprendre la lecture'} hasImage={true} imageLeft={false} onTouch={this._handleReading} />
         </View>
-        <View style={styles.placeHeader}>
-          <Text style={styles.placeName}>{this.props.place.name}</Text>
-          <Text style={styles.placeDescription}>{this.props.place.description}</Text>
-        </View>
+        <Title title={this.props.place.name} subTitle={this.props.place.description} style={styles.placeHeader} />
         <View style={styles.placeTabs}>
           <TouchableHighlight onPress={this._handleTabChange} underlayColor='transparent'  style={[
             styles.placeTab,
@@ -113,24 +111,8 @@ const styles = StyleSheet.create({
     position: 'absolute'
   },
   placeHeader: {
-    // flex: 1,
-    width: '100%',
     marginTop: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 60,
-  },
-  placeName: {
-    textAlign: 'center',
-    color: colors.grey,
-    fontSize: 30,
-    fontFamily: fonts.RubikMedium
-  },
-  placeDescription: {
-    textAlign: 'center',
-    color: colors.grey,
-    fontSize: 18,
-    fontFamily: fonts.RubikLight
+    marginBottom: 20
   },
   placeWrapper: {
     marginLeft: 20,
