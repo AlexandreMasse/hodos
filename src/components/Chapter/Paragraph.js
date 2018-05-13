@@ -1,54 +1,40 @@
 import React from 'react'
+import PropType from 'prop-types'
 import {StyleSheet, View, Dimensions, Text, Button, Image} from 'react-native'
-import {connect} from 'react-redux';
-import {currentOffsetProgress} from "../../store/actions/actions"
-import Paragraph from './Paragraph'
-import Scene from './Scene'
-import ParallaxedImage from './ParallaxedImage'
-import imageList from '../../assets/ImagesList'
+import {fonts} from './../../assets/variables'
 
 const windowHeight = Dimensions.get('window').height
 
-class Previously extends React.Component {
+export default class Paragraph extends React.Component {
+
+  static propTypes = {
+    text: PropType.string,
+    top: PropType.string,
+    left: PropType.string,
+    bottom: PropType.string
+  }
+
+  static defaultProps = {
+    text: 'Texte',
+    top: undefined,
+    left: undefined,
+    bottom: undefined
+  }
 
   constructor(props) {
     super(props)
     this.state = {
-      scalingRatio: 1
+      styles: {
+        top: this.props.top ? this.props.top : undefined,
+        left: this.props.left,
+        bottom: this.props.bottom ? this.props.bottom : undefined
+      }
     }
-  }
-
-  componentWillUnmount() {
-    console.log('Paragraph : unmount');
-  }
-
-  componentWillMount() {
-    //Calcul scaling ratio from original height
-  }
-
-  componentDidMount() {
-    // Go to last OffsetX
-  }
-
-  _scrollViewRef = el => {
-    this.scrollView = el
   }
 
   render () {
     return (
-      <View style={styles.container}>
-        <ScrollView ref={this._scrollViewRef} horizontal={true} style={styles.scrollView} scrollEventThrottle={500} onScroll={this._handleScroll
-        }>
-          <Scene src={imageList.chapters.chap27} windowHeight={windowHeight}/>
-          {/* <Paragraph text={'lorem ipsum'} color={'red'} key="1" x={300} y={100} />*/}
-          <ParallaxedImage x={100} y={50} scalingRatio={this.state.scalingRatio} src={imageList.chapters.palais}/>
-          <ParallaxedImage x={0} y={480} width={600} src={imageList.chapters.rochers} />
-        </ScrollView>
-        <View style={styles.absoluteContent}>
-          <Button title={'< Retour'} onPress={() => this.props.navigation.goBack()}/>
-          <Text style={styles.textTop}> Current offsetX : {this.props.currentOffset}</Text>
-        </View>
-      </View>
+      <Text style={[this.state.styles, styles.text]}> {this.props.text}</Text>
     )
   }
 
@@ -57,31 +43,12 @@ class Previously extends React.Component {
 
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'white'
-  },
-  scrollView: {
-    height: '100%',
-    width: '100%'
-  },
-  absoluteContent: {
-    top: 50,
-    left: 20,
-    alignItems: 'flex-start',
+  text: {
     position: 'absolute',
-  },
-  textTop: {
-    fontSize: 30,
-    color: 'white'
+    color: '#fff',
+    fontFamily: fonts.RubikRegular,
+    fontSize: 20,
+    zIndex: 40
   }
 })
 
-const mapStateToProps = state => {
-
-}
-
-const mapDispatchToProps = dispatch => {
-
-}
-export default connect(mapStateToProps, mapDispatchToProps)(Previously)
