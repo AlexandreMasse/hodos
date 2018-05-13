@@ -5,7 +5,7 @@ import {currentOffsetProgress} from "../../store/actions/actions"
 import Paragraph from './Paragraph'
 import Scene from './Scene'
 import ParallaxedImage from './ParallaxedImage'
-import imageList from './../../assets/ImagesList'
+import imageList from '../../assets/ImagesList'
 
 const windowHeight = Dimensions.get('window').height
 
