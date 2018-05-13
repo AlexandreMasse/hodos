@@ -172,7 +172,7 @@ const styles = StyleSheet.create({
   },
   listDescription: {
     fontFamily: fonts.RubikRegular,
-    fontSize: 18,
+    fontSize: 16,
     marginTop: 10,
     marginBottom: 20,
   },
