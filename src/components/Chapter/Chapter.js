@@ -46,7 +46,8 @@ class Chapter extends React.Component {
   render () {
     return (
       <View style={styles.container}>
-        <ScrollView ref={this._scrollViewRef} horizontal={true} style={styles.scrollView} scrollEventThrottle={1} onScroll={Animated.event(
+        <ScrollView ref={this._scrollViewRef} horizontal={true} style={styles.scrollView}
+        bounces={false} scrollEventThrottle={1} onScroll={Animated.event(
           [{ nativeEvent: {
               contentOffset: {
                 x: this.scrollX

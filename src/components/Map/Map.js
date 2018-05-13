@@ -166,7 +166,7 @@ const windowWidth = Dimensions.get('window').width
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.paleGreen
+    backgroundColor: '#fff'
   },
   text: {
     fontSize: 36,

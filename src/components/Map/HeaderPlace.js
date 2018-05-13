@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     textShadowColor: 'rgba(0, 0, 0, 0.3)',
     textShadowOffset: {width: -1, height: 1},
-    textShadowRadius: 15,
+    textShadowRadius: 6,
     fontFamily: fonts.RubikBold,
   },
   button: {
