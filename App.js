@@ -1,16 +1,22 @@
+// React
 import React from 'react';
 import {StyleSheet, YellowBox} from 'react-native';
 import {StackNavigator} from 'react-navigation';
+// Store / data
 import {store} from './src/store/reducers/index'
 import {Provider} from 'react-redux'
 import storageSessionManager from './src/store/StorageSessionManager'
+// Component
 import HomeScreen from './src/components/HomeScreen/HomeScreen'
 import Map from './src/components/Map/Map'
 import Chapter from './src/components/Chapter/Chapter'
 import Previously from './src/components/Chapter/Previously'
+// Assets
+import imageList from './src/assets/ImagesList'
+// Expo
 import { Asset, AppLoading, Font } from 'expo';
 
-_cacheImages = (images) => {
+  _cacheImages = (images) => {
     return images.map(image => {
       if (typeof image === 'string') {
         return Image.prefetch(image);
@@ -31,36 +37,40 @@ _cacheImages = (images) => {
     })
   }
 
+  // Get all Images require from ImageList
+  _getImages = () => {
+    var images = []
+    function getAllValuesOfObject(obj) {
+      for (let key in obj) {
+        let value = obj[key]
+        if(typeof value === 'object') {
+          getAllValuesOfObject(value)
+        } else {
+          images.push(value)
+        }
+      }
+    }
+    getAllValuesOfObject(imageList)
+    return images
+  }
+
 class App extends React.Component {
 
   state = {
     isReady: false
   };
 
+  // Load asynchronously images and fonts
   async _loadAssetsAsync() {
+
     const imageAssets = _cacheImages([
+      ..._getImages(),
       require('./src/assets/images/logo.png'),
       require('./src/assets/splash/splash.png'),
       require('./src/assets/images/map/map.png'),
       require('./src/assets/images/green-arrow-right.png'),
       require('./src/assets/images/white-arrow-right.png'),
       require('./src/assets/images/white-arrow-left.png'),
-      //Chap27
-      require('./src/assets/images/chapters/27/Chap27_part1.png'),
-      require('./src/assets/images/chapters/27/Chap27_part2.png'),
-      require('./src/assets/images/chapters/27/Chap27_part3.png'),
-      require('./src/assets/images/chapters/27/Chap27_part4.png'),
-      require('./src/assets/images/chapters/27/Chap27_part5.png'),
-      require('./src/assets/images/chapters/27/Chap27_scene01_palais.png'),
-      require('./src/assets/images/chapters/27/Chap27_scene01_rochers.png'),
-      require('./src/assets/images/chapters/27/Chap27_scene01_pilier.png'),
-      require('./src/assets/images/chapters/27/Chap27_scene02_pilier1.png'),
-      require('./src/assets/images/chapters/27/Chap27_scene02_pilier2.png'),
-      require('./src/assets/images/chapters/27/Chap27_scene02_storm.png'),
-      require('./src/assets/images/chapters/27/Chap27_scene02_zeus.png'),
-      require('./src/assets/images/chapters/27/Chap27_scene03_chronos.png'),
-      require('./src/assets/images/chapters/27/Chap27_scene03_pilier.png'),
-      require('./src/assets/images/chapters/27/Chap27_scene04_storm.png'),
 
       require('./src/assets/images/arrow-left.png'),
       require('./src/assets/images/arrow-right.png'),
@@ -69,9 +79,8 @@ class App extends React.Component {
       require('./src/assets/images/patternGrid.png'),
       require('./src/assets/images/backgroundCharacter.jpg'),
       require('./src/assets/images/chapters/previously.png'),
-      require('./src/assets/images/menu.png'),
+      require('./src/assets/images/menu.png')
     ]);
-
 
     const fontAssets = _cacheFonts([
       {name: 'alcubierre', font: require('./src/assets/fonts/Alcubierre/Alcubierre.otf')},
@@ -85,6 +94,8 @@ class App extends React.Component {
     await Promise.all([...imageAssets, ...fontAssets]);
 
   }
+
+  // Finish loading assets
   _handleFinishLoading = () => {
     console.log('App : finish loading assets')
     this.setState({ isReady: true})
