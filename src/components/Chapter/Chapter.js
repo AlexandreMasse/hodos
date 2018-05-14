@@ -16,7 +16,8 @@ class Chapter extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      scalingRatio: 1
+      scalingRatio: 1,
+      totalWidth: 0
     }
     this.scrollX = new Animated.Value(0);
   }
@@ -36,24 +37,34 @@ class Chapter extends React.Component {
   componentDidMount() {
     // Go to last OffsetX
     this.scrollView.scrollTo({x: this.props.currentOffset, animated: true})
-
   }
 
   _scrollViewRef = el => {
     this.scrollView = el
   }
 
+  _onContentSizeChange = (windowWidth) => {
+    this.setState({totalWidth: windowWidth})
+  }
+
+
   render () {
     return (
       <View style={styles.container}>
-        <ScrollView ref={this._scrollViewRef} horizontal={true} style={styles.scrollView}
-        bounces={false} scrollEventThrottle={1} onScroll={Animated.event(
-          [{ nativeEvent: {
-              contentOffset: {
-                x: this.scrollX
+        <ScrollView
+          ref={this._scrollViewRef}
+          onContentSizeChange={this._onContentSizeChange}
+          horizontal={true}
+          style={styles.scrollView}
+          bounces={false}
+          scrollEventThrottle={1}
+          onScroll={Animated.event(
+            [{ nativeEvent: {
+                contentOffset: {
+                  x: this.scrollX
+                }
               }
-            }
-          }]
+            }]
         )}>
           <ParallaxedImage left={'5.9%'} top={"2%"} speed={-10} scalingRatio={this.state.scalingRatio + 0.005} scrollX={this.scrollX} src={imageList.chapters.chapter27.Chap27_scene02_storm}/>
           <Scene src={imageList.chapters.chapter27.chap27_part1} windowHeight={windowHeight}/>
@@ -61,7 +72,7 @@ class Chapter extends React.Component {
           <Scene src={imageList.chapters.chapter27.chap27_part3} windowHeight={windowHeight}/>
           <Scene src={imageList.chapters.chapter27.chap27_part4} windowHeight={windowHeight}/>
           <Scene src={imageList.chapters.chapter27.chap27_part5} windowHeight={windowHeight}/>
-          <Paragraph text={'Je suis un texte'} bottom={'2%'} left={'0.5%'} />
+          <Paragraph text={"C’est un soir d'orage que Zeus et Rhéa décidèrent d'agir contre Cronos. Ce soir-là, l'orage était terriblement violent. Cronos ne cessait d'aller et venir dans sa chambre."} width={900} top={'10%'} left={0.02} scrollX={this.scrollX} windowWidth={windowWidth} parentWidth={this.state.totalWidth} />
           <ParallaxedImage left={"0.43%"} top={'3%'} speed={1} scalingRatio={this.state.scalingRatio} scrollX={this.scrollX} src={imageList.chapters.chapter27.Chap27_scene01_palais}/>
           <ParallaxedImage left={0} bottom={0} speed={20} scalingRatio={this.state.scalingRatio} scrollX={this.scrollX} src={imageList.chapters.chapter27.Chap27_scene01_rochers}/>
           <ParallaxedImage left={'3.8%'} bottom={0} speed={-30} scalingRatio={this.state.scalingRatio} scrollX={this.scrollX} src={imageList.chapters.chapter27.Chap27_scene01_pilier}/>
@@ -71,11 +82,8 @@ class Chapter extends React.Component {
           <ParallaxedImage left={'9.1%'} bottom={0} speed={1} scalingRatio={this.state.scalingRatio} scrollX={this.scrollX} src={imageList.chapters.chapter27.Chap27_scene02_pilier2}/>
           <ParallaxedImage left={'15.1%'} top={0} speed={-12} scalingRatio={this.state.scalingRatio} scrollX={this.scrollX} src={imageList.chapters.chapter27.Chap27_scene03_pilier}/>
           <ParallaxedImage left={'18.5%'} top={'-7%'} speed={-20} scalingRatio={this.state.scalingRatio} scrollX={this.scrollX} src={imageList.chapters.chapter27.Chap27_scene04_storm}/>
-
-          <Text style={styles.textIntro}>C’est un soir d'orage que Zeus et Rhéa décidèrent d'agir contre Cronos. Ce soir-là, l'orage était terriblement violent. Cronos ne cessait d'aller et venir dans sa chambre.</Text>
         </ScrollView>
         <View style={styles.absoluteContent}>
-          {/*<Button title={'< Retour'} onPress={() => this.props.navigation.goBack()}/>*/}
           <ButtonWhite text={'Retour au plan'} hasImage={true} imageLeft={true} onTouch={() => this.props.navigation.goBack()}/>
           {/*<Text style={styles.textTop}> Current offsetX : {this.props.currentOffset}</Text>*/}
         </View>
@@ -117,7 +125,7 @@ const styles = StyleSheet.create({
   }
 })
 
-const mapStateToProps = state => {;
+const mapStateToProps = state => {
   return {
     currentOffset: state.progress.currentOffset
   }
