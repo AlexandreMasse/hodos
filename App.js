@@ -64,22 +64,7 @@ class App extends React.Component {
   async _loadAssetsAsync() {
 
     const imageAssets = _cacheImages([
-      ..._getImages(),
-      require('./src/assets/images/logo.png'),
-      require('./src/assets/splash/splash.png'),
-      require('./src/assets/images/map/map.png'),
-      require('./src/assets/images/green-arrow-right.png'),
-      require('./src/assets/images/white-arrow-right.png'),
-      require('./src/assets/images/white-arrow-left.png'),
-
-      require('./src/assets/images/arrow-left.png'),
-      require('./src/assets/images/arrow-right.png'),
-
-      require('./src/assets/images/Chapter1.png'),
-      require('./src/assets/images/patternGrid.png'),
-      require('./src/assets/images/backgroundCharacter.jpg'),
-      require('./src/assets/images/chapters/previously.png'),
-      require('./src/assets/images/menu.png')
+      ..._getImages()
     ]);
 
     const fontAssets = _cacheFonts([

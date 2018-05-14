@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, Text, Image, ART } from 'react-native';
+import imageList from '../assets/ImagesList'
 
 export default class CardDetection extends React.Component {
   constructor(props) {
@@ -396,8 +397,8 @@ export default class CardDetection extends React.Component {
 
     return (
       <View style={style.cardZone} onStartShouldSetResponder={ (evt) => {this._onTouch(evt)} } pointerEvents="box-only">
-        <Image style={style.background} source={ require('./../assets/images/backgroundCharacter.jpg')}></Image>
-        <Image style={style.patternGrid} source={ require('./../assets/images/patternGrid.png')}></Image>
+        <Image style={style.background} source={imageList.cardDetection.backgroundCharacter}/>
+        <Image style={style.patternGrid} source={imageList.cardDetection.patternGrid}/>
         {this.renderPoints()}
         {this.renderCharacterName()}
       </View>

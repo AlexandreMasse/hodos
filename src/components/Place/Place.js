@@ -40,10 +40,10 @@ export default class Place extends React.Component {
   _renderTabHeader() {
     return (
       <View style={[styles.placeHeaderWrapper]}>
-        <View style={styles.buttonLeft} src={require('./../../assets/images/arrow-left.png')}>
+        <View style={styles.buttonLeft} src={imageList.others.arrowLeft}>
           <ButtonWhite text={'Retour au plan'} hasImage={true} imageLeft={true} onTouch={this._handleBackToMap}/>
         </View>
-        <View style={styles.buttonRight} src={require('./../../assets/images/arrow-right.png')}>
+        <View style={styles.buttonRight} src={imageList.others.arrowRight}>
           <ButtonWhite text={'Reprendre la lecture'} hasImage={true} imageLeft={false} onTouch={this._handleReading} />
         </View>
         <Title title={this.props.place.name} subTitle={this.props.place.description} style={styles.placeHeader} />

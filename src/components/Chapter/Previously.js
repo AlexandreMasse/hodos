@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import { colors, fonts } from './../../assets/variables'
 import ButtonWhite from './../ButtonWhite'
 import Title from './../Title'
+import imageList from "../../assets/ImagesList";
 
 class Previously extends React.Component {
 
@@ -40,12 +41,12 @@ class Previously extends React.Component {
   render () {
     return (
       <View style={styles.container}>
-        <Image source={require('./../../assets/images/chapters/previously.png')} style={styles.backgroundImage}/>
-        <View style={styles.buttonLeft} src={require('./../../assets/images/arrow-left.png')}>
+        <Image source={imageList.previously.previously} style={styles.backgroundImage}/>
+        <View style={styles.buttonLeft} src={imageList.others.arrowLeft}>
           <ButtonWhite text={'Retour'} hasImage={true} imageLeft={true} onTouch={this._handleBackToMap}/>
         </View>
         <View source={styles.menuWrapper}>
-          <Image source={require('./../../assets/images/menu.png')} source={styles.menu}/>
+          <Image source={imageList.menu.logo} style={styles.menu}/>
         </View>
         <View style={styles.previouslyWrapper}>
           <View style={styles.previouslyTitle}>

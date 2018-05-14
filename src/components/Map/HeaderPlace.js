@@ -1,6 +1,7 @@
 import React from 'react'
 import PropType from 'prop-types'
 import { StyleSheet, Text, View, TouchableHighlight, Image} from 'react-native'
+import imageList from '../../assets/ImagesList'
 import BackToMapButton from './BackToMapButton'
 import { fonts } from './../../assets/variables'
 
@@ -33,13 +34,13 @@ export default class HeaderPlace extends React.Component {
       return (
         <TouchableHighlight style={[styles.button, styles.buttonRight]} onPress={this._handleNavigateChapter} underlayColor={'transparent'}>
           <View style={[styles.buttonWrapper]}>
-            <Image source={require('./../../assets/images/white-arrow-right.png')} style={[styles.arrow, styles.arrowRight]} />
+            <Image source={imageList.others.whiteArrowRight} style={[styles.arrow, styles.arrowRight]} />
             <Text style={[styles.text, styles.textLeft]}> Reprendre la lecture </Text>
           </View>
         </TouchableHighlight>
       )
     } else {
-      return <Image source={require('./../../assets/images/logo.png')} style={[styles.imageRight]}/>
+      return <Image source={imageList.others.logo} style={[styles.imageRight]}/>
     }
   }
 

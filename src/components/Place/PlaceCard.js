@@ -2,6 +2,7 @@ import React from 'react'
 import PropType from 'prop-types'
 import { StyleSheet, Text, View, TouchableHighlight, Image} from 'react-native'
 import { fonts, colors } from './../../assets/variables'
+import imageList from '../../assets/ImagesList'
 
 export default class PlaceCard extends React.Component {
 
@@ -33,7 +34,7 @@ export default class PlaceCard extends React.Component {
     return (
       <TouchableHighlight onPress={this._handleNavigateChapter} underlayColor='transparent'  style={[]}>
         <View style={[styles.placeCard]}>
-          <Image source={require('./../../assets/images/Chapter1.png')} style={[styles.placeCardThumbnail]}/>
+          <Image source={imageList.chapters.chapter1.thumbnail} style={[styles.placeCardThumbnail]}/>
             <View style={[styles.placeCardText]}>
               <Text style={[styles.placeCardTitle]}>{this.props.title}</Text>
               <Text style={[styles.placeCardDescription]}>{this.props.description}</Text>

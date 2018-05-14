@@ -2,6 +2,7 @@ import React from 'react'
 import PropType from 'prop-types'
 import {StyleSheet, TouchableHighlight, Image, Text, View} from 'react-native'
 import { colors, fonts } from './../assets/variables'
+import imageList from '../assets/ImagesList'
 
 export default class ButtonWhite extends React.Component {
 
@@ -27,7 +28,7 @@ export default class ButtonWhite extends React.Component {
   _renderImage() {
     if (this.props.hasImage) {
       return(
-        <Image source={this.props.imageLeft ? require('./../assets/images/arrow-left.png') : require('./../assets/images/arrow-right.png')} style={[
+        <Image source={this.props.imageLeft ? imageList.others.arrowLeft :imageList.others.arrowRight} style={[
           styles.buttonImage,
           this.props.imageLeft ? styles.imageLeft : styles.imageRight
         ]} />

@@ -6,13 +6,13 @@ import Scene from './../Chapter/Scene'
 import {colors} from '../../assets/variables'
 import resolveAssetSource from 'resolveAssetSource'
 import mapData from './../../store/datas/map.json'
-import mapImage from './../../assets/images/map/map.png'
+import imageList from '../../assets/ImagesList'
 import HeaderPlace from './HeaderPlace'
 import ButtonWhite from './../ButtonWhite'
 import Place from './../Place/Place'
 
 const windowHeight = Dimensions.get('window').height
-
+const windowWidth = Dimensions.get('window').width
 
 class Map extends React.Component {
 
@@ -28,7 +28,7 @@ class Map extends React.Component {
       },
       fadeAnim: new Animated.Value(0)
     }
-
+    this.mapImage = imageList.map.map
   }
 
   _handleReading = () => {
@@ -62,7 +62,7 @@ class Map extends React.Component {
   _renderReadingButton() {
     if (this.state.showReadingButton) {
       return (
-        <View  style={styles.buttonRead} src={require('./../../assets/images/arrow-right.png')}>
+        <View  style={styles.buttonRead} src={imageList.others.arrowRight}>
           <ButtonWhite text={'Reprendre la lecture'} hasImage={true} imageLeft={false} onTouch={this._handleReading} />
         </View>
       );
@@ -86,7 +86,7 @@ class Map extends React.Component {
   _renderPlace () {
     if (this.state.showPlace) {
       return (
-        <View style={styles.placeButton} src={require('./../../assets/images/arrow-right.png')}>
+        <View style={styles.placeButton} src={imageList.others.arrowRight}>
           <ButtonWhite text={'Accéder au lieu'} hasImage={true} imageLeft={false} onTouch={this._handleNavigationPlace} />
         </View>
       );
@@ -134,7 +134,7 @@ class Map extends React.Component {
   }
 
   getMapImageWidth() {
-    const originalSize = resolveAssetSource(mapImage)
+    const originalSize = resolveAssetSource(this.mapImage)
     return (windowHeight / originalSize.height) * originalSize.width
   }
 
@@ -142,7 +142,7 @@ class Map extends React.Component {
     return (
       <View style={styles.container}>
         <PinchZoomView initialScale={2.5} minScale={2} maxScale={3.5} childHeight={windowHeight} childWidth={this.getMapImageWidth()}>
-          <Scene src={mapImage}/>
+          <Scene src={this.mapImage}/>
           <TouchableHighlight style={styles.mapTouchable} onPress={() => this._hideHeader()}  underlayColor={'transparent'}>
             <View />
           </TouchableHighlight>
@@ -158,8 +158,6 @@ class Map extends React.Component {
     )
   }
 }
-
-const windowWidth = Dimensions.get('window').width
 
 const styles = StyleSheet.create({
   container: {

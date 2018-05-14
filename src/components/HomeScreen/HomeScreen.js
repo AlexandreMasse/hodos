@@ -10,7 +10,7 @@ class HomeScreen extends React.Component {
   render () {
     return (
       <View style={styles.container}>
-        <Image source={require('./../../assets/splash/splash.png')} style={styles.splashImage} />
+        <Image source={require('../../assets/images/splash/splash.png')} style={styles.splashImage} />
         <View style={styles.buttonStorage} >
           <Button title="empty Local Storage" onPress={ () => StorageSessionManager.clearStorage()} />
           <Button title="get Data from API" onPress={ () => {

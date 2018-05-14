@@ -1,7 +1,10 @@
 export default imageList = {
   chapters: {
+    chapter1: {
+      'thumbnail': require('./images/chapters/1/thumbnail.png'),
+    },
     chapter27: {
-      'thumbnail': require('./images/Chapter1.png'),
+      'thumbnail': require('./images/chapters/1/thumbnail.png'),
       'chap27_part1': require('./images/chapters/27/Chap27_part1.png'),
       'chap27_part2': require('./images/chapters/27/Chap27_part2.png'),
       'chap27_part3': require('./images/chapters/27/Chap27_part3.png'),
@@ -19,8 +22,29 @@ export default imageList = {
       'Chap27_scene04_storm': require('./images/chapters/27/Chap27_scene04_storm.png'),
     },
   },
+  map: {
+    'map': require('./images/map/map.png'),
+  },
+  menu: {
+    'logo': require('./images/menu.png')
+  },
   characters: {
     'zeus': require('./images/characters/zeus.png'),
+  },
+  previously: {
+    'previously': require('./images/chapters/previously.png'),
+  },
+  cardDetection: {
+    'patternGrid': require('./images/patternGrid.png'),
+    'backgroundCharacter': require('./images/backgroundCharacter.jpg'),
+  },
+  others: {
+    'splash':  require('./images/splash/splash.png'),
+    'logo': require('./images/logo.png'),
+    'whiteArrowRight': require('./images/white-arrow-right.png'),
+    'whiteArrowLeft': require('./images/white-arrow-left.png'),
+    'arrowLeft': require('./images/arrow-left.png'),
+    'arrowRight': require('./images/arrow-right.png'),
   }
 };
 

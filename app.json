@@ -9,8 +9,8 @@
       "isTabletOnly": true,
       "splash": {
         "resizeMode": "contain",
-        "image": "./src/assets/splash/splash.png",
-        "tabletImage": "./src/assets/splash/splash.png"
+        "image": "./src/assets/images/splash/splash.png",
+        "tabletImage": "./src/assets/images/splash/splash.png"
       }
     }
   }
