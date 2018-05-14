@@ -36,7 +36,6 @@ class Chapter extends React.Component {
   componentDidMount() {
     // Go to last OffsetX
     this.scrollView.scrollTo({x: this.props.currentOffset, animated: true})
-    console.log('Chapter : State on mount => ', this.state);
 
   }
 
@@ -57,12 +56,12 @@ class Chapter extends React.Component {
           }]
         )}>
           <ParallaxedImage left={'5.9%'} top={"2%"} speed={-10} scalingRatio={this.state.scalingRatio + 0.005} scrollX={this.scrollX} src={imageList.chapters.chapter27.Chap27_scene02_storm}/>
-          <Paragraph text={'Je suis un texte'} top={'5.9%'} left={'2%'} />
           <Scene src={imageList.chapters.chapter27.chap27_part1} windowHeight={windowHeight}/>
           <Scene src={imageList.chapters.chapter27.chap27_part2} windowHeight={windowHeight}/>
           <Scene src={imageList.chapters.chapter27.chap27_part3} windowHeight={windowHeight}/>
           <Scene src={imageList.chapters.chapter27.chap27_part4} windowHeight={windowHeight}/>
           <Scene src={imageList.chapters.chapter27.chap27_part5} windowHeight={windowHeight}/>
+          <Paragraph text={'Je suis un texte'} bottom={'2%'} left={'0.5%'} />
           <ParallaxedImage left={"0.43%"} top={'3%'} speed={1} scalingRatio={this.state.scalingRatio} scrollX={this.scrollX} src={imageList.chapters.chapter27.Chap27_scene01_palais}/>
           <ParallaxedImage left={0} bottom={0} speed={20} scalingRatio={this.state.scalingRatio} scrollX={this.scrollX} src={imageList.chapters.chapter27.Chap27_scene01_rochers}/>
           <ParallaxedImage left={'3.8%'} bottom={0} speed={-30} scalingRatio={this.state.scalingRatio} scrollX={this.scrollX} src={imageList.chapters.chapter27.Chap27_scene01_pilier}/>
@@ -118,8 +117,7 @@ const styles = StyleSheet.create({
   }
 })
 
-const mapStateToProps = state => {
-  console.log('Chapter: state in mapstatetoprops => ', state);
+const mapStateToProps = state => {;
   return {
     currentOffset: state.progress.currentOffset
   }
