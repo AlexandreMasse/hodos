@@ -26,7 +26,8 @@ export default imageList = {
     'map': require('./images/map/map.png'),
   },
   menu: {
-    'logo': require('./images/menu.png')
+    'logo': require('./images/menu/logo.png'),
+    'close': require('./images/menu/close.png'),
   },
   characters: {
     'zeus': require('./images/characters/zeus.png'),

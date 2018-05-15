@@ -1,16 +1,12 @@
 // React
 import React from 'react';
-import {StyleSheet, YellowBox} from 'react-native';
-import {StackNavigator} from 'react-navigation';
+import {StyleSheet, YellowBox, TouchableOpacity, Text, View} from 'react-native';
 // Store / data
 import {store} from './src/store/reducers/index'
 import {Provider} from 'react-redux'
 import storageSessionManager from './src/store/StorageSessionManager'
-// Component
-import HomeScreen from './src/components/HomeScreen/HomeScreen'
-import Map from './src/components/Map/Map'
-import Chapter from './src/components/Chapter/Chapter'
-import Previously from './src/components/Chapter/Previously'
+//Navigator
+import AppNavigator from './src/components/Navigator'
 // Assets
 import imageList from './src/assets/ImagesList'
 // Expo
@@ -76,14 +72,18 @@ class App extends React.Component {
       {name: 'rubik-light', font: require('./src/assets/fonts/Rubik/Rubik-Light.ttf')}
     ]);
 
-    await Promise.all([...imageAssets, ...fontAssets]);
+    await Promise.all([...fontAssets, ...imageAssets]);
 
   }
 
   // Finish loading assets
   _handleFinishLoading = () => {
     console.log('App : finish loading assets')
-    this.setState({ isReady: true})
+
+    setTimeout(() => {
+      this.setState({ isReady: true})
+    }, 100)
+
   };
 
   componentWillMount () {
@@ -101,47 +101,27 @@ class App extends React.Component {
     } else {
       return (
         <Provider store={store}>
-          <AppNavigator />
+            <AppNavigator/>
         </Provider>
       )
     }
   }
 }
 
-
-// NAVIGATION CONFIGURATION
-
-const AppNavigator = StackNavigator({
-  HomeScreen: {
-    screen: HomeScreen
-  },
-  Map: {
-    screen: Map
-  },
-  Chapter : {
-    screen: Chapter
-  },
-  Previously: {
-    screen: Previously
-  }
-},{
-  initialRouteName: 'HomeScreen',
-  headerMode: 'none',
-  navigationOptions: {
-    gesturesEnabled: false,
-  },
-})
-
-
 // STYLES
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    // backgroundColor: '#fff',
+    // alignItems: 'center',
+    // justifyContent: 'center',
   },
+  button: {
+    position: 'absolute',
+    top: 30,
+    left: 10
+  }
 });
 
 // Remove some warning for dev
