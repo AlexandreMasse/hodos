@@ -12,7 +12,9 @@ export default class Place extends React.Component {
 
   static propTypes = {
     onBackToMap: PropType.func,
-    onReading: PropType.func
+    onReading: PropType.func,
+    showPlaceInfo: PropType.number,
+    translateY: PropType.number
   }
 
   static defaultProps = {
@@ -37,6 +39,17 @@ export default class Place extends React.Component {
     this.props.onReading()
   }
 
+  componentWillMount() {
+    this._visibility = new Animated.Value(0);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    Animated.timing(this._visibility, {
+      toValue: nextProps.showPlaceInfo,
+      duration: 300
+    }).start()
+  }
+
   _renderTabHeader() {
     return (
       <View style={[styles.placeHeaderWrapper]}>
@@ -47,21 +60,6 @@ export default class Place extends React.Component {
           <ButtonWhite text={'Reprendre la lecture'} hasImage={true} imageLeft={false} onTouch={this._handleReading} />
         </View>
         <Title title={this.props.place.name} subTitle={this.props.place.description} style={styles.placeHeader} />
-        {/* <View style={styles.placeTabs}>
-          <TouchableHighlight onPress={this._handleTabChange} underlayColor='transparent'  style={[
-            styles.placeTab,
-            this.state.tab ? styles.placeActiveTab: styles.placeUnactiveTab]}>
-            <Text style={[
-              styles.placeTabTitle,
-              this.state.tab ? styles.placeActiveTabTitle : styles.placeUnactiveTabTitle]}>Chapitres</Text>
-          </TouchableHighlight>
-          <TouchableHighlight onPress={this._handleTabChange} underlayColor='transparent'  style={[
-            styles.placeTab,
-            !this.state.tab ? styles.placeActiveTab : styles.placeUnactiveTab]}>
-            <Text style={[styles.placeTabTitle,
-              !this.state.tab ? styles.placeActiveTabTitle : styles.placeUnactiveTabTitle]}>Personnages</Text>
-          </TouchableHighlight>
-        </View> */}
       </View>
     )
   }
@@ -101,39 +99,69 @@ export default class Place extends React.Component {
   }
 
   render () {
+    const showPlaceInfo = this.props.showPlaceInfo
     return (
-      <View style={styles.container}>
-        <View style={[styles.placeWrapper]}>
-          {this._renderTabHeader()}
-          <View style={[styles.placeContent]}>
-            <View>
-              <Text style={styles.listTitle}>Chapitres</Text>
-              <ScrollView horizontal={true} style={styles.listContent}>
-                {this._renderChapterList()}
-              </ScrollView>
-            </View>
-            <View>
-              <Text style={styles.listTitle}>Personnages</Text>
-              <ScrollView horizontal={true} style={styles.listContent}>
-              {this._renderCharacterList()}
-              </ScrollView>
+      <Animated.View style={[styles.animatedContainer,
+        {
+          opacity: this._visibility.interpolate({
+            inputRange: [0, 100],
+            outputRange: [0, 1],
+          }),
+          transform: [{
+            translateY: this._visibility.interpolate({
+              inputRange: [0, 100],
+              outputRange: [this.props.translateY, 0]
+            }),
+          }],
+        }
+      ]}>
+        <TouchableHighlight style={styles.backToMapZone} onPress={this._handleBackToMap} underlayColor={"transparent"}>
+          <View />
+        </TouchableHighlight>
+        <View style={styles.container}>
+          <View style={[styles.placeWrapper]}>
+            {this._renderTabHeader()}
+            <View style={[styles.placeContent]}>
+              <View>
+                <Text style={styles.listTitle}>Chapitres</Text>
+                <ScrollView horizontal={true} style={styles.listContent}>
+                  {this._renderChapterList()}
+                </ScrollView>
+              </View>
+              <View>
+                <Text style={styles.listTitle}>Personnages</Text>
+                <ScrollView horizontal={true} style={styles.listContent}>
+                {this._renderCharacterList()}
+                </ScrollView>
+              </View>
             </View>
           </View>
         </View>
-      </View>
+      </Animated.View>
     )
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
+  animatedContainer: {
+    position: 'absolute',
     bottom: 0,
     left: 0,
     right: 0,
+    height: '100%',
+  },
+  backToMapZone: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    height: '20%',
+  },
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
     height: '85%',
-    position: 'absolute'
+    marginTop: '15%',
   },
   placeHeader: {
     marginTop: 20,
