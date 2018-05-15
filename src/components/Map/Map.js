@@ -26,7 +26,6 @@ class Map extends React.Component {
         id: '',
         name: ''
       },
-      fadeAnim: new Animated.Value(0)
     }
     this.mapImage = imageList.map.map
   }
@@ -50,13 +49,9 @@ class Map extends React.Component {
   }
 
   _renderPlaceInfo() {
-    console.log('Map : state showPlaceInfo => ', this.state.showPlaceInfo)
-    if (this.state.showPlaceInfo) {
-      console.log('Map: showPlaceInfo (true) => is shown');
-      return(
-        <Place place={this.state.activePlace} onBackToMap={this._handleBackToMap} onReading={this._handleReading} style={styles.placeInfo} />
-      )
-    }
+    return(
+      <Place place={this.state.activePlace} showPlaceInfo={this.state.showPlaceInfo ? 100 : 0} onBackToMap={this._handleBackToMap} translateY={windowHeight} onReading={this._handleReading} style={styles.placeInfo} />
+    )
   }
 
   _renderReadingButton() {
