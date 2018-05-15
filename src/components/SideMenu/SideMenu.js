@@ -24,15 +24,16 @@ class SideMenu extends React.Component {
     console.log('close drawer');
     this.props.navigation.navigate('DrawerClose')
   }
+  _handleOpen = () => {
+    console.log('open drawer');
+    this.props.navigation.navigate('DrawerOpen')
+  }
+
   render() {
     return (
-      <View style={styles.container}>
+      <View style={styles.container} onLayout={() => console.log('layout')}>
         {/*Top container*/}
         <View style={styles.topContainer}>
-          {/*Close*/}
-          <TouchableOpacity onPress={this._handleClose} style={styles.closeContainer}>
-            <Image source={imageList.menu.close} style={styles.close}/>
-          </TouchableOpacity>
           {/*Logo*/}
           <Image source={imageList.menu.logo} style={styles.logo}/>
           {/*DrawerItems*/}
@@ -52,6 +53,16 @@ class SideMenu extends React.Component {
           <ButtonWhite text={'Reprendre la lecture'} hasImage={true} imageLeft={false} onTouch={() => this.props.navigation.navigate('Chapter')}/>
         </View>
 
+        {/*Close*/}
+        <TouchableOpacity onPress={this._handleClose} style={styles.closeContainer}>
+          <Image source={imageList.menu.close} style={styles.close}/>
+        </TouchableOpacity>
+
+        {/*Open*/}
+        <TouchableOpacity onPress={this._handleOpen} activeOpacity={0.8} style={styles.openContainer}>
+          <Image source={imageList.menu.logo} style={styles.open}/>
+        </TouchableOpacity>
+
       </View>
     )
   }
@@ -62,15 +73,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     //justifyContent: 'space-between'
-  },
-  closeContainer: {
-    position:'absolute',
-    top: 20,
-    right: 20,
-  },
-  close: {
-    width: 18,
-    height: 18,
   },
   topContainer: {
     flex: 1,
@@ -93,7 +95,32 @@ const styles = StyleSheet.create({
     flex:1,
     alignItems: 'center',
     justifyContent: 'center',
-  }
+  },
+  closeContainer: {
+    position:'absolute',
+    top: 20,
+    right: 20,
+  },
+  close: {
+    width: 18,
+    height: 18,
+  },
+  openContainer: {
+
+    position:'absolute',
+    width: 50,
+    height: 50,
+    top: 30,
+    right: -70,
+    backgroundColor: 'white',
+    borderRadius: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  open: {
+    width: 25,
+    height: 25,
+  },
 })
 
 export default SideMenu
