@@ -31,7 +31,7 @@ class SideMenu extends React.Component {
 
   render() {
     return (
-      <View style={styles.container} onLayout={() => console.log('layout')}>
+      <View style={styles.container} onLayout={() => console.log('SideMenu : layout')}>
         {/*Top container*/}
         <View style={styles.topContainer}>
           {/*Logo*/}

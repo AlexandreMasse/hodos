@@ -69,9 +69,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderRadius: 30,
     shadowColor: '#b3afbe',
-    shadowOffset: { width: 0, height: 5 },
+    shadowOffset: { width: 2, height: 2 },
     shadowOpacity: 0.3,
-    shadowRadius: 2
+    shadowRadius: 3
   },
   buttonWrapper: {
     justifyContent: 'center'

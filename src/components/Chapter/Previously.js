@@ -45,9 +45,6 @@ class Previously extends React.Component {
         <View style={styles.buttonLeft} src={imageList.others.arrowLeft}>
           <ButtonWhite text={'Retour'} hasImage={true} imageLeft={true} onTouch={this._handleBackToMap}/>
         </View>
-        <View source={styles.menuWrapper}>
-          <Image source={imageList.menu.logo} style={styles.menu}/>
-        </View>
         <View style={styles.previouslyWrapper}>
           <View style={styles.previouslyTitle}>
             <Title title={'Chapitre '+this.state.chapter.numberRoman}  subTitle={this.state.chapter.title} />
@@ -140,7 +137,6 @@ const styles = StyleSheet.create({
 })
 
 const mapStateToProps = state => {
-  console.log('Previously : state => ', state.chapterList)
   return {
     progress: state.progress,
     chapters: state.chapterList
