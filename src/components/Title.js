@@ -31,7 +31,6 @@ export default class Title extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.title !== this.state.title && this.props.willUpdate) {
-      console.log('receive props')
       Animated.timing(this._visibility, {
         toValue: 0,
         duration: 300,
