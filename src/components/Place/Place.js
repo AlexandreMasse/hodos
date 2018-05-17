@@ -162,6 +162,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     height: '85%',
     marginTop: '15%',
+    shadowColor: '#000',
+    shadowOffset: { width: -1, height: -2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 3
   },
   placeHeader: {
     marginTop: 20,
