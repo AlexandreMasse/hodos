@@ -23,10 +23,12 @@ class CircularSkill extends React.Component {
   }
 
   _handleCircularProgressRef = (el) => {
+    if(this.el) return;
+    this.el = el;
     const {currentSkill, totalSkill, animationDelay, animationDuration} = this.props;
     const progress = Math.round(currentSkill/ totalSkill * 100);
     setTimeout(() => {
-      el.performLinearAnimation(progress, animationDuration, Easing.out(0.2));
+      this.el.performLinearAnimation(progress, animationDuration);
     }, animationDelay)
   }
 

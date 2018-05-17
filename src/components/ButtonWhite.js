@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     shadowColor: '#b3afbe',
     shadowOffset: { width: 2, height: 2 },
     shadowOpacity: 0.3,
-    shadowRadius: 3
+    shadowRadius: 4
   },
   buttonWrapper: {
     justifyContent: 'center'

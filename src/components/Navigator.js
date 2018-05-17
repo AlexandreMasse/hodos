@@ -4,6 +4,7 @@ import HomeScreen from "./HomeScreen/HomeScreen";
 import Map from "./Map/Map";
 import Previously from "./Chapter/Previously";
 import Chapter from "./Chapter/Chapter";
+import Profile from './Profile/Profile'
 
 import {colors, fonts} from '../assets/variables'
 
@@ -44,6 +45,9 @@ export default AppNavigator = DrawerNavigator(
     },
     Previously: {
       screen: Previously
+    },
+    Profile: {
+      screen: Profile
     }
   },
   {
