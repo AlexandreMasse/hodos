@@ -106,7 +106,6 @@ const styles = StyleSheet.create({
     height: 18,
   },
   openContainer: {
-
     position:'absolute',
     width: 50,
     height: 50,

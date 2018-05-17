@@ -32,6 +32,14 @@ export default imageList = {
     'logo': require('./images/menu/logo.png'),
     'close': require('./images/menu/close.png'),
   },
+  profile: {
+    skills: {
+      'physical': require('./images/skills/physical.png'),
+      'intellectual': require('./images/skills/intellectual.png'),
+      'personality': require('./images/skills/personality.png'),
+      'technical': require('./images/skills/technical.png')
+    }
+  },
   characters: {
     'zeus': require('./images/characters/zeus.png'),
   },

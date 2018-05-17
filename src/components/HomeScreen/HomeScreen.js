@@ -4,6 +4,8 @@ import {connect} from 'react-redux';
 import storageSessionManager from './../../store/StorageSessionManager'
 import StorageSessionManager from './../../store/StorageSessionManager';
 import { LinearGradient } from 'expo'
+import CircularSkill from "../Profile/CircularSkill";
+import imageList from  '../../assets/ImagesList'
 
 class HomeScreen extends React.Component {
 
@@ -25,6 +27,12 @@ class HomeScreen extends React.Component {
             <Text style={styles.buttonText}> Commencer l'aventure </Text>
         </TouchableHighlight>
         </LinearGradient>
+
+        {/* CircularSkill test */}
+        <View style={{position: 'absolute', bottom: '5%'}}>
+          <CircularSkill currentSkill={4} totalSkill={5} size={150} img={imageList.profile.skills.intellectual} animationDelay={1000}/>
+        </View>
+
       </View>
     )
   }
