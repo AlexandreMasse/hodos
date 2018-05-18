@@ -37,10 +37,10 @@ export default imageList = {
       '2': require('./images/profile/hermes-2.png')
     },
     skills: {
-      'physical': require('./images/skills/physical.png'),
-      'intellectual': require('./images/skills/intellectual.png'),
-      'personality': require('./images/skills/personality.png'),
-      'technical': require('./images/skills/technical.png')
+      '0': require('./images/profile/skills/physical.png'),
+      '1': require('./images/profile/skills/intellectual.png'),
+      '2': require('./images/profile/skills/technical.png'),
+      '3': require('./images/profile/skills/personality.png'),
     }
   },
   characters: {

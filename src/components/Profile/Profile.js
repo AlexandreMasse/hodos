@@ -20,19 +20,49 @@ class Profile extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      skillProgress: [],
+      activeSkill: {},
+      showActiveSkill: false
     }
   }
 
+  createSkillsArray () {
+    let skillProgress = this.props.skillTypeList.map(skillType => {
+      return {
+        ...skillType,
+        skills: [],
+        nbUnlocked: 0
+      }
+    })
+    this.props.skillList.map(skill => {
+      for (let i = 0; i < skillProgress.length; i++) {
+        if (skillProgress[i].id == skill.type) {
+          skillProgress[i].skills.push(skill)
+          if (!skill.isLocked) {
+            const nbUnlocked = skillProgress[i].nbUnlocked.
+            skillProgress[i].nbUnlocked.push(nbUnlocked++)
+          }
+        }
+      }
+    })
+    this.setState({
+      skillProgress: skillProgress
+    })
+  }
+
+  componentDidMount () {
+    this.createSkillsArray()
+  }
+
   _renderCard () {
-    const array = [0, 1, 2, 3]
-    return array.map( (index) => {
+    return this.state.skillProgress.map( (skillType, index) => {
       return (
         <View style={styles.card} key={index}>
           <View style={[{alignItems: 'center', flexDirection: 'row', width: '100%'}]}>
-            <CircularSkill currentSkill={4} totalSkill={5} size={110} width={3} img={imageList.profile.skills.intellectual} animationDelay={1000}/>
+            <CircularSkill currentSkill={skillType.nbUnlocked} totalSkill={skillType.skills.length} size={110} width={3} img={imageList.profile.skills[index]} animationDelay={1000}/>
             <View style={{marginLeft: 20}}>
-              <Text style={[styles.cardTitle]}>Aptitudes</Text>
-              <Text style={[styles.cardSubTitle]}>Physiques</Text>
+              <Text style={[styles.cardTitle]}>{skillType.title}</Text>
+              <Text style={[styles.cardSubTitle]}>{skillType.name}</Text>
               <LinearGradient start={[0, 0]} end={[1, 0]} colors={['rgba(255, 255, 255, 0.3)', 'rgba(0, 0, 0, 0.1)']} style={styles.line} />
             </View>
           </View>
@@ -44,7 +74,6 @@ class Profile extends React.Component {
   render () {
     return (
       <View style={styles.container}>
-        {/* CircularSkill test*/}
         <View style={[{marginTop: '10%'}, styles.profileWrapper]}>
           <View style={styles.titleWrapper}>
             <Title title="Profil" subTitle="Aptitudes et traits de caractère acquis" />
@@ -159,6 +188,8 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
   return {
+    skillList: state.skillList,
+    skillTypeList: state.skillTypeList
   }
 }
 
