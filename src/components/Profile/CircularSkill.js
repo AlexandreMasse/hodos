@@ -12,12 +12,13 @@ class CircularSkill extends React.Component {
     currentSkill: PropTypes.number.isRequired,
     totalSkill: PropTypes.number.isRequired,
     size: PropTypes.number,
+    width: PropTypes.number,
     animationDelay: PropTypes.number,
     animationDuration: PropTypes.number
   }
 
   static defaultProps = {
-    size: 100,
+    size: 50,
     animationDelay: 0,
     animationDuration: 700,
   }
@@ -33,9 +34,10 @@ class CircularSkill extends React.Component {
   }
 
   render() {
-    const {img, size, currentSkill, totalSkill} = this.props;
+    const {img, size, currentSkill, totalSkill, width} = this.props
+
     return (
-      <AnimatedCircularProgress ref={this._handleCircularProgressRef} size={size} width={6} fill={0} prefill={0} tintColor='#00a7f5' backgroundColor='rgba(41,41,45,0.1)' rotation={0} linecap={'round'}>
+      <AnimatedCircularProgress ref={this._handleCircularProgressRef} size={size} width={width} fill={0} prefill={0} tintColor='#00a7f5' backgroundColor='rgba(41,41,45,0.1)' rotation={0} linecap={'round'}>
         {
           () => (
             <View style={styles.circleContent}>
@@ -43,7 +45,7 @@ class CircularSkill extends React.Component {
                 <ImageAspectRatio src={img} width={'100%'}/>
               </View>
               <View style={styles.textContainer}>
-                <Text style={styles.text}>{currentSkill} / {totalSkill}</Text>
+                <Text style={styles.text}>{currentSkill}/{totalSkill}</Text>
               </View>
             </View>
           )
@@ -71,8 +73,9 @@ const styles = StyleSheet.create({
   },
   text: {
     fontFamily: fonts.RubikRegular,
-    fontSize: 18,
+    fontSize: 14,
     color: colors.grey,
+    opacity: 0.8
   }
 })
 

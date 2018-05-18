@@ -33,6 +33,9 @@ export default imageList = {
     'close': require('./images/menu/close.png'),
   },
   profile: {
+    hermes: {
+      '2': require('./images/profile/hermes-2.png')
+    },
     skills: {
       'physical': require('./images/skills/physical.png'),
       'intellectual': require('./images/skills/intellectual.png'),

@@ -1,7 +1,7 @@
 export const colors = {
   'paleGreen': '#82BC5C',
   'blue': '#0065CE',
-  'grey': '#29292D'
+  'grey': '#29292D',
 }
 
 export const fonts = {
