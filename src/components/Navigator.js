@@ -52,7 +52,7 @@ export default AppNavigator = DrawerNavigator(
   },
   {
     drawerWidth: 300,
-    initialRouteName: 'HomeScreen',
+    initialRouteName: 'Profile',
     drawerPosition: 'left',
     drawerBackgroundColor: 'white',
     contentComponent: SideMenu,

@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View, Text, Image, TouchableHighlight} from 'react-native'
+import {StyleSheet, View, Text, Image, TouchableOpacity, Button} from 'react-native'
 import {connect} from "react-redux";
 import PropType from 'prop-types'
 import {fonts, colors} from './../../assets/variables'
@@ -28,9 +28,12 @@ class Profile extends React.Component {
     }
   }
 
-  _handlePress (index) {
+  _handlePressCard (id) {
+    console.log(id);
+
     this.setState({
-      activeSkill: index
+      activeSkill: id,
+      showActiveSkill: true
     })
   }
 
@@ -47,8 +50,7 @@ class Profile extends React.Component {
         if (skillProgress[i].id == skill.type) {
           skillProgress[i].skills.push(skill)
           if (!skill.isLocked) {
-            const nbUnlocked = skillProgress[i].nbUnlocked.
-            skillProgress[i].nbUnlocked.push(nbUnlocked++)
+            skillProgress[i].nbUnlocked++
           }
         }
       }
@@ -62,20 +64,57 @@ class Profile extends React.Component {
     this.createSkillsArray()
   }
 
-  _renderCard () {
-    return this.state.skillProgress.map( (skillType, index) => {
-      return (
-        <TouchableHighlight style={styles.card} key={index} underlayColor={'transparent'} onPress={() => this._handlePress(index)}>
-          <View style={[{alignItems: 'center', flexDirection: 'row', width: '100%'}]}>
-            <CircularSkill currentSkill={skillType.nbUnlocked} totalSkill={skillType.skills.length} size={110} width={3} img={imageList.profile.skills[index]} animationDelay={1000}/>
-            <View style={{marginLeft: 20}}>
-              <Text style={[styles.cardTitle]}>{skillType.title}</Text>
-              <Text style={[styles.cardSubTitle]}>{skillType.name}</Text>
-            </View>
-            <LinearGradient start={[0, 0]} end={[1, 0]} colors={['rgba(255, 255, 255, 0.3)', 'rgba(0, 0, 0, 0.1)']} style={styles.line} />
+  _renderCardClose(skillType, index) {
+    return (
+      <TouchableOpacity style={[styles.card, {}]} key={skillType.id} activeOpacity={0.8} onPress={() => this._handlePressCard(skillType.id)}>
+        <View style={[{alignItems: 'center', flexDirection: 'row', width: '100%'}]}>
+          <CircularSkill currentSkill={skillType.nbUnlocked} totalSkill={skillType.skills.length} size={110} width={3} img={imageList.profile.skills[index]} animationDelay={1000}/>
+          <View style={{marginLeft: 20}}>
+            <Text style={[styles.cardTitle]}>{skillType.title}</Text>
+            <Text style={[styles.cardSubTitle]}>{skillType.name}</Text>
           </View>
-        </TouchableHighlight>
-      )
+          <LinearGradient start={[0, 0]} end={[1, 0]} colors={['rgba(255, 255, 255, 0.3)', 'rgba(0, 0, 0, 0.1)']} style={styles.line} />
+        </View>
+      </TouchableOpacity>
+    )
+  }
+
+  _renderCardOpen(skillType, index) {
+    return (
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <Text>Skill open is : {skillType.name}</Text>
+        <Button title={'Close'} onPress={() => this.setState({showActiveSkill: false})}/>
+      </View>
+    )
+  }
+
+  _renderLeft () {
+    return this.state.skillProgress.map( (skillType, index) => {
+      // if all skills are closed render 2 skills closed
+      if(!this.state.showActiveSkill) {
+        if(skillType.id <= 1) {
+          return this._renderCardClose(skillType, index)
+        }
+      } else { // if one skill showing render 3 skills closed
+        if(skillType.id !== this.state.activeSkill) {
+          return this._renderCardClose(skillType, index)
+        }
+      }
+    })
+  }
+
+   _renderRight () {
+    return this.state.skillProgress.map( (skillType, index) => {
+      // if all skills are closed render 2 skills closed
+      if(!this.state.showActiveSkill) {
+        if(skillType.id >= 2) {
+          return this._renderCardClose(skillType, index)
+        }
+      } else { // if one skill showing render 1 skill opened
+        if(skillType.id === this.state.activeSkill) {
+          return this._renderCardOpen(skillType, index)
+        }
+      }
     })
   }
 
@@ -90,9 +129,12 @@ class Profile extends React.Component {
             <Image source={imageList.profile.hermes[2]} style={[{width: '35%', height: '100%', resizeMode: 'contain'}]} />
             <View style={styles.skillsContainer}>
               <View style={styles.cardContainer}>
-                <View style={styles.cardWrapper} >
-                  {this._renderCard()}
-                </View>
+                  <View style={styles.cardWrapperLeft}>
+                    {this._renderLeft()}
+                  </View>
+                  <View style={styles.cardWrapperRight}>
+                    {this._renderRight()}
+                  </View>
               </View>
               <View style={styles.progressBarContainer}>
                 <View style={styles.progressBarTextContainer}>
@@ -146,22 +188,25 @@ const styles = StyleSheet.create({
   cardContainer: {
     width: '100%',
     height: '85%',
-    justifyContent: 'center'
-  },
-  cardWrapper: {
-    backgroundColor: '#fff',
-    height: '80%',
-    width: '100%',
     flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    justifyContent: 'space-between'
+  },
+  cardWrapperLeft: {
+    height: '100%',
+    width: '48%',
+    justifyContent:'center',
+  },
+  cardWrapperRight: {
+    height: '100%',
+    width: '48%',
+    justifyContent:'center',
   },
   card: {
     position: 'relative',
-    width: '47%',
-    height: '44%',
-    marginBottom: 20,
+    width: '100%',
+    height: '30%',
+    marginTop: 10,
+    marginBottom: 10,
     padding: 15,
     paddingLeft: 20,
     flexDirection: 'row',
