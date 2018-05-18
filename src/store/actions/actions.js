@@ -8,6 +8,14 @@ export const unlockChapter = (id) => {
   }
 }
 
+// SKILL
+export const unlockSkill = (id) => {
+  return {
+    type: actionTypes.SKILL_UNLOCK,
+    id
+  }
+}
+
 // CHARACTER
 export const unlockCharacter = (id) => {
   return {
@@ -64,6 +72,16 @@ export const setChapterList = (chapterList) => ({
 export const setProgress = (progress) => ({
   type: actionTypes.SET_PROGRESS,
   progress
+});
+
+export const setSkillList = (skillList) => ({
+  type: actionTypes.SET_SKILLLIST,
+  skillList
+});
+
+export const setSkillTypeList = (skillTypeList) => ({
+  type: actionTypes.SET_SKILLTYPELIST,
+  skillTypeList
 });
 
 

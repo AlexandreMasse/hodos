@@ -6,6 +6,8 @@ const CHAPTERLIST_KEY = '@HODOS:CHAPTER_LIST'
 const CHARACTERLIST_KEY = '@HODOS:CHARACTER_LIST'
 const PLACELIST_KEY = '@HODOS:PLACELIST_LIST'
 const PROGRESS_KEY = '@HODOS:PROGRESS_LIST'
+const SKILLLIST_KEY = '@HODOS:SKILL_LIST'
+const SKILLTYPELIST_KEY = '@HODOS:SKILL_TYPE_LIST'
 
 export const Storage = {
   async hasSavedData() {
@@ -44,6 +46,20 @@ export const Storage = {
       await AsyncStorage.setItem(PROGRESS_KEY, JSON.stringify(progress))
     } catch (error) {
       console.log('AsyncStorage : error in setProgress => ', error)
+    }
+  },
+  async setSkillList(skillList) {
+    try {
+      await AsyncStorage.setItem(SKILLLIST_KEY, JSON.stringify(skillList))
+    } catch (error) {
+      console.log('AsyncStorage : error in setSkillList => ', error)
+    }
+  },
+  async setSkillTypeList(skillTypeList) {
+    try {
+      await AsyncStorage.setItem(SKILLTYPELIST_KEY, JSON.stringify(skillTypeList))
+    } catch (error) {
+      console.log('AsyncStorage : error in setSkillList => ', error)
     }
   },
   async getPlaceList () {
@@ -89,9 +105,31 @@ export const Storage = {
       console.log('AsyncStorage : error in getProgress => ', error)
     }
   },
+  async getSkillList() {
+    try {
+      const skillList =  await AsyncStorage.getItem(SKILLLIST_KEY)
+
+      if (skillList !== null)
+        return JSON.parse(skillList)
+
+    } catch (error) {
+      console.log('AsyncStorage : error in getSkillList => ', error)
+    }
+  },
+  async getSkillTypeList() {
+    try {
+      const skillTypeList =  await AsyncStorage.getItem(SKILLTYPELIST_KEY)
+
+      if (skillTypeList !== null)
+        return JSON.parse(skillTypeList)
+
+    } catch (error) {
+      console.log('AsyncStorage : error in getSkillTypeList => ', error)
+    }
+  },
   async clearStorage() {
     try {
-      const keys = [CHAPTERLIST_KEY, PROGRESS_KEY, CHARACTERLIST_KEY, PLACELIST_KEY]
+      const keys = [CHAPTERLIST_KEY, PROGRESS_KEY, CHARACTERLIST_KEY, PLACELIST_KEY, SKILLLIST_KEY, SKILLTYPELIST_KEY]
       AsyncStorage.multiRemove(keys)
     } catch (error) {
       console.log('AsyncStorage : error in clearStorage => ', error)

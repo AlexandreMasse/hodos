@@ -1,5 +1,5 @@
 import { store } from './reducers/index'
-import { setChapterList, setPlaceList, setProgress, setCharacterList} from './actions/actions'
+import { setChapterList, setPlaceList, setProgress, setCharacterList, setSkillList, setSkillTypeList} from './actions/actions'
 import { API } from './api/index'
 import { Storage } from './storage/index'
 
@@ -26,6 +26,12 @@ class StorageSessionManager {
         Storage.getProgress().then( progress => {
           store.dispatch(setProgress(progress))
         })
+        Storage.getSkillList().then( skillList => {
+          store.dispatch(setSkillList(skillList))
+        })
+        Storage.getSkillTypeList().then( skillTypeList => {
+          store.dispatch(setSkillTypeList(skillTypeList))
+        })
       } else {
         //If there's no local storage (1st app launch), gets data from API
         this.getDataFromApi()
@@ -42,6 +48,8 @@ class StorageSessionManager {
     API.getPlaceList()
     API.getCharacterList()
     API.getChapterList()
+    API.getSkillList()
+    API.getSkillTypeList()
   }
 }
 
