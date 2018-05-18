@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View, Text, Image} from 'react-native'
+import { StyleSheet, View, Text, Image, TouchableHighlight} from 'react-native'
 import {connect} from "react-redux";
 import PropType from 'prop-types'
 import {fonts, colors} from './../../assets/variables'
@@ -26,6 +26,12 @@ class Profile extends React.Component {
       activeSkill: {},
       showActiveSkill: false
     }
+  }
+
+  _handlePress (index) {
+    this.setState({
+      activeSkill: index
+    })
   }
 
   createSkillsArray () {
@@ -59,16 +65,16 @@ class Profile extends React.Component {
   _renderCard () {
     return this.state.skillProgress.map( (skillType, index) => {
       return (
-        <View style={styles.card} key={index}>
+        <TouchableHighlight style={styles.card} key={index} underlayColor={'transparent'} onPress={() => this._handlePress(index)}>
           <View style={[{alignItems: 'center', flexDirection: 'row', width: '100%'}]}>
             <CircularSkill currentSkill={skillType.nbUnlocked} totalSkill={skillType.skills.length} size={110} width={3} img={imageList.profile.skills[index]} animationDelay={1000}/>
             <View style={{marginLeft: 20}}>
               <Text style={[styles.cardTitle]}>{skillType.title}</Text>
               <Text style={[styles.cardSubTitle]}>{skillType.name}</Text>
-              <LinearGradient start={[0, 0]} end={[1, 0]} colors={['rgba(255, 255, 255, 0.3)', 'rgba(0, 0, 0, 0.1)']} style={styles.line} />
             </View>
+            <LinearGradient start={[0, 0]} end={[1, 0]} colors={['rgba(255, 255, 255, 0.3)', 'rgba(0, 0, 0, 0.1)']} style={styles.line} />
           </View>
-        </View>
+        </TouchableHighlight>
       )
     })
   }
@@ -198,8 +204,8 @@ const styles = StyleSheet.create({
   },
   line: {
     position: 'absolute',
-    bottom: -25,
-    right: -40,
+    bottom: 10,
+    right: -15,
     width: 150,
     height: 1,
   }
