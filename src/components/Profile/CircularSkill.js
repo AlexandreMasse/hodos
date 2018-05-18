@@ -19,6 +19,7 @@ class CircularSkill extends React.Component {
 
   static defaultProps = {
     size: 50,
+    width: 5,
     animationDelay: 0,
     animationDuration: 700,
   }

@@ -82,7 +82,7 @@ class App extends React.Component {
 
     setTimeout(() => {
       this.setState({ isReady: true})
-    }, 100)
+    }, 200)
 
   };
 

@@ -5,8 +5,10 @@ import PropType from 'prop-types'
 import {fonts, colors} from './../../assets/variables'
 import Title from './../Title'
 import CircularSkill from "../Profile/CircularSkill"
+import ProgressBar from 'react-native-progress/Bar'
 import { LinearGradient } from 'expo'
 import imageList from './../../assets/ImagesList'
+import progress from "../../store/reducers/progress";
 
 
 class Profile extends React.Component {
@@ -87,6 +89,11 @@ class Profile extends React.Component {
                 </View>
               </View>
               <View style={styles.progressBarContainer}>
+                <View style={styles.progressBarTextContainer}>
+                  <Text style={styles.progressBarText}>Naissance</Text>
+                  <Text style={styles.progressBarText}>Âge adulte</Text>
+                </View>
+                <ProgressBar progress={0.5} width={null} height={8} borderRadius={4} color='#00a7f5' unfilledColor='rgba(41,41,45,0.1)' borderWidth={0}/>
               </View>
             </View>
           </View>
@@ -162,8 +169,21 @@ const styles = StyleSheet.create({
     shadowRadius: 2
   },
   progressBarContainer: {
-    backgroundColor: '#ceffbf',
+    flex: 1,
+    justifyContent: 'center',
+    // backgroundColor: '#ceffbf',
     height: '15%',
+  },
+  progressBarTextContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 15,
+    opacity: 0.5,
+  },
+  progressBarText: {
+    color: colors.grey,
+    fontFamily: fonts.RubikRegular,
+    fontSize: 16,
   },
   cardTitle: {
     color: '#a9a9aa',
