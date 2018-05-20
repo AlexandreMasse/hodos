@@ -33,6 +33,9 @@ export default imageList = {
     'close': require('./images/menu/close.png'),
   },
   profile: {
+    background: {
+      'general':  require('./images/profile/backgrounds/general.png')
+    },
     hermes: {
       '2': require('./images/profile/hermes-2.png')
     },
@@ -60,6 +63,7 @@ export default imageList = {
     'whiteArrowLeft': require('./images/white-arrow-left.png'),
     'arrowLeft': require('./images/arrow-left.png'),
     'arrowRight': require('./images/arrow-right.png'),
+    'close': require('./images/close.png')
   }
 };
 
