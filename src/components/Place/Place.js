@@ -11,6 +11,7 @@ import imageList from './../../assets/ImagesList'
 export default class Place extends React.Component {
 
   static propTypes = {
+    place: PropType.object,
     onBackToMap: PropType.func,
     onReading: PropType.func,
     showPlaceInfo: PropType.number,
@@ -21,14 +22,8 @@ export default class Place extends React.Component {
     id: null
   }
 
-
   constructor(props) {
     super(props)
-    this.state = {
-      place: {
-        name: ' '
-      }
-    }
   }
 
   _handleBackToMap = () => {

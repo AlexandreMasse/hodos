@@ -28,22 +28,26 @@ export default class Title extends React.Component {
     this._visibility = new Animated.Value(100)
   }
 
-
   componentWillReceiveProps(nextProps) {
     if (nextProps.title !== this.state.title && this.props.willUpdate) {
       Animated.timing(this._visibility, {
         toValue: 0,
         duration: 300,
       }).start(this._handleShowUpdate)
+    } else {
+      this._updateState()
     }
   }
 
-  _handleShowUpdate = () => {
+  _updateState = () => {
     this.setState({
       title: this.props.title,
       subTitle: this.props.subTitle
     })
+  }
 
+  _handleShowUpdate = () => {
+    this._updateState()
     Animated.timing(this._visibility, {
       toValue: 100,
       duration: 300,

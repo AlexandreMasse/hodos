@@ -47,7 +47,7 @@ class Profile extends React.Component {
         if (skillProgress[i].id == skill.type) {
           skillProgress[i].skills.push(skill)
           if (!skill.isLocked) {
-            const nbUnlocked = skillProgress[i].nbUnlocked.
+            const nbUnlocked = skillProgress[i].nbUnlocked
             skillProgress[i].nbUnlocked.push(nbUnlocked++)
           }
         }
