@@ -26,7 +26,8 @@ class Profile extends React.Component {
     this.state = {
       skillProgress: [],
       activeSkill: {},
-      showActiveSkill: false
+      showActiveSkill: false,
+      imageBackground: imageList.profile.background.general
     }
     this._visibility = new Animated.Value(100)
   }
@@ -42,13 +43,15 @@ class Profile extends React.Component {
   _setActiveSkill = (id) => {
     this.setState({
       activeSkill: id,
-      showActiveSkill: true
+      showActiveSkill: true,
+      imageBackground: imageList.profile.background[id]
     })
   }
 
   _setUnactiveSkill = () => {
     this.setState({
-      showActiveSkill: false
+      showActiveSkill: false,
+      imageBackground: imageList.profile.background.general
     })
   }
 
@@ -182,12 +185,21 @@ class Profile extends React.Component {
   }
 
   render () {
+    const visibilityInterpolation = this._visibility.interpolate({
+      inputRange: [0, 100],
+      outputRange: [0, 1],
+    })
+
     return (
       <View style={styles.container}>
-        <View style={{width: '100%'}}>
-          {/* <Image style={{resizeMode: 'contain'}} source={imageList.profile.background.general} /> */}
-          <ImageAspectRatio src={imageList.profile.background.general} width={'100%'}/>
-        </View>
+        <Animated.View style={[{width: '100%',
+          opacity: this._visibility.interpolate({
+            inputRange: [0, 2],
+            outputRange: [0, 1],
+          })}
+        ]}>
+          <ImageAspectRatio src={this.state.imageBackground} width={'100%'}/>
+        </Animated.View>
         <View style={[styles.profileWrapper]}>
           <View style={styles.titleWrapper}>
             <Title title="Profil" subTitle="Aptitudes et traits de caractère acquis" />
@@ -195,13 +207,9 @@ class Profile extends React.Component {
           <View style={styles.content}>
             <Image source={imageList.profile.hermes[2]} style={[{width: '35%', height: '100%', resizeMode: 'contain'}]} />
             <View style={styles.skillsContainer}>
-              <Animated.View style={[
-                styles.cardContainer,
-                {opacity: this._visibility.interpolate({
-                  inputRange: [0, 100],
-                  outputRange: [0, 1],
-                })
-              }]}>
+              <Animated.View style={[styles.cardContainer,
+                {opacity: visibilityInterpolation}
+              ]}>
                   <View style={styles.cardWrapperLeft}>
                     {this._renderLeft()}
                   </View>
@@ -229,7 +237,7 @@ const styles = StyleSheet.create({
     flex:1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#dafff2'
+    backgroundColor: '#2463ad'
   },
   profileWrapper: {
     backgroundColor: '#fff',

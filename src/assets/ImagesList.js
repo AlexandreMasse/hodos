@@ -34,7 +34,11 @@ export default imageList = {
   },
   profile: {
     background: {
-      'general':  require('./images/profile/backgrounds/general.png')
+      'general':  require('./images/profile/backgrounds/general.png'),
+      '0':  require('./images/profile/backgrounds/0.png'),
+      '1':  require('./images/profile/backgrounds/1.png'),
+      '2':  require('./images/profile/backgrounds/2.png'),
+      '3':  require('./images/profile/backgrounds/3.png'),
     },
     hermes: {
       '2': require('./images/profile/hermes-2.png')
