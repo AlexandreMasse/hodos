@@ -48,7 +48,7 @@ export default AppNavigator = DrawerNavigator(
     },
     Profile: {
       screen: Profile
-    }
+    },
   },
   {
     drawerWidth: 300,
