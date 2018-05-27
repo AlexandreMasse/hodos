@@ -1,5 +1,5 @@
 import { store } from './reducers/index'
-import { setChapterList, setPlaceList, setProgress, setCharacterList, setSkillList, setSkillTypeList} from './actions/actions'
+import { setChapterList, setPlaceList, setProgress, setCharacterList, setSkillList, setSkillTypeList, setChapterProgress, unlockSkill} from './actions/actions'
 import { API } from './api/index'
 import { Storage } from './storage/index'
 
@@ -30,10 +30,12 @@ class StorageSessionManager {
           store.dispatch(setSkillList(skillList))
         })
         Storage.getSkillTypeList().then( skillTypeList => {
+
+          console.log(JSON.stringify(skillTypeList))
           store.dispatch(setSkillTypeList(skillTypeList))
         })
       } else {
-        //If there's no local storage (1st app launch), gets data from API
+        //If there's no local storage (1st app launch ever), gets data from API
         this.getDataFromApi()
       }
     })
@@ -45,11 +47,32 @@ class StorageSessionManager {
 
   getDataFromApi() {
     console.log('StorageSessionManager : get data from api')
-    API.getPlaceList()
-    API.getCharacterList()
-    API.getChapterList()
-    API.getSkillList()
-    API.getSkillTypeList()
+    Promise.all([
+      API.getPlaceList(),
+      API.getCharacterList(),
+      API.getChapterList(),
+      API.getSkillList(),
+      API.getSkillTypeList()
+    ]).then((values) => {
+      const chapterProgress = 26
+      store.dispatch(setChapterProgress(chapterProgress))
+      const chapterList = values[2]
+      const storeSkill = store.getState().skillList
+      chapterList.forEach(chapter => {
+        if (chapter.skillDiscovered && chapter.skillDiscovered.length && chapter.id <= chapterProgress) {
+          chapter.skillDiscovered.forEach(skill => {
+            store.dispatch(unlockSkill(skill))
+          })
+        }
+      })
+      store.dispatch(unlockSkill(1))
+    })
+
+    //Set current progress chapter
+
+
+    //Set discovered skills
+
   }
 }
 

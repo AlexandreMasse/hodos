@@ -45,6 +45,14 @@ export const currentOffsetProgress = (currentOffset) => {
   }
 }
 
+export const setChapterProgress = (chapter) => {
+  console.log('ACTIONS SETCHAPTERPROGRESS => ', chapter)
+  return {
+    type: actionTypes.PROGRESS_SET_CHAPTER,
+    chapter
+  }
+}
+
 // PLACE
 export const unlockPlace = (id) => {
   return {

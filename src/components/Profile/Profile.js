@@ -126,7 +126,7 @@ class Profile extends React.Component {
           <View style={{marginHorizontal: 10, justifyContent: 'space-between'}}>
               {this._renderSkillNumber(skillType)}
           </View>
-          <ProgressBar progress={4} nbSteps={skillType.skills.length} height={260} width={8} isReversed={true} />
+          <ProgressBar progress={skillType.nbUnlocked} nbSteps={skillType.skills.length} height={260} width={8} isReversed={true} />
           <View style={{marginLeft: 40, marginTop: -5, justifyContent: 'space-between'}}>
             {this._renderSkillName(skillType)}
           </View>
@@ -136,9 +136,10 @@ class Profile extends React.Component {
   }
 
   _renderSkillName(skillType) {
+    const nb = skillType.skills.length
     return skillType.skills.map((skill, index) => {
       return (
-        <Text style={{fontFamily: fonts.RubikRegular, color: '#29292D', opacity: 0.8}} key={index}>{skill.name}</Text>
+        <Text style={{fontFamily: fonts.RubikRegular, color: nb - index <= skillType.nbUnlocked ? '#29292D' : '#fff', opacity: 0.8}} key={index}>{skill.name}</Text>
       )
     })
   }
@@ -222,7 +223,7 @@ class Profile extends React.Component {
                   <Text style={styles.progressBarText}>Naissance</Text>
                   <Text style={styles.progressBarText}>Âge adulte</Text>
                 </View>
-                <ProgressBar nbSteps={100} progress={20} height={8} width={680} isHorizontal={true} />
+                <ProgressBar nbSteps={100} progress={this.props.progress.chapter} height={8} width={680} isHorizontal={true} />
               </View>
             </View>
           </View>
@@ -342,7 +343,8 @@ const styles = StyleSheet.create({
 const mapStateToProps = state => {
   return {
     skillList: state.skillList,
-    skillTypeList: state.skillTypeList
+    skillTypeList: state.skillTypeList,
+    progress: state.progress
   }
 }
 

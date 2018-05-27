@@ -8,7 +8,7 @@ const skillList = (state = initialState, action) => {
       return state.map((skill) => {
         if (skill.id === action.id) {
           return {
-            ...state,
+            ...skill,
             isLocked: false
           }
         }

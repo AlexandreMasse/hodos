@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, View, ScrollView, Image, Dimensions, Text, Animated } from 'react-native'
 import { connect } from 'react-redux';
-import { currentOffsetProgress } from "../../store/actions/actions"
+import { currentOffsetProgress, setChapterProgress } from "../../store/actions/actions"
 import Paragraph from './Paragraph'
 import Scene from './Scene'
 import ParallaxedImage from './ParallaxedImage'
@@ -45,6 +45,7 @@ class Chapter extends React.Component {
 
     //Retrieves current chapter data in store
     const currentChapterId = 26
+    this.props._setProgressChapter(currentChapterId)
     this.props.chapterList.map(val => {
       if (val.id === currentChapterId) {
         this.setState({
@@ -173,6 +174,9 @@ const mapDispatchToProps = dispatch => {
   return {
     _setCurrentOffsetProgress: (currentOffset) => {
       dispatch(currentOffsetProgress(currentOffset))
+    },
+    _setProgressChapter: (chapter) => {
+      dispatch(setChapterProgress(chapter))
     }
   }
 }

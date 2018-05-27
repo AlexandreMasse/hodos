@@ -18,6 +18,12 @@ const progress = (state = initialState, action) => {
         ...state,
         currentOffset: action.currentOffset
       }
+    case actionTypes.PROGRESS_SET_CHAPTER:
+      console.log('progress reducer =>', action.chapter)
+      return {
+        ...state,
+        chapter: action.chapter
+      }
     case actionTypes.SET_PROGRESS:
       return action.progress
     default:
