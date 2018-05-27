@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import storageSessionManager from './../../store/StorageSessionManager'
 import StorageSessionManager from './../../store/StorageSessionManager';
 import { LinearGradient } from 'expo'
+import Animation from '../Animation/Animation'
 
 class HomeScreen extends React.Component {
 
@@ -25,6 +26,9 @@ class HomeScreen extends React.Component {
             <Text style={styles.buttonText}> Commencer l'aventure </Text>
         </TouchableHighlight>
         </LinearGradient>
+        <View style={styles.animationContainer}>
+          <Animation/>
+        </View>
       </View>
     )
   }
@@ -82,6 +86,12 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 5,
     right: 5,
+    flex: 1,
+  },
+  animationContainer: {
+    position: 'absolute',
+    bottom: 20,
+    left: 10,
     flex: 1,
   }
 })
