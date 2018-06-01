@@ -6,7 +6,7 @@ import {store} from './src/store/reducers/index'
 import {Provider} from 'react-redux'
 import storageSessionManager from './src/store/StorageSessionManager'
 //Navigator
-import AppNavigator from './src/components/Navigator'
+import {AppStackNavigator} from './src/components/Navigator'
 // Assets
 import imageList from './src/assets/ImagesList'
 // Expo
@@ -101,7 +101,7 @@ class App extends React.Component {
     } else {
       return (
         <Provider store={store}>
-            <AppNavigator/>
+            <AppStackNavigator/>
         </Provider>
       )
     }

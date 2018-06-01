@@ -98,9 +98,9 @@ class Profile extends React.Component {
 
   _renderCardClose(skillType, index) {
     return (
-      <TouchableOpacity style={[styles.card, styles.cardBox, {}]} key={skillType.id} activeOpacity={0.8} onPress={() => this._handlePressCard(skillType.id)}>
+      <TouchableOpacity style={[styles.card, styles.cardBox, {}]} key={Math.round(Math.random() * Math.random() * 10000)} activeOpacity={0.8} onPress={() => this._handlePressCard(skillType.id)}>
         <View style={[{alignItems: 'center', flexDirection: 'row', width: '100%'}]}>
-          <CircularSkill currentSkill={skillType.nbUnlocked} totalSkill={skillType.skills.length} size={100} width={3} img={imageList.profile.skills[index]} animationDelay={1000}/>
+          <CircularSkill currentSkill={skillType.nbUnlocked} totalSkill={skillType.skills.length} size={100} width={3} img={imageList.profile.skills[index]} animationDelay={700}/>
           <View style={{marginLeft: 20}}>
             <Text style={[styles.cardTitle]}>{skillType.title}</Text>
             <Text style={[styles.cardSubTitle]}>{skillType.name}</Text>

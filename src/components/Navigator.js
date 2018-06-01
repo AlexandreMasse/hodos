@@ -5,54 +5,97 @@ import Map from "./Map/Map";
 import Previously from "./Chapter/Previously";
 import Chapter from "./Chapter/Chapter";
 import Profile from './Profile/Profile'
+import Intro from "./Intro/Intro";
+import Characters from "./Characters/Characters";
+import Settings from "./Settings/Settings";
 
 import {colors, fonts} from '../assets/variables'
 
-// NAVIGATION CONFIGURATION
+// TRANSITION
 
-// export default AppNavigator = StackNavigator({
-//   HomeScreen: {
-//     screen: HomeScreen
-//   },
-//   Map: {
-//     screen: Map
-//   },
-//   Chapter : {
-//     screen: Chapter
-//   },
-//   Previously: {
-//     screen: Previously
-//   }
-// },{
-//   initialRouteName: 'HomeScreen',
-//   headerMode: 'none',
-//   navigationOptions: {
-//     gesturesEnabled: false,
-//   },
-// })
+const fade = (props) => {
+  const {position, scene} = props
+
+  const index = scene.index
+
+  const translateX = 0
+  const translateY = 0
+
+  const opacity = position.interpolate({
+    inputRange: [index - 0.7, index, index + 0.7],
+    outputRange: [0.3, 1, 0.3]
+  })
+
+  return {
+    opacity,
+    transform: [{translateX}, {translateY}]
+  }
+}
 
 
-export default AppNavigator = DrawerNavigator(
+// INTRO STACK NAVIGATOR
+
+export const IntroStackNavigator = StackNavigator({
+  HomeScreen: {
+    screen: HomeScreen
+  },
+  Intro: {
+    screen: Intro
+  }
+},{
+  initialRouteName: 'HomeScreen',
+  headerMode: 'none',
+  navigationOptions: {
+    gesturesEnabled: false,
+  },
+})
+
+
+// MAIN DRAWER NAVIGATOR
+
+export const MainDrawerNavigator = DrawerNavigator(
   {
-    HomeScreen: {
-      screen: HomeScreen
-    },
     Map: {
-      screen: Map
-    },
-    Chapter : {
-      screen: Chapter
-    },
-    Previously: {
-      screen: Previously
+      screen: Map,
+      navigationOptions : {
+        drawerLabel: 'Plan'
+      }
     },
     Profile: {
-      screen: Profile
+      screen: Profile,
+      navigationOptions : {
+        title: 'Profil'
+      }
+    },
+    Characters: {
+      screen: Characters,
+      navigationOptions : {
+        title: 'Personnages'
+      }
+    },
+    Settings: {
+      screen: Settings,
+      navigationOptions : {
+        title: 'Paramètres'
+      }
+    },
+    // HIDDEN SCREENS
+    Chapter : {
+      screen: Chapter,
+      navigationOptions : {
+        drawerLabel: () => null
+      }
+    },
+    Previously: {
+      screen: Previously,
+      navigationOptions : {
+        drawerLabel: () => null
+      }
     },
   },
   {
     drawerWidth: 300,
-    initialRouteName: 'Profile',
+    initialRouteName: 'Map',
     drawerPosition: 'left',
     drawerBackgroundColor: 'white',
     contentComponent: SideMenu,
@@ -69,12 +112,40 @@ export default AppNavigator = DrawerNavigator(
       activeLabelStyle: {
         fontFamily: fonts.RubikMedium,
       },
-       inactiveLabelStyle: {
+      inactiveLabelStyle: {
         fontFamily: fonts.RubikRegular,
       },
       activeTintColor : '#00a7f5',
       inactiveTintColor : colors.grey,
       activeBackgroundColor: 'transparent',
-    }
+    },
   }
 )
+
+
+// APP STACK NAVIGATOR
+
+export const AppStackNavigator = StackNavigator({
+  IntroStackNavigator: {
+    screen: IntroStackNavigator
+  },
+  MainDrawerNavigator: {
+    screen: MainDrawerNavigator
+  }
+},{
+  initialRouteName: 'IntroStackNavigator',
+  headerMode: 'none',
+  navigationOptions: {
+    gesturesEnabled: false,
+  },
+  transitionConfig: () => ({
+    transitionSpec: {
+      duration: 2000,
+      //easing: Easing.out(Easing.poly(4)),
+      //timing: Animated.timing,
+    },
+    screenInterpolator: (props) => {
+      return fade(props)
+    }
+  })
+})

@@ -2,7 +2,6 @@ import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { DangerZone } from 'expo';
 const { Lottie } = DangerZone;
-import('./images/img_0.png')
 
 export default class Animation extends React.Component {
   state = {
@@ -18,9 +17,8 @@ export default class Animation extends React.Component {
           <Lottie
             ref={animation => { this.animation = animation; }}
             style={styles.animation}
-            source={require('./data.json')}
+            source={require('./nuage-degrade.json')}
             loop={this.state.loop}
-            imageAssetsFolder="images"
           />
         </View>
       </View>
@@ -30,18 +28,18 @@ export default class Animation extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: 'rgba(0,255,255, 0.2)',
-    backgroundColor: 'white',
+    //backgroundColor: 'rgba(0,255,255, 1)',
+    backgroundColor: 'red',
     justifyContent: 'center',
     alignItems: 'center',
   },
   animationContainer: {
-    width: 400,
-    height: 400,
+    width: 1000,
+    height: 800,
   },
   animation: {
-    // width: 500,
-    // height: 500,
+    // width: 400,
+    // height: 400,
     flex: 1,
   },
 });

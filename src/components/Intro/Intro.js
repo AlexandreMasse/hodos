@@ -6,29 +6,20 @@ import StorageSessionManager from './../../store/StorageSessionManager';
 import { LinearGradient } from 'expo'
 import Animation from '../Animation/Animation'
 
-class HomeScreen extends React.Component {
+class Intro extends React.Component {
 
   render () {
     return (
       <View style={styles.container}>
         <Image source={require('../../assets/images/splash/splash.png')} style={styles.splashImage} />
-        <View style={styles.buttonStorage} >
-          <Button title="empty Local Storage" onPress={ () => StorageSessionManager.clearStorage()} />
-          <Button title="get Data from API" onPress={ () => {
-            StorageSessionManager.getDataFromApi()
-          } } />
-        </View>
         <LinearGradient
           start={[0, 0]} end={[1, 0]}
           colors={['rgba(0, 101, 206, 0)','#0065CE']}
           style={styles.buttonContainer}>
-          <TouchableHighlight onPress={() => this.props.navigation.navigate('Intro')} style={styles.button} underlayColor='#fff'>
-            <Text style={styles.buttonText}> Commencer l'aventure </Text>
+          <TouchableHighlight onPress={() => this.props.navigation.navigate('MainDrawerNavigator')} style={styles.button} underlayColor='#fff'>
+            <Text style={styles.buttonText}>Passer l'introduction</Text>
         </TouchableHighlight>
         </LinearGradient>
-        {/*<View style={styles.animationContainer}>*/}
-          {/*<Animation/>*/}
-        {/*</View>*/}
       </View>
     )
   }
@@ -82,18 +73,6 @@ const styles = StyleSheet.create({
     height: 250,
     marginBottom: 30
   },
-  buttonStorage: {
-    position: 'absolute',
-    bottom: 5,
-    right: 5,
-    flex: 1,
-  },
-  animationContainer: {
-    position: 'absolute',
-    bottom: 20,
-    left: 10,
-    flex: 1,
-  }
 })
 
 const mapStateToProps = state => {
@@ -105,4 +84,4 @@ const mapDispatchToProps = dispatch => {
   return {
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(Intro)
