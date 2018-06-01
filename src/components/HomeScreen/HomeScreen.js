@@ -8,7 +8,7 @@ import ButtonWhite from './../ButtonWhite'
 
 class HomeScreen extends React.Component {
 
-  _handleNavigationToMap() {
+  _handleNavigationToMap = () => {
     this.props.navigation.navigate('Intro')
   }
 

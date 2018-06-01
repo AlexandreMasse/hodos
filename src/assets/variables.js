@@ -13,3 +13,18 @@ export const fonts = {
   RubikLight: 'rubik-light'
 }
 
+export const stylesSheet = {
+  subTitle: {
+    textAlign: 'center',
+    color: colors.grey,
+    fontFamily: fonts.RubikRegular,
+    fontSize: 16,
+    marginTop: 10
+  },
+  title: {
+    textAlign: 'center',
+    color: colors.grey,
+    fontFamily: fonts.RubikRegular,
+    fontSize: 48,
+  },
+}

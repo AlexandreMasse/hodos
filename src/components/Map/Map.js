@@ -3,11 +3,10 @@ import { StyleSheet, View, Text, Button, Image, TouchableHighlight, Dimensions, 
 import {connect} from 'react-redux';
 import PinchZoomView from '../../lib/PinchZoomView'
 import Scene from './../Chapter/Scene'
-import {colors} from '../../assets/variables'
+import {colors, stylesSheet} from '../../assets/variables'
 import resolveAssetSource from 'resolveAssetSource'
 import mapData from './../../store/datas/map.json'
 import imageList from '../../assets/ImagesList'
-import HeaderPlace from './HeaderPlace'
 import ButtonWhite from './../ButtonWhite'
 import Place from './../Place/Place'
 import OpenDrawerButton from '../OpenDrawerButton'
@@ -29,6 +28,21 @@ class Map extends React.Component {
       },
     }
     this.mapImage = imageList.map.map
+  }
+
+  componentWillMount() {
+    this._visibility = new Animated.Value(0);
+  }
+
+  _handleAnimationOpacity(value, clb) {
+    Animated.timing(this._visibility, {
+      toValue: value,
+      duration: 500
+    }).start(() => {
+      if (clb) {
+        clb()
+      }
+    })
   }
 
   _handleReading = () => {
@@ -70,7 +84,7 @@ class Map extends React.Component {
         return(
           <TouchableHighlight
             key={'map_'+index}
-            onPress={() => {this._showHeader(mapPlace)} }
+            onPress={() => {this._showCard(mapPlace)} }
             style={[styles.button, {top: mapPlace.y, left: mapPlace.x, width: mapPlace.width, height: mapPlace.height}]}
             underlayColor={null}>
             <View />
@@ -79,20 +93,27 @@ class Map extends React.Component {
       })
   }
 
-  _renderPlace () {
+  _renderCard () {
     if (this.state.showPlace) {
       return (
-        <View style={styles.placeButton} src={imageList.others.arrowRight}>
-          <ButtonWhite text={'Accéder au lieu'} hasImage={true} imageLeft={false} onTouch={this._handleNavigationPlace} />
-        </View>
-      );
-    }
-  }
-
-  _renderHeader () {
-    if (this.state.showPlace) {
-      return (
-        <HeaderPlace placeName={this.state.activePlace.name} onHideHeader={this._hideHeader} onNavigateChapter={this._navigateChapter} />
+        <Animated.View style={[
+          styles.cardContainer,
+          {
+            opacity: this._visibility.interpolate({
+              inputRange: [0, 100],
+              outputRange: [0, 1],
+            })
+          }
+        ]}>
+          <TouchableHighlight underlayColor={null} onPress={() => this._hideCard()} style={styles.closeBtn}>
+            <Image source={imageList.others.close} style={{width: 20, height: 20}} />
+          </TouchableHighlight>
+          <Text style={stylesSheet.title}>{this.state.activePlace.name}</Text>
+          <Text style={stylesSheet.subTitle}>{this.state.activePlace.description}</Text>
+          <View style={styles.cardButtonContainer}>
+            <ButtonWhite text={'Accéder au lieu'} hasImage={true} imageLeft={false} onTouch={this._handleNavigationPlace} />
+          </View>
+        </Animated.View>
       )
     }
   }
@@ -101,11 +122,10 @@ class Map extends React.Component {
     this.props.navigation.navigate('Previously')
   }
 
-  _showHeader = (mapPlace) => {
+  _showCard = (mapPlace) => {
     var place = {}
     const id = mapPlace.id
 
-    // console.log(this.props.placeList)
     this.props.placeList.map(val => {
       if (val.id == id) {
         place = val;
@@ -118,10 +138,15 @@ class Map extends React.Component {
       activePlace: place
     })
 
-    // console.log(place)
+    this._handleAnimationOpacity(100)
   }
 
-  _hideHeader = () => {
+  _hideCard = () => {
+    this._handleAnimationOpacity(0, this._hideCardOnAnimationCompete)
+
+  }
+
+  _hideCardOnAnimationCompete = () => {
     this.setState({
       showPlace: false,
       showPlaceInfo: false,
@@ -139,15 +164,14 @@ class Map extends React.Component {
       <View style={styles.container}>
         <PinchZoomView initialScale={2.5} minScale={2} maxScale={3.5} childHeight={windowHeight} childWidth={this.getMapImageWidth()}>
           <Scene src={this.mapImage}/>
-          <TouchableHighlight style={styles.mapTouchable} onPress={() => this._hideHeader()}  underlayColor={'transparent'}>
+          <TouchableHighlight style={styles.mapTouchable} onPress={() => this._hideCard()}  underlayColor={'transparent'}>
             <View />
           </TouchableHighlight>
           { this._renderTouchablePlace() }
         </PinchZoomView>
           {this._renderReadingButton()}
         <Button title={'Retour'} onPress={() => this.props.navigation.goBack()}/>
-        {this._renderPlace()}
-        {this._renderHeader()}
+        {this._renderCard()}
         {this._renderPlaceInfo()}
         <OpenDrawerButton/>
       </View>
@@ -190,12 +214,6 @@ const styles = StyleSheet.create({
     top: 50,
     right: 15,
   },
-  placeButton: {
-    position: 'absolute',
-    bottom: 50,
-    left: '50%',
-    transform: [{'translateX': -100}]
-  },
   whiteButton: {
     backgroundColor: '#fff',
     borderRadius: 15,
@@ -228,6 +246,28 @@ const styles = StyleSheet.create({
     width: 700,
     height: 400,
     flex: 1
+  },
+  cardContainer: {
+    position: 'absolute',
+    bottom: 20,
+    left: '50%',
+    transform: [{translateX: -350}],
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    width: 700,
+    height: 250,
+    padding: 20,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  cardButtonContainer: {
+    marginTop: 40,
+    width: 200
+  },
+  closeBtn: {
+    position: 'absolute',
+    top: 20,
+    right: 20,
   }
 })
 
