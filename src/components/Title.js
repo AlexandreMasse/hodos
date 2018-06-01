@@ -1,7 +1,7 @@
 import React from 'react'
 import PropType from 'prop-types'
 import {StyleSheet, Text, View, Animated} from 'react-native'
-import { colors, fonts } from './../assets/variables'
+import { colors, fonts, stylesSheet } from './../assets/variables'
 import { LinearGradient } from 'expo'
 
 export default class Title extends React.Component {
@@ -65,8 +65,8 @@ export default class Title extends React.Component {
             outputRange: [0, 1]
           }) : 1 }
         ]}>
-          <Text style={styles.title}>{this.state.title}</Text>
-          <Text style={styles.subTitle}>{this.state.subTitle}</Text>
+          <Text style={stylesSheet.title}>{this.state.title}</Text>
+          <Text style={stylesSheet.subTitle}>{this.state.subTitle}</Text>
         </Animated.View>
         <LinearGradient start={[0, 0]} end={[1, 0]}
         colors={['rgba(255, 255, 255, 0.3)', 'rgba(0, 0, 0, 0.3)']} style={styles.line} />
@@ -80,19 +80,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'center',
-  },
-  title: {
-    textAlign: 'center',
-    color: colors.grey,
-    fontFamily: fonts.RubikRegular,
-    fontSize: 48,
-  },
-  subTitle: {
-    textAlign: 'center',
-    color: colors.grey,
-    fontFamily: fonts.RubikRegular,
-    fontSize: 16,
-    marginTop: 10
   },
   line: {
     width: '45%',
