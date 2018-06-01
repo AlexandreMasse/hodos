@@ -24,6 +24,7 @@ class SideMenu extends React.Component {
     console.log('close drawer');
     this.props.navigation.navigate('DrawerClose')
   }
+
   _handleOpen = () => {
     console.log('open drawer');
     this.props.navigation.navigate('DrawerOpen')
@@ -59,9 +60,10 @@ class SideMenu extends React.Component {
         </TouchableOpacity>
 
         {/*Open*/}
-        <TouchableOpacity onPress={this._handleOpen} activeOpacity={0.8} style={styles.openContainer}>
-          <Image source={imageList.menu.logo} style={styles.open}/>
-        </TouchableOpacity>
+
+        {/*<TouchableOpacity onPress={this._handleOpen} activeOpacity={0.8} style={styles.openContainer}>*/}
+          {/*<Image source={imageList.menu.logo} style={styles.open}/>*/}
+        {/*</TouchableOpacity>*/}
 
       </View>
     )
@@ -98,14 +100,18 @@ const styles = StyleSheet.create({
   },
   closeContainer: {
     position:'absolute',
-    top: 20,
-    right: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+    top: 15,
+    right: 15,
+    width: 40,
+    height: 40,
   },
   close: {
-    width: 18,
-    height: 18,
+    width: 20,
+    height: 20,
   },
-  openContainer: {
+ /* openContainer: {
     position:'absolute',
     width: 50,
     height: 50,
@@ -119,7 +125,7 @@ const styles = StyleSheet.create({
   open: {
     width: 25,
     height: 25,
-  },
+  },*/
 })
 
 export default SideMenu

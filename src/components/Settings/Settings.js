@@ -1,6 +1,7 @@
 import React from 'react'
 import { StyleSheet, View, Text } from 'react-native'
 import {connect} from 'react-redux';
+import OpenDrawerButton from "../OpenDrawerButton";
 
 class Settings extends React.Component {
 
@@ -8,6 +9,7 @@ class Settings extends React.Component {
     return (
       <View style={styles.container}>
         <Text>Settings</Text>
+        <OpenDrawerButton/>
       </View>
     )
   }

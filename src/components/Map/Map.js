@@ -10,6 +10,7 @@ import imageList from '../../assets/ImagesList'
 import HeaderPlace from './HeaderPlace'
 import ButtonWhite from './../ButtonWhite'
 import Place from './../Place/Place'
+import OpenDrawerButton from '../OpenDrawerButton'
 
 const windowHeight = Dimensions.get('window').height
 const windowWidth = Dimensions.get('window').width
@@ -148,6 +149,7 @@ class Map extends React.Component {
         {this._renderPlace()}
         {this._renderHeader()}
         {this._renderPlaceInfo()}
+        <OpenDrawerButton/>
       </View>
 
     )

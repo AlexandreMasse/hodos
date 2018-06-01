@@ -5,6 +5,7 @@ import { colors, fonts } from './../../assets/variables'
 import ButtonWhite from './../ButtonWhite'
 import Title from './../Title'
 import imageList from "../../assets/ImagesList";
+import OpenDrawerButton from "../OpenDrawerButton";
 
 class Previously extends React.Component {
 
@@ -59,6 +60,7 @@ class Previously extends React.Component {
             <ButtonWhite text={'Reprendre la lecture'} hasImage={true} imageLeft={false} onTouch={this._handleReading} />
           </View>
         </View>
+        <OpenDrawerButton/>
       </View>
 
     )

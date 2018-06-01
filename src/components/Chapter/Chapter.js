@@ -8,6 +8,7 @@ import ParallaxedImage from './ParallaxedImage'
 import ButtonWhite from "./../ButtonWhite";
 import ChapterEnd from './ChapterEnd'
 import imageList from '../../assets/ImagesList'
+import OpenDrawerButton from "../OpenDrawerButton";
 
 const windowHeight = Dimensions.get('window').height
 const windowWidth = Dimensions.get('window').width
@@ -125,6 +126,7 @@ class Chapter extends React.Component {
         <View style={styles.absoluteContent}>
           {/*<Text style={styles.textTop}> Current offsetX : {this.props.currentOffset}</Text>*/}
         </View>
+        <OpenDrawerButton/>
       </View>
     )
   }

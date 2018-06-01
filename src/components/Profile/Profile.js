@@ -11,6 +11,7 @@ import progress from "../../store/reducers/progress";
 import ProgressBar from './ProgressBar'
 import ImageAspectRatio from './../utils/ImageAspectRatio'
 import AnimatedCircularProgress from 'react-native-circular-progress/src/AnimatedCircularProgress';
+import OpenDrawerButton from "../OpenDrawerButton";
 
 
 class Profile extends React.Component {
@@ -228,6 +229,7 @@ class Profile extends React.Component {
             </View>
           </View>
         </View>
+        <OpenDrawerButton/>
       </View>
     )
   }
