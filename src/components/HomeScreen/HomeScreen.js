@@ -4,7 +4,6 @@ import {connect} from 'react-redux';
 import storageSessionManager from './../../store/StorageSessionManager'
 import StorageSessionManager from './../../store/StorageSessionManager';
 import { LinearGradient } from 'expo'
-import Animation from '../Animation/Animation'
 
 class HomeScreen extends React.Component {
 
