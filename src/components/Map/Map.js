@@ -128,6 +128,22 @@ class Map extends React.Component {
       })
   }
 
+  _renderTouchableIndicator() {
+    return mapData.map((mapPlace, index) => {
+      if (!this.state.placeList[index].isLocked) {
+        return(
+          <TouchableHighlight
+            key={'mapIndicator_'+index}
+            onPress={() => {this._showCard(mapPlace)} }
+            style={[styles.button, {top: mapPlace.indicator.y, left: mapPlace.indicator.x, width: 16, height: 16}]}
+            underlayColor={null}>
+            <Image source={imageList.map.mapIndicator} style={{width: 16, height: 16}}/>
+          </TouchableHighlight>
+        )
+      }
+    })
+  }
+
   _renderCard () {
     if (this.state.showPlace) {
       return (
@@ -203,6 +219,7 @@ class Map extends React.Component {
             <View />
           </TouchableHighlight>
           { this._renderTouchablePlace() }
+          { this._renderTouchableIndicator() }
         </PinchZoomView>
           {this._renderReadingButton()}
         <Button title={'Retour'} onPress={() => this.props.navigation.goBack()}/>
