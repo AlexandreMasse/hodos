@@ -72,7 +72,7 @@ export default class Place extends React.Component {
           <View key={index} style={[styles.listElement]}>
             <View style={[styles.listThumbnailWrapper,  styles.listChapterThumbnailWrapper]}>
               <View style={[styles.listThumbnailContainer, styles.listChapterThumbnailWrapper]}>
-                <Image source={chapter.isLocked ? imageList.others.lock : imageList.chapters['chapter27'].thumbnail} style={[chapter.isLocked ? styles.listThumbnailLocked : styles.listThumbnail]} />
+                <Image source={chapter.isLocked ? imageList.others.lock : imageList.chapters['chapter27'].thumbnail} style={[chapter.isLocked ? styles.listThumbnailLocked : styles.listThumbnail, styles.listChapterThumbnailWrapper]} />
               </View>
             </View>
             <Text style={[styles.listSubTitle]}>Chapitre - {chapter.numberRoman}</Text>
@@ -90,7 +90,7 @@ export default class Place extends React.Component {
           <View key={index} style={[styles.listElement]}>
             <View style={[styles.listThumbnailWrapper, styles.listCharacterThumbnailWrapper]}>
               <View style={[styles.listThumbnailContainer, styles.listCharacterThumbnailWrapper]}>
-              <Image source={character.isLocked ? imageList.others.lock: imageList.characters['zeus']} style={[ character.isLocked ? styles.listThumbnailLocked : styles.listThumbnail]} />
+              <Image source={character.isLocked ? imageList.others.lock: imageList.characters['zeus']} style={[ character.isLocked ? styles.listThumbnailLocked : styles.listThumbnail, styles.listCharacterThumbnailWrapper]} />
               </View>
             </View>
             <Text style={[styles.listSubTitle, styles.listCharacterSubtitle]}>{character.name}</Text>
