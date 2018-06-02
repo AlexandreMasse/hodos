@@ -66,31 +66,34 @@ export default class Place extends React.Component {
       {name: 'Chapitre XXV', description: 'Où Hermès découvre qu’il peut voler', numberInt: '27'},
       {name: 'Chapitre XV', description: 'Où Hermès découvre qu’il peut voler', numberInt: '27'}
     ]
-    return chapterList.map(function(chapter, index) {
-      return (
-        <View key={index} style={[styles.listElement]}>
-          <View style={[styles.listThumbnailWrapper,  styles.listChapterThumbnailWrapper]}>
-            <Image source={imageList.chapters['chapter'+chapter.numberInt].thumbnail} style={[styles.listChapterThumbnailWrapper, styles.listThumbnail]} />
+    if (this.props.place && this.props.place.chapters) {
+      return this.props.place.chapters.map(function(chapter, index) {
+        return (
+          <View key={index} style={[styles.listElement]}>
+            <View style={[styles.listThumbnailWrapper,  styles.listChapterThumbnailWrapper]}>
+              <Image source={imageList.chapters['chapter27'].thumbnail} style={[styles.listChapterThumbnailWrapper, styles.listThumbnail]} />
+            </View>
+            <Text style={[styles.listSubTitle]}>Chapitre - {chapter.numberRoman}</Text>
+            <Text style={styles.listDescription}>{chapter.title}</Text>
           </View>
-          <Text style={[styles.listSubTitle]}>{chapter.name}</Text>
-          <Text style={styles.listDescription}>{chapter.description}</Text>
-        </View>
-      )
-    })
+        )
+      })
+    }
   }
 
   _renderCharacterList() {
-    const charactersList = ['Hermes', 'Cronos', 'Hadès']
-    return charactersList.map(function(character, index) {
-      return (
-        <View key={index} style={[styles.listElement]}>
-          <View style={[styles.listThumbnailWrapper, styles.listCharacterThumbnailWrapper]}>
-            <Image source={imageList.characters['zeus']} style={[styles.listCharacterThumbnailWrapper, styles.listThumbnail]} />
+    if (this.props.place && this.props.place.characters) {
+      return this.props.place.characters.map(function(character, index) {
+        return (
+          <View key={index} style={[styles.listElement]}>
+            <View style={[styles.listThumbnailWrapper, styles.listCharacterThumbnailWrapper]}>
+              <Image source={imageList.characters['zeus']} style={[styles.listCharacterThumbnailWrapper, styles.listThumbnail]} />
+            </View>
+            <Text style={[styles.listSubTitle, styles.listCharacterSubtitle]}>{character.name}</Text>
           </View>
-          <Text style={[styles.listSubTitle, styles.listCharacterSubtitle]}>{character}</Text>
-        </View>
-      )
-    })
+        )
+      })
+    }
   }
 
   render () {
@@ -155,8 +158,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    height: '85%',
-    marginTop: '15%',
+    height: '88%',
+    marginTop: '10%',
     shadowColor: '#000',
     shadowOffset: { width: -1, height: -2 },
     shadowOpacity: 0.2,
@@ -169,7 +172,7 @@ const styles = StyleSheet.create({
   placeWrapper: {
     marginLeft: 20,
     marginRight: 20,
-    marginBottom: 20,
+    marginBottom: 70,
     height: '100%',
   },
   placeHeaderWrapper: {

@@ -26,12 +26,47 @@ class Map extends React.Component {
         id: '',
         name: ''
       },
+      placeList: []
     }
     this.mapImage = imageList.map.map
   }
 
   componentWillMount() {
     this._visibility = new Animated.Value(0);
+
+    const placeList = this.props.placeList.map(place => {
+      const chapterList = [];
+      const characterList = [];
+      let characterIds = [];
+      if (place.chapters && place.chapters.length) {
+        this.props.chapterList.forEach(chapter => {
+          if (place.chapters.indexOf(chapter.id) !== -1) {
+            chapterList.push(chapter)
+            chapter.characters.forEach(characterId => {
+              characterIds.push(characterId)
+            })
+          }
+        })
+
+        characterIds = [ ...new Set(characterIds) ]
+
+        this.props.characterList.forEach(character => {
+          if (characterIds.indexOf(character.id) !== -1){
+            characterList.push(character)
+          }
+        })
+
+      }
+
+      return {
+        ...place,
+        chapters: chapterList,
+        characters: characterList
+      }
+    })
+    this.setState({
+      placeList: placeList
+    })
   }
 
   _handleAnimationOpacity(value, clb) {
@@ -126,7 +161,7 @@ class Map extends React.Component {
     var place = {}
     const id = mapPlace.id
 
-    this.props.placeList.map(val => {
+    this.state.placeList.map(val => {
       if (val.id == id) {
         place = val;
       }
@@ -258,7 +293,11 @@ const styles = StyleSheet.create({
     height: 250,
     padding: 20,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 3, height: 6 },
+    shadowOpacity: 0.6,
+    shadowRadius: 10,
   },
   cardButtonContainer: {
     marginTop: 40,
@@ -273,7 +312,9 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
   return {
-    placeList: state.placeList
+    placeList: state.placeList,
+    chapterList: state.chapterList,
+    characterList: state.characterList
   }
 }
 
