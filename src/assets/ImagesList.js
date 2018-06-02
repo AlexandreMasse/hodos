@@ -27,6 +27,7 @@ export default imageList = {
   },
   map: {
     'map': require('./images/map/map.png'),
+    'mapIndicator': require('./images/map/mapIndicator.png'),
   },
   menu: {
     'logo': require('./images/menu/logo.png'),
