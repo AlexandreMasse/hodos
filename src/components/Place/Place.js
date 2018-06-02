@@ -71,7 +71,9 @@ export default class Place extends React.Component {
         return (
           <View key={index} style={[styles.listElement]}>
             <View style={[styles.listThumbnailWrapper,  styles.listChapterThumbnailWrapper]}>
-              <Image source={imageList.chapters['chapter27'].thumbnail} style={[styles.listChapterThumbnailWrapper, styles.listThumbnail]} />
+              <View style={[styles.listThumbnailContainer, styles.listChapterThumbnailWrapper]}>
+                <Image source={chapter.isLocked ? imageList.others.lock : imageList.chapters['chapter27'].thumbnail} style={[chapter.isLocked ? styles.listThumbnailLocked : styles.listThumbnail]} />
+              </View>
             </View>
             <Text style={[styles.listSubTitle]}>Chapitre - {chapter.numberRoman}</Text>
             <Text style={styles.listDescription}>{chapter.title}</Text>
@@ -87,7 +89,9 @@ export default class Place extends React.Component {
         return (
           <View key={index} style={[styles.listElement]}>
             <View style={[styles.listThumbnailWrapper, styles.listCharacterThumbnailWrapper]}>
-              <Image source={imageList.characters['zeus']} style={[styles.listCharacterThumbnailWrapper, styles.listThumbnail]} />
+              <View style={[styles.listThumbnailContainer, styles.listCharacterThumbnailWrapper]}>
+              <Image source={character.isLocked ? imageList.others.lock: imageList.characters['zeus']} style={[ character.isLocked ? styles.listThumbnailLocked : styles.listThumbnail]} />
+              </View>
             </View>
             <Text style={[styles.listSubTitle, styles.listCharacterSubtitle]}>{character.name}</Text>
           </View>
@@ -170,8 +174,7 @@ const styles = StyleSheet.create({
     marginBottom: 20
   },
   placeWrapper: {
-    marginLeft: 20,
-    marginRight: 20,
+    marginLeft: 50,
     marginBottom: 70,
     height: '100%',
   },
@@ -183,7 +186,7 @@ const styles = StyleSheet.create({
     width: 180,
     flexWrap: 'wrap',
     marginRight: 20,
-    marginBottom: 20,
+    marginBottom: 10,
     borderRadius: 10,
     shadowColor: '#c8cbce',
     shadowOffset: { width: 5, height: 5 },
@@ -206,19 +209,36 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 20,
   },
-  listThumbnail: {
-    width: 180,
-    resizeMode: 'cover',
-    borderRadius: 10,
-  },
   listThumbnailWrapper: {
     width: 180,
+    borderRadius: 8,
+    shadowColor: '#c8cbce',
+    shadowOffset: { width: 1, height: 0 },
+    shadowOpacity: 0.3,
+  },
+  listThumbnailContainer: {
+    overflow: 'hidden',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#fff',
+    width: 180,
+    borderRadius: 8,
   },
   listChapterThumbnailWrapper: {
     height: 120,
   },
   listCharacterThumbnailWrapper: {
     height: 200,
+  },
+  listThumbnail: {
+    width: 180,
+    resizeMode: 'cover',
+    backgroundColor: 'green',
+  },
+  listThumbnailLocked: {
+    width: 180,
+    resizeMode: 'contain',
+    height: 60
   },
   listCharacterSubtitle: {
     textAlign: 'center'
