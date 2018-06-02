@@ -8,7 +8,7 @@ const chapterList = (state = initialState, action) => {
       return state.map((chapter) => {
         if (chapter.id === action.id) {
           return {
-            ...state,
+            ...chapter,
             isLocked: false
           }
         }

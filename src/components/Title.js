@@ -83,6 +83,7 @@ const styles = StyleSheet.create({
   },
   line: {
     width: '45%',
-    height: 1
+    height: 1.5,
+    opacity: 0.3
   }
 })

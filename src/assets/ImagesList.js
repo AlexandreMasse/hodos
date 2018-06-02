@@ -67,7 +67,8 @@ export default imageList = {
     'whiteArrowLeft': require('./images/white-arrow-left.png'),
     'arrowLeft': require('./images/arrow-left.png'),
     'arrowRight': require('./images/arrow-right.png'),
-    'close': require('./images/close.png')
+    'close': require('./images/close.png'),
+    'lock': require('./images/lock.png')
   }
 };
 

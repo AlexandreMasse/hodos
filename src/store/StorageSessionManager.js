@@ -1,5 +1,5 @@
 import { store } from './reducers/index'
-import { setChapterList, setPlaceList, setProgress, setCharacterList, setSkillList, setSkillTypeList, setChapterProgress, unlockSkill} from './actions/actions'
+import { setChapterList, setPlaceList, setProgress, setCharacterList, setSkillList, setSkillTypeList, setChapterProgress, unlockSkill, unlockCharacter, unlockPlace, unlockChapter} from './actions/actions'
 import { API } from './api/index'
 import { Storage } from './storage/index'
 
@@ -54,24 +54,42 @@ class StorageSessionManager {
       API.getSkillList(),
       API.getSkillTypeList()
     ]).then((values) => {
+      //Set current progress chapter
       const chapterProgress = 26
       store.dispatch(setChapterProgress(chapterProgress))
       const chapterList = values[2]
       const storeSkill = store.getState().skillList
       chapterList.forEach(chapter => {
-        if (chapter.skillDiscovered && chapter.skillDiscovered.length && chapter.id <= chapterProgress) {
-          chapter.skillDiscovered.forEach(skill => {
-            store.dispatch(unlockSkill(skill))
+        if (chapter.id <= chapterProgress) {
+          //Unlock chapter
+          store.dispatch(unlockChapter(chapter.id))
+          //Unlock discovered skills
+          if (chapter.skillDiscovered && chapter.skillDiscovered.length) {
+            chapter.skillDiscovered.forEach(skill => {
+              store.dispatch(unlockSkill(skill))
+            })
+          }
+          //Unlock discovered characters
+          if (chapter.charactersDiscovered && chapter.charactersDiscovered.length) {
+            chapter.charactersDiscovered.forEach(character => {
+              store.dispatch(unlockCharacter(character))
+            })
+          }
+        }
+      })
+      //Set discovered places
+      const placeList = values[0]
+      placeList.forEach(place => {
+        if (place.chapters && place.chapters.length) {
+          place.chapters.forEach(chapter => {
+            if (chapter <= chapterProgress) {
+              store.dispatch(unlockPlace(place.id))
+            }
           })
         }
       })
-      store.dispatch(unlockSkill(1))
     })
 
-    //Set current progress chapter
-
-
-    //Set discovered skills
 
   }
 }
