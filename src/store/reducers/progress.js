@@ -2,7 +2,8 @@ import { actionTypes } from '../actions/actionTypes'
 
 const initialState = {
   chapter: 0,
-  currentOffset: 0
+  currentOffset: 0,
+  place: null
 }
 
 const progress = (state = initialState, action) => {
@@ -19,10 +20,14 @@ const progress = (state = initialState, action) => {
         currentOffset: action.currentOffset
       }
     case actionTypes.PROGRESS_SET_CHAPTER:
-      console.log('progress reducer =>', action.chapter)
       return {
         ...state,
         chapter: action.chapter
+      }
+    case actionTypes.PROGRESS_SET_PLACE:
+      return {
+        ...state,
+        place: action.place
       }
     case actionTypes.SET_PROGRESS:
       return action.progress

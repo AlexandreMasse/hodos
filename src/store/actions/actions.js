@@ -53,6 +53,14 @@ export const setChapterProgress = (chapter) => {
   }
 }
 
+export const setPlaceProgress = (place) => {
+  console.log('ACTIONS SETPLACEPROGRESS => ', place)
+  return {
+    type: actionTypes.PROGRESS_SET_PLACE,
+    place
+  }
+}
+
 // PLACE
 export const unlockPlace = (id) => {
   return {
