@@ -105,7 +105,7 @@ export const MainDrawerNavigator = DrawerNavigator(
   },
   {
     drawerWidth: 300,
-    initialRouteName: 'Map',
+    initialRouteName: 'Settings',
     drawerPosition: 'left',
     drawerBackgroundColor: 'white',
     contentComponent: SideMenu,
@@ -143,7 +143,7 @@ export const AppStackNavigator = StackNavigator({
     screen: MainDrawerNavigator
   }
 },{
-  initialRouteName: 'MainDrawerNavigator',
+  initialRouteName: 'IntroStackNavigator',
   headerMode: 'none',
   navigationOptions: {
     gesturesEnabled: false,
