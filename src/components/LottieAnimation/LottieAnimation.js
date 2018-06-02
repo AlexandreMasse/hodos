@@ -41,18 +41,20 @@ export default class LottieAnimation extends React.Component {
 
   render() {
     return (
-        <View style={[styles.animationContainer, {
-          width: this.props.width,
-          height: this.props.height
-        }, this.props.styles]} pointerEvents="none">
-          <Lottie
-            ref={animation => { this.animation = animation; }}
-            style={styles.animation}
-            source={this.props.source}
-            loop={this.state.isLoop}
-            speed={this.props.speed}
-          />
-        </View>
+      <View style={[styles.animationContainer, {
+        width: this.props.width,
+        height: this.props.height
+      }, this.props.styles]} pointerEvents="none">
+        <Lottie
+          ref={animation => {
+            this.animation = animation;
+          }}
+          style={styles.animation}
+          source={this.props.source}
+          loop={this.state.isLoop}
+          speed={this.props.speed}
+        />
+      </View>
     );
   }
 }

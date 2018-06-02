@@ -61,6 +61,9 @@ export default imageList = {
     'patternGrid': require('./images/patternGrid.png'),
     'backgroundCharacter': require('./images/backgroundCharacter.jpg'),
   },
+  intro: {
+    'landscape': require('./images/intro/landscape.png')
+  },
   others: {
     'splash':  require('./images/splash/splash.png'),
     'logo': require('./images/logo.png'),
