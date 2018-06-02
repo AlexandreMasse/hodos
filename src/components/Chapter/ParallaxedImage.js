@@ -9,6 +9,7 @@ export default class ParallaxedImage extends React.Component {
   static propTypes = {
     left: PropTypes.any,
     top: PropTypes.any,
+    zIndex: PropTypes.number,
     scalingRatio: PropTypes.number,
     scrollX: PropTypes.any,
     speed: PropTypes.number
@@ -18,6 +19,7 @@ export default class ParallaxedImage extends React.Component {
     left: undefined,
     top: undefined,
     bottom: undefined,
+    zIndex: undefined,
     scalingRatio: 1,
     speed: 0
   }
@@ -28,7 +30,8 @@ export default class ParallaxedImage extends React.Component {
       styles: {
         top: this.props.top,
         left: this.props.left,
-        bottom: this.props.bottom
+        bottom: this.props.bottom,
+        zIndex: this.props.zIndex
       }
     }
   }

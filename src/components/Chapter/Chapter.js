@@ -9,6 +9,7 @@ import ButtonWhite from "./../ButtonWhite";
 import ChapterEnd from './ChapterEnd'
 import imageList from '../../assets/ImagesList'
 import OpenDrawerButton from "../OpenDrawerButton";
+import Chapter27 from "./datas/chapter27.json";
 
 const windowHeight = Dimensions.get('window').height
 const windowWidth = Dimensions.get('window').width
@@ -83,6 +84,23 @@ class Chapter extends React.Component {
     }
   }
 
+  _renderScenes () {
+    return Chapter27.scenes.map((scene, index) => {
+      return (
+        <Scene src={imageList.chapters.chapter27[scene.src]} windowHeight={windowHeight} key={index} zIndex={1} />
+      )
+    })
+  }
+
+  _renderParallaxedImages () {
+    return Chapter27.parallaxedImage.map((image, index) => {
+      const scallingRatio = image.scallingRatio ? this.state.scalingRatio + image.scallingRatio : this.state.scalingRatio
+      return (
+        <ParallaxedImage left={image.left} bottom={image.bottom || image.bottom >= 0 ? image.bottom : null} top={image.top || image.top >= 0 ? image.top : null} speed={20} scalingRatio={scallingRatio} scrollX={this.scrollX} src={imageList.chapters.chapter27[image.src]} zIndex={image.zIndex >= 0 ? image.zIndex : 2 } key={index}/>
+      )
+    })
+  }
+
   render () {
     return (
       <View style={styles.container}>
@@ -105,22 +123,9 @@ class Chapter extends React.Component {
               },
             }
         )}>
-          <ParallaxedImage left={'5.9%'} top={"2%"} speed={-10} scalingRatio={this.state.scalingRatio + 0.005} scrollX={this.scrollX} src={imageList.chapters.chapter27.Chap27_scene02_storm}/>
-          <Scene src={imageList.chapters.chapter27.chap27_part1} windowHeight={windowHeight}/>
-          <Scene src={imageList.chapters.chapter27.chap27_part2} windowHeight={windowHeight}/>
-          <Scene src={imageList.chapters.chapter27.chap27_part3} windowHeight={windowHeight}/>
-          <Scene src={imageList.chapters.chapter27.chap27_part4} windowHeight={windowHeight}/>
-          <Scene src={imageList.chapters.chapter27.chap27_part5} windowHeight={windowHeight}/>
+          {this._renderScenes()}
           <Paragraph text={"C’est un soir d'orage que Zeus et Rhéa décidèrent d'agir contre Cronos. Ce soir-là, l'orage était terriblement violent. Cronos ne cessait d'aller et venir dans sa chambre."} width={900} bottom={'5%'} left={0.003} scrollX={this.scrollX} windowWidth={windowWidth} parentWidth={this.state.totalWidth} />
-          <ParallaxedImage left={"0.43%"} top={'3%'} speed={1} scalingRatio={this.state.scalingRatio} scrollX={this.scrollX} src={imageList.chapters.chapter27.Chap27_scene01_palais}/>
-          <ParallaxedImage left={0} bottom={0} speed={20} scalingRatio={this.state.scalingRatio} scrollX={this.scrollX} src={imageList.chapters.chapter27.Chap27_scene01_rochers}/>
-          <ParallaxedImage left={'3.8%'} bottom={0} speed={-30} scalingRatio={this.state.scalingRatio} scrollX={this.scrollX} src={imageList.chapters.chapter27.Chap27_scene01_pilier}/>
-          <ParallaxedImage left={'4.4%'} bottom={0} speed={10} scalingRatio={this.state.scalingRatio} scrollX={this.scrollX} src={imageList.chapters.chapter27.Chap27_scene02_zeus}/>
-          <ParallaxedImage left={'9.4%'} bottom={0} speed={-7} scalingRatio={this.state.scalingRatio} scrollX={this.scrollX} src={imageList.chapters.chapter27.Chap27_scene02_pilier1}/>
-          <ParallaxedImage left={'9.05%'} top={0} speed={7.8} scalingRatio={this.state.scalingRatio + 0.007} scrollX={this.scrollX} src={imageList.chapters.chapter27.Chap27_scene03_chronos}/>
-          <ParallaxedImage left={'9.1%'} bottom={0} speed={1} scalingRatio={this.state.scalingRatio} scrollX={this.scrollX} src={imageList.chapters.chapter27.Chap27_scene02_pilier2}/>
-          <ParallaxedImage left={'15.1%'} top={0} speed={-12} scalingRatio={this.state.scalingRatio} scrollX={this.scrollX} src={imageList.chapters.chapter27.Chap27_scene03_pilier}/>
-          <ParallaxedImage left={'18.5%'} top={'-7%'} speed={-20} scalingRatio={this.state.scalingRatio} scrollX={this.scrollX} src={imageList.chapters.chapter27.Chap27_scene04_storm}/>
+          {this._renderParallaxedImages()}
         </ScrollView>
         <ChapterEnd width={windowWidth} imageSource={imageList.chapters.chapter28.thumbnail} nextChapter={this.state.nextChapter} showChapterEnd={this.state.showChapterEnd} />
         <View style={styles.absoluteContent}>

@@ -8,6 +8,7 @@ export default class Scene extends React.Component {
 
   static propTypes = {
     windowHeight: PropType.number,
+    zIndex: PropType.number,
     src: PropType.any.isRequired
   }
 
@@ -25,10 +26,9 @@ export default class Scene extends React.Component {
       styles: {
         height: windowHeight,
         width: (windowHeight / this.sourceInfo.height) * this.sourceInfo.width,
+        zIndex: this.props.zIndex
       }
     }
-
-    console.log('Scene: styles => ', [styles.scene, this.state.styles ])
   }
 
   render () {
