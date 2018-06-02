@@ -1,9 +1,7 @@
 import React from 'react'
 import { StyleSheet, View, Text, TouchableHighlight, Image, Button } from 'react-native'
 import {connect} from 'react-redux';
-import storageSessionManager from './../../store/StorageSessionManager'
 import StorageSessionManager from './../../store/StorageSessionManager'
-import Animation from '../Animation/Animation'
 import ButtonWhite from './../ButtonWhite'
 
 class HomeScreen extends React.Component {
@@ -25,9 +23,6 @@ class HomeScreen extends React.Component {
             StorageSessionManager.getDataFromApi()
           } } />
         </View>
-        {/*<View style={styles.animationContainer}>*/}
-          {/*<Animation/>*/}
-        {/*</View>*/}
       </View>
     )
   }

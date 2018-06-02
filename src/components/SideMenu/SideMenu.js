@@ -55,7 +55,7 @@ class SideMenu extends React.Component {
         </View>
 
         {/*Close*/}
-        <TouchableOpacity onPress={this._handleClose} style={styles.closeContainer}>
+        <TouchableOpacity onPress={this._handleClose} style={styles.closeContainer} activeOpacity={0.8}>
           <Image source={imageList.menu.close} style={styles.close}/>
         </TouchableOpacity>
 

@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import storageSessionManager from './../../store/StorageSessionManager'
 import StorageSessionManager from './../../store/StorageSessionManager';
 import { LinearGradient } from 'expo'
-import Animation from '../Animation/Animation'
+import Animation from '../LottieAnimation/LottieAnimation'
 
 class Intro extends React.Component {
 
