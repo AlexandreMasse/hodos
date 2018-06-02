@@ -10,7 +10,7 @@ class Characters extends React.Component {
     return (
       <View style={styles.container}>
         <Text>Characters</Text>
-        <LottieAnimation speed={2}/>
+        <LottieAnimation/>
         <OpenDrawerButton/>
       </View>
     )

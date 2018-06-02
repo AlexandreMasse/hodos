@@ -6,7 +6,7 @@ import ButtonWhite from './../ButtonWhite'
 
 class HomeScreen extends React.Component {
 
-  _handleNavigationToMap = () => {
+  _handleButtonWhiteOnTouch = () => {
     this.props.navigation.navigate('Intro')
   }
 
@@ -15,7 +15,7 @@ class HomeScreen extends React.Component {
       <View style={styles.container}>
         <Image source={require('../../assets/images/splash/splash.png')} style={styles.splashImage} />
         <View style={styles.buttonContainer} >
-          <ButtonWhite text={'Commencer l\'aventure'}  style={styles.button} hasImage={true} imageLeft={false} onTouch={this._handleNavigationToMap} />
+          <ButtonWhite text={'Commencer l\'aventure'}  style={styles.button} hasImage={true} imageLeft={false} onTouch={this._handleButtonWhiteOnTouch} />
         </View>
         <View style={styles.buttonStorage} >
           <Button title="empty Local Storage" onPress={ () => StorageSessionManager.clearStorage()} />

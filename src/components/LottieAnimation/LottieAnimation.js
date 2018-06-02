@@ -7,8 +7,9 @@ const { Lottie } = DangerZone;
 export default class LottieAnimation extends React.Component {
 
   static propTypes = {
-    width: PropTypes.number,
-    height: PropTypes.number,
+    width: PropTypes.any,
+    height: PropTypes.any,
+    styles: PropTypes.any,
     isLoop: PropTypes.bool,
     source: PropTypes.any,
     delay: PropTypes.number,
@@ -18,8 +19,9 @@ export default class LottieAnimation extends React.Component {
   static defaultProps = {
     width: 500,
     height: 500,
+    styles: {},
     isLoop: true,
-    source: require('./nuage-degrade.json'),
+    source: require('./olympe-bg.json'),
     delay: 0,
     speed: 1,
   }
@@ -41,15 +43,14 @@ export default class LottieAnimation extends React.Component {
     return (
         <View style={[styles.animationContainer, {
           width: this.props.width,
-          height: this.props.height,
-        }]}>
+          height: this.props.height
+        }, this.props.styles]} pointerEvents="none">
           <Lottie
             ref={animation => { this.animation = animation; }}
             style={styles.animation}
             source={this.props.source}
             loop={this.state.isLoop}
             speed={this.props.speed}
-            // autoSize={true}
           />
         </View>
     );
@@ -58,7 +59,6 @@ export default class LottieAnimation extends React.Component {
 
 const styles = StyleSheet.create({
   animationContainer: {
-    backgroundColor: 'red',
   },
   animation: {
     flex: 1,
