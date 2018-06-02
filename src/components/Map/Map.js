@@ -9,6 +9,7 @@ import mapData from './../../store/datas/map.json'
 import imageList from '../../assets/ImagesList'
 import ButtonWhite from './../ButtonWhite'
 import Place from './../Place/Place'
+import LottieAnimation from './../LottieAnimation/LottieAnimation'
 import OpenDrawerButton from '../OpenDrawerButton'
 
 const windowHeight = Dimensions.get('window').height
@@ -131,15 +132,27 @@ class Map extends React.Component {
   _renderTouchableIndicator() {
     return mapData.map((mapPlace, index) => {
       if (!this.state.placeList[index].isLocked) {
-        return(
-          <TouchableHighlight
-            key={'mapIndicator_'+index}
-            onPress={() => {this._showCard(mapPlace)} }
-            style={[styles.button, {top: mapPlace.indicator.y, left: mapPlace.indicator.x, width: 16, height: 16}]}
-            underlayColor={null}>
-            <Image source={imageList.map.mapIndicator} style={{width: 16, height: 16}}/>
-          </TouchableHighlight>
-        )
+        if (index === this.props.progress.place) {
+          return (
+            <TouchableHighlight
+              key={'mapIndicator_'+index}
+              onPress={() => {this._showCard(mapPlace)} }
+              style={[styles.button, {top: (mapPlace.indicator.y - 0.7).toString() + '%', left: (mapPlace.indicator.x - 0.55).toString() + '%', width: 29, height: 29}]}
+              underlayColor={null}>
+              <LottieAnimation source={require('./../../assets/animations/map-indicator-active.json')} styles={{width: '100%', height: '100%'}} />
+            </TouchableHighlight>
+          )
+        } else {
+          return(
+            <TouchableHighlight
+              key={'mapIndicator_'+index}
+              onPress={() => {this._showCard(mapPlace)} }
+              style={[styles.button, {top: mapPlace.indicator.y.toString() + '%', left: mapPlace.indicator.x.toString() + '%', width: 16, height: 16}]}
+              underlayColor={null}>
+              <Image source={imageList.map.mapIndicator} style={{width: 16, height: 16}}/>
+            </TouchableHighlight>
+          )
+        }
       }
     })
   }
@@ -331,7 +344,8 @@ const mapStateToProps = state => {
   return {
     placeList: state.placeList,
     chapterList: state.chapterList,
-    characterList: state.characterList
+    characterList: state.characterList,
+    progress: state.progress
   }
 }
 
