@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, View, ScrollView, Image, Dimensions, Text, Animated } from 'react-native'
 import { connect } from 'react-redux';
-import { currentOffsetProgress, setChapterProgress } from "../../store/actions/actions"
+import { currentOffsetProgress, setChapterProgress, setChapterRomanProgress } from "../../store/actions/actions"
 import Paragraph from './Paragraph'
 import Scene from './Scene'
 import ParallaxedImage from './ParallaxedImage'
@@ -30,7 +30,7 @@ class Chapter extends React.Component {
   }
 
   componentWillUnmount() {
-    this.props._setCurrentOffsetProgress(this.scrollX._value)
+    this.props._setCurrentOffsetProgress(this.scrollX._value, this._getPercentProgress())
   }
 
   componentWillMount() {
@@ -48,6 +48,7 @@ class Chapter extends React.Component {
     //Retrieves current chapter data in store
     const currentChapterId = 26
     this.props._setProgressChapter(currentChapterId)
+    this.props._setChapterRomanProgress('XXVII')
     this.props.chapterList.map(val => {
       if (val.id === currentChapterId) {
         this.setState({
@@ -59,6 +60,13 @@ class Chapter extends React.Component {
         })
       }
     })
+  }
+
+  _getPercentProgress () {
+    if (this.state.maxScrollX > 0) {
+      return this.scrollX._value / this.state.maxScrollX  * 100
+    }
+    return 0
   }
 
   _scrollViewRef = el => {
@@ -179,11 +187,14 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    _setCurrentOffsetProgress: (currentOffset) => {
-      dispatch(currentOffsetProgress(currentOffset))
+    _setCurrentOffsetProgress: (currentOffset, percent) => {
+      dispatch(currentOffsetProgress(currentOffset, percent))
     },
     _setProgressChapter: (chapter) => {
       dispatch(setChapterProgress(chapter))
+    },
+    _setChapterRomanProgress: (chapterRoman) => {
+      dispatch(setChapterRomanProgress(chapterRoman))
     }
   }
 }

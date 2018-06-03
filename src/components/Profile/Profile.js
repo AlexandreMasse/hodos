@@ -8,7 +8,7 @@ import CircularSkill from "../Profile/CircularSkill"
 import { LinearGradient } from 'expo'
 import imageList from './../../assets/ImagesList'
 import progress from "../../store/reducers/progress";
-import ProgressBar from './ProgressBar'
+import ProgressBar from './../ProgressBar'
 import ImageAspectRatio from './../utils/ImageAspectRatio'
 import AnimatedCircularProgress from 'react-native-circular-progress/src/AnimatedCircularProgress';
 import OpenDrawerButton from "../OpenDrawerButton";

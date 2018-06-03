@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { StyleSheet, View, Animated, Text, Easing} from 'react-native'
 import { LinearGradient } from 'expo'
-import {fonts, colors} from '../../assets/variables'
+import {fonts, colors} from './../assets/variables'
 
 class ProgressBar extends React.Component {
 

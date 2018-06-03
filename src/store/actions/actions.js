@@ -38,23 +38,29 @@ export const incrementChapter = () => {
   }
 }
 
-export const currentOffsetProgress = (currentOffset) => {
+export const currentOffsetProgress = (currentOffset, percent) => {
   return {
     type: actionTypes.PROGRESS_CURRENT_OFFSET,
-    currentOffset
+    currentOffset,
+    percent
   }
 }
 
 export const setChapterProgress = (chapter) => {
-  console.log('ACTIONS SETCHAPTERPROGRESS => ', chapter)
   return {
     type: actionTypes.PROGRESS_SET_CHAPTER,
     chapter
   }
 }
 
+export const setChapterRomanProgress = (chapterRoman) => {
+  return {
+    type: actionTypes.PROGRESS_SET_CHAPTER_ROMAN,
+    chapterRoman
+  }
+}
+
 export const setPlaceProgress = (place) => {
-  console.log('ACTIONS SETPLACEPROGRESS => ', place)
   return {
     type: actionTypes.PROGRESS_SET_PLACE,
     place

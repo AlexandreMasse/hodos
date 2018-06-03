@@ -1,6 +1,7 @@
 export const colors = {
   'paleGreen': '#82BC5C',
   'blue': '#0065CE',
+  'lightBlue': '#00A7F5',
   'grey': '#29292D',
 }
 

@@ -1,5 +1,5 @@
 import { store } from './reducers/index'
-import { setChapterList, setPlaceList, setProgress, setCharacterList, setSkillList, setSkillTypeList, setChapterProgress, unlockSkill, unlockCharacter, unlockPlace, unlockChapter, setPlaceProgress} from './actions/actions'
+import { setChapterList, setPlaceList, setProgress, setCharacterList, setSkillList, setSkillTypeList, setChapterProgress, unlockSkill, unlockCharacter, unlockPlace, unlockChapter, setPlaceProgress, setChapterRomanProgress} from './actions/actions'
 import { API } from './api/index'
 import { Storage } from './storage/index'
 
@@ -56,6 +56,7 @@ class StorageSessionManager {
       //Set current progress chapter
       const chapterProgress = 26
       store.dispatch(setChapterProgress(chapterProgress))
+      store.dispatch(_setChapterRomanProgress('XXVII'))
       const chapterList = values[2]
       const storeSkill = store.getState().skillList
       chapterList.forEach(chapter => {

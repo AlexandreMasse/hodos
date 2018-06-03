@@ -2,7 +2,9 @@ import { actionTypes } from '../actions/actionTypes'
 
 const initialState = {
   chapter: 0,
+  chapterRoman: 'I',
   currentOffset: 0,
+  percent: 0,
   place: null
 }
 
@@ -17,12 +19,18 @@ const progress = (state = initialState, action) => {
     case actionTypes.PROGRESS_CURRENT_OFFSET:
       return {
         ...state,
-        currentOffset: action.currentOffset
+        currentOffset: action.currentOffset,
+        percent: action.percent
       }
     case actionTypes.PROGRESS_SET_CHAPTER:
       return {
         ...state,
         chapter: action.chapter
+      }
+    case actionTypes.PROGRESS_SET_CHAPTER_ROMAN:
+      return {
+        ...state,
+        chapterRoman: action.chapterRoman
       }
     case actionTypes.PROGRESS_SET_PLACE:
       return {

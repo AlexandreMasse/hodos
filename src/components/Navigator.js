@@ -125,7 +125,7 @@ export const MainDrawerNavigator = DrawerNavigator(
   },
   {
     drawerWidth: 300,
-    initialRouteName: 'Chapter',
+    initialRouteName: 'Map',
     drawerPosition: 'left',
     drawerBackgroundColor: 'white',
     contentComponent: SideMenu,
@@ -133,11 +133,11 @@ export const MainDrawerNavigator = DrawerNavigator(
       labelStyle: {
         textAlign: 'center',
         width: '100%',
-        marginTop: 17,
+        marginTop: 15,
         marginRight: 0,
         marginBottom: 17,
         marginLeft: 0,
-        fontSize: 18,
+        fontSize: 22,
       },
       activeLabelStyle: {
         fontFamily: fonts.RubikMedium,
