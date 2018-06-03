@@ -57,6 +57,7 @@ class Chapter extends React.Component {
     // Go to last OffsetX
     this.scrollView.scrollTo({x: this.props.currentOffset, animated: true})
 
+    // TODO : dynamic
     //Retrieves current chapter data in store
     const currentChapterId = 26
     this.props._setProgressChapter(currentChapterId)
@@ -107,7 +108,11 @@ class Chapter extends React.Component {
   _renderScenes () {
     return chapterList['chapter'+this.props.number].scenes.map((scene, index) => {
       return (
-        <Scene src={imageList.chapters['chapter'+this.props.number]['scene0'+(index+1)][scene.src]} windowHeight={windowHeight} key={index} zIndex={10} />
+        <Scene src={scene.src}
+               windowHeight={windowHeight}
+               key={index}
+               zIndex={10}
+        />
       )
     })
   }
@@ -116,7 +121,16 @@ class Chapter extends React.Component {
     return chapterList['chapter'+this.props.number].parallaxedImage.map((image, index) => {
       const scallingRatio = image.scallingRatio ? this.state.scalingRatio + image.scallingRatio : this.state.scalingRatio
       return (
-        <ParallaxedImage left={image.left} bottom={image.bottom || image.bottom >= 0 ? image.bottom : null} top={image.top || image.top >= 0 ? image.top : null} speed={20} scalingRatio={scallingRatio} scrollX={this.scrollX} src={imageList.chapters['chapter'+this.props.number]['scene'+image.scene][image.src]} zIndex={image.zIndex >= 0 ? image.zIndex : 20 } key={index}/>
+        <ParallaxedImage left={image.left}
+                         bottom={image.bottom || image.bottom >= 0 ? image.bottom : null}
+                         top={image.top || image.top >= 0 ? image.top : null}
+                         speed={20}
+                         scalingRatio={scallingRatio}
+                         scrollX={this.scrollX}
+                         src={image.src}
+                         zIndex={image.zIndex >= 0 ? image.zIndex : 20 }
+                         key={index}
+        />
       )
     })
   }
@@ -124,7 +138,7 @@ class Chapter extends React.Component {
   _renderLottieAnimations () {
     return chapterList['chapter'+this.props.number].lottieAnimations.map((animation, index) => {
       return (
-        <LottieAnimation source={animationList.chapters['chapter'+this.props.number][animation.source]}
+        <LottieAnimation source={animation.source}
                          progress={animation.progress ? animation.progress : undefined}
                          isLoop={animation.isLoop || animation === false ? animation.isLoop : undefined}
                          speed={animation.speed ? animation.speed : undefined}
