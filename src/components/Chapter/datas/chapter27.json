@@ -72,8 +72,20 @@
       "left" : "15.1%",
       "top": 0,
       "speed": -12
-    },
+    }
   ],
   "texts": [
+  ],
+  "lottieAnimations" : [
+    {
+      "source": "palais",
+      "styles": {
+        "width": "4%",
+        "height": "80%",
+        "left": "1%",
+        "top": "10%",
+        "zIndex": 2
+      }
+    }
   ]
 }

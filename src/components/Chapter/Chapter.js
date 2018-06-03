@@ -8,8 +8,10 @@ import ParallaxedImage from './ParallaxedImage'
 import ButtonWhite from "./../ButtonWhite";
 import ChapterEnd from './ChapterEnd'
 import imageList from '../../assets/ImagesList'
+import animationList from '../../assets/AnimationsList'
 import OpenDrawerButton from "../OpenDrawerButton";
 import Chapter27 from "./datas/chapter27.json";
+import LottieAnimation from "../LottieAnimation/LottieAnimation";
 
 const windowHeight = Dimensions.get('window').height
 const windowWidth = Dimensions.get('window').width
@@ -104,7 +106,21 @@ class Chapter extends React.Component {
     return Chapter27.parallaxedImage.map((image, index) => {
       const scallingRatio = image.scallingRatio ? this.state.scalingRatio + image.scallingRatio : this.state.scalingRatio
       return (
-        <ParallaxedImage left={image.left} bottom={image.bottom || image.bottom >= 0 ? image.bottom : null} top={image.top || image.top >= 0 ? image.top : null} speed={20} scalingRatio={scallingRatio} scrollX={this.scrollX} src={imageList.chapters.chapter27['scene'+image.scene][image.src]} zIndex={image.zIndex >= 0 ? image.zIndex : 2 } key={index}/>
+        <ParallaxedImage left={image.left} bottom={image.bottom || image.bottom >= 0 ? image.bottom : null} top={image.top || image.top >= 0 ? image.top : null} speed={20} scalingRatio={scallingRatio} scrollX={this.scrollX} src={imageList.chapters.chapter27['scene'+image.scene][image.src]} zIndex={image.zIndex >= 0 ? image.zIndex : 5 } key={index}/>
+      )
+    })
+  }
+
+  _renderLottieAnimations () {
+    return Chapter27.lottieAnimations.map((animation, index) => {
+      return (
+        <LottieAnimation source={animationList.chapters.chapter27[animation.source]}
+                         progress={animation.progress ? animation.progress : null}
+                         isLoop={animation.isLoop || animation === false ? animation.isLoop : null}
+                         speed={animation.speed ? animation.speed : null}
+                         styles={[{position: 'absolute', zIndex: 10 }, animation.styles]}
+                         key={index}
+        />
       )
     })
   }
@@ -132,8 +148,9 @@ class Chapter extends React.Component {
             }
         )}>
           {this._renderScenes()}
-          <Paragraph text={"C’est un soir d'orage que Zeus et Rhéa décidèrent d'agir contre Cronos. Ce soir-là, l'orage était terriblement violent. Cronos ne cessait d'aller et venir dans sa chambre."} width={900} bottom={'5%'} left={0.003} scrollX={this.scrollX} windowWidth={windowWidth} parentWidth={this.state.totalWidth} />
+          <Paragraph text={"C’est un soir d'orage que Zeus et Rhéa décidèrent d'agir contre Cronos. Ce soir-là, l'orage était terriblement violent. Cronos ne cessait d'aller et venir dans sa chambre."} width={900} bottom={'5%'} left={0.003} scrollX={this.scrollX} windowWidth={windowWidth} parentWidth={this.state.totalWidth}/>
           {this._renderParallaxedImages()}
+          {this._renderLottieAnimations()}
         </ScrollView>
         <ChapterEnd width={windowWidth} imageSource={imageList.chapters.chapter28.thumbnail} nextChapter={this.state.nextChapter} showChapterEnd={this.state.showChapterEnd} />
         <View style={styles.absoluteContent}>
