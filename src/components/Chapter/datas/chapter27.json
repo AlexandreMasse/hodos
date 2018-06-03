@@ -1,14 +1,15 @@
 {
   "scenes": [
-    {"src": "chap27_part1"},
-    {"src": "chap27_part2"},
-    {"src": "chap27_part3"},
-    {"src": "chap27_part4"},
-    {"src": "chap27_part5"}
+    {"src": "Chap27_scene01"},
+    {"src": "Chap27_scene02"},
+    {"src": "Chap27_scene03"},
+    {"src": "Chap27_scene04"},
+    {"src": "Chap27_scene05"}
   ],
   "parallaxedImage": [
     {
-      "src": "Chap27_scene02_storm",
+      "src": "Chap27_scene01_eclair",
+      "scene": "01",
       "left" : "4.2%",
       "top" : "2%",
       "speed": -10,
@@ -17,59 +18,61 @@
     },
     {
       "src": "Chap27_scene01_palais",
+      "scene": "01",
       "left" : "0.43%",
       "top" : "3%",
       "speed": 1
     },
     {
       "src": "Chap27_scene01_rochers",
+      "scene": "01",
       "left" : 0,
       "bottom" : -2,
       "speed": 20
     },
     {
-      "src": "Chap27_scene01_pilier",
+      "src": "Chap27_scene01_pilier1",
+      "scene": "01",
       "left" : "3.8%",
       "bottom": 0,
       "speed": -30
     },
     {
-      "src": "Chap27_scene02_zeus",
+      "src": "Chap27_scene01_zeus",
+      "scene": "01",
       "left" : "4.4%",
       "bottom": 0,
       "speed": 10
     },
     {
-      "src": "Chap27_scene02_pilier1",
+      "src": "Chap27_scene01_pilier2",
+      "scene": "01",
       "left" : "9.4%",
       "bottom": 0,
       "speed": -7
     },
     {
-      "src": "Chap27_scene03_chronos",
+      "src": "Chap27_scene01_chronos",
+      "scene": "01",
       "left" : "9.05%",
       "top": 0,
       "speed": 7.8,
       "scallingRatio": 0.007
     },
     {
-      "src": "Chap27_scene02_pilier2",
+      "src": "Chap27_scene01_pilier3",
+      "scene": "01",
       "left" : "9.1%",
       "bottom": 0,
       "speed": 1
     },
     {
-      "src": "Chap27_scene03_pilier",
+      "src": "Chap27_scene01_pilier1",
+      "scene": "01",
       "left" : "15.1%",
       "top": 0,
       "speed": -12
     },
-    {
-      "src": "Chap27_scene04_storm",
-      "left" : "18.5%",
-      "top": "-7%",
-      "speed": -20
-    }
   ],
   "texts": [
   ]

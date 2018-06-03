@@ -35,7 +35,7 @@ class Chapter extends React.Component {
 
   componentWillMount() {
     //Calcul scaling ratio from original height
-    const sourceBackground = Image.resolveAssetSource(imageList.chapters.chapter27.chap27_part1)
+    const sourceBackground = Image.resolveAssetSource(imageList.chapters.chapter27.scene01.Chap27_scene01)
 
     this.setState({scalingRatio: windowHeight / sourceBackground.height})
 
@@ -87,7 +87,7 @@ class Chapter extends React.Component {
   _renderScenes () {
     return Chapter27.scenes.map((scene, index) => {
       return (
-        <Scene src={imageList.chapters.chapter27[scene.src]} windowHeight={windowHeight} key={index} zIndex={1} />
+        <Scene src={imageList.chapters.chapter27['scene0'+(index+1)][scene.src]} windowHeight={windowHeight} key={index} zIndex={1} />
       )
     })
   }
@@ -96,7 +96,7 @@ class Chapter extends React.Component {
     return Chapter27.parallaxedImage.map((image, index) => {
       const scallingRatio = image.scallingRatio ? this.state.scalingRatio + image.scallingRatio : this.state.scalingRatio
       return (
-        <ParallaxedImage left={image.left} bottom={image.bottom || image.bottom >= 0 ? image.bottom : null} top={image.top || image.top >= 0 ? image.top : null} speed={20} scalingRatio={scallingRatio} scrollX={this.scrollX} src={imageList.chapters.chapter27[image.src]} zIndex={image.zIndex >= 0 ? image.zIndex : 2 } key={index}/>
+        <ParallaxedImage left={image.left} bottom={image.bottom || image.bottom >= 0 ? image.bottom : null} top={image.top || image.top >= 0 ? image.top : null} speed={20} scalingRatio={scallingRatio} scrollX={this.scrollX} src={imageList.chapters.chapter27['scene'+image.scene][image.src]} zIndex={image.zIndex >= 0 ? image.zIndex : 2 } key={index}/>
       )
     })
   }
