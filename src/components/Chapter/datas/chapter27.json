@@ -16,13 +16,13 @@
       "scallingRatio": 0.005,
       "zIndex": 0
     },
-    {
+    /*{
       "src": "Chap27_scene01_palais",
       "scene": "01",
       "left" : "0.43%",
       "top" : "3%",
       "speed": 1
-    },
+    },*/
     {
       "src": "Chap27_scene01_rochers",
       "scene": "01",
@@ -35,8 +35,17 @@
       "scene": "01",
       "left" : "3.8%",
       "bottom": 0,
-      "speed": -30
+      "speed": -20
     },
+
+    {
+      "src": "Chap27_scene01_serviteur",
+      "scene": "01",
+      "left" : "4.2%",
+      "bottom": 0,
+      "speed": 10
+    },
+
     {
       "src": "Chap27_scene01_zeus",
       "scene": "01",
@@ -76,15 +85,46 @@
   ],
   "texts": [
   ],
-  "lottieAnimations" : [
+  "lottieAnimations": [
     {
       "source": "palais",
       "styles": {
-        "width": "4%",
-        "height": "80%",
-        "left": "1%",
-        "top": "10%",
-        "zIndex": 2
+        "width": "3.4%",
+        "height": "88%",
+        "left": "0.05%",
+        "top": "7%",
+        "zIndex": 18
+      }
+    },
+    {
+      "source": "eclair-palais",
+      "styles": {
+        "width": "3.4%",
+        "height": "90%",
+        "left": "0.1%",
+        "top": "-10%",
+        "zIndex": 16
+      }
+    },
+    {
+      "source": "nuages-palais",
+      "progress": 0.5,
+      "styles": {
+        "width": "4.4%",
+        "height": "100%",
+        "left": "-0.5%",
+        "top": "5%",
+        "zIndex": 17
+      }
+    },
+    {
+      "source": "nuages-palais",
+      "styles": {
+        "width": "4.4%",
+        "height": "100%",
+        "left": "-0.5%",
+        "top": "35%",
+        "zIndex": 19
       }
     }
   ]

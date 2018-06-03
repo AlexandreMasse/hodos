@@ -1,22 +1,31 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { StyleSheet, View, ScrollView, Image, Dimensions, Text, Animated } from 'react-native'
 import { connect } from 'react-redux';
 import { currentOffsetProgress, setChapterProgress, setChapterRomanProgress } from "../../store/actions/actions"
 import Paragraph from './Paragraph'
 import Scene from './Scene'
 import ParallaxedImage from './ParallaxedImage'
-import ButtonWhite from "./../ButtonWhite";
 import ChapterEnd from './ChapterEnd'
 import imageList from '../../assets/ImagesList'
 import animationList from '../../assets/AnimationsList'
+import chapterList from './datas/chapterList'
 import OpenDrawerButton from "../OpenDrawerButton";
-import Chapter27 from "./datas/chapter27.json";
 import LottieAnimation from "../LottieAnimation/LottieAnimation";
 
 const windowHeight = Dimensions.get('window').height
 const windowWidth = Dimensions.get('window').width
 
 class Chapter extends React.Component {
+
+  static propTypes = {
+    number: PropTypes.number
+  }
+
+  static defaultProps = {
+    number: 27
+  }
+
 
   constructor(props) {
     super(props)
@@ -37,6 +46,7 @@ class Chapter extends React.Component {
 
   componentWillMount() {
     //Calcul scaling ratio from original height
+    // TODO : render this calcul dynamic with chapter number
     const sourceBackground = Image.resolveAssetSource(imageList.chapters.chapter27.scene01.Chap27_scene01)
 
     this.setState({scalingRatio: windowHeight / sourceBackground.height})
@@ -95,30 +105,30 @@ class Chapter extends React.Component {
   }
 
   _renderScenes () {
-    return Chapter27.scenes.map((scene, index) => {
+    return chapterList['chapter'+this.props.number].scenes.map((scene, index) => {
       return (
-        <Scene src={imageList.chapters.chapter27['scene0'+(index+1)][scene.src]} windowHeight={windowHeight} key={index} zIndex={1} />
+        <Scene src={imageList.chapters['chapter'+this.props.number]['scene0'+(index+1)][scene.src]} windowHeight={windowHeight} key={index} zIndex={10} />
       )
     })
   }
 
   _renderParallaxedImages () {
-    return Chapter27.parallaxedImage.map((image, index) => {
+    return chapterList['chapter'+this.props.number].parallaxedImage.map((image, index) => {
       const scallingRatio = image.scallingRatio ? this.state.scalingRatio + image.scallingRatio : this.state.scalingRatio
       return (
-        <ParallaxedImage left={image.left} bottom={image.bottom || image.bottom >= 0 ? image.bottom : null} top={image.top || image.top >= 0 ? image.top : null} speed={20} scalingRatio={scallingRatio} scrollX={this.scrollX} src={imageList.chapters.chapter27['scene'+image.scene][image.src]} zIndex={image.zIndex >= 0 ? image.zIndex : 5 } key={index}/>
+        <ParallaxedImage left={image.left} bottom={image.bottom || image.bottom >= 0 ? image.bottom : null} top={image.top || image.top >= 0 ? image.top : null} speed={20} scalingRatio={scallingRatio} scrollX={this.scrollX} src={imageList.chapters['chapter'+this.props.number]['scene'+image.scene][image.src]} zIndex={image.zIndex >= 0 ? image.zIndex : 20 } key={index}/>
       )
     })
   }
 
   _renderLottieAnimations () {
-    return Chapter27.lottieAnimations.map((animation, index) => {
+    return chapterList['chapter'+this.props.number].lottieAnimations.map((animation, index) => {
       return (
-        <LottieAnimation source={animationList.chapters.chapter27[animation.source]}
-                         progress={animation.progress ? animation.progress : null}
-                         isLoop={animation.isLoop || animation === false ? animation.isLoop : null}
-                         speed={animation.speed ? animation.speed : null}
-                         styles={[{position: 'absolute', zIndex: 10 }, animation.styles]}
+        <LottieAnimation source={animationList.chapters['chapter'+this.props.number][animation.source]}
+                         progress={animation.progress ? animation.progress : undefined}
+                         isLoop={animation.isLoop || animation === false ? animation.isLoop : undefined}
+                         speed={animation.speed ? animation.speed : undefined}
+                         styles={[{position: 'absolute', zIndex: 30 }, animation.styles]}
                          key={index}
         />
       )
@@ -151,8 +161,9 @@ class Chapter extends React.Component {
           <Paragraph text={"C’est un soir d'orage que Zeus et Rhéa décidèrent d'agir contre Cronos. Ce soir-là, l'orage était terriblement violent. Cronos ne cessait d'aller et venir dans sa chambre."} width={900} bottom={'5%'} left={0.003} scrollX={this.scrollX} windowWidth={windowWidth} parentWidth={this.state.totalWidth}/>
           {this._renderParallaxedImages()}
           {this._renderLottieAnimations()}
+          {/*<LottieAnimation source={require('../../assets/animations/chapter27/eclair-palais')}/>*/}
         </ScrollView>
-        <ChapterEnd width={windowWidth} imageSource={imageList.chapters.chapter28.thumbnail} nextChapter={this.state.nextChapter} showChapterEnd={this.state.showChapterEnd} />
+        <ChapterEnd width={windowWidth} imageSource={imageList.chapters['chapter'+(this.props.number+1)].thumbnail} nextChapter={this.state.nextChapter} showChapterEnd={this.state.showChapterEnd} />
         <View style={styles.absoluteContent}>
           {/*<Text style={styles.textTop}> Current offsetX : {this.props.currentOffset}</Text>*/}
         </View>
