@@ -27,21 +27,34 @@ class Intro extends React.Component {
   render () {
     return (
       <View style={styles.container}>
+        {/* Background Gradient*/}
         <LinearGradient start={[0, 0]} end={[0, 1]}
                         colors={['#00a7f5', 'rgba(255, 255, 255, 1)']} style={styles.backgroundGradient}
         />
-        <LottieAnimation source={require('../../assets/animations/nuages-intro.json')} styles={styles.animationNuagesIntro}/>
+        {/* Animations */}
+        <LottieAnimation source={require('../../assets/animations/intro/nuages-intro.json')} styles={styles.animationNuagesIntro}/>
         <ImageAspectRatio src={ImagesList.intro.landscape} width={'100%'} styles={styles.landscape}/>
-        <LottieAnimation source={require('../../assets/animations/olympe')} styles={styles.animationOlympe}/>
+        <LottieAnimation source={require('../../assets/animations/intro/cascade-intro')} styles={styles.animationCascade}/>
+        <LottieAnimation source={require('../../assets/animations/intro/olympe')} styles={styles.animationOlympe}/>
 
+        <LottieAnimation source={require('../../assets/animations/intro/bulles')} styles={styles.animationBulles1}/>
+        <LottieAnimation source={require('../../assets/animations/intro/bullesV2')} styles={styles.animationBulles2}/>
+        <LottieAnimation source={require('../../assets/animations/intro/bulles')} progress={0.33} styles={styles.animationBulles3}/>
+        <LottieAnimation source={require('../../assets/animations/intro/bullesV2')} progress={0.5} styles={styles.animationBulles4}/>
+        <LottieAnimation source={require('../../assets/animations/intro/bulles')} progress={0.66} styles={styles.animationBulles5}/>
+
+
+
+        {/* Texts */}
         <View style={styles.textApparitionContainer}>
           <TextApparition texts={this.texts} durations={[5200, 4000, 4500, 4000]} delay={1000} styles={{fontSize: 25, color: '#fff'}} />
         </View>
 
+        {/* Button */}
         <ButtonWhite text={'Passer l\'introduction'} style={styles.button} hasImage={true} imageLeft={false} onTouch={this._handleButtonWhiteOnTouch}/>
 
-        <LottieAnimation source={require('../../assets/animations/nuages-debut.json')} delay={200} styles={styles.animationNuagesDebut} isLoop={false}/>
-
+        {/* Nuage debut*/}
+        <LottieAnimation source={require('../../assets/animations/intro/nuages-debut.json')} delay={200} styles={styles.animationNuagesDebut} isLoop={false}/>
 
       </View>
     )
@@ -100,7 +113,49 @@ const styles = StyleSheet.create({
     left: '42%',
     height: '20%',
     width: '20%',
-  }
+  },
+  animationCascade: {
+    position: 'absolute',
+    bottom: '6.2%',
+    left: '0.5%',
+    height: '9%',
+    width: '10%',
+  },
+  animationBulles1: {
+    position: 'absolute',
+    bottom: '5.5%',
+    left: '60%',
+    height: '4%',
+    width: '5%',
+  },
+  animationBulles2: {
+    position: 'absolute',
+    bottom: '5.2%',
+    left: '68%',
+    height: '4%',
+    width: '5%',
+  },
+  animationBulles3: {
+    position: 'absolute',
+    bottom: '7%',
+    left: '80%',
+    height: '3%',
+    width: '5%',
+  },
+  animationBulles4: {
+    position: 'absolute',
+    bottom: '6.2%',
+    left: '86%',
+    height: '4%',
+    width: '5%',
+  },
+  animationBulles5: {
+    position: 'absolute',
+    bottom: '6.2%',
+    left: '91%',
+    height: '3.5%',
+    width: '5%',
+  },
 })
 
 const mapStateToProps = state => {

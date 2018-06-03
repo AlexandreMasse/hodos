@@ -14,6 +14,7 @@ export default class LottieAnimation extends React.Component {
     source: PropTypes.any,
     delay: PropTypes.number,
     speed: PropTypes.number,
+    progress: PropTypes.number
   }
 
   static defaultProps = {
@@ -24,6 +25,7 @@ export default class LottieAnimation extends React.Component {
     source: require('./olympe-bg.json'),
     delay: 0,
     speed: 1,
+    progress: 0
   }
 
   constructor(props) {
@@ -53,6 +55,7 @@ export default class LottieAnimation extends React.Component {
           source={this.props.source}
           loop={this.state.isLoop}
           speed={this.props.speed}
+          progress={this.props.progress}
         />
       </View>
     );
