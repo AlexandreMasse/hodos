@@ -7,11 +7,12 @@ import ImageScalingRatio from '../utils/ImageScalingRatio'
 export default class ParallaxedImage extends React.Component {
 
   static propTypes = {
+    scrollX: PropTypes.any.isRequired,
     left: PropTypes.any,
     top: PropTypes.any,
     zIndex: PropTypes.number,
+    rotate: PropTypes.number,
     scalingRatio: PropTypes.number,
-    scrollX: PropTypes.any,
     speed: PropTypes.number
   }
 
@@ -20,6 +21,7 @@ export default class ParallaxedImage extends React.Component {
     top: undefined,
     bottom: undefined,
     zIndex: undefined,
+    rotate: 0,
     scalingRatio: 1,
     speed: 0
   }
@@ -44,6 +46,8 @@ export default class ParallaxedImage extends React.Component {
             inputRange:[0, 100],
             outputRange: [0, this.props.speed]
           })
+        }, {
+          rotate: this.props.rotate + 'deg'
         }]},
         this.state.styles, styles.image]}
       >

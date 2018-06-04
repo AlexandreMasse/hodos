@@ -15,10 +15,10 @@ export default {
   "parallaxedImage": [
     {
       //"src": "Chap27_scene01_eclair",
-      "src": imageList.chapters.chapter27.scene01.Chap27_scene01_eclair,
+      "src": imageList.chapters.chapter27.scene01.Chap27_scene01_fenetre_background,
       "left" : "4.2%",
       "top" : "2%",
-      "speed": -10,
+      "speed": 25,
       "scallingRatio": 0.005,
       "zIndex": 0
     },
@@ -34,59 +34,88 @@ export default {
       "src": imageList.chapters.chapter27.scene01.Chap27_scene01_rochers,
       "left" : 0,
       "bottom" : -2,
-      "speed": 20
+      "speed": 10
     },
     {
       // "src": "Chap27_scene01_pilier1",
       "src": imageList.chapters.chapter27.scene01.Chap27_scene01_pilier1,
-      "left" : "3.8%",
+      "left" : "3.7%",
       "bottom": 0,
-      "speed": -20
+      "speed": -5
     },
 
     {
       //"src": "Chap27_scene01_serviteur",
       "src": imageList.chapters.chapter27.scene01.Chap27_scene01_serviteur,
-      "left" : "4.2%",
-      "bottom": 0,
-      "speed": 10
+      "left" : "4%",
+      "bottom": "9%",
+      "speed": 15,
+      "zIndex": 18
     },
-
     {
       //"src": "Chap27_scene01_zeus",
       "src": imageList.chapters.chapter27.scene01.Chap27_scene01_zeus,
-      "left" : "4.4%",
-      "bottom": 0,
-      "speed": 10
+      "left" : "6%",
+      "bottom": "-15%",
+      "speed": -10,
+      "zIndex": 19
     },
     {
-      // "src": "Chap27_scene01_pilier2",
+      "src": imageList.chapters.chapter27.scene01.Chap27_scene01_table,
+      "left" : "7.5%",
+      "bottom": "-15%",
+      "speed": -25
+    },
+    // chaise1
+    // chaise2
+    {
+      "src": imageList.chapters.chapter27.scene01.Chap27_scene01_chaise1,
+      "left" : "7.3%",
+      "bottom": "2%",
+      "speed": 8,
+      zIndex: 16
+    },
+    {
+      "src": imageList.chapters.chapter27.scene01.Chap27_scene01_chaise2,
+      "left" : "9.5%",
+      "bottom": "-17%",
+      "speed": -5,
+      zIndex: 16
+    },
+    {
       "src": imageList.chapters.chapter27.scene01.Chap27_scene01_pilier2,
-      "left" : "9.4%",
-      "bottom": 0,
-      "speed": -7
+      "left" : "8.8%",
+      "top": 0,
+      "speed": 10,
+      "zIndex": 15
     },
     {
-      //"src": "Chap27_scene01_chronos",
       "src": imageList.chapters.chapter27.scene01.Chap27_scene01_chronos,
-      "left" : "9.05%",
-      "top": 0,
-      "speed": 7.8,
-      "scallingRatio": 0.007
+      "left" : "9.3%",
+      "bottom": "-0.1%",
+      "speed": 5,
+      "scallingRatio": 0.00,
+      "zIndex": 19
     },
     {
-      //"src": "Chap27_scene01_pilier3",
       "src": imageList.chapters.chapter27.scene01.Chap27_scene01_pilier3,
-      "left" : "9.1%",
+      "left" : "11.5%",
       "bottom": 0,
-      "speed": 1
+      "speed": -15
     },
     {
-      // "src": "Chap27_scene01_pilier1",
-      "src": imageList.chapters.chapter27.scene01.Chap27_scene01_pilier1,
-      "left" : "15.1%",
+      "src": imageList.chapters.chapter27.scene01.Chap27_scene01_hera,
+      "left" : "11.4%",
+      "bottom": "11%",
+      "speed": 21,
+      "zIndex": 18,
+      "rotate": -14
+    },
+    {
+      "src": imageList.chapters.chapter27.scene01.Chap27_scene01_pilier3,
+      "left" : "18.4%",
       "top": 0,
-      "speed": -12
+      "speed": -10
     }
   ],
   "lottieAnimations": [
@@ -129,6 +158,17 @@ export default {
         "left": "-0.5%",
         "top": "35%",
         "zIndex": 19
+      }
+    },
+    {
+      "source": animationList.chapters.chapter27.eclairLeft,
+      "speed": 25,
+      "styles": {
+        "width": "3.1%",
+        "height": "100%",
+        "left": "5.3%",
+        "top": "-15%",
+        "zIndex": 5
       }
     }
   ],

@@ -12,6 +12,7 @@ import animationList from '../../assets/AnimationsList'
 import chapterList from './datas/chapterList'
 import OpenDrawerButton from "../OpenDrawerButton";
 import LottieAnimation from "../LottieAnimation/LottieAnimation";
+import ParallaxedAnimation from "./ParallaxedAnimation";
 
 const windowHeight = Dimensions.get('window').height
 const windowWidth = Dimensions.get('window').width
@@ -51,6 +52,10 @@ class Chapter extends React.Component {
 
     this.setState({scalingRatio: windowHeight / sourceBackground.height})
 
+    setInterval(() => {
+      this.props._setCurrentOffsetProgress(this.scrollX._value, this._getPercentProgress())
+    }, 2000)
+
   }
 
   componentDidMount() {
@@ -77,7 +82,7 @@ class Chapter extends React.Component {
 
   _getPercentProgress () {
     if (this.state.maxScrollX > 0) {
-      return this.scrollX._value / this.state.maxScrollX  * 100
+      return this.scrollX._value / this.state.maxScrollX * 100
     }
     return 0
   }
@@ -122,9 +127,10 @@ class Chapter extends React.Component {
       const scallingRatio = image.scallingRatio ? this.state.scalingRatio + image.scallingRatio : this.state.scalingRatio
       return (
         <ParallaxedImage left={image.left}
-                         bottom={image.bottom || image.bottom >= 0 ? image.bottom : null}
-                         top={image.top || image.top >= 0 ? image.top : null}
-                         speed={20}
+                         bottom={image.bottom || image.bottom >= 0 ? image.bottom : undefined}
+                         top={image.top || image.top >= 0 ? image.top : undefined}
+                         speed={image.speed || image.speed === 0 ? image.speed : undefined}
+                         rotate={image.rotate || image.rotate === 0 ? image.rotate : undefined}
                          scalingRatio={scallingRatio}
                          scrollX={this.scrollX}
                          src={image.src}
@@ -147,14 +153,23 @@ class Chapter extends React.Component {
   }
 
   _renderLottieAnimations () {
-    return chapterList['chapter'+this.props.number].lottieAnimations.map((animation, index) => {
-      return (
-        <LottieAnimation source={animation.source}
+    {/*  <LottieAnimation source={animation.source}
                          progress={animation.progress ? animation.progress : undefined}
                          isLoop={animation.isLoop || animation === false ? animation.isLoop : undefined}
                          speed={animation.speed ? animation.speed : undefined}
                          styles={[{position: 'absolute', zIndex: 30 }, animation.styles]}
                          key={index}
+        /> */}
+
+    return chapterList['chapter'+this.props.number].lottieAnimations.map((animation, index) => {
+      return (
+        <ParallaxedAnimation scrollX={this.scrollX}
+                             source={animation.source}
+                             progress={animation.progress ? animation.progress : undefined}
+                             isLoop={animation.isLoop || animation === false ? animation.isLoop : undefined}
+                             speed={animation.speed ? animation.speed : undefined}
+                             styles={[{position: 'absolute', zIndex: 30 }, animation.styles]}
+                             key={index}
         />
       )
     })

@@ -22,6 +22,7 @@ export default imageList = {
         'Chap27_scene01_serviteur': require('./images/chapters/27/scene01/Chap27_scene01_serviteur.png'),
         'Chap27_scene01_table': require('./images/chapters/27/scene01/Chap27_scene01_table.png'),
         'Chap27_scene01_zeus': require('./images/chapters/27/scene01/Chap27_scene01_zeus.png'),
+        'Chap27_scene01_fenetre_background': require('./images/chapters/27/scene01/Chap27_scene01_fenetre_background.png'),
       },
       scene02: {
         'Chap27_scene02': require('./images/chapters/27/scene02/Chap27_scene02.png'),
