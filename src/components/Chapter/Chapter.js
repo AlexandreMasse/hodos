@@ -13,6 +13,8 @@ import chapterList from './datas/chapterList'
 import OpenDrawerButton from "../OpenDrawerButton";
 import LottieAnimation from "../LottieAnimation/LottieAnimation";
 import ParallaxedAnimation from "./ParallaxedAnimation";
+import TextApparition from "./../TextApparition"
+import ButtonWhite from "./../ButtonWhite"
 
 const windowHeight = Dimensions.get('window').height
 const windowWidth = Dimensions.get('window').width
@@ -142,7 +144,6 @@ class Chapter extends React.Component {
   }
 
   _renderTexts () {
-    console.log(this.state.currentChapter)
     if (this.state.currentChapter && this.state.currentChapter.textBlocks) {
       return this.state.currentChapter.textBlocks.map((text, index) => {
         return (
@@ -175,6 +176,21 @@ class Chapter extends React.Component {
     })
   }
 
+  _renderBeginText() {
+    if (this.state.currentChapter && this.state.currentChapter.beginText) {
+      return(
+        <View style={{position: 'absolute', left: '0.5%', bottom: '5%', zIndex: 400, width: 800, alignItems: 'center'}}>
+          <View style={{width: 800, marginBottom: 50}}>
+            <TextApparition texts={this.state.currentChapter.beginText} durations={[15000, 6000, 12000, 4000]} delay={1000} styles={{fontSize: 21, color: '#fff'}}/>
+          </View>
+          <View style={{width: 150, paddingTop: 50}}>
+            <ButtonWhite text={'Rejouer'}/>
+          </View>
+        </View>
+      )
+    }
+  }
+
   render () {
     return (
       <View style={styles.container}>
@@ -198,7 +214,7 @@ class Chapter extends React.Component {
             }
         )}>
           {this._renderScenes()}
-          <Paragraph text={"C’est un soir d'orage que Zeus et Rhéa décidèrent d'agir contre Cronos. Ce soir-là, l'orage était terriblement violent. Cronos ne cessait d'aller et venir dans sa chambre."} width={900} bottom={'5%'} left={0.003} scrollX={this.scrollX} windowWidth={windowWidth} parentWidth={this.state.totalWidth}/>
+          {this._renderBeginText()}
           {this._renderParallaxedImages()}
           {this._renderLottieAnimations()}
           {this._renderTexts()}
