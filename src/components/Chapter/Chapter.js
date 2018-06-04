@@ -135,6 +135,17 @@ class Chapter extends React.Component {
     })
   }
 
+  _renderTexts () {
+    console.log(this.state.currentChapter)
+    if (this.state.currentChapter && this.state.currentChapter.textBlocks) {
+      return this.state.currentChapter.textBlocks.map((text, index) => {
+        return (
+          <Text style={{zIndex: 100, position: 'absolute', top: 30, left: 30, color: '#fff'}} key={index}>{text}</Text>
+        )
+      })
+    }
+  }
+
   _renderLottieAnimations () {
     return chapterList['chapter'+this.props.number].lottieAnimations.map((animation, index) => {
       return (
@@ -175,6 +186,7 @@ class Chapter extends React.Component {
           <Paragraph text={"C’est un soir d'orage que Zeus et Rhéa décidèrent d'agir contre Cronos. Ce soir-là, l'orage était terriblement violent. Cronos ne cessait d'aller et venir dans sa chambre."} width={900} bottom={'5%'} left={0.003} scrollX={this.scrollX} windowWidth={windowWidth} parentWidth={this.state.totalWidth}/>
           {this._renderParallaxedImages()}
           {this._renderLottieAnimations()}
+          {this._renderTexts()}
           {/*<LottieAnimation source={require('../../assets/animations/chapter27/eclair-palais')}/>*/}
         </ScrollView>
         <ChapterEnd width={windowWidth} imageSource={imageList.chapters['chapter'+(this.props.number+1)].thumbnail} nextChapter={this.state.nextChapter} showChapterEnd={this.state.showChapterEnd} />
