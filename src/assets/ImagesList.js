@@ -112,7 +112,24 @@ export default imageList = {
     }
   },
   characters: {
-    'zeus': require('./images/characters/zeus.png'),
+    card: {
+      'zeus': require('./images/characters/cards/Zeus.png'),
+      'artemis': require('./images/characters/cards/Artemis.png'),
+      'medee': require('./images/characters/cards/Medee.png'),
+      'aphrodite': require('./images/characters/cards/Aphrodite.png'),
+      'charon': require('./images/characters/cards/Charon.png'),
+      'helios': require('./images/characters/cards/Helios.png'),
+    },
+    profile: {
+      'zeus':  require('./images/characters/profile/Zeus.png'),
+      'artemis': require('./images/characters/profile/Artemis.png'),
+      'medee': require('./images/characters/profile/Medee.png'),
+      'aphrodite': require('./images/characters/profile/Aphrodite.png'),
+      'charon': require('./images/characters/profile/Charon.png'),
+      'helios': require('./images/characters/profile/Helios.png'),
+      'cronos': require('./images/characters/profile/Cronos.png'),
+      'hades': require('./images/characters/profile/Hades.png'),
+    }
   },
   previously: {
     'previously': require('./images/chapters/previously.png'),
