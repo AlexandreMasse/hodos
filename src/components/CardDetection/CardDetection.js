@@ -1,9 +1,15 @@
-import React from 'react';
+import React from 'react'
+import PropTypes from 'prop-types'
 import { View, StyleSheet, Text, Image, ART } from 'react-native';
-import imageList from '../assets/ImagesList'
+import imageList from './../../assets/ImagesList'
+import { patternList, charactersPatterns} from './patterns.js'
 
 export default class CardDetection extends React.Component {
-  
+
+  static propTypes = {
+    onPatternRecognition: PropTypes.func,
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -13,56 +19,9 @@ export default class CardDetection extends React.Component {
       characterName: ''
     };
 
-    this.patternsList = [
-      [
-        [1, 0, 0],
-        [0, 0, 1],
-        [1, 0, 0]
-      ],
-      [
-        [0, 0, 1],
-        [1, 0, 0],
-        [0, 0, 1]
-      ],
-      [
-        [0, 1, 0],
-        [1, 0, 0],
-        [1, 0, 0]
-      ],
-      [
-        [0, 0, 1],
-        [0, 0, 1],
-        [0, 1, 0]
-      ],
-      [
-        [0, 1, 0],
-        [1, 0, 0],
-        [0, 0, 1]
-      ],
-      [
-        [0, 0, 1],
-        [1, 0, 0]
-        [0, 1, 0],
-      ],
-    ]
+    this.patternsList = patternList
 
-    this.characters = [
-      {
-        id: 0,
-        name: "Hermès",
-        patterns: [0, 1]
-      },
-      {
-        id: 1,
-        name: "Rosanna",
-        patterns: [2, 3]
-      },
-      {
-        id: 2,
-        name: "Pausanna",
-        patterns: [4, 5]
-      },
-    ]
+    this.characters = charactersPatterns
 
     this.matrixCoords = [
       [
@@ -359,6 +318,9 @@ export default class CardDetection extends React.Component {
       console.log('CardDetection : matching Character Id => ',character)
       if (character) {
         this.setState({characterName: character.name})
+        if (this.onPatternRecognition) {
+          this.onPatternRecognition(character)
+        }
       }
     }
   }

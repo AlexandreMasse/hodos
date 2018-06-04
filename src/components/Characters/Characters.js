@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import OpenDrawerButton from "../OpenDrawerButton";
 import ImageAspectRatio from './../utils/ImageAspectRatio'
 import Title from './../Title'
-import CardDetection from './../CardDetection'
+import CardDetection from './../CardDetection/CardDetection'
 import { characterList } from './../../assets/characterList'
 import imageList from './../../assets/ImagesList'
 import { colors, fonts } from './../../assets/variables'
@@ -42,6 +42,10 @@ class Characters extends React.Component {
       }
     })
     this.characters = unlockedCharacters.concat(lockedCharacters)
+  }
+
+  _onPatternRecognition (character) {
+    console.log(character)
   }
 
   _showCharacterInfo(character) {
@@ -135,7 +139,7 @@ class Characters extends React.Component {
             {this._renderCharacterInfo()}
           </View>
           <View style={styles.cardDetection}>
-            <CardDetection />
+            <CardDetection onPatternRecognition={this._onPatternRecognition()} />
             <Text style={styles.cardDetectionText}>Pose une carte pour accéder aux informations de l’un de tes personnages rencontré</Text>
           </View>
         </View>
