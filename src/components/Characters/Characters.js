@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View, Text, Image, ScrollView, TouchableOpacity } from 'react-native'
+import { StyleSheet, View, Text, Image, ScrollView, TouchableOpacity, Animated } from 'react-native'
 import {connect} from 'react-redux';
 import OpenDrawerButton from "../OpenDrawerButton";
 import ImageAspectRatio from './../utils/ImageAspectRatio'
@@ -18,6 +18,7 @@ class Characters extends React.Component {
       showSkills: true,
       activeCharacter: {}
     }
+    this._visibility = new Animated.Value(0)
   }
 
   componentWillMount() {
@@ -45,14 +46,31 @@ class Characters extends React.Component {
   }
 
   _onPatternRecognition (character) {
-    console.log(character)
+    console.log('pattern recognized', character)
   }
 
-  _showCharacterInfo(character) {
+  _showCharacterInfosAnimation(character) {
     this.setState({
       showInfo: true,
       activeCharacter: character
     })
+    Animated.timing(this._visibility, {
+      toValue: 100,
+      duration: 300
+    }).start()
+  }
+
+  _showCharacterInfo(character) {
+    if (!this.state.showInfo) {
+      this._showCharacterInfosAnimation(character)
+    } else {
+      Animated.timing(this._visibility, {
+        toValue: 0,
+        duration: 300
+      }).start( () => {
+        this._showCharacterInfosAnimation(character)
+      })
+    }
   }
 
   _renderDescription(description) {
@@ -71,8 +89,8 @@ class Characters extends React.Component {
           <View key={index} style={[{flexDirection: 'row', alignItems: 'center', marginTop: 15}]}>
             <Image source={imageList.profile.skills[skillType.id]} style={[{width: 45, height: 45, resizeMode: 'contain', marginRight: 15}]} />
             <View>
-              <Text style={[styles.skillTypeName]}>{skillType.title} {skillType.name} </Text>
-              <Text style={[styles.skillName]}>{skill.name}</Text>
+              <Text style={[styles.characterSkillTypeName]}>{skillType.title} {skillType.name} </Text>
+              <Text style={[styles.characterSkillName]}>{skill.name}</Text>
             </View>
           </View>
         )
@@ -85,12 +103,12 @@ class Characters extends React.Component {
   }
 
   _renderCharacterInfo() {
-    if (this.state.showInfo && this.state.activeCharacter) {
+    if (this.state.showInfo && this.state.activeCharacter && characterList.profile[this.state.activeCharacter.id]) {
       return(
         <View style={[{flexDirection: 'row'}]}>
-          <View style={[styles.card]}>
-            <Text style={[styles.characterName]}>{this.state.activeCharacter.name}</Text>
-            <Text style={[styles.characterRole]}>{this.state.activeCharacter.role}</Text>
+          <View style={[styles.characterInfoCard]}>
+            <Text style={[styles.characterInfoName]}>{this.state.activeCharacter.name}</Text>
+            <Text style={[styles.characterInfoRole]}>{this.state.activeCharacter.role}</Text>
             <View style={{marginTop: 15}}>
               {this._renderDescription(this.state.activeCharacter.description)}
             </View>
@@ -133,11 +151,17 @@ class Characters extends React.Component {
         <View style={styles.characterTitle}>
           <Title title="Personnages" subTitle="Dieux, monstres et mortels rencontrés par Hermès" style={styles.title} />
         </View>
-        <ScrollView horizontal={true} style={{marginLeft: 60, flexGrow: 0, flexShrink: 0}}>{this._renderCharacterList()}</ScrollView>
-        <View style={[styles.infoWrapper]}>
-          <View style={[{width: 600, height: 400, marginLeft: 70, marginRight: 30, marginBottom: 30, marginTop: 40}]}>
+        <ScrollView horizontal={true} style={styles.characterScrollView}>{this._renderCharacterList()}</ScrollView>
+        <View style={[styles.characterInfoWrapper]}>
+          <Animated.View style={[
+            styles.characterInfoContainer,
+            {opacity: this._visibility.interpolate({
+                inputRange: [0, 100],
+                outputRange: [0, 1],
+              })}
+            ]}>
             {this._renderCharacterInfo()}
-          </View>
+          </Animated.View>
           <View style={styles.cardDetection}>
             <CardDetection onPatternRecognition={this._onPatternRecognition()} />
             <Text style={styles.cardDetectionText}>Pose une carte pour accéder aux informations de l’un de tes personnages rencontré</Text>
@@ -163,6 +187,11 @@ const styles = StyleSheet.create({
   characterTitle: {
     marginTop: 30,
     marginBottom: 20
+  },
+  characterScrollView: {
+    marginLeft: 60,
+    flexGrow: 0,
+    flexShrink: 0
   },
   listThumbnailWrapper: {
     width: 120,
@@ -193,11 +222,18 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     height: 60
   },
-  infoWrapper: {
+  characterInfoWrapper: {
     flexDirection: 'row',
     flex: 1,
     width: '100%',
-
+  },
+  characterInfoContainer: {
+    width: 600,
+    height: 400,
+    marginLeft: 70,
+    marginRight: 30,
+    marginBottom: 30,
+    marginTop: 40
   },
   cardDetection: {
     position: 'absolute',
@@ -220,7 +256,7 @@ const styles = StyleSheet.create({
     color: colors.grey,
     opacity: 0.8
   },
-  card: {
+  characterInfoCard: {
     width: 350,
     marginRight: 50,
     height: '100%',
@@ -232,18 +268,30 @@ const styles = StyleSheet.create({
     paddingVertical: 30,
     paddingHorizontal: 35,
   },
-  characterName: {
+  characterInfoName: {
     fontFamily: fonts.RubikMedium,
     textAlign: 'center',
     fontSize: 22,
     color: colors.grey
   },
-  characterRole: {
+  characterInfoRole: {
     fontFamily: fonts.RubikRegular,
     textAlign: 'center',
     fontSize: 15,
     color: colors.grey,
     opacity: 0.7
+  },
+  characterSkillTypeName: {
+    fontSize: 14,
+    color: colors.grey,
+    fontFamily: fonts.RubikRegular,
+    opacity: 0.5,
+    marginBottom: 2
+  },
+  characterSkillName: {
+    color: colors.grey,
+    fontFamily: fonts.RubikMedium,
+    fontSize: 18
   },
   cardText: {
     fontFamily: fonts.RubikRegular,
@@ -251,18 +299,6 @@ const styles = StyleSheet.create({
     color: colors.grey,
     margin: 2
   },
-  skillTypeName: {
-    fontSize: 14,
-    color: colors.grey,
-    fontFamily: fonts.RubikRegular,
-    opacity: 0.5,
-    marginBottom: 2
-  },
-  skillName: {
-    color: colors.grey,
-    fontFamily: fonts.RubikMedium,
-    fontSize: 18
-  }
 })
 
 const mapStateToProps = state => {
