@@ -1,6 +1,6 @@
 import React from 'react'
 import PropType from 'prop-types'
-import {StyleSheet, TouchableHighlight, Image, Text, View} from 'react-native'
+import {StyleSheet, TouchableOpacity, Image, Text, View} from 'react-native'
 import { colors, fonts } from './../assets/variables'
 import imageList from '../assets/ImagesList'
 
@@ -58,12 +58,12 @@ export default class ButtonWhite extends React.Component {
   }
   render () {
     return (
-      <TouchableHighlight onPress={ () => this._handleTouch()} underlayColor={'white'} style={styles.button}>
+      <TouchableOpacity onPress={ () => this._handleTouch()} activeOpacity={0.5} style={styles.button}>
         <View style={styles.wrapper}>
           {this._renderImage()}
           {this._renderText()}
         </View>
-      </TouchableHighlight>
+      </TouchableOpacity>
     )
   }
 }

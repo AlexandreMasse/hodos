@@ -137,7 +137,8 @@ class Map extends React.Component {
             <TouchableHighlight
               key={'mapIndicator_'+index}
               onPress={() => {this._showCard(mapPlace)} }
-              style={[styles.button, {top: (mapPlace.indicator.y - 0.7).toString() + '%', left: (mapPlace.indicator.x - 0.55).toString() + '%', width: 29, height: 29}]}
+              style={[styles.button, {top: (mapPlace.indicator.y - 1
+              ).toString() + '%', left: (mapPlace.indicator.x - 0.45).toString() + '%', width: 33, height: 33}]}
               underlayColor={null}>
               <LottieAnimation source={require('./../../assets/animations/map-indicator-active.json')} styles={{width: '100%', height: '100%'}} />
             </TouchableHighlight>
