@@ -1,10 +1,11 @@
 import imageList from '../../../assets/ImagesList'
 import animationList from '../../../assets/AnimationsList'
 
-// TODO: get texts from store
+// TODO: place texts
 // TODO: string in object is not necessary now ?
 
 export default {
+  "previouslyBannerImage":  imageList.chapters.chapter27.previously,
   "scenes": [
     {"src": imageList.chapters.chapter27.scene01.Chap27_scene01},
     {"src": imageList.chapters.chapter27.scene02.Chap27_scene02},

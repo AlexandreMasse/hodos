@@ -22,11 +22,11 @@ const windowWidth = Dimensions.get('window').width
 class Chapter extends React.Component {
 
   static propTypes = {
-    number: PropTypes.number
+    chapterId: PropTypes.number
   }
 
   static defaultProps = {
-    number: 27
+    chapterId: 26
   }
 
   constructor(props) {
@@ -34,8 +34,6 @@ class Chapter extends React.Component {
     this.state = {
       scalingRatio: 1,
       totalWidth: 0,
-      currentChapter: {},
-      nextChapter : {},
       maxScrollX: 0,
       showChapterEnd: false,
       scrollEnabled: true, //@Todo : switch it off for prez
@@ -44,6 +42,21 @@ class Chapter extends React.Component {
     }
     this.scrollX = new Animated.Value(0)
     this._buttonVisibility = new Animated.Value(0)
+
+    //Set progress if chapter wasn't read before
+    if (this.props.chapterId > this.props.progress.chapter) {
+      this.props._setChapterRomanProgress(val.numberRoman)
+    }
+
+    //Retrieves current chapter data in store
+    this.currentChapter = {}
+    this.props.chapterList.map(val => {
+      if (val.id === this.props.chapterId) {
+        this.currentChapter = val
+      } else if (this.currentChapter && Number(val.numberInt) === (Number(this.currentChapter.numberInt) + 1)) {
+        this.nextChapter = val
+      }
+    })
   }
 
   componentWillUnmount() {
@@ -66,21 +79,6 @@ class Chapter extends React.Component {
   componentDidMount() {
     // Go to last OffsetX
     this.scrollView.scrollTo({x: this.props.currentOffset, animated: true})
-
-    //Retrieves current chapter data in store
-    const currentChapterId = this.props.progress.chapter
-    this.props.chapterList.map(val => {
-      if (val.id === currentChapterId) {
-        this.props._setChapterRomanProgress(val.numberRoman)
-        this.setState({
-          currentChapter: val
-        })
-      } else if (val.id === currentChapterId + 1) {
-        this.setState({
-          nextChapter: val,
-        })
-      }
-    })
   }
 
   _getPercentProgress () {
@@ -136,7 +134,8 @@ class Chapter extends React.Component {
   }
 
   _renderScenes () {
-    return chapterList['chapter'+this.props.number].scenes.map((scene, index) => {
+    const chapterNumber = this.currentChapter.numberInt
+    return chapterList['chapter'+chapterNumber].scenes.map((scene, index) => {
       return (
         <Scene src={scene.src}
                windowHeight={windowHeight}
@@ -148,7 +147,7 @@ class Chapter extends React.Component {
   }
 
   _renderParallaxedImages () {
-    const chapterNumber = this.state.currentChapter.numberInt
+    const chapterNumber = this.currentChapter.numberInt
     if (chapterNumber) {
       return chapterList['chapter'+chapterNumber].parallaxedImage.map((image, index) => {
         const scallingRatio = image.scallingRatio ? this.state.scalingRatio + image.scallingRatio : this.state.scalingRatio
@@ -170,8 +169,9 @@ class Chapter extends React.Component {
   }
 
   _renderTexts () {
-    if (this.state.currentChapter && this.state.currentChapter.textBlocks) {
-      return this.state.currentChapter.textBlocks.map((text, index) => {
+    const currentChapter = this.currentChapter
+    if (currentChapter && currentChapter.textBlocks) {
+      return currentChapter.textBlocks.map((text, index) => {
         return (
           <Text style={{zIndex: 100, position: 'absolute', top: 30, left: 30, color: '#fff'}} key={index}>{text}</Text>
         )
@@ -188,7 +188,7 @@ class Chapter extends React.Component {
                          key={index}
         /> */}
 
-    const chapterNumber = this.state.currentChapter.numberInt
+    const chapterNumber = this.currentChapter.numberInt
     if (chapterNumber) {
       return chapterList['chapter'+chapterNumber].lottieAnimations.map((animation, index) => {
         return (
@@ -206,14 +206,13 @@ class Chapter extends React.Component {
   }
 
   _renderBeginText() {
-    const currentChapter = this.state.currentChapter
-    const chapterNumber = currentChapter.numberInt
-    if (currentChapter && currentChapter.beginText) {
+    const chapterNumber = this.currentChapter.numberInt
+    if (this.currentChapter && this.currentChapter.beginText) {
       const beginTextData = chapterList['chapter'+chapterNumber].beginText
       return(
         <View style={[{position: 'absolute'}, beginTextData.styles]}>
           <View style={{width: beginTextData.parentWidth, marginBottom: 50}}>
-            <TextApparition texts={currentChapter.beginText} durations={beginTextData.durations} delay={1000} styles={{fontSize: 21, color: '#fff'}} onAnimationEnd={ () => this._enableScroll() } restartAnimationCount={this.state.beginTextAnimationCount} />
+            <TextApparition texts={this.currentChapter.beginText} durations={beginTextData.durations} delay={1000} styles={{fontSize: 21, color: '#fff'}} onAnimationEnd={ () => this._enableScroll() } restartAnimationCount={this.state.beginTextAnimationCount} />
           </View>
             <Animated.View style={
               [{
@@ -243,10 +242,10 @@ class Chapter extends React.Component {
   }
 
   _renderChapterEnd() {
-    const nextChapterNumber = this.state.nextChapter.numberInt
-    if (nextChapterNumber) {
+    if (this.nextChapter) {
+      const nextChapterNumber = this.nextChapter.numberInt
       return (
-        <ChapterEnd width={windowWidth} imageSource={imageList.chapters['chapter'+(nextChapterNumber)].thumbnail} nextChapter={this.state.nextChapter} showChapterEnd={this.state.showChapterEnd} />
+        <ChapterEnd width={windowWidth} imageSource={imageList.chapters['chapter'+(nextChapterNumber)].thumbnail} nextChapter={this.nextChapter} showChapterEnd={this.state.showChapterEnd} />
       )
     }
   }

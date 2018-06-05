@@ -5,6 +5,7 @@ export default imageList = {
     },
     chapter27: {
       'thumbnail': require('./images/chapters/1/thumbnail.png'),
+      'previously': require('./images/chapters/27/previously.png'),
       scene01: {
         'Chap27_scene01': require('./images/chapters/27/scene01/Chap27_scene01.png'),
         'Chap27_scene01_palais': require('./images/chapters/27/scene01/Chap27_scene01_palais.png'),
