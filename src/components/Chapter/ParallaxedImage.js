@@ -13,7 +13,8 @@ export default class ParallaxedImage extends React.Component {
     zIndex: PropTypes.number,
     rotate: PropTypes.number,
     scalingRatio: PropTypes.number,
-    speed: PropTypes.number
+    speedX: PropTypes.number,
+    speedY: PropTypes.number
   }
 
   static defaultProps = {
@@ -23,7 +24,8 @@ export default class ParallaxedImage extends React.Component {
     zIndex: undefined,
     rotate: 0,
     scalingRatio: 1,
-    speed: 0
+    speedX: 0,
+    speedY: 0
   }
 
   constructor(props) {
@@ -44,7 +46,12 @@ export default class ParallaxedImage extends React.Component {
         transform: [{
           translateX: this.props.scrollX.interpolate({
             inputRange:[0, 100],
-            outputRange: [0, this.props.speed]
+            outputRange: [0, this.props.speedX]
+          })
+        },{
+          translateY: this.props.scrollX.interpolate({
+            inputRange:[0, 100],
+            outputRange: [0, this.props.speedY]
           })
         }, {
           rotate: this.props.rotate + 'deg'

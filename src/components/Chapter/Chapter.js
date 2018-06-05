@@ -155,7 +155,8 @@ class Chapter extends React.Component {
           <ParallaxedImage left={image.left}
                            bottom={image.bottom || image.bottom >= 0 ? image.bottom : undefined}
                            top={image.top || image.top >= 0 ? image.top : undefined}
-                           speed={image.speed || image.speed === 0 ? image.speed : undefined}
+                           speedX={image.speedX || image.speedX === 0 ? image.speedX : undefined}
+                           speedY={image.speedY || image.speedY === 0 ? image.speedY : undefined}
                            rotate={image.rotate || image.rotate === 0 ? image.rotate : undefined}
                            scalingRatio={scallingRatio}
                            scrollX={this.scrollX}
@@ -196,7 +197,9 @@ class Chapter extends React.Component {
                                source={animation.source}
                                progress={animation.progress ? animation.progress : undefined}
                                isLoop={animation.isLoop || animation === false ? animation.isLoop : undefined}
-                               speed={animation.speed ? animation.speed : undefined}
+                               speedX={animation.speedX ? animation.speedX : undefined}
+                               speedY={animation.speedY ? animation.speedY : undefined}
+                               speedAnimation={animation.speedAnimation ? animation.speedAnimation : undefined}
                                styles={[{position: 'absolute', zIndex: 30 }, animation.styles]}
                                key={index}
           />

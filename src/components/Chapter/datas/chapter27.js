@@ -20,7 +20,7 @@ export default {
       "src": imageList.chapters.chapter27.scene01.Chap27_scene01_fenetre_background,
       "left" : "4.2%",
       "top" : "2%",
-      "speed": 25,
+      "speedX": 25,
       "scallingRatio": 0.005,
       "zIndex": 0
     },
@@ -28,60 +28,60 @@ export default {
       "src": imageList.chapters.chapter27.scene01.Chap27_scene01_rochers,
       "left" : 0,
       "bottom" : -2,
-      "speed": 10
+      "speedX": 10,
     },
     {
       "src": imageList.chapters.chapter27.scene01.Chap27_scene01_pilier1,
       "left" : "3.7%",
       "bottom": 0,
-      "speed": -5
+      "speedX": -5
     },
     {
       "src": imageList.chapters.chapter27.scene01.Chap27_scene01_serviteur,
       "left" : "4%",
       "bottom": "9%",
-      "speed": 15,
+      "speedX": 15,
       "zIndex": 18
     },
     {
       "src": imageList.chapters.chapter27.scene01.Chap27_scene01_zeus,
       "left" : "6%",
       "bottom": "-15%",
-      "speed": -10,
+      "speedX": -10,
       "zIndex": 19
     },
     {
       "src": imageList.chapters.chapter27.scene01.Chap27_scene01_table,
       "left" : "7.5%",
       "bottom": "-15%",
-      "speed": -25
+      "speedX": -25
     },
     {
       "src": imageList.chapters.chapter27.scene01.Chap27_scene01_chaise1,
       "left" : "7.3%",
       "bottom": "2%",
-      "speed": 8,
+      "speedX": 8,
       zIndex: 16
     },
     {
       "src": imageList.chapters.chapter27.scene01.Chap27_scene01_chaise2,
       "left" : "9.5%",
       "bottom": "-17%",
-      "speed": -5,
+      "speedX": -5,
       "zIndex": 16
     },
     {
       "src": imageList.chapters.chapter27.scene01.Chap27_scene01_pilier2,
       "left" : "8.8%",
       "top": 0,
-      "speed": 10,
+      "speedX": 10,
       "zIndex": 15
     },
     {
       "src": imageList.chapters.chapter27.scene01.Chap27_scene01_chronos,
       "left" : "9.3%",
       "bottom": "-0.1%",
-      "speed": 5,
+      "speedX": 5,
       "scallingRatio": 0.00,
       "zIndex": 19
     },
@@ -89,13 +89,13 @@ export default {
       "src": imageList.chapters.chapter27.scene01.Chap27_scene01_pilier3,
       "left" : "11.5%",
       "bottom": 0,
-      "speed": -15
+      "speedX": -15
     },
     {
       "src": imageList.chapters.chapter27.scene01.Chap27_scene01_hera,
       "left" : "11.4%",
       "bottom": "11%",
-      "speed": 21,
+      "speedX": 21,
       "zIndex": 18,
       "rotate": -14
     },
@@ -103,7 +103,7 @@ export default {
       "src": imageList.chapters.chapter27.scene01.Chap27_scene01_pilier3,
       "left" : "18.4%",
       "top": 0,
-      "speed": -10
+      "speedX": -10
     },
 
     // SCENE 02
@@ -112,80 +112,87 @@ export default {
       "src": imageList.chapters.chapter27.scene02.Chap27_scene02_rochers1,
       "left" : "26.5%",
       "bottom": 0,
-      "speed": -8
+      "speedX": -8
     },
     {
       "src": imageList.chapters.chapter27.scene02.Chap27_scene02_texte1,
       "left" : "24.6%",
       "top": "35%",
-      "speed": 5,
+      "speedX": 5,
       "zIndex": 19
     },
     {
       "src": imageList.chapters.chapter27.scene02.Chap27_scene02_cailloux,
       "left" : "31.2%",
       "top": "10%",
-      "speed": -20,
+      "speedX": -20,
       "zIndex": 18
     },
     {
       "src": imageList.chapters.chapter27.scene02.Chap27_scene02_rochers2,
       "left" : "32.4%",
       "bottom": "-0.4%",
-      "speed": -5,
+      "speedX": -5,
       "scallingRatio": 0.01,
     },
     {
       "src": imageList.chapters.chapter27.scene02.Chap27_scene02_rochers3,
       "left" : "40.2%",
       "bottom": "0%",
-      "speed": -30,
+      "speedX": -30,
+    },
+    {
+      "src": imageList.chapters.chapter27.scene02.Chap27_scene02_main,
+      "left" : "36.1%",
+      "top": "272%",
+      "speedX": -5,
+      "speedY": -20,
+      "zIndex": 19
     },
     {
       "src": imageList.chapters.chapter27.scene02.Chap27_scene02_rochers4,
       "left" : "47.5%",
       "bottom": "-1%",
-      "speed": -35,
+      "speedX": -35,
       "zIndex": 21
     },
     {
       "src": imageList.chapters.chapter27.scene02.Chap27_scene02_rochers5,
       "left" : "33.5%",
       "bottom": "0%",
-      "speed": 10,
+      "speedX": 10,
     },
     {
       "src": imageList.chapters.chapter27.scene02.Chap27_scene02_rochers9,
       "left" : "45.5%",
       "top": "-1.1%",
-      "speed": -20,
+      "speedX": -20,
     },
     {
       "src": imageList.chapters.chapter27.scene02.Chap27_scene02_rochers7,
       "left" : "31.2%",
       "bottom": "-1%",
-      "speed": 20,
+      "speedX": 20,
       "zIndex": 19
     },
     {
       "src": imageList.chapters.chapter27.scene02.Chap27_scene02_texte2,
       "left" : "47.7%",
       "bottom": "30%",
-      "speed": -20,
+      "speedX": -20,
     },
     {
       "src": imageList.chapters.chapter27.scene02.Chap27_scene02_rochers6,
       "left" : "48.2%",
       "bottom": "-0.1%",
-      "speed": -15,
+      "speedX": -15,
     },
     {
       "src": imageList.chapters.chapter27.scene02.Chap27_scene02_rochers8,
       "left" : "38.1%",
       "top": "-0.7%",
-      "speed": 10,
+      "speedX": 10,
       "zIndex": 19
-
     },
 
   ],
@@ -234,7 +241,7 @@ export default {
     },
     {
       "source": animationList.chapters.chapter27.eclairLeft,
-      "speed": 25,
+      "speedX": 25,
       "styles": {
         "width": "3.9%",
         "height": "100%",
@@ -245,7 +252,7 @@ export default {
     },
     {
       "source": animationList.chapters.chapter27.eclairLeft,
-      "speed": -30,
+      "speedX": -30,
       "styles": {
         "width": "5.5%",
         "height": "142%",
@@ -258,12 +265,23 @@ export default {
 
     {
       "source": animationList.chapters.chapter27.eclairRouge,
-      "speed": 0,
+      "speedX": 0,
       "styles": {
         "width": "5.5%",
         "height": "142%",
         "left": "23.3%",
         "top": "-32%",
+        "zIndex": 15
+      }
+    },
+    {
+      "source": animationList.chapters.chapter27.nuagesBlanc,
+      "speedX": 0,
+      "styles": {
+        "width": "5%",
+        "height": "120%",
+        "left": "38.2%",
+        "top": "30%",
         "zIndex": 15
       }
     }

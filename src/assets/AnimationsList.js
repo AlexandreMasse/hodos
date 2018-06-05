@@ -6,6 +6,7 @@ export default animationList = {
       'nuagesPalais': require('./animations/chapter27/nuages-palais'),
       'eclairLeft': require('./animations/chapter27/eclair-left'),
       'eclairRouge': require('./animations/chapter27/eclair-rouge'),
+      'nuagesBlanc': require('./animations/chapter27/nuages-blancs'),
     },
   },
 };

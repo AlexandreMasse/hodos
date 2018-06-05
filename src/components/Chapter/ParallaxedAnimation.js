@@ -13,7 +13,8 @@ export default class ParallaxedAnimation extends React.Component {
     delay: PropTypes.number,
     speedAnimation: PropTypes.number,
     progress: PropTypes.number,
-    speed: PropTypes.number
+    speedX: PropTypes.number,
+    speedY: PropTypes.number,
   }
 
   static defaultProps = {
@@ -22,7 +23,8 @@ export default class ParallaxedAnimation extends React.Component {
     delay: undefined,
     speedAnimation: undefined,
     progress: undefined,
-    speed: 0
+    speedX: 0,
+    speedY: 0
   }
 
   constructor(props) {
@@ -35,9 +37,17 @@ export default class ParallaxedAnimation extends React.Component {
         transform: [{
           translateX: this.props.scrollX.interpolate({
             inputRange:[0, 100],
-            outputRange: [0, this.props.speed]
+            outputRange: [0, this.props.speedX]
           })
-        }]}, this.props.styles]}
+        },
+          {
+            translateY: this.props.scrollX.interpolate({
+              inputRange:[0, 100],
+              outputRange: [0, this.props.speedY]
+            })
+          }
+        ]
+      }, this.props.styles]}
       >
         <LottieAnimation source={this.props.source}
                          isLoop={this.props.isLoop}
