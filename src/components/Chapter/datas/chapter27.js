@@ -281,5 +281,75 @@ export default {
     "parentWidth": 800
   },
   "texts": [
+    {
+      "styles" : {
+        "top": "10%",
+        "left": 7.8,
+        "width": 1.5
+      }
+    },
+    {
+      "styles" : {
+        "top": "29%",
+        "left": 7.8,
+        "width": 1.4
+      }
+    },
+    {
+      "styles" : {
+        "top": "11%",
+        "left": 14.7,
+        "width": 1.4
+      }
+    },
+    {
+      "styles" : {
+        "bottom": "12%",
+        "left": 18,
+        "width": 1.5
+      }
+    },
+    {
+      "styles" : {
+        "top": "15%",
+        "left": 23,
+        "width": 1.53
+      }
+    },
+    {
+      "styles" : {
+        "top": "26%",
+        "left": 29.6,
+        "width": 1.53
+      }
+    },
+    {
+      "styles" : {
+        "bottom": "9%",
+        "left": 37,
+        "width": 1.53
+      }
+    },
+    {
+      "styles" : {
+        "top": "29%",
+        "left": 46,
+        "width": 1.53
+      }
+    },
+    {
+      "styles" : {
+        "top": "34%",
+        "left": 56,
+        "width": 1.53
+      }
+    },
+    {
+      "styles" : {
+        "top": "54%",
+        "left": 56,
+        "width": 1.53
+      }
+    }
   ]
 }

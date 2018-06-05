@@ -7,14 +7,15 @@ import Paragraph from './Paragraph'
 import Scene from './Scene'
 import ParallaxedImage from './ParallaxedImage'
 import ChapterEnd from './ChapterEnd'
-import imageList from '../../assets/ImagesList'
-import animationList from '../../assets/AnimationsList'
-import chapterList from './datas/chapterList'
 import OpenDrawerButton from "../OpenDrawerButton";
 import LottieAnimation from "../LottieAnimation/LottieAnimation";
 import ParallaxedAnimation from "./ParallaxedAnimation";
 import TextApparition from "./../TextApparition"
 import ButtonWhite from "./../ButtonWhite"
+import animationList from '../../assets/AnimationsList'
+import chapterList from './datas/chapterList'
+import imageList from '../../assets/ImagesList'
+import {fonts, colors} from './../../assets/variables'
 
 const windowHeight = Dimensions.get('window').height
 const windowWidth = Dimensions.get('window').width
@@ -72,7 +73,7 @@ class Chapter extends React.Component {
 
     setInterval(() => {
       this.props._setCurrentOffsetProgress(this.scrollX._value, this._getPercentProgress())
-    }, 2000)
+    }, 5000)
 
   }
 
@@ -170,11 +171,15 @@ class Chapter extends React.Component {
 
   _renderTexts () {
     const currentChapter = this.currentChapter
+    const chapterNumber = currentChapter.numberInt
     if (currentChapter && currentChapter.textBlocks) {
       return currentChapter.textBlocks.map((text, index) => {
-        return (
-          <Text style={{zIndex: 100, position: 'absolute', top: 30, left: 30, color: '#fff'}} key={index}>{text}</Text>
-        )
+        const textData = chapterList['chapter'+chapterNumber].texts[index]
+        if (textData) {
+          return (
+            <Paragraph text={text} styles={textData.styles} key={index} scrollX={this.scrollX} parentWidth={this.state.totalWidth} windowWidth={windowWidth} />
+          )
+        }
       })
     }
   }
