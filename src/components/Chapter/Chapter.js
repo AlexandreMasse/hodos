@@ -41,7 +41,7 @@ class Chapter extends React.Component {
       showSwipe: false,
       beginTextAnimationCount: 0
     }
-    this.scrollX = new Animated.Value(0)
+    this.scrollX = new Animated.Value(this.props.currentOffset)
     this._buttonVisibility = new Animated.Value(0)
 
     //Set progress if chapter wasn't read before
@@ -71,15 +71,16 @@ class Chapter extends React.Component {
 
     this.setState({scalingRatio: windowHeight / sourceBackground.height})
 
+    // Save progress
     setInterval(() => {
       this.props._setCurrentOffsetProgress(this.scrollX._value, this._getPercentProgress())
-    }, 5000)
+    }, 2000)
 
   }
 
   componentDidMount() {
     // Go to last OffsetX
-    this.scrollView.scrollTo({x: this.props.currentOffset, animated: true})
+    this.scrollView.scrollTo({x: this.props.currentOffset, animated: false})
   }
 
   _getPercentProgress () {

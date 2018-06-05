@@ -177,9 +177,9 @@ export default {
     },
     {
       "src": imageList.chapters.chapter27.scene02.Chap27_scene02_texte2,
-      "left" : "47.7%",
+      "left" : "51.5%",
       "bottom": "30%",
-      "speedX": -20,
+      "speedX": -30,
     },
     {
       "src": imageList.chapters.chapter27.scene02.Chap27_scene02_rochers6,
@@ -195,6 +195,75 @@ export default {
       "zIndex": 19
     },
 
+    // SCENE 03
+    {
+      "src": imageList.chapters.chapter27.scene03.Chap27_scene03_cailloux1,
+      "left" : "56.5%",
+      "bottom": "0%",
+      "speedX": -24,
+    },
+    {
+      "src": imageList.chapters.chapter27.scene03.Chap27_scene03_cailloux2,
+      "left" : "52%",
+      "bottom": "15%",
+      "speedX": -8,
+      "zIndex": 19
+    },
+    {
+      "src": imageList.chapters.chapter27.scene03.Chap27_scene03_cailloux3,
+      "left" : "44%",
+      "top": "-2%",
+      "speedX": 8,
+      "zIndex": 18
+    },
+    {
+      "src": imageList.chapters.chapter27.scene03.Chap27_scene03_cailloux4,
+      "left" : "35.5%",
+      "top": "10%",
+      "speedX": 24,
+      "zIndex": 17
+    },
+    {
+      "src": imageList.chapters.chapter27.scene03.Chap27_scene03_fumee1,
+      "left" : "45.5%",
+      "bottom": "-3%",
+      "speedX": 0,
+      "zIndex": 16
+    },
+    {
+      "src": imageList.chapters.chapter27.scene03.Chap27_scene03_fumee2,
+      "left" : "50.5%",
+      "top": "-4%",
+      "speedX": 0,
+      "zIndex": 16
+    },
+    {
+      "src": imageList.chapters.chapter27.scene03.Chap27_scene03_rochers1,
+      "left" : "66%",
+      "top": "0%",
+      "speedX": -20,
+    },
+    {
+      "src": imageList.chapters.chapter27.scene03.Chap27_scene03_hades,
+      "left" : "44.2%",
+      "top": "10%",
+      "speedX": 25,
+      "zIndex": 19
+    },
+    {
+      "src": imageList.chapters.chapter27.scene03.Chap27_scene03_zeus,
+      "left" : "76.8%",
+      "bottom": "-0.1%",
+      "speedX": -28,
+      "zIndex": 19
+    },
+    {
+      "src": imageList.chapters.chapter27.scene03.Chap27_scene03_rochers2,
+      "left" : "53%",
+      "bottom": "-0.1%",
+      "speedX": 15,
+      "zIndex": 19
+    },
   ],
   "lottieAnimations": [
     // SCENE 01
