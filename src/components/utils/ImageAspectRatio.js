@@ -8,7 +8,7 @@ export default class ImageAspectRatio extends React.Component {
     width: PropTypes.any,
     height: PropTypes.any,
     src: PropTypes.any.isRequired,
-    styles: PropTypes.any
+    styles: PropTypes.any,
   }
 
   static defaultProps = {
@@ -51,7 +51,7 @@ export default class ImageAspectRatio extends React.Component {
 
   render () {
     return (
-      <Image resizeMode='stretch' aspectRatio={this.ratio} style={[this.state.styles, this.props.styles]} source={this.props.src}/>
+      <Image resizeMode='stretch' aspectRatio={this.ratio} style={[this.state.styles, this.props.styles]} source={this.props.src} />
     )
   }
 }
