@@ -268,6 +268,17 @@ export default {
     }
 
   ],
+  "beginText": {
+    "styles": {
+      "left": "0.5%",
+      "bottom": "1%",
+      "zIndex": 30,
+      "width": 800,
+      "alignItems": "center"
+    },
+    "durations": [15000, 6000, 12000, 4000],
+    "parentWidth": 800
+  },
   "texts": [
   ]
 }

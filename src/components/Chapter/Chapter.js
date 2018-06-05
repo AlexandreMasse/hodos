@@ -202,11 +202,12 @@ class Chapter extends React.Component {
   }
 
   _renderBeginText() {
+    const beginTextData = chapterList['chapter'+this.props.number].beginText
     if (this.state.currentChapter && this.state.currentChapter.beginText) {
       return(
-        <View style={{position: 'absolute', left: '0.5%', bottom: '3%', zIndex: 400, width: 800, alignItems: 'center'}}>
-          <View style={{width: 800, marginBottom: 50}}>
-            <TextApparition texts={this.state.currentChapter.beginText} durations={[15000, 6000, 12000, 4000]} delay={1000} styles={{fontSize: 21, color: '#fff'}} onAnimationEnd={ () => this._enableScroll() } restartAnimationCount={this.state.beginTextAnimationCount} />
+        <View style={[{position: 'absolute'}, beginTextData.styles]}>
+          <View style={{width: beginTextData.parentWidth, marginBottom: 50}}>
+            <TextApparition texts={this.state.currentChapter.beginText} durations={beginTextData.durations} delay={1000} styles={{fontSize: 21, color: '#fff'}} onAnimationEnd={ () => this._enableScroll() } restartAnimationCount={this.state.beginTextAnimationCount} />
           </View>
             <Animated.View style={
               [{
