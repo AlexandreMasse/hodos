@@ -39,6 +39,7 @@ class Chapter extends React.Component {
       maxScrollX: 0,
       showChapterEnd: false,
       scrollEnabled: true, //@Todo : switch it off for prez
+      showSwipe: false,
       beginTextAnimationCount: 0
     }
     this.scrollX = new Animated.Value(0)
@@ -116,7 +117,10 @@ class Chapter extends React.Component {
 
   _enableScroll = () => {
     if (!this.state.scrollEnabled) {
-      this.setState({scrollEnabled: true})
+      this.setState({
+        scrollEnabled: true,
+        showSwipe: true
+      })
     }
     Animated.timing(this._buttonVisibility, {
       toValue: 100,
@@ -200,7 +204,7 @@ class Chapter extends React.Component {
   _renderBeginText() {
     if (this.state.currentChapter && this.state.currentChapter.beginText) {
       return(
-        <View style={{position: 'absolute', left: '0.5%', bottom: '5%', zIndex: 400, width: 800, alignItems: 'center'}}>
+        <View style={{position: 'absolute', left: '0.5%', bottom: '3%', zIndex: 400, width: 800, alignItems: 'center'}}>
           <View style={{width: 800, marginBottom: 50}}>
             <TextApparition texts={this.state.currentChapter.beginText} durations={[15000, 6000, 12000, 4000]} delay={1000} styles={{fontSize: 21, color: '#fff'}} onAnimationEnd={ () => this._enableScroll() } restartAnimationCount={this.state.beginTextAnimationCount} />
           </View>
@@ -216,6 +220,16 @@ class Chapter extends React.Component {
             }>
             <ButtonWhite text={'Rejouer'} source={imageList.others.iconReplay} iconLeft={false} imageStyle={{width: 30, height: 30}} onTouch={() => this._restartBeginTextAnimation()}/>
           </Animated.View>
+        </View>
+      )
+    }
+  }
+
+  _renderSwipeGesture() {
+    if (this.state.showSwipe) {
+      return (
+        <View style={{width: 180, height: 140, position: 'absolute', left: '3.2%', bottom: '2%', zIndex: 300}}>
+          <LottieAnimation source={require('./../../assets/animations/swipe-indicator.json')} styles={{width: '100%', height: '100%'}} />
         </View>
       )
     }
@@ -245,6 +259,7 @@ class Chapter extends React.Component {
             }
         )}>
           {this._renderScenes()}
+          {this._renderSwipeGesture()}
           {this._renderBeginText()}
           {this._renderParallaxedImages()}
           {this._renderLottieAnimations()}
