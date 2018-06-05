@@ -109,7 +109,7 @@ class Map extends React.Component {
     if (this.state.showReadingButton) {
       return (
         <View  style={styles.buttonRead} src={imageList.others.arrowRight}>
-          <ButtonWhite text={'Reprendre la lecture'} hasImage={true} imageLeft={false} onTouch={this._handleReading} />
+          <ButtonWhite text={'Reprendre la lecture'} source={imageList.others.arrowRight} iconLeft={false} onTouch={this._handleReading} />
         </View>
       );
     }
@@ -175,7 +175,7 @@ class Map extends React.Component {
           <Text style={stylesSheet.title}>{this.state.activePlace.name}</Text>
           <Text style={stylesSheet.subTitle}>{this.state.activePlace.description}</Text>
           <View style={styles.cardButtonContainer}>
-            <ButtonWhite text={'Accéder au lieu'} hasImage={true} imageLeft={false} onTouch={this._handleNavigationPlace} />
+            <ButtonWhite text={'Accéder au lieu'} source={imageList.others.arrowRight} iconLeft={false} onTouch={this._handleNavigationPlace} />
           </View>
         </Animated.View>
       )

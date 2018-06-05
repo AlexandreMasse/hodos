@@ -4,6 +4,7 @@ import { StyleSheet, View, Text, Image, Animated } from 'react-native'
 import { fonts } from './../../assets/variables'
 import ButtonWhite from './../ButtonWhite'
 import Title from './../Title'
+import imageList from './../../assets/ImagesList'
 
 export default class ChapterEnd extends React.Component {
 
@@ -119,10 +120,10 @@ export default class ChapterEnd extends React.Component {
           <Image source={this.props.imageSource} style={styles.thumbnail} />
         </View>
         <Animated.View style={[ styles.buttonBottomWrapper, {left: 20}, buttonVisibilityInterpolation ]}>
-          <ButtonWhite text={'Retour au plan'} hasImage={true} imageLeft={true} onTouch={this._handleBackToMap}  />
+          <ButtonWhite text={'Retour au plan'} source={imageList.others.arrowLeft} iconLeft={true} onTouch={this._handleBackToMap}  />
         </Animated.View>
         <Animated.View style={[styles.buttonBottomWrapper, {right: 20}, buttonVisibilityInterpolation ]}>
-          <ButtonWhite text={'Chapitre suivant'} hasImage={true} imageLeft={false} onTouch={this._handleGoToPreviously} />
+          <ButtonWhite text={'Chapitre suivant'} source={imageList.others.arrowRight} iconLeft={false} onTouch={this._handleGoToPreviously} />
         </Animated.View>
       </Animated.View>
     )

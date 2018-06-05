@@ -29,7 +29,6 @@ class Chapter extends React.Component {
     number: 27
   }
 
-
   constructor(props) {
     super(props)
     this.state = {
@@ -38,9 +37,12 @@ class Chapter extends React.Component {
       currentChapter: {},
       nextChapter : {},
       maxScrollX: 0,
-      showChapterEnd: false
+      showChapterEnd: false,
+      scrollEnabled: true, //@Todo : switch it off for prez
+      beginTextAnimationCount: 0
     }
-    this.scrollX = new Animated.Value(0);
+    this.scrollX = new Animated.Value(0)
+    this._buttonVisibility = new Animated.Value(0)
   }
 
   componentWillUnmount() {
@@ -112,6 +114,25 @@ class Chapter extends React.Component {
     }
   }
 
+  _enableScroll = () => {
+    if (!this.state.scrollEnabled) {
+      this.setState({scrollEnabled: true})
+    }
+    Animated.timing(this._buttonVisibility, {
+      toValue: 100,
+      duration: 300,
+    }).start()
+  }
+
+  _restartBeginTextAnimation = () => {
+    Animated.timing(this._buttonVisibility, {
+      toValue: 0,
+      duration: 300,
+    }).start()
+    let beginTextCount = this.state.beginTextAnimationCount
+    this.setState({beginTextAnimationCount: beginTextCount+1})
+  }
+
   _renderScenes () {
     return chapterList['chapter'+this.props.number].scenes.map((scene, index) => {
       return (
@@ -181,11 +202,20 @@ class Chapter extends React.Component {
       return(
         <View style={{position: 'absolute', left: '0.5%', bottom: '5%', zIndex: 400, width: 800, alignItems: 'center'}}>
           <View style={{width: 800, marginBottom: 50}}>
-            <TextApparition texts={this.state.currentChapter.beginText} durations={[15000, 6000, 12000, 4000]} delay={1000} styles={{fontSize: 21, color: '#fff'}}/>
+            <TextApparition texts={this.state.currentChapter.beginText} durations={[15000, 6000, 12000, 4000]} delay={1000} styles={{fontSize: 21, color: '#fff'}} onAnimationEnd={ () => this._enableScroll() } restartAnimationCount={this.state.beginTextAnimationCount} />
           </View>
-          <View style={{width: 150, paddingTop: 50}}>
-            <ButtonWhite text={'Rejouer'}/>
-          </View>
+            <Animated.View style={
+              [{
+                width: 150,
+                paddingTop: 50,
+                opacity: this._buttonVisibility.interpolate({
+                  inputRange: [0, 100],
+                  outputRange: [0, 1]
+                })
+              }]
+            }>
+            <ButtonWhite text={'Rejouer'} source={imageList.others.iconReplay} iconLeft={false} imageStyle={{width: 30, height: 30}} onTouch={() => this._restartBeginTextAnimation()}/>
+          </Animated.View>
         </View>
       )
     }
@@ -198,6 +228,7 @@ class Chapter extends React.Component {
           ref={this._scrollViewRef}
           onContentSizeChange={this._onContentSizeChange}
           horizontal={true}
+          scrollEnabled={this.state.scrollEnabled ? true : false}
           style={styles.scrollView}
           bounces={false}
           scrollEventThrottle={1}

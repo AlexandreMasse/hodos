@@ -13,7 +13,9 @@ export default class TextApparition extends React.Component {
     durations: PropType.array.isRequired,
     delay: PropType.number,
     start: PropType.bool,
-    styles: PropType.object
+    styles: PropType.object,
+    onAnimationEnd: PropType.func,
+    restartAnimationCount: PropType.number
   }
 
   static defaultProps = {
@@ -24,8 +26,48 @@ export default class TextApparition extends React.Component {
     super(props)
     this.state = {
       title: this.props.title,
-      subTitle: this.props.subTitle
+      subTitle: this.props.subTitle,
+      // restartAnimationCount: 0,
+      stopAnimation: false
     }
+  }
+
+  componentWillMount() {
+    this._visibility = new Animated.Value(0)
+    this._parentVisibility = new Animated.Value(100)
+    this.ranges = []
+    this.props.texts.forEach( (text, index) => {
+      this.ranges.push(increaseValue * (index + 1))
+    })
+    this.handleAnimation(increaseValue, this.props.durations, 0, this.props.texts.length)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.restartAnimationCount !== this.props.restartAnimationCount
+      && nextProps.restartAnimationCount > 0) {
+      this._handleRestart()
+    }
+  }
+
+  _handleRestart() {
+    this._visibility = new Animated.Value(0)
+    Animated.timing(this._parentVisibility, {
+      toValue: 0,
+      duration:  1000,
+    }).start( () => {
+      Animated.timing(this._visibility, {
+        toValue: 0,
+        duration:  10,
+      }).start( () => {
+        Animated.timing(this._parentVisibility, {
+          toValue: 100,
+          duration:  1000,
+        }).start( () => {
+          this.setState({stopAnimation: false})
+          this.handleAnimation(increaseValue, this.props.durations, 0, this.props.texts.length)
+        })
+      })
+    })
   }
 
   handleAnimation (value, durations, index, nb) {
@@ -35,23 +77,16 @@ export default class TextApparition extends React.Component {
       duration:  durations[index],
       delay: this.props.delay
     }).start(() => {
-      if (index < nb - 1) {
-        this.handleAnimation((value + increaseValue), durations, (index + 1), nb)
+      if (!this.state.stopAnimation) {
+        if (index < nb - 1) {
+          this.handleAnimation((value + increaseValue), durations, (index + 1), nb)
+        } else {
+          if (this.props.onAnimationEnd) {
+            this.props.onAnimationEnd()
+          }
+        }
       }
     })
-  }
-
-  componentWillMount() {
-    this._visibility = new Animated.Value(0)
-    this.ranges = []
-    this.props.texts.forEach( (text, index) => {
-      this.ranges.push(increaseValue * (index + 1))
-    })
-    this.handleAnimation(increaseValue, this.props.durations, 0, this.props.texts.length)
-  }
-
-  componentWillReceiveProps(nextProps) {
-
   }
 
   _renderTexts() {
@@ -75,9 +110,14 @@ export default class TextApparition extends React.Component {
 
   render () {
     return (
-      <View style={styles.textContainer}>
+      <Animated.View style={[
+        styles.textContainer,
+        { opacity: this._parentVisibility.interpolate({
+          inputRange: [0, 100],
+          outputRange: [0, 1]
+        })},]}>
         {this._renderTexts()}
-      </View>
+      </Animated.View>
     )
   }
 }

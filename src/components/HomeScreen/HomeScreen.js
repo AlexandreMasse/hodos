@@ -3,6 +3,7 @@ import { StyleSheet, View, Text, TouchableHighlight, Image, Button } from 'react
 import {connect} from 'react-redux';
 import StorageSessionManager from './../../store/StorageSessionManager'
 import ButtonWhite from './../ButtonWhite'
+import imageList from './../../assets/ImagesList'
 
 class HomeScreen extends React.Component {
 
@@ -15,7 +16,7 @@ class HomeScreen extends React.Component {
       <View style={styles.container}>
         <Image source={require('../../assets/images/splash/splash.png')} style={styles.splashImage} />
         <View style={styles.buttonContainer} >
-          <ButtonWhite text={'Commencer l\'aventure'}  style={styles.button} hasImage={true} imageLeft={false} onTouch={this._handleButtonWhiteOnTouch} />
+          <ButtonWhite text={'Commencer l\'aventure'}  style={styles.button} source={imageList.others.arrowRight} iconLeft={false} onTouch={this._handleButtonWhiteOnTouch} />
         </View>
         <View style={styles.buttonStorage} >
           <Button title="empty Local Storage" onPress={ () => StorageSessionManager.clearStorage()} />

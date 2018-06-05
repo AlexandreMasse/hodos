@@ -89,7 +89,7 @@ class SideMenu extends React.Component {
           </View>
           <ProgressBar nbSteps={100} progress={progressChapterPercent} height={6} width={240} isHorizontal={true} />
           <View style={{marginTop: 30}}>
-            <ButtonWhite text={'Reprendre la lecture'} hasImage={true} imageLeft={false} onTouch={() => this.props.navigation.navigate('Chapter')}/>
+            <ButtonWhite text={'Reprendre la lecture'} source={imageList.others.arrowRight} iconLeft={false} onTouch={() => this.props.navigation.navigate('Chapter')}/>
           </View>
         </View>
 

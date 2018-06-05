@@ -150,7 +150,8 @@ export default imageList = {
     'arrowLeft': require('./images/arrow-left.png'),
     'arrowRight': require('./images/arrow-right.png'),
     'close': require('./images/close.png'),
-    'lock': require('./images/lock.png')
+    'lock': require('./images/lock.png'),
+    'iconReplay': require('./images/icon-replay.png')
   }
 };
 

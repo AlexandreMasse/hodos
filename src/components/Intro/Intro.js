@@ -51,7 +51,7 @@ class Intro extends React.Component {
         </View>
 
         {/* Button */}
-        <ButtonWhite text={'Passer l\'introduction'} style={styles.button} hasImage={true} imageLeft={false} onTouch={this._handleButtonWhiteOnTouch}/>
+        <ButtonWhite text={'Passer l\'introduction'} style={styles.button} source={ImagesList.others.arrowRight} iconLeft={false} onTouch={this._handleButtonWhiteOnTouch}/>
 
         {/* Nuage debut*/}
         <LottieAnimation source={require('../../assets/animations/intro/nuages-debut.json')} delay={200} styles={styles.animationNuagesDebut} isLoop={false}/>

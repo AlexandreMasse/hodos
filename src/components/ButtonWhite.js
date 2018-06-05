@@ -8,9 +8,10 @@ export default class ButtonWhite extends React.Component {
 
   static propTypes = {
     text: PropType.string,
-    imageLeft: PropType.bool,
-    hasImage: PropType.bool,
-    onTouch: PropType.func
+    iconLeft: PropType.bool,
+    source: PropType.any,
+    onTouch: PropType.func,
+    imageStyle: PropType.any
   }
 
   static defaultProps = {
@@ -22,26 +23,29 @@ export default class ButtonWhite extends React.Component {
   }
 
   _handleTouch = () => {
-    this.props.onTouch()
+    if (this.props.onTouch) {
+      this.props.onTouch()
+    }
   }
 
   _renderImage() {
-    if (this.props.hasImage) {
+    if (this.props.source) {
       return(
-        <Image source={this.props.imageLeft ? imageList.others.arrowLeft :imageList.others.arrowRight} style={[
+        <Image source={this.props.source} style={[
           styles.buttonImage,
-          this.props.imageLeft ? styles.imageLeft : styles.imageRight
+          this.props.imageStyle ? this.props.imageStyle : '',
+          this.props.iconLeft ? styles.iconLeft : styles.iconRight
         ]} />
       )
     }
   }
 
   _renderText() {
-    if (this.props.hasImage) {
+    if (this.props.source) {
       return(
         <Text style={[
           styles.buttonText,
-          this.props.imageLeft ? styles.buttonLeft : styles.buttonRight
+          this.props.iconLeft ? styles.buttonLeft : styles.buttonRight
         ]}>{this.props.text}</Text>
       )
     } else {
@@ -79,13 +83,14 @@ const styles = StyleSheet.create({
   buttonImage: {
     position: 'absolute',
     top: 10,
-    width: 15,
+    width: 20,
+    height: 30,
     resizeMode: 'contain',
   },
-  imageRight: {
+  iconRight: {
     right: 18,
   },
-  imageLeft: {
+  iconLeft: {
     left: 18,
   },
   buttonText: {

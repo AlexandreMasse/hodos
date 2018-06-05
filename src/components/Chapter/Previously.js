@@ -44,7 +44,7 @@ class Previously extends React.Component {
       <View style={styles.container}>
         <Image source={imageList.previously.previously} style={styles.backgroundImage}/>
         <View style={styles.buttonLeft} src={imageList.others.arrowLeft}>
-          <ButtonWhite text={'Retour'} hasImage={true} imageLeft={true} onTouch={this._handleBackToMap}/>
+          <ButtonWhite text={'Retour'} source={imageList.others.arrowLeft} iconLeft={true} onTouch={this._handleBackToMap}/>
         </View>
         <View style={styles.previouslyWrapper}>
           <View style={styles.previouslyTitle}>
@@ -57,7 +57,7 @@ class Previously extends React.Component {
             </View>
           </View>
           <View style={styles.buttonRight}>
-            <ButtonWhite text={'Reprendre la lecture'} hasImage={true} imageLeft={false} onTouch={this._handleReading} />
+            <ButtonWhite text={'Reprendre la lecture'}  source={imageList.others.arrowRight} iconLeft={false} onTouch={this._handleReading} />
           </View>
         </View>
         <OpenDrawerButton/>
