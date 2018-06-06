@@ -255,15 +255,118 @@ export default {
       "left" : "76.8%",
       "bottom": "-0.1%",
       "speedX": -28,
-      "zIndex": 19
     },
     {
       "src": imageList.chapters.chapter27.scene03.Chap27_scene03_rochers2,
-      "left" : "53%",
+      "left" : "54.9%",
       "bottom": "-0.1%",
+      "speedX": 12,
+    },
+
+    // SCENE 04
+
+    {
+      "src": imageList.chapters.chapter27.scene04.Chap27_scene04_rochers1Lave,
+      "left" : "77%",
+      "bottom": "-0%",
+      "speedX": -20,
+      "zIndex": 21
+    },
+    {
+      "src": imageList.chapters.chapter27.scene04.Chap27_scene04_cyclope,
+      // 60.7
+      "left" : "57.4%",
+      "top": "-0.1%",
+      "speedX": 15,
+      "zIndex": 18
+    },
+    {
+      "src": imageList.chapters.chapter27.scene04.Chap27_scene04_bras_cyclope,
+      // 59.2
+      "left" : "55.9%",
+      "top": "-1.1%",
+      "speedX": 15,
+    },
+    {
+      "src": imageList.chapters.chapter27.scene04.Chap27_scene04_socle,
+      "left" : "67%",
+      "bottom": "16%",
+      "speedX": 0,
+      "zIndex": 19
+    },
+    {
+      "src": imageList.chapters.chapter27.scene04.Chap27_scene04_rochers2,
+      "left" : "77.1%",
+      "bottom": "-1%",
+      "speedX": -13,
+      "scallingRatio": 0.02,
+    },
+    {
+      "src": imageList.chapters.chapter27.scene04.Chap27_scene04_main_casque,
+      "left" : "59.7%",
+      "top": "-19%",
       "speedX": 15,
       "zIndex": 19
     },
+    {
+      "src": imageList.chapters.chapter27.scene04.Chap27_scene04_rochers3,
+      "left" : "81.7%",
+      "bottom": "-0.1%",
+      "speedX": -10,
+      "zIndex": 18
+    },
+    {
+      "src": imageList.chapters.chapter27.scene04.Chap27_scene04_rochers4,
+      "left" : "76.9%",
+      "bottom": "-0.1%",
+      "speedX": 0,
+    },
+    {
+      "src": imageList.chapters.chapter27.scene04.Chap27_scene04_hades,
+      "left" : "77.2%",
+      "bottom": "5%",
+      "speedX": 0,
+      "zIndex": 19
+    },
+    {
+      "src": imageList.chapters.chapter27.scene04.Chap27_scene04_rochers5,
+      "left" : "85.4%",
+      "bottom": "-0.1%",
+      "speedX": -10,
+    },
+    {
+      "src": imageList.chapters.chapter27.scene04.Chap27_scene04_rochers6,
+      "left" : "88.2%",
+      "bottom": "3%",
+      "speedX": -10,
+    },
+    {
+      "src": imageList.chapters.chapter27.scene04.Chap27_scene04_rochers7,
+      "left" : "109%",
+      "top": "-0.1%",
+      "speedX": -35,
+    },
+    {
+      "src": imageList.chapters.chapter27.scene04.Chap27_scene04_forge,
+      "left" : "83.1%",
+      "top": "17%",
+      "speedX": 0,
+    },
+    {
+      "src": imageList.chapters.chapter27.scene04.Chap27_scene04_forge_rochers,
+      "left" : "88.4%",
+      "bottom": "19%",
+      "speedX": -5,
+    },
+    {
+      "src": imageList.chapters.chapter27.scene04.Chap27_scene04_rochers8,
+      "left" : "102%",
+      "bottom": "-0.1%",
+      "speedX": -20,
+    },
+
+
+
   ],
   "lottieAnimations": [
     // SCENE 01
@@ -289,22 +392,23 @@ export default {
     },
     {
       "source": animationList.chapters.chapter27.nuagesPalais,
-      "progress": 0.5,
+      "progress": 0,
       "styles": {
         "width": "4.4%",
         "height": "100%",
         "left": "-0.5%",
         "top": "5%",
-        "zIndex": 17
+        "zIndex": 19
       }
     },
     {
       "source": animationList.chapters.chapter27.nuagesPalais,
+      "progress": 0.5,
       "styles": {
         "width": "4.4%",
         "height": "100%",
         "left": "-0.5%",
-        "top": "35%",
+        "top": "20%",
         "zIndex": 19
       }
     },
@@ -353,7 +457,21 @@ export default {
         "top": "30%",
         "zIndex": 15
       }
+    },
+
+    // SCENE 03
+
+    {
+      "source": animationList.chapters.chapter27.lave,
+      "speedX": -20,
+      "styles": {
+        "width": "3%",
+        "height": "75%",
+        "left": "78%",
+        "bottom": "23%",
+      }
     }
+
 
   ],
   "beginText": {

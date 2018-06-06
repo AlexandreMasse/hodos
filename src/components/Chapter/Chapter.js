@@ -73,14 +73,22 @@ class Chapter extends React.Component {
 
     // Save progress
     setInterval(() => {
+      console.log(this.scrollX._value);
       this.props._setCurrentOffsetProgress(this.scrollX._value, this._getPercentProgress())
-    }, 2000)
+    }, 5000)
 
   }
 
   componentDidMount() {
     // Go to last OffsetX
     this.scrollView.scrollTo({x: this.props.currentOffset, animated: false})
+    // setTimeout(() => {
+    //   Animated.timing(this.scrollX, {
+    //     toValue: this.props.currentOffset,
+    //     duration: 1,
+    //   }).start();
+    // }, 6000)
+
   }
 
   _getPercentProgress () {
