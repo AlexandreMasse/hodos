@@ -537,22 +537,78 @@ export default {
     },
     {
       "styles" : {
-        "top": "29%",
-        "left": 46,
+        "top": "34%",
+        "left": 47,
         "width": 1.53
       }
     },
     {
       "styles" : {
         "top": "34%",
-        "left": 56,
+        "left": 56.1,
         "width": 1.53
       }
     },
     {
       "styles" : {
-        "top": "54%",
-        "left": 56,
+        "top": "56%",
+        "left": 56.1,
+        "width": 1.53
+      }
+    },
+    {
+      "styles" : {
+        "top": "17%",
+        "left": 58,
+        "width": 1.53
+      }
+    },
+    {
+      "styles" : {
+        "bottom": "5%",
+        "left": 61,
+        "width": 1.53
+      }
+    },
+    {
+      "styles" : {
+        "top": "24%",
+        "left": 64,
+        "width": 1.53
+      }
+    },
+    {
+      "styles" : {
+        "top": "52%",
+        "left": 64,
+        "width": 1.53
+      }
+    },
+    {
+      "styles" : {
+        "bottom": "7%",
+        "left": 69.7,
+        "width": 1.53
+      }
+    },
+    {
+      "styles" : {
+        "top": "15%",
+        "left": 80,
+        "width": 1.53
+      }
+    },
+    {
+      "styles" : {
+        "top": "31%",
+        "left": 87,
+        "width": 1.53
+      }
+    },
+    {
+      "styles" : {
+        "bottom": "15%",
+        "left": 95,
         "width": 1.53
       }
     }
