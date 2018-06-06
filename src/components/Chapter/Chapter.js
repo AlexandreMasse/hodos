@@ -39,21 +39,22 @@ class Chapter extends React.Component {
       showChapterEnd: false,
       scrollEnabled: true, //@Todo : switch it off for prez
       showSwipe: false,
-      beginTextAnimationCount: 0
+      beginTextAnimationCount: 0,
+      scrollX: new Animated.Value(this.props.currentOffset),
+      currentScrollX: this.props.currentOffset
     }
-    this.scrollX = new Animated.Value(this.props.currentOffset)
-    this._buttonVisibility = new Animated.Value(0)
 
-    //Set progress if chapter wasn't read before
-    if (this.props.chapterId > this.props.progress.chapter) {
-      this.props._setChapterRomanProgress(val.numberRoman)
-    }
+    this._buttonVisibility = new Animated.Value(0)
 
     //Retrieves current chapter data in store
     this.currentChapter = {}
     this.props.chapterList.map(val => {
       if (val.id === this.props.chapterId) {
         this.currentChapter = val
+        //Set progress if chapter wasn't read before
+        if (this.props.chapterId > this.props.progress.chapter) {
+          this.props._setChapterRomanProgress(val.numberRoman)
+        }
       } else if (this.currentChapter && Number(val.numberInt) === (Number(this.currentChapter.numberInt) + 1)) {
         this.nextChapter = val
       }
@@ -61,7 +62,7 @@ class Chapter extends React.Component {
   }
 
   componentWillUnmount() {
-    this.props._setCurrentOffsetProgress(this.scrollX._value, this._getPercentProgress())
+    this.props._setCurrentOffsetProgress(this.state.currentScrollX, this._getPercentProgress())
   }
 
   componentWillMount() {
@@ -73,29 +74,29 @@ class Chapter extends React.Component {
 
     // Save progress
     setInterval(() => {
-      this.props._setCurrentOffsetProgress(this.scrollX._value, this._getPercentProgress())
-    }, 5000)
+      this.props._setCurrentOffsetProgress(this.state.currentScrollX, this._getPercentProgress())
+    }, 2000)
 
     setInterval(() => {
-      this._handleEndChapter(this.scrollX._value)
+      this._handleEndChapter(this.state.currentScrollX)
     }, 1500)
   }
 
   componentDidMount() {
     // Go to last OffsetX
-    // this.scrollView.scrollTo({x: this.props.currentOffset, animated: false})
-    // setTimeout(() => {
-    //   Animated.timing(this.scrollX, {
-    //     toValue: this.props.currentOffset,
-    //     duration: 1,
-    //   }).start();
-    // }, 6000)
+    this.scrollView.getNode().scrollTo({x: this.state.currentScrollX , animated: false})
 
+    // Simulate scroll for animation
+    Animated.timing(this.state.scrollX, {
+      toValue: this.props.currentOffset,
+      duration: 1,
+      useNativeDriver: true
+    }).start();
   }
 
   _getPercentProgress () {
     if (this.state.maxScrollX > 0) {
-      return this.scrollX._value / this.state.maxScrollX * 100
+      return this.state.currentScrollX / this.state.maxScrollX * 100
     }
     return 0
   }
@@ -171,7 +172,7 @@ class Chapter extends React.Component {
                            speedY={image.speedY || image.speedY === 0 ? image.speedY : undefined}
                            rotate={image.rotate || image.rotate === 0 ? image.rotate : undefined}
                            scalingRatio={scallingRatio}
-                           scrollX={this.scrollX}
+                           scrollX={this.state.scrollX}
                            src={image.src}
                            zIndex={image.zIndex >= 0 ? image.zIndex : 20 }
                            key={index}
@@ -189,7 +190,7 @@ class Chapter extends React.Component {
         const textData = chapterList['chapter'+chapterNumber].texts[index]
         if (textData) {
           return (
-            <Paragraph text={text} styles={textData.styles} key={index} scrollX={this.scrollX} parentWidth={this.state.totalWidth} windowWidth={windowWidth} />
+            <Paragraph text={text} styles={textData.styles} key={index} scrollX={this.state.scrollX} parentWidth={this.state.totalWidth} windowWidth={windowWidth} />
           )
         }
       })
@@ -209,7 +210,7 @@ class Chapter extends React.Component {
     if (chapterNumber) {
       return chapterList['chapter'+chapterNumber].lottieAnimations.map((animation, index) => {
         return (
-          <ParallaxedAnimation scrollX={this.scrollX}
+          <ParallaxedAnimation scrollX={this.state.scrollX}
                                source={animation.source}
                                progress={animation.progress ? animation.progress : undefined}
                                isLoop={animation.isLoop || animation === false ? animation.isLoop : undefined}
@@ -283,15 +284,19 @@ class Chapter extends React.Component {
           onScroll={Animated.event(
             [{ nativeEvent: {
                 contentOffset: {
-                  x: this.scrollX
+                  x: this.state.scrollX
                 }
               }
-            }], { useNativeDriver: true }
-            // {
-            //   listener: event => {
-            //     this._handleEndChapter(event.nativeEvent.contentOffset.x)
-            //   },
-            // }
+            }],
+            {
+              useNativeDriver: true,
+              listener: event => {
+                this.setState({
+                  currentScrollX: event.nativeEvent.contentOffset.x
+                })
+                //this._handleEndChapter(event.nativeEvent.contentOffset.x)
+              },
+            }
         )}>
           {this._renderScenes()}
           {this._renderSwipeGesture()}

@@ -336,13 +336,13 @@ export default {
     },
     {
       "src": imageList.chapters.chapter27.scene04.Chap27_scene04_rochers6,
-      "left" : "88.2%",
+      "left" : "88.4%",
       "bottom": "3%",
       "speedX": -10,
     },
     {
       "src": imageList.chapters.chapter27.scene04.Chap27_scene04_rochers7,
-      "left" : "109%",
+      "left" : "110%",
       "top": "-0.1%",
       "speedX": -35,
     },
@@ -364,7 +364,9 @@ export default {
       "bottom": "-0.1%",
       "speedX": -20,
     },
+
     // SCENE 05
+
     {
       "src": imageList.chapters.chapter27.scene05.Chap27_scene05_hermes,
       "left" : "105%",
