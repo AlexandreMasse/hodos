@@ -79,8 +79,8 @@ export default imageList = {
       scene05: {
         'Chap27_scene05': require('./images/chapters/27/scene05/Chap27_scene05.png'),
         'Chap27_scene05_zeus': require('./images/chapters/27/scene05/Chap27_scene05_zeus.png'),
-        'Chap27_scene05_hermes-main-droite': require('./images/chapters/27/scene05/Chap27_scene05_hermes-main-droite.png'),
-        'Chap27_scene05_hermes-main-gauche': require('./images/chapters/27/scene05/Chap27_scene05_hermes-main-gauche.png'),
+        'Chap27_scene05_hermes_main_droite': require('./images/chapters/27/scene05/Chap27_scene05_hermes-main-droite.png'),
+        'Chap27_scene05_hermes_main_gauche': require('./images/chapters/27/scene05/Chap27_scene05_hermes-main-gauche.png'),
         'Chap27_scene05_hermes': require('./images/chapters/27/scene05/Chap27_scene05_hermes.png'),
         'Chap27_scene05_rochers1': require('./images/chapters/27/scene05/Chap27_scene05_rochers1.png'),
         'Chap27_scene05_rochers2': require('./images/chapters/27/scene05/Chap27_scene05_rochers2.png'),

@@ -364,8 +364,44 @@ export default {
       "bottom": "-0.1%",
       "speedX": -20,
     },
-
-
+    // SCENE 05
+    {
+      "src": imageList.chapters.chapter27.scene05.Chap27_scene05_hermes,
+      "left" : "105%",
+      "bottom": "-60%",
+      "speedX": -16.5,
+      "speedY": -1.9,
+    },
+    {
+      "src": imageList.chapters.chapter27.scene05.Chap27_scene05_hermes_main_droite,
+      "left" : "82%",
+      "bottom": "-0.6%",
+      "speedX": 8,
+    },
+    {
+      "src": imageList.chapters.chapter27.scene05.Chap27_scene05_hermes_main_gauche,
+      "left" : "99%",
+      "bottom": "-0.6%",
+      "speedX": -8
+    },
+    {
+      "src": imageList.chapters.chapter27.scene05.Chap27_scene05_rochers1,
+      "left" : "106%",
+      "top": 0,
+      "speedX": -20,
+    },
+    {
+      "src": imageList.chapters.chapter27.scene05.Chap27_scene05_rochers3,
+      "left" : "112%",
+      "bottom": "5%",
+      "speedX": -20,
+    },
+    {
+      "src": imageList.chapters.chapter27.scene05.Chap27_scene05_zeus,
+      "left" : "112%",
+      "bottom": "-103%",
+      "speedX": -20,
+    },
 
   ],
   "lottieAnimations": [
@@ -608,7 +644,7 @@ export default {
     {
       "styles" : {
         "bottom": "15%",
-        "left": 95,
+        "left": 94.35,
         "width": 1.53
       }
     }

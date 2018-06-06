@@ -73,15 +73,17 @@ class Chapter extends React.Component {
 
     // Save progress
     setInterval(() => {
-      console.log(this.scrollX._value);
       this.props._setCurrentOffsetProgress(this.scrollX._value, this._getPercentProgress())
     }, 5000)
 
+    setInterval(() => {
+      this._handleEndChapter(this.scrollX._value)
+    }, 1500)
   }
 
   componentDidMount() {
     // Go to last OffsetX
-    this.scrollView.scrollTo({x: this.props.currentOffset, animated: false})
+    // this.scrollView.scrollTo({x: this.props.currentOffset, animated: false})
     // setTimeout(() => {
     //   Animated.timing(this.scrollX, {
     //     toValue: this.props.currentOffset,
@@ -110,7 +112,7 @@ class Chapter extends React.Component {
   }
 
   _handleEndChapter = (scrollX) => {
-    if (scrollX === this.state.maxScrollX) {
+    if (scrollX === this.props.scrollX) {
       this.setState({
         showChapterEnd: true,
       })
@@ -270,7 +272,7 @@ class Chapter extends React.Component {
   render () {
     return (
       <View style={styles.container}>
-        <ScrollView
+        <Animated.ScrollView
           ref={this._scrollViewRef}
           onContentSizeChange={this._onContentSizeChange}
           horizontal={true}
@@ -284,11 +286,12 @@ class Chapter extends React.Component {
                   x: this.scrollX
                 }
               }
-            }], {
-              listener: event => {
-                this._handleEndChapter(event.nativeEvent.contentOffset.x)
-              },
-            }
+            }], { useNativeDriver: true }
+            // {
+            //   listener: event => {
+            //     this._handleEndChapter(event.nativeEvent.contentOffset.x)
+            //   },
+            // }
         )}>
           {this._renderScenes()}
           {this._renderSwipeGesture()}
@@ -297,7 +300,7 @@ class Chapter extends React.Component {
           {this._renderLottieAnimations()}
           {this._renderTexts()}
           {/*<LottieAnimation source={require('../../assets/animations/chapter27/eclair-palais')}/>*/}
-        </ScrollView>
+        </Animated.ScrollView>
         {this._renderChapterEnd()}
         <View style={styles.absoluteContent}>
           {/*<Text style={styles.textTop}> Current offsetX : {this.props.currentOffset}</Text>*/}
