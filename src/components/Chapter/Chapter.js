@@ -248,7 +248,7 @@ class Chapter extends React.Component {
             <Animated.View style={
               [{
                 width: 150,
-                paddingTop: 50,
+                paddingTop: 15,
                 opacity: this._buttonVisibility.interpolate({
                   inputRange: [0, 100],
                   outputRange: [0, 1]

@@ -26,9 +26,9 @@ export default {
     },
     {
       "src": imageList.chapters.chapter27.scene01.Chap27_scene01_rochers,
-      "left" : 0,
+      "left" : "-0.05%",
       "bottom" : -2,
-      "speedX": 10,
+      "speedX": -15,
     },
     {
       "src": imageList.chapters.chapter27.scene01.Chap27_scene01_pilier1,
@@ -94,10 +94,11 @@ export default {
     {
       "src": imageList.chapters.chapter27.scene01.Chap27_scene01_hera,
       "left" : "11.4%",
-      "bottom": "11%",
+      "bottom": "24%",
       "speedX": 21,
+      "speedY": 4,
       "zIndex": 18,
-      "rotate": -14
+      "rotate": -8
     },
     {
       "src": imageList.chapters.chapter27.scene01.Chap27_scene01_pilier3,
@@ -395,12 +396,12 @@ export default {
       "bottom": "-0.6%",
       "speedX": 12
     },
-    {
-      "src": imageList.chapters.chapter27.scene05.Chap27_scene05_rochers3,
-      "left" : "93.5%",
-      "bottom": "-0.1%",
-      "speedX": 0,
-    },
+    // {
+    //   "src": imageList.chapters.chapter27.scene05.Chap27_scene05_rochers3,
+    //   "left" : "93.5%",
+    //   "bottom": "-0.1%",
+    //   "speedX": 0,
+    // },
     {
       "src": imageList.chapters.chapter27.scene05.Chap27_scene05_zeus,
       "left" : "114.5%",
@@ -422,20 +423,22 @@ export default {
       "styles": {
         "width": "3.4%",
         "height": "88%",
-        "left": "0.05%",
+        "left": "0.050%",
         "top": "7%",
         "zIndex": 18
-      }
+      },
+      "speedX": 10
     },
     {
       "source": animationList.chapters.chapter27.eclairPalais,
       "styles": {
         "width": "3.4%",
         "height": "90%",
-        "left": "0.1%",
+        "left": "0.04%",
         "top": "-10%",
         "zIndex": 16
-      }
+      },
+      "speedX": 12
     },
     {
       "source": animationList.chapters.chapter27.nuagesPalais,
@@ -461,11 +464,11 @@ export default {
     },
     {
       "source": animationList.chapters.chapter27.eclairLeft,
-      "speedX": 25,
+      "speedX": 18,
       "styles": {
         "width": "3.9%",
         "height": "100%",
-        "left": "4.9%",
+        "left": "5.2%",
         "top": "-12%",
         "zIndex": 5
       }
@@ -533,7 +536,7 @@ export default {
   "beginText": {
     "styles": {
       "left": "0.5%",
-      "bottom": "1%",
+      "bottom": "4%",
       "zIndex": 30,
       "width": 800,
       "alignItems": "center"
@@ -647,7 +650,7 @@ export default {
     {
       // le deuxieme cyclope
       "styles" : {
-        "bottom": "7%",
+        "bottom": "9%",
         "left": 69.35,
         "width": 1.53
       }
