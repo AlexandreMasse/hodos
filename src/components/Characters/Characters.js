@@ -151,7 +151,7 @@ class Characters extends React.Component {
         <View style={styles.characterTitle}>
           <Title title="Personnages" subTitle="Dieux, monstres et mortels rencontrés par Hermès" style={styles.title} />
         </View>
-        <ScrollView horizontal={true} style={styles.characterScrollView}>{this._renderCharacterList()}</ScrollView>
+        <ScrollView horizontal={true} contentInset={{left:60}} contentInsetAdjustmentBehavior={'automatic'} style={styles.characterScrollView}>{this._renderCharacterList()}</ScrollView>
         <View style={[styles.characterInfoWrapper]}>
           <Animated.View style={[
             styles.characterInfoContainer,

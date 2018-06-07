@@ -107,6 +107,7 @@ class Chapter extends React.Component {
 
     // Save progress
     setInterval(() => {
+      console.log('update progress');
       this.props._setCurrentOffsetProgress(this.state.currentScrollX, this._getPercentProgress())
     }, 2000)
 

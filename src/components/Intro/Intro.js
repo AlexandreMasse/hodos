@@ -1,5 +1,5 @@
 import React from 'react'
-import {StyleSheet, View, Text, Image, Button, Dimensions} from 'react-native'
+import {StyleSheet, View, Text, Image, Button, Dimensions, Animated} from 'react-native'
 import {connect} from 'react-redux';
 import ButtonWhite from "../ButtonWhite";
 import LottieAnimation from "../LottieAnimation/LottieAnimation";
@@ -31,8 +31,11 @@ class Intro extends React.Component {
     // this.phrase2 = new PlayAudio(SoundsList.intro.phrase2)
     // this.phrase3 = new PlayAudio(SoundsList.intro.phrase3)
 
-
     // }
+
+    this.state = {
+      buttonOpacity: new Animated.Value(0)
+    }
   }
   // this.phrase1
   _handleButtonWhiteOnTouch = () => {
@@ -63,9 +66,9 @@ class Intro extends React.Component {
   }
 
   componentWillMount() {
-
     this._prepareSounds()
     console.log(this.audio)
+
     // soundObject.playAsync(SoundsList.intro.phrase1)
     // this.backgroundAudio.loadAudio().then(() => {
       // this.backgroundAudio.playAudio()
@@ -83,6 +86,12 @@ class Intro extends React.Component {
 
   componentDidMount() {
     console.log(this.audio)
+
+    Animated.timing(this.state.buttonOpacity, {
+      toValue: 1,
+      delay: 4000,
+      duration: 700
+    }).start()
   }
 
   componentDidUpdate() {
@@ -112,11 +121,19 @@ class Intro extends React.Component {
 
         {/* Texts */}
         <View style={styles.textApparitionContainer}>
-          <TextApparition texts={this.texts} durations={textsApparitions} delay={1000} styles={{fontSize: 25, color: '#fff'}} />
+          <TextApparition texts={this.texts} durations={textsApparitions} delay={1000} startDelay={2000} styles={{fontSize: 25, color: '#fff'}} />
         </View>
 
         {/* Button */}
-        <ButtonWhite text={'Passer l\'introduction'} style={styles.button} source={ImagesList.others.arrowRight} iconLeft={false} onTouch={this._handleButtonWhiteOnTouch}/>
+        <Animated.View style={[styles.buttonContainer, {opacity: this.state.buttonOpacity}]}>
+          <ButtonWhite text={'Passer l\'introduction'}
+                       style={styles.button}
+                       source={ImagesList.others.arrowRight}
+                       iconLeft={false}
+                       onTouch={this._handleButtonWhiteOnTouch}
+          />
+        </Animated.View>
+
 
         {/* Nuage debut*/}
         <LottieAnimation source={require('../../assets/animations/intro/nuages-debut.json')} delay={200} styles={styles.animationNuagesDebut} isLoop={false}/>
@@ -153,7 +170,7 @@ const styles = StyleSheet.create({
   },
   textApparitionContainer: {
     position: 'absolute',
-    top: '25%',
+    top: '22%',
     left: '50%',
     transform: [{translateX: -250}],
     width: 500,
