@@ -138,13 +138,13 @@ export default class Place extends React.Component {
             <View style={[styles.placeContent]}>
               <View>
                 <Text style={styles.listTitle}>Chapitres</Text>
-                <ScrollView horizontal={true} style={styles.listContent}>
+                <ScrollView horizontal={true} style={styles.listContent} showsHorizontalScrollIndicator={false}>
                   {this._renderChapterList()}
                 </ScrollView>
               </View>
               <View>
                 <Text style={styles.listTitle}>Personnages</Text>
-                <ScrollView horizontal={true} style={styles.listContent}>
+                <ScrollView horizontal={true} style={styles.listContent} showsHorizontalScrollIndicator={false}>
                 {this._renderCharacterList()}
                 </ScrollView>
               </View>

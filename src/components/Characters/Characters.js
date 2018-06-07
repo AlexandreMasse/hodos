@@ -131,8 +131,9 @@ class Characters extends React.Component {
                 {character.isLocked &&
                   <Image source={imageList.others.lock} style={[styles.listThumbnailLocked]} />
                 }
-                {!character.isLocked &&
+                {(!character.isLocked) &&
                   <View style={{position: 'absolute', top: 0, left: 0}}>
+                    <ImageAspectRatio width={'100%'} src={characterList.cards[character.id] ? characterList.cards[character.id] : characterList.cards[2]} style={[styles.listThumbnail, styles.listCharacterThumbnailWrapper]} />
                     <ImageAspectRatio width={'100%'} src={characterList.cards[character.id] ? characterList.cards[character.id] : characterList.cards[2]} style={[styles.listThumbnail, styles.listCharacterThumbnailWrapper]} />
                   </View>
                 }
@@ -151,7 +152,7 @@ class Characters extends React.Component {
         <View style={styles.characterTitle}>
           <Title title="Personnages" subTitle="Dieux, monstres et mortels rencontrés par Hermès" style={styles.title} />
         </View>
-        <ScrollView horizontal={true} style={styles.characterScrollView}>{this._renderCharacterList()}</ScrollView>
+        <ScrollView horizontal={true} style={styles.characterScrollView} showsHorizontalScrollIndicator={false} contentInset={{left: 60}} contentOffset={{x: -60}}>{this._renderCharacterList() }</ScrollView>
         <View style={[styles.characterInfoWrapper]}>
           <Animated.View style={[
             styles.characterInfoContainer,
@@ -189,7 +190,6 @@ const styles = StyleSheet.create({
     marginBottom: 20
   },
   characterScrollView: {
-    marginLeft: 60,
     flexGrow: 0,
     flexShrink: 0
   },
@@ -230,7 +230,7 @@ const styles = StyleSheet.create({
   characterInfoContainer: {
     width: 600,
     height: 400,
-    marginLeft: 70,
+    marginLeft: 50,
     marginRight: 30,
     marginBottom: 30,
     marginTop: 40

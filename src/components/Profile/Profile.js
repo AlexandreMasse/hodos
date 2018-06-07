@@ -127,7 +127,7 @@ class Profile extends React.Component {
           <View style={{marginHorizontal: 10, justifyContent: 'space-between'}}>
               {this._renderSkillNumber(skillType)}
           </View>
-          <ProgressBar progress={skillType.nbUnlocked} nbSteps={skillType.skills.length} height={260} width={8} isReversed={true} />
+          <ProgressBar progress={skillType.nbUnlocked} nbSteps={skillType.skills.length} height={260} width={8} isReversed={true} animationDelay={700} />
           <View style={{marginLeft: 40, marginTop: -5, justifyContent: 'space-between'}}>
             {this._renderSkillName(skillType)}
           </View>
@@ -224,7 +224,7 @@ class Profile extends React.Component {
                   <Text style={styles.progressBarText}>Naissance</Text>
                   <Text style={styles.progressBarText}>Âge adulte</Text>
                 </View>
-                <ProgressBar nbSteps={100} progress={this.props.progress.chapter} height={8} width={680} isHorizontal={true} />
+                <ProgressBar nbSteps={100} progress={this.props.progress.chapter} height={8} width={680} isHorizontal={true} animationDelay={700} />
               </View>
             </View>
           </View>
