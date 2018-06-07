@@ -13,12 +13,12 @@ import SoundsList from './src/assets/SoundsList'
 // Expo
 import { Asset, AppLoading, Font, Audio } from 'expo';
 
-  _cacheImages = (images) => {
-    return images.map(image => {
-      if (typeof image === 'string') {
-        return Image.prefetch(image);
+  _cacheFiles = (files) => {
+    return files.map(file => {
+      if (typeof file === 'string') {
+        return Image.prefetch(file);
       } else {
-        return Asset.fromModule(image).downloadAsync()
+        return Asset.fromModule(file).downloadAsync()
       }
     })
   }
@@ -31,16 +31,6 @@ import { Asset, AppLoading, Font, Audio } from 'expo';
       let fontObject = {}
       fontObject[name] = fontSrc
       Font.loadAsync(fontObject)
-    })
-  }
-
-  _cacheAudio = (audios) => {
-    return audios.map( audio => {
-      console.log('LOAD SOUND')
-      const soundObject = new Expo.Audio.Sound.create(audio)
-      return soundObject.loadAsync(audio).then(() => {
-        console.log('is loaded')
-      })
     })
   }
 
@@ -74,7 +64,6 @@ import { Asset, AppLoading, Font, Audio } from 'expo';
       }
     }
     getAllValuesOfObject(SoundsList)
-    console.log('AUDIOS', audios)
     return audios
   }
 
@@ -87,11 +76,11 @@ class App extends React.Component {
   // Load asynchronously images and fonts
   async _loadAssetsAsync() {
 
-    const imageAssets = _cacheImages([
+    const imageAssets = _cacheFiles([
       ..._getImages()
     ])
 
-    const soundsAsset = _cacheImages([
+    const soundsAsset = _cacheFiles([
       ..._getAudios()
     ])
 
