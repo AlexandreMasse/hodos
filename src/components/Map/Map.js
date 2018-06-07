@@ -170,7 +170,7 @@ class Map extends React.Component {
             })
           }
         ]}>
-          <TouchableHighlight underlayColor={null} onPress={() => this._hideCard()} style={styles.closeBtn}>
+          <TouchableHighlight underlayColor={null} onPress={() => this._hideCard()} style={[styles.closeBtn, {padding: 15}]}>
             <Image source={imageList.others.close} style={{width: 20, height: 20}} />
           </TouchableHighlight>
           <Text style={stylesSheet.title}>{this.state.activePlace.name}</Text>
@@ -336,8 +336,8 @@ const styles = StyleSheet.create({
   },
   closeBtn: {
     position: 'absolute',
-    top: 20,
-    right: 20,
+    top: 15,
+    right: 15,
   }
 })
 

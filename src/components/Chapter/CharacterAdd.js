@@ -7,8 +7,9 @@ import Title from './../Title'
 import imageList from './../../assets/ImagesList'
 import CardDetection from './../CardDetection/CardDetection'
 import { characterList } from './../../assets/characterList'
+import { withNavigation } from 'react-navigation'
 
-export default class CharacterAdd extends React.Component {
+class CharacterAdd extends React.Component {
 
   static propTypes = {
     nextChapter: PropType.any,
@@ -234,3 +235,5 @@ const styles = StyleSheet.create({
     fontFamily: fonts.RubikMedium
   },
 })
+
+export default withNavigation(CharacterAdd)

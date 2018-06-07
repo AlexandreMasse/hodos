@@ -2,11 +2,13 @@ import React from 'react'
 import { StyleSheet, View, Text, Button, Image, TouchableHighlight, Dimensions, Animated, ScrollView } from 'react-native'
 import PropType from 'prop-types'
 import {fonts, colors} from './../../assets/variables'
+import {characterList} from '../../assets/characterList'
 import HeaderPlace from './../Map/HeaderPlace'
 import PlaceCard from './PlaceCard'
 import Title from './../Title'
 import ButtonWhite from './../ButtonWhite'
 import imageList from './../../assets/ImagesList'
+import ImageAspectRatio from './../utils/ImageAspectRatio'
 
 export default class Place extends React.Component {
 
@@ -60,25 +62,25 @@ export default class Place extends React.Component {
   }
 
   _renderChapterList() {
-    const chapterList = [
-      {name: 'Chapitre XX', description: 'Où Hermès découvre le palais de son père', numberInt: '27'},
-      {name: 'Chapitre IV', description: 'Où Hermès rencontre Zeus, son père', numberInt: '27'},
-      {name: 'Chapitre XXV', description: 'Où Hermès découvre qu’il peut voler', numberInt: '27'},
-      {name: 'Chapitre XV', description: 'Où Hermès découvre qu’il peut voler', numberInt: '27'}
-    ]
     if (this.props.place && this.props.place.chapters) {
       return this.props.place.chapters.map(function(chapter, index) {
-        return (
-          <View key={index} style={[styles.listElement]}>
-            <View style={[styles.listThumbnailWrapper,  styles.listChapterThumbnailWrapper]}>
-              <View style={[styles.listThumbnailContainer, styles.listChapterThumbnailWrapper]}>
-                <Image source={chapter.isLocked ? imageList.others.lock : imageList.chapters['chapter27'].thumbnail} style={[chapter.isLocked ? styles.listThumbnailLocked : styles.listThumbnail, styles.listChapterThumbnailWrapper]} />
+        const chapterNb = chapter.numberInt
+        const chapterImages = imageList.chapters['chapter'+chapterNb]
+        console.log(chapterImages)
+        if(chapterImages && chapterImages.thumbnail) {
+          return (
+            <View key={index} style={[styles.listElement]}>
+              <View style={[styles.listThumbnailWrapper,  styles.listChapterThumbnailWrapper]}>
+                <View style={[styles.listThumbnailContainer, styles.listChapterThumbnailWrapper]}>
+                  {/* <Image source={chapter.isLocked ? imageList.others.lock : chapterImages.thumbnail} style={[chapter.isLocked ? styles.listThumbnailLocked : styles.listThumbnail, styles.listChapterThumbnailWrapper]} /> */}
+                  <Image source={chapterImages.thumbnail} style={[styles.listThumbnail, styles.listChapterThumbnailWrapper]} />
+                </View>
               </View>
+              <Text style={[styles.listSubTitle]}>Chapitre {chapter.numberRoman}</Text>
+              <Text style={styles.listDescription}>{chapter.title}</Text>
             </View>
-            <Text style={[styles.listSubTitle]}>Chapitre - {chapter.numberRoman}</Text>
-            <Text style={styles.listDescription}>{chapter.title}</Text>
-          </View>
-        )
+          )
+        }
       })
     }
   }
@@ -90,7 +92,17 @@ export default class Place extends React.Component {
           <View key={index} style={[styles.listElement]}>
             <View style={[styles.listThumbnailWrapper, styles.listCharacterThumbnailWrapper]}>
               <View style={[styles.listThumbnailContainer, styles.listCharacterThumbnailWrapper]}>
-              <Image source={character.isLocked ? imageList.others.lock: imageList.characters['zeus']} style={[ character.isLocked ? styles.listThumbnailLocked : styles.listThumbnail, styles.listCharacterThumbnailWrapper]} />
+              {character.isLocked &&
+                // <Image source={imageList.others.lock} style={[styles.listThumbnailLocked]} />
+                <View style={{position: 'absolute', top: 0, left: 0}}>
+                  <ImageAspectRatio width={'100%'} src={characterList.cards[character.id] ? characterList.cards[character.id] : characterList.cards[2]} style={[styles.listThumbnail, styles.listCharacterThumbnailWrapper]} />
+                </View>
+              }
+              {!character.isLocked &&
+                <View style={{position: 'absolute', top: 0, left: 0}}>
+                  <ImageAspectRatio width={'100%'} src={characterList.cards[character.id] ? characterList.cards[character.id] : characterList.cards[2]} style={[styles.listThumbnail, styles.listCharacterThumbnailWrapper]} />
+                </View>
+              }
               </View>
             </View>
             <Text style={[styles.listSubTitle, styles.listCharacterSubtitle]}>{character.name}</Text>
@@ -236,9 +248,9 @@ const styles = StyleSheet.create({
     backgroundColor: 'green',
   },
   listThumbnailLocked: {
-    width: 180,
+    width: 35,
     resizeMode: 'contain',
-    height: 60
+    height: 35
   },
   listCharacterSubtitle: {
     textAlign: 'center'
