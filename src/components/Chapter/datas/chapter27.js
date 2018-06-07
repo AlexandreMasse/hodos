@@ -325,7 +325,9 @@ export default {
       "left" : "77.2%",
       "bottom": "5%",
       "speedX": 0,
-      "zIndex": 19
+      "zIndex": 19,
+      "opacityInputRange": [76.5, 77.1],
+      "opacityOutputRange": [1, 0]
     },
     {
       "src": imageList.chapters.chapter27.scene04.Chap27_scene04_rochers5,
