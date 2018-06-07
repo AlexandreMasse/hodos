@@ -151,6 +151,12 @@ export default imageList = {
       'charon': require('./images/characters/cards/Charon.png'),
       'helios': require('./images/characters/cards/Helios.png'),
       'hades': require('./images/characters/cards/Hades.png'),
+      'cronos': require('./images/characters/cards/Cronos.png'),
+      'dionysos': require('./images/characters/cards/Dionysos.png'),
+      'pausania': require('./images/characters/cards/Pausania.png'),
+      'poseidon': require('./images/characters/cards/Poseidon.png'),
+      'rosanna': require('./images/characters/cards/Rosanna.png'),
+      'hestia': require('./images/characters/cards/Hestia.png'),
     },
     profile: {
       'zeus':  require('./images/characters/profile/Zeus.png'),
@@ -161,6 +167,7 @@ export default imageList = {
       'helios': require('./images/characters/profile/Helios.png'),
       'cronos': require('./images/characters/profile/Cronos.png'),
       'hades': require('./images/characters/profile/Hades.png'),
+      'hestia': require('./images/characters/profile/Hestia.png'),
     }
   },
   previously: {

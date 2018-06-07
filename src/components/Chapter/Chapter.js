@@ -96,6 +96,7 @@ class Chapter extends React.Component {
 
   componentWillUnmount() {
     this.props._setCurrentOffsetProgress(this.state.currentScrollX, this._getPercentProgress())
+    clearInterval(this.progressTimeOut)
   }
 
   componentWillMount() {
@@ -106,14 +107,15 @@ class Chapter extends React.Component {
     this.setState({scalingRatio: windowHeight / sourceBackground.height})
 
     // Save progress
-    setInterval(() => {
-      console.log('update progress');
-      this.props._setCurrentOffsetProgress(this.state.currentScrollX, this._getPercentProgress())
+    this.progressTimeOut = setInterval(() => {
+      if (this._getPercentProgress() < 100) {
+        this.props._setCurrentOffsetProgress(this.state.currentScrollX, this._getPercentProgress())
+      }
     }, 2000)
 
     setInterval(() => {
       this._handleEndChapter(this.state.currentScrollX)
-    }, 1500)
+    }, 500)
   }
 
   componentDidMount() {
@@ -149,9 +151,11 @@ class Chapter extends React.Component {
   _handleEndChapter = (scrollX) => {
     if (scrollX === this.state.maxScrollX) {
       console.log("end !");
+      this.props._setCurrentOffsetProgress(0, 0)
       this.setState({
         showChapterEnd: true,
       })
+
     } else if (this.state.showChapterEnd) {
       console.log("not end !");
       this.setState({

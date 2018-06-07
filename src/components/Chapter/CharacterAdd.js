@@ -191,7 +191,7 @@ const styles = StyleSheet.create({
     zIndex: 40,
     height: '100%',
     width: '100%',
-    backgroundColor: '#dedede'
+    backgroundColor: '#fff'
   },
   backgroundImage: {
     position: 'absolute',
