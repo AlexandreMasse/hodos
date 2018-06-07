@@ -7,6 +7,7 @@ import Paragraph from './Paragraph'
 import Scene from './Scene'
 import ParallaxedImage from './ParallaxedImage'
 import ChapterEnd from './ChapterEnd'
+import CharacterAdd from './CharacterAdd'
 import OpenDrawerButton from "../OpenDrawerButton";
 import LottieAnimation from "../LottieAnimation/LottieAnimation";
 import ParallaxedAnimation from "./ParallaxedAnimation";
@@ -59,6 +60,38 @@ class Chapter extends React.Component {
         this.nextChapter = val
       }
     })
+
+    //Retrieves character discoverd
+    const characterDiscovered = this.currentChapter.charactersDiscovered
+    this.currentChapter.characterDiscoveredObject = []
+    if (characterDiscovered.length) {
+      characterDiscovered.forEach(character => {
+        this.props.characterList.forEach(val => {
+          if (character === val.id) {
+            this.currentChapter.characterDiscoveredObject.push(val)
+          }
+        })
+      })
+    }
+    //Retrieves skill
+    const skillDiscovered = this.currentChapter.skillDiscovered
+    this.currentChapter.skillDiscoveredObject = []
+    if (skillDiscovered.length) {
+      skillDiscovered.forEach(skill => {
+        this.props.skillList.forEach(val => {
+          if (skill === val.id) {
+            const skillObj = val
+            this.props.skillTypeList.forEach(skillType => {
+              if (Number(skillType.id) === Number(val.type)) {
+                skillObj.skillType = skillType
+              }
+            })
+            this.currentChapter.skillDiscoveredObject.push(skillObj)
+          }
+        })
+      })
+    }
+
   }
 
   componentWillUnmount() {
@@ -262,11 +295,20 @@ class Chapter extends React.Component {
   }
 
   _renderChapterEnd() {
-    if (this.nextChapter) {
-      const nextChapterNumber = this.nextChapter.numberInt
-      return (
-        <ChapterEnd width={windowWidth} imageSource={imageList.chapters['chapter'+(nextChapterNumber)].thumbnail} nextChapter={this.nextChapter} showChapterEnd={this.state.showChapterEnd} />
-      )
+    if (this.state.showChapterEnd) {
+      const chapterNumber = this.currentChapter.numberInt
+      if (this.nextChapter && chapterNumber) {
+        if (this.currentChapter.characterDiscoveredObject &&this.currentChapter.characterDiscoveredObject.length) {
+          return(
+            <CharacterAdd width={windowWidth} characterDiscovered={this.currentChapter.characterDiscoveredObject} skillDiscovered={this.currentChapter.skillDiscoveredObject}   nextChapter={this.nextChapter} showChapterEnd={this.state.showChapterEnd} texts={chapterList['chapter'+chapterNumber].characterDiscoveredText} />
+          )
+        } else {
+          const nextChapterNumber = this.nextChapter.numberInt
+          return (
+            <ChapterEnd width={windowWidth} imageSource={imageList.chapters['chapter'+(nextChapterNumber)].thumbnail} nextChapter={this.nextChapter} showChapterEnd={this.state.showChapterEnd} />
+          )
+        }
+      }
     }
   }
 
@@ -355,7 +397,10 @@ const mapStateToProps = state => {
   return {
     currentOffset: state.progress.currentOffset,
     chapterList: state.chapterList,
-    progress: state.progress
+    progress: state.progress,
+    characterList: state.characterList,
+    skillList: state.skillList,
+    skillTypeList: state.skillTypeList
   }
 }
 

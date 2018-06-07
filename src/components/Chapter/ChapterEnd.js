@@ -32,15 +32,13 @@ export default class ChapterEnd extends React.Component {
       },
       hasShownContainer: false
     }
+
+    this._visibility = new Animated.Value(0)
+    this._translation = new Animated.Value(0)
   }
 
   componentWillMount() {
-    this._visibility = new Animated.Value(0)
-    this._translation = new Animated.Value(0)
     this._buttonVisibility = new Animated.Value(0)
-  }
-
-  componentWillReceiveProps(nextProps) {
     Animated.timing(this._visibility, {
       toValue: nextProps.showChapterEnd ? 100 : 0,
       duration: 300,

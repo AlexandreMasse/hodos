@@ -539,6 +539,10 @@ export default {
     "durations": [15000, 6000, 12000, 4000],
     "parentWidth": 800
   },
+  "characterDiscoveredText": [
+    "Dans ce chapitre, Hermès a rencontré un personnage qui, grâce à un casque magique, peut devenir invisible.",
+    "Parmis ta collection de cartes, retrouve ce mystérieux personnage et maintiens sa carte dans le cadre gris pour ajouter cette nouvelle aptitude."
+  ],
   "texts": [
     {
       "styles" : {

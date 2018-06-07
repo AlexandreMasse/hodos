@@ -42,7 +42,7 @@ const introFade = (props) => {
   const translateY = 0
 
   const opacity = position.interpolate({
-    inputRange: [index - 1, index, index],
+    inputRange: [index - 1, index, index + 1],
     outputRange: [0, 1, 1]
   })
 

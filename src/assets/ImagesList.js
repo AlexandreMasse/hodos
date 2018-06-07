@@ -1,5 +1,6 @@
 export default imageList = {
   chapters: {
+    characterAddBackground: require('./images/chapters/characterAddBackground.png'),
     chapter1: {
       'thumbnail': require('./images/chapters/1/thumbnail.png'),
     },
