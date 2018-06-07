@@ -14,7 +14,9 @@ export default class ParallaxedImage extends React.Component {
     rotate: PropTypes.number,
     scalingRatio: PropTypes.number,
     speedX: PropTypes.number,
-    speedY: PropTypes.number
+    speedY: PropTypes.number,
+    parentWidth: PropTypes.number,
+    opacityInputRange: PropTypes.array
   }
 
   static defaultProps = {
@@ -25,7 +27,10 @@ export default class ParallaxedImage extends React.Component {
     rotate: 0,
     scalingRatio: 1,
     speedX: 0,
-    speedY: 0
+    speedY: 0,
+    parentWidth: 0,
+    opacityInputRange: [1, 2],
+    opacityOutputRange: [1, 1]
   }
 
   constructor(props) {
@@ -55,7 +60,13 @@ export default class ParallaxedImage extends React.Component {
           })
         }, {
           rotate: this.props.rotate + 'deg'
-        }]},
+        }],
+        opacity: this.props.scrollX.interpolate({
+          inputRange: this.props.opacityInputRange.map((val) => (val / 100) * this.props.parentWidth),
+          outputRange: this.props.opacityOutputRange
+        })
+      },
+
         this.state.styles, styles.image]}
       >
         <ImageScalingRatio scalingRatio={this.props.scalingRatio} src={this.props.src}/>

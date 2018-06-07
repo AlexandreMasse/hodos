@@ -146,11 +146,13 @@ class Chapter extends React.Component {
   }
 
   _handleEndChapter = (scrollX) => {
-    if (scrollX === this.props.scrollX) {
+    if (scrollX === this.state.maxScrollX) {
+      console.log("end !");
       this.setState({
         showChapterEnd: true,
       })
     } else if (this.state.showChapterEnd) {
+      console.log("not end !");
       this.setState({
         showChapterEnd: false,
       })
@@ -208,6 +210,9 @@ class Chapter extends React.Component {
                            scrollX={this.state.scrollX}
                            src={image.src}
                            zIndex={image.zIndex >= 0 ? image.zIndex : 20 }
+                           parentWidth={this.state.totalWidth}
+                           opacityInputRange={image.opacityInputRange ? image.opacityInputRange : undefined }
+                           opacityOutputRange={image.opacityOutputRange ? image.opacityOutputRange : undefined }
                            key={index}
           />
         )
@@ -223,7 +228,13 @@ class Chapter extends React.Component {
         const textData = chapterList['chapter'+chapterNumber].texts[index]
         if (textData) {
           return (
-            <Paragraph text={text} styles={textData.styles} key={index} scrollX={this.state.scrollX} parentWidth={this.state.totalWidth} windowWidth={windowWidth} />
+            <Paragraph text={text}
+                       styles={textData.styles}
+                       key={index}
+                       scrollX={this.state.scrollX}
+                       parentWidth={this.state.totalWidth}
+                       windowWidth={windowWidth}
+            />
           )
         }
       })
