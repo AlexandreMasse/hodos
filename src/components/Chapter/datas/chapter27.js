@@ -242,12 +242,13 @@ export default {
       "left" : "66%",
       "top": "0%",
       "speedX": -20,
+      "scallingRatio": 0.01
     },
     {
       "src": imageList.chapters.chapter27.scene03.Chap27_scene03_hades,
-      "left" : "44.2%",
+      "left" : "49.6%",
       "top": "10%",
-      "speedX": 25,
+      "speedX": 16,
       "zIndex": 19
     },
     {
@@ -274,7 +275,6 @@ export default {
     },
     {
       "src": imageList.chapters.chapter27.scene04.Chap27_scene04_cyclope,
-      // 60.7
       "left" : "57.4%",
       "top": "-0.1%",
       "speedX": 15,
@@ -282,7 +282,6 @@ export default {
     },
     {
       "src": imageList.chapters.chapter27.scene04.Chap27_scene04_bras_cyclope,
-      // 59.2
       "left" : "55.9%",
       "top": "-1.1%",
       "speedX": 15,
@@ -290,7 +289,7 @@ export default {
     {
       "src": imageList.chapters.chapter27.scene04.Chap27_scene04_socle,
       "left" : "67%",
-      "bottom": "16%",
+      "bottom": "0%",
       "speedX": 0,
       "zIndex": 19
     },
@@ -368,42 +367,50 @@ export default {
     // SCENE 05
 
     {
-      "src": imageList.chapters.chapter27.scene05.Chap27_scene05_hermes,
-      "left" : "105%",
-      "bottom": "-60%",
-      "speedX": -16.5,
-      "speedY": -1.9,
+      "src": imageList.chapters.chapter27.scene05.Chap27_scene05_rochers1,
+      "left" : "86%",
+      "top": "-0.1%",
+      "speedX": 0,
+      "zIndex": 22,
     },
     {
       "src": imageList.chapters.chapter27.scene05.Chap27_scene05_hermes_main_droite,
-      "left" : "82%",
+      "left" : "98.1%",
       "bottom": "-0.6%",
-      "speedX": 8,
+      "speedX": -12,
+    },
+    {
+      "src": imageList.chapters.chapter27.scene05.Chap27_scene05_hermes,
+      "left" : "88.3%",
+      "bottom": "-315%",
+      "speedX": 0,
+      "speedY": -10,
+      "zIndex": 18,
     },
     {
       "src": imageList.chapters.chapter27.scene05.Chap27_scene05_hermes_main_gauche,
-      "left" : "99%",
+      "left" : "79.2%",
       "bottom": "-0.6%",
-      "speedX": -8
-    },
-    {
-      "src": imageList.chapters.chapter27.scene05.Chap27_scene05_rochers1,
-      "left" : "106%",
-      "top": 0,
-      "speedX": -20,
+      "speedX": 12
     },
     {
       "src": imageList.chapters.chapter27.scene05.Chap27_scene05_rochers3,
-      "left" : "112%",
-      "bottom": "5%",
-      "speedX": -20,
+      "left" : "93.5%",
+      "bottom": "-0.1%",
+      "speedX": 0,
     },
     {
       "src": imageList.chapters.chapter27.scene05.Chap27_scene05_zeus,
-      "left" : "112%",
+      "left" : "114.5%",
       "bottom": "-103%",
-      "speedX": -20,
+      "speedX": -25,
     },
+    // {
+    //   "src": imageList.chapters.chapter27.scene05.Chap27_scene05_rochers2,
+    //   "left" : "95%",
+    //   "top": "-0.1%",
+    //   "speedX": 0,
+    // },
 
   ],
   "lottieAnimations": [
@@ -497,7 +504,7 @@ export default {
       }
     },
 
-    // SCENE 03
+    // SCENE 04
 
     {
       "source": animationList.chapters.chapter27.lave,
@@ -508,8 +515,17 @@ export default {
         "left": "78%",
         "bottom": "23%",
       }
+    },
+    {
+      "source": animationList.chapters.chapter27.forge,
+      "speedX": 0,
+      "styles": {
+        "width": "0.9%",
+        "height": "38%",
+        "left": "83.69%",
+        "bottom": "27%",
+      }
     }
-
 
   ],
   "beginText": {
@@ -595,58 +611,66 @@ export default {
       }
     },
     {
+      // les forces brutales
       "styles" : {
-        "top": "17%",
-        "left": 58,
-        "width": 1.53
+        "top": "28%",
+        "left": 58.3,
+        "width": 1
       }
     },
     {
+      // Il nous faut
       "styles" : {
-        "bottom": "5%",
+        "bottom": "7%",
         "left": 61,
         "width": 1.53
       }
     },
     {
+      // les cyclopes frappaient
       "styles" : {
         "top": "24%",
-        "left": 64,
+        "left": 63.6,
         "width": 1.53
       }
     },
     {
+      // le Cyclope était
       "styles" : {
         "top": "52%",
-        "left": 64,
+        "left": 63.6,
         "width": 1.53
       }
     },
     {
+      // le deuxieme cyclope
       "styles" : {
         "bottom": "7%",
-        "left": 69.7,
+        "left": 69.35,
         "width": 1.53
       }
     },
     {
+      // Hades le mit
       "styles" : {
         "top": "15%",
-        "left": 80,
+        "left": 79.5,
         "width": 1.53
       }
     },
     {
+      //le troisieme cyclope
       "styles" : {
-        "top": "31%",
-        "left": 87,
+        "top": "29%",
+        "left": 85.7,
         "width": 1.53
       }
     },
     {
+      //le cyclope
       "styles" : {
-        "bottom": "15%",
-        "left": 94.35,
+        "top": "17%",
+        "left": 92.2,
         "width": 1.53
       }
     }

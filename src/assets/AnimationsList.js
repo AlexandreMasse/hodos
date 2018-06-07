@@ -8,6 +8,7 @@ export default animationList = {
       'eclairRouge': require('./animations/chapter27/eclair-rouge'),
       'nuagesBlanc': require('./animations/chapter27/nuages-blancs'),
       'lave': require('./animations/chapter27/lave'),
+      'forge': require('./animations/chapter27/forge'),
     },
   },
 };

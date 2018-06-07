@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { StyleSheet, View, ScrollView, Image, Dimensions, Text, Animated } from 'react-native'
+import {StyleSheet, View, ScrollView, Image, Dimensions, Text, Animated, Button} from 'react-native'
 import { connect } from 'react-redux';
 import { currentOffsetProgress, setChapterProgress, setChapterRomanProgress } from "../../store/actions/actions"
 import Paragraph from './Paragraph'
@@ -277,6 +277,7 @@ class Chapter extends React.Component {
           ref={this._scrollViewRef}
           onContentSizeChange={this._onContentSizeChange}
           horizontal={true}
+          showsHorizontalScrollIndicator={false}
           scrollEnabled={this.state.scrollEnabled ? true : false}
           style={styles.scrollView}
           bounces={false}
@@ -308,6 +309,7 @@ class Chapter extends React.Component {
         </Animated.ScrollView>
         {this._renderChapterEnd()}
         <View style={styles.absoluteContent}>
+          {/*<Button title='save' onPress={() => this.props._setCurrentOffsetProgress(this.state.currentScrollX, this._getPercentProgress())}/>*/}
           {/*<Text style={styles.textTop}> Current offsetX : {this.props.currentOffset}</Text>*/}
         </View>
         <OpenDrawerButton/>
@@ -329,7 +331,7 @@ const styles = StyleSheet.create({
   },
   absoluteContent: {
     top: 20,
-    left: 20,
+    right: 20,
     alignItems: 'flex-start',
     position: 'absolute',
   },
