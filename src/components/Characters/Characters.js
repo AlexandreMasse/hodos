@@ -7,7 +7,7 @@ import Title from './../Title'
 import CardDetection from './../CardDetection/CardDetection'
 import { characterList } from './../../assets/characterList'
 import imageList from './../../assets/ImagesList'
-import { colors, fonts } from './../../assets/variables'
+import { colors, fonts, stylesSheet } from './../../assets/variables'
 
 class Characters extends React.Component {
 
@@ -162,9 +162,9 @@ class Characters extends React.Component {
             ]}>
             {this._renderCharacterInfo()}
           </Animated.View>
-          <View style={styles.cardDetection}>
+          <View style={stylesSheet.cardDetection}>
             <CardDetection onPatternRecognition={this._onPatternRecognition()} />
-            <Text style={styles.cardDetectionText}>Pose une carte pour accéder aux informations de l’un de tes personnages rencontré</Text>
+            <Text style={stylesSheet.cardDetectionText}>Pose une carte pour accéder aux informations de l’un de tes personnages rencontré</Text>
           </View>
         </View>
         <OpenDrawerButton/>
@@ -235,27 +235,7 @@ const styles = StyleSheet.create({
     marginBottom: 30,
     marginTop: 40
   },
-  cardDetection: {
-    position: 'absolute',
-    bottom: 0,
-    right: 20,
-    width: 300,
-    height: 400,
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-    backgroundColor: colors.lightGrey
-  },
-  cardDetectionText: {
-    position: 'absolute',
-    bottom: 0,
-    width: '100%',
-    fontSize: 14,
-    marginVertical: 30,
-    paddingHorizontal: 40,
-    textAlign: 'center',
-    color: colors.grey,
-    opacity: 0.8
-  },
+
   characterInfoCard: {
     width: 350,
     marginRight: 50,

@@ -7,6 +7,7 @@ export const characterList = {
     25: imageList.characters.card.charon,
     20: imageList.characters.card.helios,
     30: imageList.characters.card.medee,
+    17: imageList.characters.card.hades,
   },
   profile: {
     2: imageList.characters.profile.zeus,

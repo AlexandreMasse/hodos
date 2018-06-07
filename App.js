@@ -9,8 +9,9 @@ import storageSessionManager from './src/store/StorageSessionManager'
 import {AppStackNavigator} from './src/components/Navigator'
 // Assets
 import imageList from './src/assets/ImagesList'
+import SoundsList from './src/assets/SoundsList'
 // Expo
-import { Asset, AppLoading, Font } from 'expo';
+import { Asset, AppLoading, Font, Audio } from 'expo';
 
   _cacheImages = (images) => {
     return images.map(image => {
@@ -33,6 +34,16 @@ import { Asset, AppLoading, Font } from 'expo';
     })
   }
 
+  _cacheAudio = (audios) => {
+    return audios.map( audio => {
+      console.log('LOAD SOUND')
+      const soundObject = new Expo.Audio.Sound.create(audio)
+      return soundObject.loadAsync(audio).then(() => {
+        console.log('is loaded')
+      })
+    })
+  }
+
   // Get all Images require from ImageList
   _getImages = () => {
     var images = []
@@ -50,6 +61,23 @@ import { Asset, AppLoading, Font } from 'expo';
     return images
   }
 
+  _getAudios = () => {
+    const audios = []
+    function getAllValuesOfObject(obj) {
+      for (let key in obj) {
+        let value = obj[key]
+        if(typeof value === 'object') {
+          getAllValuesOfObject(value)
+        } else {
+          audios.push(value)
+        }
+      }
+    }
+    getAllValuesOfObject(SoundsList)
+    console.log('AUDIOS', audios)
+    return audios
+  }
+
 class App extends React.Component {
 
   state = {
@@ -61,7 +89,11 @@ class App extends React.Component {
 
     const imageAssets = _cacheImages([
       ..._getImages()
-    ]);
+    ])
+
+    const soundsAsset = _cacheImages([
+      ..._getAudios()
+    ])
 
     const fontAssets = _cacheFonts([
       {name: 'alcubierre', font: require('./src/assets/fonts/Alcubierre/Alcubierre.otf')},
@@ -70,9 +102,9 @@ class App extends React.Component {
       {name: 'rubik-medium', font: require('./src/assets/fonts/Rubik/Rubik-Medium.ttf')},
       {name: 'rubik-regular', font: require('./src/assets/fonts/Rubik/Rubik-Regular.ttf')},
       {name: 'rubik-light', font: require('./src/assets/fonts/Rubik/Rubik-Light.ttf')}
-    ]);
+    ])
 
-    await Promise.all([...fontAssets, ...imageAssets]);
+    await Promise.all([...fontAssets, ...imageAssets, ...soundsAsset])
 
   }
 

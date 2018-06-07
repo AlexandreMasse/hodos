@@ -7,21 +7,86 @@ import {LinearGradient} from "expo";
 import ImageAspectRatio from "../utils/ImageAspectRatio";
 import ImagesList from "../../assets/ImagesList";
 import TextApparition from "./../TextApparition";
+import PlayAudio from './../PlayAudio'
+import SoundsList from './../../assets/SoundsList'
+const soundObject = new Expo.Audio.Sound()
+
+import Audio from 'expo'
+
+const textsApparitions = [8800, 4000, 4500]
 
 class Intro extends React.Component {
 
-  constructor(props){
+  constructor(props) {
     super(props)
+    this.audio = {}
     this.texts = [
-      'Il y a fort longtemps, sur les terres lointaines de la Grèce antique,',
-      'régna l’âge d’or des dieux tout-puissants et d’extraordinaires héros.',
-      'Nous allons découvrir l’histoire de l’un d’entre eux, au travers d’une aventure à mille et un rebomdissements,',
+      'Il y a fort longtemps, sur les terres lointaines de la Grèce antique, régna l’âge d’or des dieux tout-puissants et d’extraordinaires héros.',
+      'Nous allons découvrir l’histoire de l’un d’entre eux, au travers d’une aventure à mille et un rebondissements,',
       'celle d’Hermès, jeune dieu curieux et courageux.'
     ]
+    // this.backgroundAudio = new PlayAudio(SoundsList.intro.background)
+    // console.log(SoundsList.intro.background)
+    // this.phrase1 = new PlayAudio(SoundsList.intro.phrase1)
+    // this.phrase2 = new PlayAudio(SoundsList.intro.phrase2)
+    // this.phrase3 = new PlayAudio(SoundsList.intro.phrase3)
+
+
+    // }
+  }
+  // this.phrase1
+  _handleButtonWhiteOnTouch = () => {
+    // this.backgroundAudio.stopAudio()
+    // this.phrase1.stopAudio()
+    this.props.navigation.navigate('MainDrawerNavigator')
   }
 
-  _handleButtonWhiteOnTouch = () => {
-    this.props.navigation.navigate('MainDrawerNavigator')
+  _prepareSounds() {
+    Object.keys(SoundsList.intro).map(async key => {
+      const res = SoundsList.intro[key]
+      const { sound } = await Expo.Audio.Sound.create(res)
+      await sound.setStatusAsync({
+        volume: 1,
+      })
+      this.audio[key] = async () => {
+        try {
+          console.log('hehey')
+          await sound.setPositionAsync(0);
+          // await sound.playAsync()
+        } catch (error) {
+          console.warn('SOUNDERROR ', { error });
+          // An error occurred!
+        }
+      }
+      // this.audio.background()
+    })
+  }
+
+  componentWillMount() {
+
+    this._prepareSounds()
+    console.log(this.audio)
+    // soundObject.playAsync(SoundsList.intro.phrase1)
+    // this.backgroundAudio.loadAudio().then(() => {
+      // this.backgroundAudio.playAudio()
+    // })
+    // this.phrase1.loadAudio().then(() => {
+    //   console.log('is loaded maggle')
+    //   setTimeout( () => {
+    //     this.phrase1.playAudio()
+    //   }, 200)
+    // // })
+    // // this.phrase2.loadAudio().then(() => {
+    //   this.phrase2.playAudio()
+    // // })
+  }
+
+  componentDidMount() {
+    console.log(this.audio)
+  }
+
+  componentDidUpdate() {
+    console.log(this.audio)
   }
 
   render () {
@@ -47,7 +112,7 @@ class Intro extends React.Component {
 
         {/* Texts */}
         <View style={styles.textApparitionContainer}>
-          <TextApparition texts={this.texts} durations={[5200, 4000, 4500, 4000]} delay={1000} styles={{fontSize: 25, color: '#fff'}} />
+          <TextApparition texts={this.texts} durations={textsApparitions} delay={1000} styles={{fontSize: 25, color: '#fff'}} />
         </View>
 
         {/* Button */}

@@ -58,7 +58,7 @@ export default class ButtonWhite extends React.Component {
   }
   render () {
     return (
-      <TouchableOpacity onPress={ () => this._handleTouch()} activeOpacity={0.5} style={styles.button}>
+      <TouchableOpacity onPress={ () => this._handleTouch()} activeOpacity={0.7} style={styles.button}>
         <View style={styles.wrapper}>
           {this._renderImage()}
           {this._renderText()}

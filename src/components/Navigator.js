@@ -42,7 +42,7 @@ const introFade = (props) => {
   const translateY = 0
 
   const opacity = position.interpolate({
-    inputRange: [index - 1, index, index],
+    inputRange: [index - 1, index, index + 1],
     outputRange: [0, 1, 1]
   })
 
@@ -125,7 +125,7 @@ export const MainDrawerNavigator = DrawerNavigator(
   },
   {
     drawerWidth: 300,
-    initialRouteName: 'Chapter',
+    initialRouteName: 'Map',
     drawerPosition: 'left',
     drawerBackgroundColor: 'white',
     contentComponent: SideMenu,
@@ -163,7 +163,7 @@ export const AppStackNavigator = StackNavigator({
     screen: MainDrawerNavigator
   }
 },{
-  initialRouteName: 'MainDrawerNavigator',
+  initialRouteName: 'IntroStackNavigator',
   headerMode: 'none',
   navigationOptions: {
     gesturesEnabled: false,

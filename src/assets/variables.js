@@ -29,4 +29,25 @@ export const stylesSheet = {
     fontFamily: fonts.RubikRegular,
     fontSize: 48,
   },
+  cardDetection: {
+    position: 'absolute',
+    bottom: 0,
+    right: 20,
+    width: 375,
+    height: 500,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    backgroundColor: colors.lightGrey
+  },
+  cardDetectionText: {
+    position: 'absolute',
+    bottom: 0,
+    width: '100%',
+    fontSize: 14,
+    marginVertical: 30,
+    paddingHorizontal: 40,
+    textAlign: 'center',
+    color: colors.grey,
+    opacity: 0.8
+  },
 }

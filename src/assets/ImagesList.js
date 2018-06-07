@@ -1,7 +1,11 @@
 export default imageList = {
   chapters: {
+    characterAddBackground: require('./images/chapters/characterAddBackground.png'),
     chapter1: {
       'thumbnail': require('./images/chapters/1/thumbnail.png'),
+    },
+    chapter13: {
+      'thumbnail': require('./images/chapters/13/thumbnail.png'),
     },
     chapter27: {
       'thumbnail': require('./images/chapters/1/thumbnail.png'),
@@ -89,6 +93,27 @@ export default imageList = {
     },
     chapter28: {
       'thumbnail': require('./images/chapters/28/thumbnail.png'),
+    },
+    chapter50: {
+      'thumbnail': require('./images/chapters/50/thumbnail.png'),
+    },
+    chapter51: {
+      'thumbnail': require('./images/chapters/51/thumbnail.png'),
+    },
+    chapter52: {
+      'thumbnail': require('./images/chapters/52/thumbnail.png'),
+    },
+    chapter53: {
+      'thumbnail': require('./images/chapters/53/thumbnail.png'),
+    },
+    chapter54: {
+      'thumbnail': require('./images/chapters/54/thumbnail.png'),
+    },
+    chapter59: {
+      'thumbnail': require('./images/chapters/59/thumbnail.png'),
+    },
+    chapter62: {
+      'thumbnail': require('./images/chapters/62/thumbnail.png'),
     }
   },
   map: {
@@ -125,6 +150,7 @@ export default imageList = {
       'aphrodite': require('./images/characters/cards/Aphrodite.png'),
       'charon': require('./images/characters/cards/Charon.png'),
       'helios': require('./images/characters/cards/Helios.png'),
+      'hades': require('./images/characters/cards/Hades.png'),
     },
     profile: {
       'zeus':  require('./images/characters/profile/Zeus.png'),

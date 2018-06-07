@@ -30,6 +30,7 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     alignItems: 'center',
     justifyContent: 'center',
+    zIndex: 700,
   },
   open: {
     width: 25,

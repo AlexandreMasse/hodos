@@ -5,8 +5,9 @@ import { fonts } from './../../assets/variables'
 import ButtonWhite from './../ButtonWhite'
 import Title from './../Title'
 import imageList from './../../assets/ImagesList'
+import { withNavigation } from 'react-navigation'
 
-export default class ChapterEnd extends React.Component {
+class ChapterEnd extends React.Component {
 
   static propTypes = {
     top: PropType.string,
@@ -32,26 +33,18 @@ export default class ChapterEnd extends React.Component {
       },
       hasShownContainer: false
     }
+
+    this._visibility = new Animated.Value(0)
+    this._translation = new Animated.Value(0)
   }
 
   componentWillMount() {
-    this._visibility = new Animated.Value(0)
-    this._translation = new Animated.Value(0)
     this._buttonVisibility = new Animated.Value(0)
-  }
-
-  componentWillReceiveProps(nextProps) {
     Animated.timing(this._visibility, {
-      toValue: nextProps.showChapterEnd ? 100 : 0,
+      toValue: 100,
       duration: 300,
       delay: 1500
     }).start(this._handleShowNext)
-
-    Animated.timing(this._translation, {
-      toValue: nextProps.showChapterEnd ? 100 : 0,
-      duration: 1,
-      delay: 1000
-    }).start()
   }
 
   _handleBackToMap = () => {
@@ -170,3 +163,5 @@ const styles = StyleSheet.create({
     bottom: -20
   }
 })
+
+export default withNavigation(ChapterEnd)

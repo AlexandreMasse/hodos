@@ -1,14 +1,22 @@
 import React from 'react'
 import { StyleSheet, View, Text } from 'react-native'
-import {connect} from 'react-redux';
-import OpenDrawerButton from "../OpenDrawerButton";
+import {connect} from 'react-redux'
+import OpenDrawerButton from "../OpenDrawerButton"
+import Audio from 'expo'
+import SoundsList from './../../assets/SoundsList'
+
+const soundObject = new Expo.Audio.Sound()
 
 class Settings extends React.Component {
 
   constructor(props) {
     super(props)
-  }
 
+    this.state = {
+      isLoaded: false
+    }
+  }
+  
   render () {
     return (
       <View style={styles.container}>
