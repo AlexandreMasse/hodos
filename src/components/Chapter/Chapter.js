@@ -327,6 +327,17 @@ class Chapter extends React.Component {
     }
   }
 
+  _renderAudio() {
+    const chapterNumber = this.currentChapter.numberInt
+    if (chapterNumber) {
+      return chapterList['chapter'+chapterNumber].sounds.map((sound, index) => {
+        return(
+          <Audio source={sound.source} volumeInputRange={sound.volumeInputRange} key={index} volumeOutputRange={sound.volumeOutputRange} parentWidth={this.state.totalWidth} scrollX={this.state.scrollX} />
+        )
+      })
+    }
+  }
+
   render () {
     return (
       <View style={styles.container}>
@@ -362,13 +373,13 @@ class Chapter extends React.Component {
           {this._renderParallaxedImages()}
           {this._renderLottieAnimations()}
           {this._renderTexts()}
+          {this._renderAudio()}
           {/*<LottieAnimation source={require('../../assets/animations/chapter27/eclair-palais')}/>*/}
         </Animated.ScrollView>
         {this._renderChapterEnd()}
         <View style={styles.absoluteContent}>
           {/*<Button title='save' onPress={() => this.props._setCurrentOffsetProgress(this.state.currentScrollX, this._getPercentProgress())}/>*/}
           {/*<Text style={styles.textTop}> Current offsetX : {this.props.currentOffset}</Text>*/}
-          <Audio source={soundsList.chapters.chapter27.orage} parentWidth={this.state.totalWidth} scrollX={this.state.scrollX} />
         </View>
         <OpenDrawerButton/>
       </View>

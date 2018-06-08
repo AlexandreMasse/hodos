@@ -28,12 +28,13 @@ export const AudioManager = {
       })
     })
   },
-  prepareSound: async (source) => {
+  prepareSound: async (source, config) => {
     return new Promise(async (resolve, reject) => {
       const res = source
       const { sound } = await Expo.Audio.Sound.create(res)
       await sound.setStatusAsync({
         volume: 1,
+        isLooping: config.isLooping ? config.isLooping : false
       })
       resolve(sound)
     })

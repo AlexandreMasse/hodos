@@ -1,4 +1,5 @@
 import imageList from '../../../assets/ImagesList'
+import soundsList from '../../../assets/SoundsList'
 import animationList from '../../../assets/AnimationsList'
 
 // TODO: place texts
@@ -682,6 +683,13 @@ export default {
         "left": 92.2,
         "width": 1.53
       }
+    }
+  ],
+  "sounds" : [
+    {
+      "source": soundsList.chapters.chapter27.orage,
+      "volumeInputRange": [0, 7.8, 12, 15, 17],
+      "volumeOutputRange": [1, 0.5, 0.2, 1, 0]
     }
   ]
 }

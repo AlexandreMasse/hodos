@@ -27,14 +27,15 @@ export default class Audio extends React.Component {
       audio:[],
       isLoaded: false
     }
-    // this.audio = []
   }
 
   componentWillMount() {
 
     this.scrollXAnimated = new Animated.Value(0)
 
-    AudioManager.prepareSound(this.props.source).then((data) => {
+    AudioManager.prepareSound(this.props.source, {
+      isLooping: true
+    }).then((data) => {
       this.setState({
         audio: data,
         isLoaded: true
@@ -48,24 +49,18 @@ export default class Audio extends React.Component {
         toValue: value,
         duration: 1
       }).start()
-      // this.setState({
-      //   scrollXAnimated: value
-      // })
     })
   }
 
   componentWillUpdate() {
     if (this.state.isLoaded) {
       const volumeOutput = this.scrollXAnimated.interpolate({
-        inputRange: this.props.volumeInputRange,
+        inputRange: this.props.volumeInputRange.map((val) => (val / 100) * this.props.parentWidth),
         outputRange: this.props.volumeOutputRange,
         extrapolate: 'clamp',
       }).__getValue()
 
-
-      // if(volumeOutput < 1 && volumeOutput > 0) {
-        AudioManager.setVolume(this.state.audio, volumeOutput)
-      // }
+      AudioManager.setVolume(this.state.audio, volumeOutput)
     }
   }
 

@@ -1,4 +1,4 @@
-export default SoundsList = {
+export default soundsList = {
   chapters: {
     chapter1: {
 
