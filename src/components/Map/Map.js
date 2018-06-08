@@ -1,7 +1,8 @@
 import React from 'react'
 import { StyleSheet, View, Text, Button, Image, TouchableHighlight, Dimensions, Animated } from 'react-native'
 import {connect} from 'react-redux';
-import PinchZoomView from '../../lib/PinchZoomView'
+import PinchZoomView from './PinchZoomView'
+//import PinchZoomView from './PinchZoomViewAnimationTest'
 import Scene from './../Chapter/Scene'
 import {colors, stylesSheet} from '../../assets/variables'
 import resolveAssetSource from 'resolveAssetSource'
