@@ -1,10 +1,11 @@
 import React from 'react'
-import { StyleSheet, View, Text, Image, ScrollView, TouchableOpacity, Animated } from 'react-native'
+import { StyleSheet, View, Text, Image, ScrollView, TouchableOpacity, Animated, TouchableHighlight } from 'react-native'
 import {connect} from 'react-redux';
 import OpenDrawerButton from "../OpenDrawerButton";
 import ImageAspectRatio from './../utils/ImageAspectRatio'
 import Title from './../Title'
 import CardDetection from './../CardDetection/CardDetection'
+import LottieAnimation from './../LottieAnimation/LottieAnimation'
 import { characterList } from './../../assets/characterList'
 import imageList from './../../assets/ImagesList'
 import { colors, fonts, stylesSheet } from './../../assets/variables'
@@ -18,7 +19,8 @@ class Characters extends React.Component {
       showSkills: true,
       activeCharacter: {}
     }
-    this._visibility = new Animated.Value(0)
+    this._visibility = new Animated.Value(50)
+    this._visibilitySkills = new Animated.Value(0)
   }
 
   componentWillMount() {
@@ -49,9 +51,21 @@ class Characters extends React.Component {
     console.log('pattern recognized', character)
   }
 
+  _showSkillsAnimation = () => {
+    this.setState({
+      showInfo: true,
+      showSkills: true
+    })
+    Animated.timing(this._visibilitySkills, {
+      toValue: 100,
+      duration: 700
+    }).start()
+  }
+
   _showCharacterInfosAnimation(character) {
     this.setState({
       showInfo: true,
+      showSkills: false,
       activeCharacter: character
     })
     Animated.timing(this._visibility, {
@@ -68,6 +82,7 @@ class Characters extends React.Component {
         toValue: 0,
         duration: 300
       }).start( () => {
+        this._visibilitySkills = new Animated.Value(0)
         this._showCharacterInfosAnimation(character)
       })
     }
@@ -95,27 +110,62 @@ class Characters extends React.Component {
           </View>
         )
       })
-    } else {
-      return (
-        <Text style={[styles.cardText]}>Pour connaître l’aptitude lié à ce personnage, pose sa carte sur le rectangle grisé.</Text>
-      )
     }
   }
 
   _renderCharacterInfo() {
     if (this.state.showInfo && this.state.activeCharacter && characterList.profile[this.state.activeCharacter.id]) {
       return(
-        <View style={[{flexDirection: 'row'}]}>
-          <View style={[styles.characterInfoCard]}>
-            <Text style={[styles.characterInfoName]}>{this.state.activeCharacter.name}</Text>
-            <Text style={[styles.characterInfoRole]}>{this.state.activeCharacter.role}</Text>
-            <View style={{marginTop: 15}}>
-              {this._renderDescription(this.state.activeCharacter.description)}
+        <Animated.View style={[
+          styles.characterInfoContainer,
+          {opacity: this._visibility.interpolate({
+              inputRange: [50, 100],
+              outputRange: [0, 1],
+            })}
+          ]}>
+          <View style={[{flexDirection: 'row', height: '100%'}]}>
+            <View style={[styles.characterInfoCard]}>
+              <Text style={[styles.characterInfoName]}>{this.state.activeCharacter.name}</Text>
+              <Text style={[styles.characterInfoRole]}>{this.state.activeCharacter.role}</Text>
+              <View style={{marginTop: 15}}>
+                {this._renderDescription(this.state.activeCharacter.description)}
+              </View>
+              <Animated.View style={[
+                {opacity: this._visibilitySkills.interpolate({
+                  inputRange: [50, 100],
+                  outputRange: [0, 1],
+                })}
+              ]}>
+                {this._renderSkills(this.state.activeCharacter.skills)}
+              </Animated.View>
+              {!this.state.showSkills &&
+                <Animated.View style={[
+                  {opacity: this._visibilitySkills.interpolate({
+                    inputRange: [0, 50],
+                    outputRange: [1, 0],
+                  })}
+                ]}>
+                  <Text style={[styles.cardText, {opacity: 0.7, color: colors.grey, marginTop: 30}]}>Pour connaître l’aptitude lié à ce personnage, pose sa carte sur le rectangle grisé.</Text>
+                </Animated.View>
+              }
             </View>
-            {this._renderSkills(this.state.activeCharacter.skills)}
+            <Image source={characterList.profile[this.state.activeCharacter.id]} style={[{width: 250, height: 430, resizeMode: 'contain'}]} />
           </View>
-          <ImageAspectRatio src={characterList.profile[this.state.activeCharacter.id]} height={430} style={{ marginLeft: 50}}/>
-        </View>
+        </Animated.View>
+      )
+    } else {
+      return (
+        <Animated.View style={[
+          styles.characterInfoContainer,
+          {alignItems: 'center', justifyContent: 'center', marginLeft: 100, width: 500},
+          {opacity: this._visibility.interpolate({
+              inputRange: [0, 50],
+              outputRange: [0, 1],
+            })}
+          ]}>
+          <LottieAnimation source={require('./../../assets/animations/card-grey.json')} styles={{width: 150, height: 120}} />
+          <Text style={styles.infoText}>Pose une carte  dans la zone grisée pour accéder aux informations de l’un de tes personnages rencontré</Text>
+        </Animated.View>
       )
     }
   }
@@ -134,7 +184,7 @@ class Characters extends React.Component {
                 {(!character.isLocked) &&
                   <View style={{position: 'absolute', top: 0, left: 0}}>
                     <ImageAspectRatio width={'100%'} src={characterList.cards[character.id] ? characterList.cards[character.id] : characterList.cards[2]} style={[styles.listThumbnail, styles.listCharacterThumbnailWrapper]} />
-                    <ImageAspectRatio width={'100%'} src={characterList.cards[character.id] ? characterList.cards[character.id] : characterList.cards[2]} style={[styles.listThumbnail, styles.listCharacterThumbnailWrapper]} />
+                    {/* <ImageAspectRatio width={'100%'} src={characterList.cards[character.id] ? characterList.cards[character.id] : characterList.cards[2]} style={[styles.listThumbnail, styles.listCharacterThumbnailWrapper]} /> */}
                   </View>
                 }
                 </View>
@@ -152,20 +202,17 @@ class Characters extends React.Component {
         <View style={styles.characterTitle}>
           <Title title="Personnages" subTitle="Dieux, monstres et mortels rencontrés par Hermès" style={styles.title} />
         </View>
-        <ScrollView horizontal={true} style={styles.characterScrollView} showsHorizontalScrollIndicator={false} contentInset={{left: 60}} contentOffset={{x: -60}}>{this._renderCharacterList() }</ScrollView>
+        <TouchableHighlight style={{position: 'absolute', top: 0, right: 0, width: 150, height: 150, backgroundColor: 'transparent', zIndex: 300}} onPress={this._showSkillsAnimation} underlayColor={'transparent'}>
+          <View />
+        </ TouchableHighlight>
+        <ScrollView horizontal={true} style={styles.characterScrollView} showsHorizontalScrollIndicator={false} contentInset={{left: 40}} contentOffset={{x: -40}}>{this._renderCharacterList() }</ScrollView>
         <View style={[styles.characterInfoWrapper]}>
-          <Animated.View style={[
-            styles.characterInfoContainer,
-            {opacity: this._visibility.interpolate({
-                inputRange: [0, 100],
-                outputRange: [0, 1],
-              })}
-            ]}>
-            {this._renderCharacterInfo()}
-          </Animated.View>
+          {this._renderCharacterInfo()}
           <View style={stylesSheet.cardDetection}>
             <CardDetection onPatternRecognition={this._onPatternRecognition()} />
-            <Text style={stylesSheet.cardDetectionText}>Pose une carte pour accéder aux informations de l’un de tes personnages rencontré</Text>
+            <View style={[{width: 315, height:'95%', position: 'absolute', left: 30, top: 40}]}  pointerEvents= {'none'}>
+              <ImageAspectRatio src={imageList.others.cardBack} width={'100%'} />
+            </View>
           </View>
         </View>
         <OpenDrawerButton/>
@@ -227,18 +274,24 @@ const styles = StyleSheet.create({
     flex: 1,
     width: '100%',
   },
+  infoText: {
+    fontSize: 25,
+    fontFamily: fonts.RubikRegular,
+    textAlign: 'center',
+    color: fonts.grey,
+    opacity: 0.7
+  },
   characterInfoContainer: {
     width: 600,
-    height: 400,
+    height: 430,
     marginLeft: 50,
     marginRight: 30,
     marginBottom: 30,
     marginTop: 40
   },
-
   characterInfoCard: {
     width: 350,
-    marginRight: 50,
+    marginRight: 30,
     height: '100%',
     borderRadius: 10,
     backgroundColor: '#fff',

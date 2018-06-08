@@ -7,13 +7,13 @@ import {LinearGradient} from "expo";
 import ImageAspectRatio from "../utils/ImageAspectRatio";
 import ImagesList from "../../assets/ImagesList";
 import TextApparition from "./../TextApparition";
-import PlayAudio from './../PlayAudio'
+import { AudioManager} from './../AudioManager'
 import SoundsList from './../../assets/SoundsList'
 const soundObject = new Expo.Audio.Sound()
 
 import Audio from 'expo'
 
-const textsApparitions = [8800, 4000, 4500]
+const textsApparitions = [8800, 6500, 4500]
 
 class Intro extends React.Component {
 
@@ -25,77 +25,56 @@ class Intro extends React.Component {
       'Nous allons découvrir l’histoire de l’un d’entre eux, au travers d’une aventure à mille et un rebondissements,',
       'celle d’Hermès, jeune dieu curieux et courageux.'
     ]
-    // this.backgroundAudio = new PlayAudio(SoundsList.intro.background)
-    // console.log(SoundsList.intro.background)
-    // this.phrase1 = new PlayAudio(SoundsList.intro.phrase1)
-    // this.phrase2 = new PlayAudio(SoundsList.intro.phrase2)
-    // this.phrase3 = new PlayAudio(SoundsList.intro.phrase3)
 
-    // }
+    this.audioTimeOut = []
 
     this.state = {
-      buttonOpacity: new Animated.Value(0)
+      buttonOpacity: new Animated.Value(0),
+      audioLoaded: false
     }
-  }
-  // this.phrase1
-  _handleButtonWhiteOnTouch = () => {
-    // this.backgroundAudio.stopAudio()
-    // this.phrase1.stopAudio()
-    this.props.navigation.navigate('MainDrawerNavigator')
-  }
-
-  _prepareSounds() {
-    Object.keys(SoundsList.intro).map(async key => {
-      const res = SoundsList.intro[key]
-      const { sound } = await Expo.Audio.Sound.create(res)
-      await sound.setStatusAsync({
-        volume: 1,
-      })
-      this.audio[key] = async () => {
-        try {
-          console.log('hehey')
-          await sound.setPositionAsync(0);
-          // await sound.playAsync()
-        } catch (error) {
-          console.warn('SOUNDERROR ', { error });
-          // An error occurred!
-        }
-      }
-      // this.audio.background()
+    AudioManager.prepareSounds(SoundsList.intro).then((data) => {
+      this.audio = data
+      this.setState({audioLoaded: true})
+      this.audio.play.background()
+      this.audioTimeOut.push(
+        setTimeout(() => {
+        this.audio.play.phrase1()
+        }, 2100),
+        setTimeout(() => {
+          this.audio.play.phrase2()
+        }, 13000),
+        setTimeout(() => {
+          this.audio.play.phrase3()
+        }, 21100)
+      )
     })
   }
 
-  componentWillMount() {
-    this._prepareSounds()
-    console.log(this.audio)
+  _handleButtonWhiteOnTouch = () => {
+    if (this.audio) {
+      this.audioTimeOut.map(timeout => {
+        clearTimeout(timeout)
+      })
+      AudioManager.stopSounds(this.audio.sound)
+    }
+    this.props.navigation.navigate('MainDrawerNavigator')
+  }
 
-    // soundObject.playAsync(SoundsList.intro.phrase1)
-    // this.backgroundAudio.loadAudio().then(() => {
-      // this.backgroundAudio.playAudio()
-    // })
-    // this.phrase1.loadAudio().then(() => {
-    //   console.log('is loaded maggle')
-    //   setTimeout( () => {
-    //     this.phrase1.playAudio()
-    //   }, 200)
-    // // })
-    // // this.phrase2.loadAudio().then(() => {
-    //   this.phrase2.playAudio()
-    // // })
+  componentWillUnmount() {
+    console.log('UNMOUNT')
+
+  }
+
+  componentWillMount() {
   }
 
   componentDidMount() {
-    console.log(this.audio)
 
     Animated.timing(this.state.buttonOpacity, {
       toValue: 1,
       delay: 4000,
       duration: 700
     }).start()
-  }
-
-  componentDidUpdate() {
-    console.log(this.audio)
   }
 
   render () {

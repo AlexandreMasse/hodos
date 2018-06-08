@@ -125,7 +125,7 @@ export const MainDrawerNavigator = DrawerNavigator(
   },
   {
     drawerWidth: 300,
-    initialRouteName: 'Map',
+    initialRouteName: 'Characters',
     drawerPosition: 'left',
     drawerBackgroundColor: 'white',
     contentComponent: SideMenu,

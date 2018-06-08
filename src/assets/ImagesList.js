@@ -189,7 +189,8 @@ export default imageList = {
     'arrowRight': require('./images/arrow-right.png'),
     'close': require('./images/close.png'),
     'lock': require('./images/lock.png'),
-    'iconReplay': require('./images/icon-replay.png')
+    'iconReplay': require('./images/icon-replay.png'),
+    'cardBack': require('./images/dos_carte.png')
   }
 };
 
