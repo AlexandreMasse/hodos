@@ -11,6 +11,8 @@ import ButtonWhite from './../ButtonWhite'
 import Place from './../Place/Place'
 import LottieAnimation from './../LottieAnimation/LottieAnimation'
 import OpenDrawerButton from '../OpenDrawerButton'
+import { AudioManager} from '../utils/AudioManager'
+import SoundsList from './../../assets/SoundsList'
 
 const windowHeight = Dimensions.get('window').height
 const windowWidth = Dimensions.get('window').width
@@ -30,6 +32,12 @@ class Map extends React.Component {
       placeList: []
     }
     this.mapImage = imageList.map.map
+
+    AudioManager.prepareSounds(SoundsList.map).then((data) => {
+      this.audio = data
+      this.setState({audioLoaded: true})
+      this.audio.play.background()
+    })
   }
 
   componentWillMount() {
@@ -70,6 +78,11 @@ class Map extends React.Component {
     })
   }
 
+  componentWillUnmount() {
+    console.log('unmount')
+    AudioManager.stopSounds(this.audio.sound)
+  }
+
   _handleAnimationOpacity(value, clb) {
     Animated.timing(this._visibility, {
       toValue: value,
@@ -83,6 +96,7 @@ class Map extends React.Component {
 
   _handleReading = () => {
     this.props.navigation.navigate('Previously')
+    AudioManager.stopSounds(this.audio.sound)
   }
 
   _handleNavigationPlace = () => {
@@ -185,6 +199,7 @@ class Map extends React.Component {
 
   _navigateChapter = () => {
     this.props.navigation.navigate('Previously')
+    AudioManager.stopSounds(this.audio.sound)
   }
 
   _showCard = (mapPlace) => {

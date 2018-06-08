@@ -125,29 +125,31 @@ class Characters extends React.Component {
           ]}>
           <View style={[{flexDirection: 'row', height: '100%'}]}>
             <View style={[styles.characterInfoCard]}>
-              <Text style={[styles.characterInfoName]}>{this.state.activeCharacter.name}</Text>
-              <Text style={[styles.characterInfoRole]}>{this.state.activeCharacter.role}</Text>
-              <View style={{marginTop: 15}}>
-                {this._renderDescription(this.state.activeCharacter.description)}
-              </View>
-              <Animated.View style={[
-                {opacity: this._visibilitySkills.interpolate({
-                  inputRange: [50, 100],
-                  outputRange: [0, 1],
-                })}
-              ]}>
-                {this._renderSkills(this.state.activeCharacter.skills)}
-              </Animated.View>
-              {!this.state.showSkills &&
+              <ScrollView>
+                <Text style={[styles.characterInfoName]}>{this.state.activeCharacter.name}</Text>
+                <Text style={[styles.characterInfoRole]}>{this.state.activeCharacter.role}</Text>
+                <View style={{marginTop: 15}}>
+                  {this._renderDescription(this.state.activeCharacter.description)}
+                </View>
                 <Animated.View style={[
                   {opacity: this._visibilitySkills.interpolate({
-                    inputRange: [0, 50],
-                    outputRange: [1, 0],
+                    inputRange: [50, 100],
+                    outputRange: [0, 1],
                   })}
                 ]}>
-                  <Text style={[styles.cardText, {opacity: 0.7, color: colors.grey, marginTop: 30}]}>Pour connaître l’aptitude lié à ce personnage, pose sa carte sur le rectangle grisé.</Text>
+                  {this._renderSkills(this.state.activeCharacter.skills)}
                 </Animated.View>
-              }
+                {!this.state.showSkills &&
+                  <Animated.View style={[
+                    {opacity: this._visibilitySkills.interpolate({
+                      inputRange: [0, 50],
+                      outputRange: [1, 0],
+                    })}
+                  ]}>
+                    <Text style={[styles.cardText, {opacity: 0.7, color: colors.grey, marginTop: 30, textAlign: 'center'}]}>Pour connaître l’aptitude lié à ce personnage, pose sa carte sur le rectangle grisé.</Text>
+                  </Animated.View>
+                }
+              </ScrollView>
             </View>
             <Image source={characterList.profile[this.state.activeCharacter.id]} style={[{width: 250, height: 430, resizeMode: 'contain'}]} />
           </View>

@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {StyleSheet, View, ScrollView, Image, Dimensions, Text, Animated, Button} from 'react-native'
+import {StyleSheet, View, Image, Dimensions, Animated} from 'react-native'
 import { connect } from 'react-redux';
 import { currentOffsetProgress, setChapterProgress, setChapterRomanProgress } from "../../store/actions/actions"
 import Paragraph from './Paragraph'
@@ -13,10 +13,10 @@ import LottieAnimation from "../LottieAnimation/LottieAnimation";
 import ParallaxedAnimation from "./ParallaxedAnimation";
 import TextApparition from "./../TextApparition"
 import ButtonWhite from "./../ButtonWhite"
-import animationList from '../../assets/AnimationsList'
+import Audio from './Audio'
 import chapterList from './datas/chapterList'
 import imageList from '../../assets/ImagesList'
-import {fonts, colors} from './../../assets/variables'
+import soundsList from '../../assets/SoundsList'
 
 const windowHeight = Dimensions.get('window').height
 const windowWidth = Dimensions.get('window').width
@@ -157,7 +157,6 @@ class Chapter extends React.Component {
       })
 
     } else if (this.state.showChapterEnd) {
-      console.log("not end !");
       this.setState({
         showChapterEnd: false,
       })
@@ -369,6 +368,7 @@ class Chapter extends React.Component {
         <View style={styles.absoluteContent}>
           {/*<Button title='save' onPress={() => this.props._setCurrentOffsetProgress(this.state.currentScrollX, this._getPercentProgress())}/>*/}
           {/*<Text style={styles.textTop}> Current offsetX : {this.props.currentOffset}</Text>*/}
+          <Audio source={soundsList.chapters.chapter27.orage} parentWidth={this.state.totalWidth} scrollX={this.state.scrollX} />
         </View>
         <OpenDrawerButton/>
       </View>

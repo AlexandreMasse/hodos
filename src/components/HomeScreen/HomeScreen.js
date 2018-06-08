@@ -11,6 +11,10 @@ class HomeScreen extends React.Component {
     this.props.navigation.navigate('Intro')
   }
 
+  componentWillUnmount() {
+    console.log('home screen unmount')
+  }
+
   render () {
     return (
       <View style={styles.container}>

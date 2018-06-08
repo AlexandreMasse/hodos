@@ -6,12 +6,9 @@ import LottieAnimation from "../LottieAnimation/LottieAnimation";
 import {LinearGradient} from "expo";
 import ImageAspectRatio from "../utils/ImageAspectRatio";
 import ImagesList from "../../assets/ImagesList";
-import TextApparition from "./../TextApparition";
-import { AudioManager} from './../AudioManager'
+import TextApparition from "./../TextApparition"
+import { AudioManager} from '../utils/AudioManager'
 import SoundsList from './../../assets/SoundsList'
-const soundObject = new Expo.Audio.Sound()
-
-import Audio from 'expo'
 
 const textsApparitions = [8800, 6500, 4500]
 
@@ -36,9 +33,13 @@ class Intro extends React.Component {
       this.audio = data
       this.setState({audioLoaded: true})
       this.audio.play.background()
+      AudioManager.setVolume(this.audio.sound.background, 0.1)
+      AudioManager.setVolume(this.audio.sound.phrase1, 0.6)
+      AudioManager.setVolume(this.audio.sound.phrase2, 0.6)
+      AudioManager.setVolume(this.audio.sound.phrase3, 0.6)
       this.audioTimeOut.push(
         setTimeout(() => {
-        this.audio.play.phrase1()
+          this.audio.play.phrase1()
         }, 2100),
         setTimeout(() => {
           this.audio.play.phrase2()
@@ -51,25 +52,20 @@ class Intro extends React.Component {
   }
 
   _handleButtonWhiteOnTouch = () => {
+    this.props.navigation.navigate('MainDrawerNavigator')
     if (this.audio) {
       this.audioTimeOut.map(timeout => {
         clearTimeout(timeout)
       })
       AudioManager.stopSounds(this.audio.sound)
     }
-    this.props.navigation.navigate('MainDrawerNavigator')
   }
 
   componentWillUnmount() {
-    console.log('UNMOUNT')
-
-  }
-
-  componentWillMount() {
+    console.log('INTRO unmount')
   }
 
   componentDidMount() {
-
     Animated.timing(this.state.buttonOpacity, {
       toValue: 1,
       delay: 4000,
