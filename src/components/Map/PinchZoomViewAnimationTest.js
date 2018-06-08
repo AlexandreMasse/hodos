@@ -35,15 +35,17 @@ export default class PinchZoomView extends Component {
     this.state = {
       scale: this.props.initialScale ? this.props.initialScale : 1,
       lastScale: this.props.initialScale ? this.props.initialScale : 1,
-      offsetX: windowWidth * 0.5 - this.props.childWidth * 0.5, //center
-      offsetY: windowHeight * 0.5 - this.props.childHeight * 0.5, //center
+      offsetX: new Animated.Value(windowWidth * 0.5 - this.props.childWidth * 0.5), //center
+      offsetY: new Animated.Value(windowHeight * 0.5 - this.props.childHeight * 0.5), //center
+      // offsetX: windowWidth * 0.5 - this.props.childWidth * 0.5, //center
+      // offsetY: windowHeight * 0.5 - this.props.childHeight * 0.5, //center
       lastX: windowWidth * 0.5 - this.props.childWidth * 0.5, //center
       lastY: windowHeight * 0.5 - this.props.childHeight * 0.5, //center
       //side limit
       offsetLimite: {
         left: 100,
         right: 100,
-        top: 50,
+        top: 120,
         bottom: 50
       },
       // current measures of component
@@ -56,7 +58,8 @@ export default class PinchZoomView extends Component {
         py: 0
       },
       // determine if last move is a pinch or a pan
-      lastMovePinch: false
+      lastMovePinch: false,
+
     };
     // distance between 2 touches
     this.distant = 0;
@@ -132,8 +135,6 @@ export default class PinchZoomView extends Component {
       // calculate scale with the curent distance / distance at the begenning of touch * last scale
       let scale = distant / this.distant * this.state.lastScale;
 
-      console.log('PinchZoomView: scale => ', scale);
-
       // if scale is authorized set new scale
       if(scale > this.props.minScale && scale < this.props.maxScale) {
         this.setState({ scale, lastMovePinch: true });
@@ -181,22 +182,46 @@ export default class PinchZoomView extends Component {
 
         // Left or Right Limit are crossed
         if(leftLimite || rightLimite) {
+          Animated.timing(this.state.offsetY, {
+            toValue: offsetY,
+            duration: 10
+          }).start()
           this.setState({
-            offsetX: this.state.offsetX,
-            offsetY,
-            lastX: this.state.offsetX,
+           // offsetY,
             lastY: offsetY,
-            lastMovePinch: true });
+            lastMovePinch: true
+          });
         }
 
         // Top or Bottom limit are crossed
         if(topLimite || bottomLimite){
-          this.setState({offsetY: this.state.offsetY, offsetX, lastX: offsetX, lastY: this.state.offsetY, lastMovePinch: true });
+          Animated.timing(this.state.offsetX, {
+            toValue: offsetX,
+            duration: 10
+          }).start()
+          this.setState({
+            //offsetX,
+            lastX: offsetX,
+            lastMovePinch: true });
         }
 
         // No limit crossed
         if(!leftLimite && !rightLimite && !topLimite && !bottomLimite) {
-          this.setState({offsetX, offsetY, lastMovePinch: false});
+          Animated.parallel([
+            Animated.timing(this.state.offsetX, {
+              toValue: offsetX,
+              duration: 10
+            }).start(),
+            Animated.timing(this.state.offsetY, {
+              toValue: offsetY,
+              duration: 10
+            }).start()
+          ])
+          this.setState({
+            // offsetX,
+            // offsetY,
+            lastMovePinch: false
+          });
         }
 
       })
@@ -228,32 +253,44 @@ export default class PinchZoomView extends Component {
     //   });
     // }
 
-    var offsetX = this.state.offsetX
-    var offsetY = this.state.offsetY
+    var offsetX = this.state.offsetX._value
+    var offsetY = this.state.offsetY._value
 
     // Left limit crossed => reset offsetX to fit limit
     if (this.state.measure.px > this.state.offsetLimite.left) {
-      offsetX = this.state.offsetX - this.state.measure.px
+      offsetX = this.state.offsetX._value - this.state.measure.px
     }
 
     // Right limit crossed => reset offsetX to fit limit
     if(this.state.measure.px + this.state.measure.w < windowWidth + this.state.offsetLimite.right) {
-      offsetX = this.state.offsetX - (this.state.measure.px + this.state.measure.w - windowWidth - this.state.offsetLimite.right)
+      offsetX = this.state.offsetX._value - (this.state.measure.px + this.state.measure.w - windowWidth - this.state.offsetLimite.right)
     }
 
     // Top limit crossed => reset offsetY to fit limit
     if (this.state.measure.py > this.state.offsetLimite.top) {
-      offsetY = this.state.offsetY - this.state.measure.py
+      offsetY = this.state.offsetY._value - this.state.measure.py
     }
 
     // Bottom limit crossed => reset offsetY to fit limit
     if (this.state.measure.py + this.state.measure.h < windowHeight + this.state.offsetLimite.bottom) {
-      offsetY = this.state.offsetY - (this.state.measure.py + this.state.measure.h - windowHeight - this.state.offsetLimite.bottom)
+      offsetY = this.state.offsetY._value - (this.state.measure.py + this.state.measure.h - windowHeight - this.state.offsetLimite.bottom)
     }
 
+
+    Animated.parallel([
+      Animated.timing(this.state.offsetX, {
+        toValue: offsetX,
+        duration: 100
+      }).start(),
+      Animated.timing(this.state.offsetY, {
+        toValue: offsetY,
+        duration: 100
+      }).start()
+    ])
+
     this.setState({
-      offsetX: offsetX,
-      offsetY: offsetY,
+      // offsetX: offsetX,
+      // offsetY: offsetY,
       lastX: offsetX,
       lastY: offsetY,
       lastScale: this.state.scale
@@ -266,7 +303,7 @@ export default class PinchZoomView extends Component {
    * @param el
    */
   _handleComponentMount = (el) => {
-    this.el = el
+    this.el = el.getNode()
   }
 
   /**
@@ -280,19 +317,19 @@ export default class PinchZoomView extends Component {
 
   render() {
     return (
-        <View ref={this._handleComponentMount}
-          {...this.gestureHandlers.panHandlers}
-          style={[styles.container, this.props.style, {
-            width: this.props.childWidth,
-            transform: [
-              {scaleX: this.state.scale},
-              {scaleY: this.state.scale},
-              {translateX: this.state.offsetX},
-              {translateY: this.state.offsetY},
-            ]
-          }]}>
-          {this.props.children}
-        </View>
+      <Animated.View ref={this._handleComponentMount}
+            {...this.gestureHandlers.panHandlers}
+            style={[styles.container, this.props.style, {
+              width: this.props.childWidth,
+              transform: [
+                {scaleX: this.state.scale},
+                {scaleY: this.state.scale},
+                {translateX: this.state.offsetX},
+                {translateY: this.state.offsetY},
+              ]
+            }]}>
+        {this.props.children}
+      </Animated.View>
     );
   }
 }
@@ -301,7 +338,7 @@ const windowHeight = Dimensions.get('window').height;
 const windowWidth = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
- container: {
+  container: {
     //flex: 1,
- }
+  }
 });

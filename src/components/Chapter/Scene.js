@@ -2,7 +2,7 @@ import React from 'react'
 import PropType from 'prop-types'
 import {StyleSheet, Image, Dimensions} from 'react-native'
 import resolveAssetSource from 'resolveAssetSource'
-import PinchZoomView from "../../lib/PinchZoomView";
+import PinchZoomView from "../Map/PinchZoomView";
 
 export default class Scene extends React.Component {
 
