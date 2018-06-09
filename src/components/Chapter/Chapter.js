@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {StyleSheet, View, Image, Dimensions, Animated} from 'react-native'
+import {StyleSheet, View, Image, Dimensions, Animated, Text} from 'react-native'
 import { connect } from 'react-redux';
 import { currentOffsetProgress, setChapterProgress, setChapterRomanProgress } from "../../store/actions/actions"
 import Paragraph from './Paragraph'
@@ -332,7 +332,22 @@ class Chapter extends React.Component {
     if (chapterNumber) {
       return chapterList['chapter'+chapterNumber].sounds.map((sound, index) => {
         return(
-          <Audio source={sound.source} volumeInputRange={sound.volumeInputRange} key={index} volumeOutputRange={sound.volumeOutputRange} parentWidth={this.state.totalWidth} scrollX={this.state.scrollX} />
+          <Audio source={sound.source} volumeInputRange={sound.volumeInputRange} key={index} volumeOutputRange={sound.volumeOutputRange} parentWidth={this.state.totalWidth} scrollX={this.state.scrollX}
+          />
+        )
+      })
+    }
+  }
+
+  _renderObjectAudio() {
+    const chapterNumber = this.currentChapter.numberInt
+    if (chapterNumber) {
+      return chapterList['chapter'+chapterNumber].sounds[0].volumeInputRange.map((value, index) => {
+        const left = ((value / 100) * this.state.totalWidth)
+        return(
+          <View style={{width: 20, height: 200, backgroundColor: 'red', position: 'absolute', left: left, top: 0, zIndex: 500 }} key={index}>
+          <Text>{chapterList['chapter'+chapterNumber].sounds[0].volumeOutputRange[index]}</Text>
+          </View>
         )
       })
     }
@@ -374,6 +389,7 @@ class Chapter extends React.Component {
           {this._renderLottieAnimations()}
           {this._renderTexts()}
           {this._renderAudio()}
+          {this._renderObjectAudio()}
           {/*<LottieAnimation source={require('../../assets/animations/chapter27/eclair-palais')}/>*/}
         </Animated.ScrollView>
         {this._renderChapterEnd()}

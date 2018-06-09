@@ -6,7 +6,7 @@ export default soundsList = {
     chapter27: {
       cronos: require('./sounds/Chapter/27/Cronos.mp3'),
       main: require('./sounds/Chapter/27/Main.mp3'),
-      orage: require('./sounds/Chapter/27/Orage.mp3'),
+      orage: require('./sounds/Map/01_Map.mp3'),
     }
   },
   intro: {

@@ -688,8 +688,8 @@ export default {
   "sounds" : [
     {
       "source": soundsList.chapters.chapter27.orage,
-      "volumeInputRange": [0, 7.8, 12, 15, 17],
-      "volumeOutputRange": [1, 0.5, 0.2, 1, 0]
+      "volumeInputRange": [0, 15, 20],
+      "volumeOutputRange": [0, 0.4, 0]
     }
   ]
 }
