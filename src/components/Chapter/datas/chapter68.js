@@ -37,8 +37,34 @@ export default {
     //   "speedX": 10
     // },
   ],
+  "beginText": {
+    "viewStyles": {
+      "left": "0.7%",
+      "bottom": "4%",
+      "zIndex": 30,
+      "width": 800,
+      "alignItems": "center",
+    },
+    "styles": {
+      "color": "#00194d"
+    },
+    "durations": [9000, 7000],
+    "parentWidth": 800
+  },
+  "beginTextAudio": [
+    {
+      "source": soundsList.chapters.chapter68.beginTextAudio.phrase1,
+      "timeout": 1000
+    },
+    {
+      "source": soundsList.chapters.chapter68.beginTextAudio.phrase2,
+      "timeout": 9500
+    },
+  ],
   "texts": [
   ],
-  "sounds" : [
+  "audio" : [
+  ],
+  "ambientAudio" : [
   ]
 }

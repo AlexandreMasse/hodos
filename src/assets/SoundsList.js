@@ -26,7 +26,13 @@ export default soundsList = {
         pierres: require('./sounds/Chapter/27/Audio/Pierres.mp3'),
         lave: require('./sounds/Chapter/27/Audio/Lave.mp3'),
       }
-    }
+    },
+    chapter68: {
+      beginTextAudio: {
+        phrase1: require('./sounds/Chapter/68/BeginTextAudio/Chap68_1.mp3'),
+        phrase2: require('./sounds/Chapter/68/BeginTextAudio/Chap68_2.mp3'),
+      },
+    },
   },
   intro: {
     background: require('./sounds/Map/01_Map.mp3'),
