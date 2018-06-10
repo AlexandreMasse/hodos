@@ -81,9 +81,8 @@ class ProgressBar extends React.Component {
             height: this.props.isHorizontal ?  this.props.height : progressionInterpolation,
           }
         ]}>
-          <LinearGradient start={[0, 1]} end={[this.props.isHorizontal ? 1 : 0, this.props.isHorizontal ? 1 : 0]} colors={[this.props.beginGradientColor, this.props.endGradientColor]} style={{width:  '100%', height:'100%', borderRadius: 10}}></LinearGradient>
+          <LinearGradient start={[0, 1]} end={[this.props.isHorizontal ? 1 : 0, this.props.isHorizontal ? 1 : 0]} colors={[this.props.beginGradientColor, this.props.endGradientColor]} style={{width:  '100%', height:'100%', borderRadius: 10}}/>
         </ Animated.View>
-        <View></View>
 
       </View>
     )

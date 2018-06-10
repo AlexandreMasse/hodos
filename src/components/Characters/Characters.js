@@ -151,7 +151,7 @@ class Characters extends React.Component {
                 }
               </ScrollView>
             </View>
-            <Image source={characterList.profile[this.state.activeCharacter.id]} style={[{width: 250, height: 430, resizeMode: 'contain'}]} />
+            <Image source={characterList.profile[this.state.activeCharacter.id]} style={[{width: 250, height: 430, resizeMode: 'contain', alignSelf: 'flex-end'}]} />
           </View>
         </Animated.View>
       )
@@ -159,14 +159,14 @@ class Characters extends React.Component {
       return (
         <Animated.View style={[
           styles.characterInfoContainer,
-          {alignItems: 'center', justifyContent: 'center', marginLeft: 100, width: 500},
+          {alignItems: 'center', justifyContent: 'center', marginLeft: 80, marginRight: 80},
           {opacity: this._visibility.interpolate({
               inputRange: [0, 50],
               outputRange: [0, 1],
             })}
           ]}>
-          <LottieAnimation source={require('./../../assets/animations/card-grey.json')} styles={{width: 150, height: 120}} />
-          <Text style={styles.infoText}>Pose une carte  dans la zone grisée pour accéder aux informations de l’un de tes personnages rencontré</Text>
+          <LottieAnimation source={require('./../../assets/animations/card-grey.json')} styles={{width: 350, height: 250}} />
+          <Text style={styles.infoText}>Pose une carte  dans la zone grisée pour accéder aux informations de l’un de tes personnages rencontrés</Text>
         </Animated.View>
       )
     }
@@ -207,10 +207,10 @@ class Characters extends React.Component {
         <TouchableHighlight style={{position: 'absolute', top: 0, right: 0, width: 150, height: 150, backgroundColor: 'transparent', zIndex: 300}} onPress={this._showSkillsAnimation} underlayColor={'transparent'}>
           <View />
         </ TouchableHighlight>
-        <ScrollView horizontal={true} style={styles.characterScrollView} showsHorizontalScrollIndicator={false} contentInset={{left: 40}} contentOffset={{x: -40}}>{this._renderCharacterList() }</ScrollView>
+        <ScrollView horizontal={true} style={styles.characterScrollView} showsHorizontalScrollIndicator={false} contentInset={{left: 40, right: 15}} contentOffset={{x: -40}}>{this._renderCharacterList() }</ScrollView>
         <View style={[styles.characterInfoWrapper]}>
           {this._renderCharacterInfo()}
-          <View style={stylesSheet.cardDetection}>
+          <View style={styles.cardDetection}>
             <CardDetection onPatternRecognition={this._onPatternRecognition()} />
             <View style={[{width: 315, height:'95%', position: 'absolute', left: 30, top: 40}]}  pointerEvents= {'none'}>
               <ImageAspectRatio src={imageList.others.cardBack} width={'100%'} />
@@ -275,6 +275,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flex: 1,
     width: '100%',
+    marginTop: 20,
   },
   infoText: {
     fontSize: 25,
@@ -284,12 +285,13 @@ const styles = StyleSheet.create({
     opacity: 0.7
   },
   characterInfoContainer: {
-    width: 600,
-    height: 430,
+    // width: 600,
+    // height: 430,
+    flex: 1,
     marginLeft: 50,
     marginRight: 30,
     marginBottom: 30,
-    marginTop: 40
+    marginTop: 0
   },
   characterInfoCard: {
     width: 350,
@@ -334,6 +336,16 @@ const styles = StyleSheet.create({
     color: colors.grey,
     margin: 2
   },
+  cardDetection: {
+    // bottom: 0,
+    // right: 20,
+    marginRight: 20,
+    width: 375,
+    height: '100%',
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    backgroundColor: colors.lightGrey
+  }
 })
 
 const mapStateToProps = state => {

@@ -501,6 +501,7 @@ export default {
     {
       "source": animationList.chapters.chapter27.nuagesBlanc,
       "speedX": 0,
+      "speedAnimation": 15,
       "styles": {
         "width": "5%",
         "height": "120%",
