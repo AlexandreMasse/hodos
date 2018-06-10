@@ -429,7 +429,7 @@ class Chapter extends React.Component {
           {chapterList['chapter'+chapterNumber].ambientAudio.length && this._renderObjectAmbientAudio()}
           {chapterList['chapter'+chapterNumber].audio.length && this._renderAudio()}
           {chapterList['chapter'+chapterNumber].audio.length && this._renderObjectAudio()}
-        </Animated.ScrollView>
+w        </Animated.ScrollView>
         {this._renderChapterEnd()}
         <View style={styles.absoluteContent}>
           {/*<Button title='save' onPress={() => this.props._setCurrentOffsetProgress(this.state.currentScrollX, this._getPercentProgress())}/>*/}
