@@ -13,10 +13,12 @@ import LottieAnimation from "../LottieAnimation/LottieAnimation";
 import ParallaxedAnimation from "./ParallaxedAnimation";
 import TextApparition from "./../TextApparition"
 import ButtonWhite from "./../ButtonWhite"
+import AmbientAudio from './AmbientAudio'
 import Audio from './Audio'
 import chapterList from './datas/chapterList'
 import imageList from '../../assets/ImagesList'
 import soundsList from '../../assets/SoundsList'
+import {fonts} from '../../assets/variables'
 
 const windowHeight = Dimensions.get('window').height
 const windowWidth = Dimensions.get('window').width
@@ -97,6 +99,7 @@ class Chapter extends React.Component {
   componentWillUnmount() {
     this.props._setCurrentOffsetProgress(this.state.currentScrollX, this._getPercentProgress())
     clearInterval(this.progressTimeOut)
+    // AudioManager.stopSounds(this.audio.ambientAudio)
   }
 
   componentWillMount() {
@@ -150,7 +153,7 @@ class Chapter extends React.Component {
 
   _handleEndChapter = (scrollX) => {
     if (scrollX === this.state.maxScrollX) {
-      console.log("end !");
+      // console.log("end !");
       this.props._setCurrentOffsetProgress(0, 0)
       this.setState({
         showChapterEnd: true,
@@ -327,14 +330,42 @@ class Chapter extends React.Component {
     }
   }
 
+  _renderAmbientAudio() {
+    const chapterNumber = this.currentChapter.numberInt
+    if (chapterNumber) {
+      return chapterList['chapter'+chapterNumber].ambientAudio.map((sound, index) => {
+        return(
+          <AmbientAudio source={sound.source} volumeInputRange={sound.volumeInputRange} key={index} volumeOutputRange={sound.volumeOutputRange} parentWidth={this.state.totalWidth} scrollX={this.state.scrollX}
+          />
+        )
+      })
+    }
+  }
+
   _renderAudio() {
     const chapterNumber = this.currentChapter.numberInt
     if (chapterNumber) {
-      return chapterList['chapter'+chapterNumber].sounds.map((sound, index) => {
+      return chapterList['chapter'+chapterNumber].audio.map((sound, index) => {
         return(
-          <Audio source={sound.source} volumeInputRange={sound.volumeInputRange} key={index} volumeOutputRange={sound.volumeOutputRange} parentWidth={this.state.totalWidth} scrollX={this.state.scrollX}
+          <Audio source={sound.source} range={sound.range} key={index} parentWidth={this.state.totalWidth} maxVolume={sound.maxVolume} scrollX={this.state.scrollX} loopDelay={sound.loopDelay}
           />
         )
+      })
+    }
+  }
+
+  _renderObjectAmbientAudio() {
+    const chapterNumber = this.currentChapter.numberInt
+    if (chapterNumber) {
+      return chapterList['chapter'+chapterNumber].ambientAudio.map((sound, indexSound) => {
+        return sound.volumeInputRange.map((value, index) => {
+          const left = ((value / 100) * this.state.totalWidth)
+          return(
+            <View style={{width: 40, height: 200, backgroundColor: 'red', position: 'absolute', left: left, top: 0, zIndex: 500 }} key={index}>
+            <Text style={{fontFamily: fonts.RubikBold}}>{indexSound} - {sound.volumeOutputRange[index]}</Text>
+            </View>
+          )
+        })
       })
     }
   }
@@ -342,13 +373,15 @@ class Chapter extends React.Component {
   _renderObjectAudio() {
     const chapterNumber = this.currentChapter.numberInt
     if (chapterNumber) {
-      return chapterList['chapter'+chapterNumber].sounds[0].volumeInputRange.map((value, index) => {
-        const left = ((value / 100) * this.state.totalWidth)
-        return(
-          <View style={{width: 20, height: 200, backgroundColor: 'red', position: 'absolute', left: left, top: 0, zIndex: 500 }} key={index}>
-          <Text>{chapterList['chapter'+chapterNumber].sounds[0].volumeOutputRange[index]}</Text>
-          </View>
-        )
+      return chapterList['chapter'+chapterNumber].audio.map((sound, indexSound) => {
+        return sound.range.map((value, index) => {
+          const left = ((value / 100) * this.state.totalWidth)
+          return(
+            <View style={{width: 40, height: 200, backgroundColor: 'blue', position: 'absolute', left: left, bottom: 0, zIndex: 500 }} key={index}>
+            <Text style={{fontFamily: fonts.RubikBold}}>{indexSound}</Text>
+            </View>
+          )
+        })
       })
     }
   }
@@ -388,6 +421,8 @@ class Chapter extends React.Component {
           {this._renderParallaxedImages()}
           {this._renderLottieAnimations()}
           {this._renderTexts()}
+          {this._renderAmbientAudio()}
+          {this._renderObjectAmbientAudio()}
           {this._renderAudio()}
           {this._renderObjectAudio()}
           {/*<LottieAnimation source={require('../../assets/animations/chapter27/eclair-palais')}/>*/}

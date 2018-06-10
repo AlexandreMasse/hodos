@@ -4,9 +4,23 @@ export default soundsList = {
 
     },
     chapter27: {
-      cronos: require('./sounds/Chapter/27/Cronos.mp3'),
-      main: require('./sounds/Chapter/27/Main.mp3'),
-      orage: require('./sounds/Map/01_Map.mp3'),
+      ambientSounds: {
+        olympiens: require('./sounds/Chapter/27/AmbientAudio/Olympiens.mp3'),
+        forge: require('./sounds/Chapter/27/AmbientAudio/Forge.mp3'),
+        orage: require('./sounds/Chapter/27/AmbientAudio/Orage.mp3'),
+        angoisse: require('./sounds/Chapter/27/AmbientAudio/Angoisse.mp3'),
+      },
+      sounds : {
+        cronos: require('./sounds/Chapter/27/Audio/Cronos.mp3'),
+        main: require('./sounds/Chapter/27/Audio/Main.mp3'),
+        eclair1: require('./sounds/Chapter/27/Audio/Eclair_1.mp3'),
+        eclair2: require('./sounds/Chapter/27/Audio/Eclair_2.mp3'),
+        eclair3: require('./sounds/Chapter/27/Audio/Eclair_3.mp3'),
+        zeus: require('./sounds/Chapter/27/Audio/Zeus.mp3'),
+        crepitement: require('./sounds/Chapter/27/Audio/Crepitement.mp3'),
+        pierres: require('./sounds/Chapter/27/Audio/Pierres.mp3'),
+        lave: require('./sounds/Chapter/27/Audio/Lave.mp3'),
+      }
     }
   },
   intro: {

@@ -685,11 +685,74 @@ export default {
       }
     }
   ],
-  "sounds" : [
+  "ambientAudio" : [
     {
-      "source": soundsList.chapters.chapter27.orage,
-      "volumeInputRange": [0, 15, 20],
-      "volumeOutputRange": [0, 0.4, 0]
+      "source": soundsList.chapters.chapter27.ambientSounds.orage,
+      "volumeInputRange": [0, 5, 10, 20, 22, 32],
+      "volumeOutputRange": [1, 0.7, 0.4, 1, 0.7, 0]
+    },
+    {
+      "source": soundsList.chapters.chapter27.ambientSounds.angoisse,
+      "volumeInputRange": [28, 32, 38, 43, 46],
+      "volumeOutputRange": [0, 0.6, 1, 1, 0]
+    },
+    {
+      "source": soundsList.chapters.chapter27.ambientSounds.olympiens,
+      "volumeInputRange": [30, 35, 38, 42],
+      "volumeOutputRange": [0, 0.6, 0.8, 0]
+    },
+    {
+      "source": soundsList.chapters.chapter27.ambientSounds.forge,
+      "volumeInputRange": [38, 43, 48, 100],
+      "volumeOutputRange": [0, 0.6, 0.8, 0.4]
+    }
+  ],
+  "audio": [
+    {
+      "source": soundsList.chapters.chapter27.sounds.eclair3,
+      "range": [0, 5],
+      "maxVolume": 1
+    },
+    {
+      "source": soundsList.chapters.chapter27.sounds.cronos,
+      "range": [10, 15],
+      "maxVolume": 0.2
+    },
+    {
+      "source": soundsList.chapters.chapter27.sounds.eclair1,
+      "range": [19, 23],
+      "maxVolume": 1
+    },
+    {
+      "source": soundsList.chapters.chapter27.sounds.eclair2,
+      "range": [24, 29],
+      "maxVolume": 1
+    },
+    {
+      "source": soundsList.chapters.chapter27.sounds.main,
+      "range": [32, 38],
+      "maxVolume": 1
+    },
+    {
+      "source": soundsList.chapters.chapter27.sounds.pierres,
+      "range": [45, 54],
+      "maxVolume": 0.7,
+      "loopDelay": 20000
+    },
+    {
+      "source": soundsList.chapters.chapter27.sounds.lave,
+      "range": [65, 69],
+      "maxVolume": 1,
+    },
+    {
+      "source": soundsList.chapters.chapter27.sounds.crepitement,
+      "range": [80, 85],
+      "maxVolume": 1,
+    },
+    {
+      "source": soundsList.chapters.chapter27.sounds.zeus,
+      "range": [90, 95],
+      "maxVolume": 1,
     }
   ]
 }

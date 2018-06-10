@@ -32,17 +32,39 @@ export const AudioManager = {
     return new Promise(async (resolve, reject) => {
       const res = source
       const { sound } = await Expo.Audio.Sound.create(res)
+
+
+
       await sound.setStatusAsync({
-        volume: 1,
-        isLooping: config.isLooping ? config.isLooping : false
+        volume: config && config.volume ? config.volume : 0,
+        isLooping: config && config.isLooping ? config.isLooping : false
       })
       resolve(sound)
     })
   },
   playSound: async (sound) => {
+
     try {
+
       await sound.setPositionAsync(0)
       await sound.playAsync()
+    } catch (error) {
+      console.warn('SOUNDERROR ', { error });
+      // An error occurred!
+    }
+  },
+  rewind: async (sound, volume) => {
+    try {
+      await sound.setPositionAsync(0)
+      await sound.setVolumeAsync(volume ? volume : 1)
+    } catch (error) {
+      console.warn('SOUNDERROR ', { error });
+      // An error occurred!
+    }
+  },
+  getStatus: async (sound) => {
+    try {
+      const test = await sound.getStatusAsync()
     } catch (error) {
       console.warn('SOUNDERROR ', { error });
       // An error occurred!
@@ -55,5 +77,9 @@ export const AudioManager = {
     Object.keys(soundList).map(async sound => {
       await soundList[sound].stopAsync()
     })
+  },
+  stopSound: async (sound) => {
+    await sound.stopAsync()
+    await sound.setStatusAsync({ shouldPlay: false })
   }
 }

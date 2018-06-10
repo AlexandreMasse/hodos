@@ -11,69 +11,69 @@ export default class Audio extends React.Component {
 
   static propTypes = {
     scrollX: PropTypes.any.isRequired,
-    volumeInputRange: PropTypes.any.isRequired,
-    volumeOutputRange: PropTypes.any.isRequired,
+    range: PropTypes.any.isRequired,
     source: PropTypes.any.isRequired,
     parentWidth: PropTypes.any.isRequired,
-    startX: PropTypes.number
+    maxVolume: PropTypes.number,
+    loopDelay: PropTypes.number
   }
 
   static defaultProps = {
-    volumeInputRange: [0, 1000],
-    volumeOutputRange: [0, 1]
+    range: [0, 1000],
+    loopDelay: 10000,
+    maxVolume: 1
   }
 
   constructor(props) {
     super(props)
     this.state = {
-      audio:[],
+      parentWidth: 0,
       isLoaded: false,
+      time: 0
     }
   }
 
+  componentWillUnmount() {
+    if (this.audio) {
+      AudioManager.stopSound(this.audio)
+    }
+  }
   componentWillMount() {
-
-    //this.scrollXAnimated = new Animated.Value(0)
-
-
     AudioManager.prepareSound(this.props.source, {
-      isLooping: true
+      volume: 0,
+      time: 0
     }).then((data) => {
+      AudioManager.playSound(data)
+      this.audio = data
       this.setState({
-        audio: data,
-        lastVolume: 0.1,
         isLoaded: true
       })
-      console.log('sound loaded !')
-      AudioManager.playSound(data)
     })
 
     this.props.scrollX.addListener(({value}) => {
+      const now = Date.now()
+      if (this.state.isLoaded
+        && value > this.state.percentRange[0]
+        && value < this.state.percentRange[1]
+        && (now - this.state.time >= this.props.loopDelay))
+      {
+        this.setState({
+          time: now
+        })
+        AudioManager.setVolume(this.audio, this.props.maxVolume).then(() => {
+          AudioManager.playSound(this.audio)
+        })
 
-      if (this.state.isLoaded) {
-        const volumeOutput = this.props.scrollX.interpolate({
-        inputRange: this.props.volumeInputRange.map((val) => (val / 100) * this.props.parentWidth),
-        outputRange: this.props.volumeOutputRange,
-       extrapolate: 'clamp'
-      }).__getValue()
-
-      //console.log(volumeOutput)
-
-
-      // if ( Math.abs(this.state.lastVolume - volumeOutput) >= 0.2) {
-      //   this.setState({
-      //     lastVolume: volumeOutput
-      //   })
-
-        AudioManager.setVolume(this.state.audio, volumeOutput).then(console.log('volume is set'))
-      // }
-    }
-
-
-
+      }
     })
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      parentWidth: nextProps.parentWidth,
+      percentRange: this.props.range.map((val) => (val / 100) * this.props.parentWidth)
+    })
+  }
   render() {
     return(
       null
