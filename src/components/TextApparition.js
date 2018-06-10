@@ -14,7 +14,7 @@ export default class TextApparition extends React.Component {
     delay: PropType.number,
     startDelay: PropType.number,
     start: PropType.bool,
-    styles: PropType.object,
+    styles: PropType.any,
     onAnimationEnd: PropType.func,
     restartAnimationCount: PropType.number
   }

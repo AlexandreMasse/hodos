@@ -9,7 +9,8 @@ export default class Paragraph extends React.Component {
 
   static propTypes = {
     text: PropType.string.isRequired,
-    styles: PropType.object,
+    styles: PropType.any,
+    viewStyles: PropType.any,
     scrollX: PropType.any.isRequired,
     parentWidth: PropType.number.isRequired,
     animationOpacityValues: PropType.array
@@ -22,7 +23,7 @@ export default class Paragraph extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      styles: this.props.styles
+      viewStyles: this.props.viewStyles
     }
   }
 
@@ -33,10 +34,10 @@ export default class Paragraph extends React.Component {
   componentWillReceiveProps (nextProp) {
     if (this.props.parentWidth !== nextProp.parentWidth) {
       this.setState({
-        styles: {
-          ...this.props.styles,
-          left:  (nextProp.parentWidth * nextProp.styles.left) / 100,
-          width: (nextProp.parentWidth * nextProp.styles.width) / 100,
+        viewStyles: {
+          ...this.props.viewStyles,
+          left:  (nextProp.parentWidth * nextProp.viewStyles.left) / 100,
+          width: (nextProp.parentWidth * nextProp.viewStyles.width) / 100,
         }
       })
     }
@@ -44,8 +45,8 @@ export default class Paragraph extends React.Component {
 
   render () {
     const { animationOpacityValues, windowWidth } = this.props
-    const { left } = this.state.styles
-    const middle = left + (this.state.styles.width / 2)
+    const { left } = this.state.viewStyles
+    const middle = left + (this.state.viewStyles.width / 2)
     const range =  [
       middle - windowWidth,
       middle - windowWidth * animationOpacityValues[0],
@@ -56,7 +57,7 @@ export default class Paragraph extends React.Component {
     ]
     return (
       <Animated.View ref={this._ParagraphView()} style={[
-        this.state.styles,
+        this.state.viewStyles,
         styles.textWrapper,
         {
           opacity: this.props.scrollX.interpolate({
@@ -74,7 +75,7 @@ export default class Paragraph extends React.Component {
         },
       ]}
         >
-        <Text style={styles.text}> {this.props.text}</Text>
+        <Text style={[styles.text, this.props.styles]}> {this.props.text}</Text>
       </Animated.View>
     )
   }
@@ -86,7 +87,6 @@ const styles = StyleSheet.create({
     zIndex: 200
   },
   text: {
-    color: '#fff',
     fontFamily: fonts.RubikRegular,
     fontSize: 22,
     lineHeight: 32

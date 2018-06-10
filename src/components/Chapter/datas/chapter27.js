@@ -533,12 +533,15 @@ export default {
 
   ],
   "beginText": {
-    "styles": {
+    "viewStyles": {
       "left": "0.5%",
       "bottom": "4%",
       "zIndex": 30,
       "width": 800,
-      "alignItems": "center"
+      "alignItems": "center",
+    },
+    "styles": {
+      "color": "#fff"
     },
     "durations": [18000, 6000, 7000],
     "parentWidth": 800
@@ -549,137 +552,191 @@ export default {
   ],
   "texts": [
     {
-      "styles" : {
+      "viewStyles" : {
         "top": "10%",
         "left": 7.8,
-        "width": 1.5
+        "width": 1.5,
+      },
+      "styles": {
+        "color": "#fff"
       }
     },
     {
-      "styles" : {
+      "viewStyles" : {
         "top": "29%",
         "left": 7.8,
-        "width": 1.4
+        "width": 1.4,
+      },
+      "styles": {
+        "color": "#fff"
       }
     },
     {
-      "styles" : {
+      "viewStyles" : {
         "top": "11%",
         "left": 14.7,
-        "width": 1.4
+        "width": 1.4,
+      },
+      "styles": {
+        "color": "#fff"
       }
     },
     {
-      "styles" : {
+      "viewStyles" : {
         "bottom": "12%",
         "left": 18,
-        "width": 1.5
+        "width": 1.5,
+      },
+      "styles": {
+        "color": "#fff"
       }
     },
     {
-      "styles" : {
+      "viewStyles" : {
         "top": "15%",
         "left": 23,
-        "width": 1.53
+        "width": 1.53,
+      },
+      "styles": {
+        "color": "#fff"
       }
     },
     {
-      "styles" : {
+      "viewStyles" : {
         "top": "26%",
         "left": 29.6,
-        "width": 1.53
+        "width": 1.53,
+      },
+      "styles": {
+        "color": "#fff"
       }
     },
     {
-      "styles" : {
+      "viewStyles" : {
         "bottom": "9%",
         "left": 37,
         "width": 1.53
+      },
+      "styles": {
+        "color": "#fff"
       }
     },
     {
-      "styles" : {
+      "viewStyles" : {
         "top": "34%",
         "left": 47,
-        "width": 1.53
+        "width": 1.53,
+      },
+      "styles": {
+        "color": "#fff"
       }
     },
     {
-      "styles" : {
+      "viewStyles" : {
         "top": "34%",
         "left": 56.1,
-        "width": 1.53
+        "width": 1.53,
+      },
+      "styles": {
+        "color": "#fff"
       }
     },
     {
-      "styles" : {
+      "viewStyles" : {
         "top": "56%",
         "left": 56.1,
-        "width": 1.53
+        "width": 1.53,
+      },
+      "styles": {
+        "color": "#fff"
       }
     },
     {
       // les forces brutales
-      "styles" : {
+      "viewStyles" : {
         "top": "28%",
         "left": 58.3,
-        "width": 1
+        "width": 1,
+      },
+      "styles": {
+        "color": "#fff"
       }
     },
     {
       // Il nous faut
-      "styles" : {
+      "viewStyles" : {
         "bottom": "7%",
         "left": 61,
-        "width": 1.53
+        "width": 1.53,
+      },
+      "styles": {
+        "color": "#fff"
       }
     },
     {
       // les cyclopes frappaient
-      "styles" : {
+      "viewStyles" : {
         "top": "24%",
         "left": 63.6,
-        "width": 1.53
+        "width": 1.53,
+      },
+      "styles": {
+        "color": "#fff"
       }
     },
     {
       // le Cyclope était
-      "styles" : {
+      "viewStyles" : {
         "top": "52%",
         "left": 63.6,
-        "width": 1.53
+        "width": 1.53,
+      },
+      "styles": {
+        "color": "#fff"
       }
     },
     {
       // le deuxieme cyclope
-      "styles" : {
+      "viewStyles" : {
         "bottom": "9%",
         "left": 69.35,
-        "width": 1.53
+        "width": 1.53,
+      },
+      "styles": {
+        "color": "#fff"
       }
     },
     {
       // Hades le mit
-      "styles" : {
+      "viewStyles" : {
         "top": "15%",
         "left": 79.5,
         "width": 1.53
+      },
+      "styles": {
+        "color": "#fff"
       }
     },
     {
       //le troisieme cyclope
-      "styles" : {
+      "viewStyles" : {
         "top": "29%",
         "left": 85.7,
-        "width": 1.53
+        "width": 1.53,
+      },
+      "styles": {
+        "color": "#fff"
       }
     },
     {
       //le cyclope
-      "styles" : {
+      "viewStyles" : {
         "top": "17%",
         "left": 92.2,
-        "width": 1.53
+        "width": 1.53,
+      },
+      "styles": {
+        "color": "#fff"
       }
     }
   ],

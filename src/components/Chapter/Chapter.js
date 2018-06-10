@@ -246,6 +246,7 @@ class Chapter extends React.Component {
         if (textData) {
           return (
             <Paragraph text={text}
+                       viewStyles={textData.viewStyles}
                        styles={textData.styles}
                        key={index}
                        scrollX={this.state.scrollX}
@@ -291,9 +292,9 @@ class Chapter extends React.Component {
     if (this.currentChapter && this.currentChapter.beginText) {
       const beginTextData = chapterList['chapter'+chapterNumber].beginText
       return(
-        <View style={[{position: 'absolute'}, beginTextData.styles]}>
+        <View style={[{position: 'absolute'}, beginTextData.viewStyles]}>
           <View style={{width: beginTextData.parentWidth, marginBottom: 50}}>
-            <TextApparition texts={this.currentChapter.beginText} durations={beginTextData.durations}  startDelay={1000} delay={300} styles={{fontSize: 21, color: '#fff'}} onAnimationEnd={ () => this._enableScroll() } restartAnimationCount={this.state.beginTextAnimationCount} />
+            <TextApparition texts={this.currentChapter.beginText} durations={beginTextData.durations}  startDelay={1000} delay={300} styles={[{fontSize: 21}, beginTextData.styles]} onAnimationEnd={ () => this._enableScroll() } restartAnimationCount={this.state.beginTextAnimationCount} />
           </View>
             <Animated.View style={
               [{
