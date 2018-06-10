@@ -19,6 +19,7 @@ import chapterList from './datas/chapterList'
 import imageList from '../../assets/ImagesList'
 import soundsList from '../../assets/SoundsList'
 import {fonts} from '../../assets/variables'
+import { AudioManager } from '../utils/AudioManager';
 
 const windowHeight = Dimensions.get('window').height
 const windowWidth = Dimensions.get('window').width
@@ -95,13 +96,17 @@ class Chapter extends React.Component {
         })
       })
     }
-
   }
 
   componentWillUnmount() {
     this.props._setCurrentOffsetProgress(this.state.currentScrollX, this._getPercentProgress())
     clearInterval(this.progressTimeOut)
-    // AudioManager.stopSounds(this.audio.ambientAudio)
+    this.beginTextTimeouts.map(timeout => {
+      clearInterval(timeout)
+    })
+    this.beginTextAudio.map(audio => {
+      AudioManager.stopSound(audio)
+    })
   }
 
   componentWillMount() {
@@ -122,6 +127,8 @@ class Chapter extends React.Component {
     setInterval(() => {
       this._handleEndChapter(this.state.currentScrollX)
     }, 500)
+
+    this._playBeginTextAudio()
   }
 
   componentDidMount() {
@@ -286,7 +293,7 @@ class Chapter extends React.Component {
       return(
         <View style={[{position: 'absolute'}, beginTextData.styles]}>
           <View style={{width: beginTextData.parentWidth, marginBottom: 50}}>
-            <TextApparition texts={this.currentChapter.beginText} durations={beginTextData.durations} delay={1000} styles={{fontSize: 21, color: '#fff'}} onAnimationEnd={ () => this._enableScroll() } restartAnimationCount={this.state.beginTextAnimationCount} />
+            <TextApparition texts={this.currentChapter.beginText} durations={beginTextData.durations}  startDelay={1000} delay={300} styles={{fontSize: 21, color: '#fff'}} onAnimationEnd={ () => this._enableScroll() } restartAnimationCount={this.state.beginTextAnimationCount} />
           </View>
             <Animated.View style={
               [{
@@ -302,6 +309,26 @@ class Chapter extends React.Component {
           </Animated.View>
         </View>
       )
+    }
+  }
+
+
+  _playBeginTextAudio = () => {
+    const chapterNumber = this.currentChapter.numberInt
+    this.beginTextTimeouts = []
+    this.beginTextAudio = []
+    if (chapterNumber) {
+      return chapterList['chapter'+chapterNumber].beginTextAudio.map((audio, index) => {
+        AudioManager.prepareSound(audio.source, {
+          volume: 1
+        }).then((data) => {
+          const timeout = setTimeout( () => {
+            AudioManager.playSound(data)
+          }, audio.timeout)
+          this.beginTextTimeouts.push(timeout)
+          this.beginTextAudio.push(data)
+        })
+      })
     }
   }
 

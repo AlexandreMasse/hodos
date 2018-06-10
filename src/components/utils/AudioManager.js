@@ -33,8 +33,6 @@ export const AudioManager = {
       const res = source
       const { sound } = await Expo.Audio.Sound.create(res)
 
-
-
       await sound.setStatusAsync({
         volume: config && config.volume ? config.volume : 0,
         isLooping: config && config.isLooping ? config.isLooping : false

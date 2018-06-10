@@ -4,6 +4,11 @@ export default soundsList = {
 
     },
     chapter27: {
+      beginTextAudio: {
+        phrase1: require('./sounds/Chapter/27/BeginTextAudio/Chap27_1.mp3'),
+        phrase2: require('./sounds/Chapter/27/BeginTextAudio/Chap27_2.mp3'),
+        phrase3: require('./sounds/Chapter/27/BeginTextAudio/Chap27_3.mp3')
+      },
       ambientSounds: {
         olympiens: require('./sounds/Chapter/27/AmbientAudio/Olympiens.mp3'),
         forge: require('./sounds/Chapter/27/AmbientAudio/Forge.mp3'),

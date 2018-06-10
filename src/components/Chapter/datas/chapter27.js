@@ -540,7 +540,7 @@ export default {
       "width": 800,
       "alignItems": "center"
     },
-    "durations": [15000, 6000, 12000, 4000],
+    "durations": [18000, 6000, 7000],
     "parentWidth": 800
   },
   "characterDiscoveredText": [
@@ -681,6 +681,20 @@ export default {
         "left": 92.2,
         "width": 1.53
       }
+    }
+  ],
+  "beginTextAudio": [
+    {
+      "source": soundsList.chapters.chapter27.beginTextAudio.phrase1,
+      "timeout": 6000
+    },
+    {
+      "source": soundsList.chapters.chapter27.beginTextAudio.phrase2,
+      "timeout": 20000
+    },
+    {
+      "source": soundsList.chapters.chapter27.beginTextAudio.phrase3,
+      "timeout": 26000
     }
   ],
   "ambientAudio" : [
