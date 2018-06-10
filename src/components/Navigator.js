@@ -63,7 +63,7 @@ export const IntroStackNavigator = StackNavigator({
     screen: Intro
   }
 },{
-  initialRouteName: 'Intro',
+  initialRouteName: 'HomeScreen',
   headerMode: 'none',
   navigationOptions: {
     gesturesEnabled: false,
@@ -163,7 +163,7 @@ export const AppStackNavigator = StackNavigator({
     screen: MainDrawerNavigator
   }
 },{
-  initialRouteName: 'IntroStackNavigator',
+  initialRouteName: 'MainDrawerNavigator',
   headerMode: 'none',
   navigationOptions: {
     gesturesEnabled: false,
