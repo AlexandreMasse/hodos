@@ -10,6 +10,9 @@ export default animationList = {
       'lave': require('./animations/chapter27/lave'),
       'forge': require('./animations/chapter27/forge'),
     },
+    chapter68: {
+      'persee': require('./animations/chapter68/persee'),
+    }
   },
 };
 

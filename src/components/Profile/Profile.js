@@ -31,6 +31,7 @@ class Profile extends React.Component {
       imageBackground: imageList.profile.background.general
     }
     this._visibility = new Animated.Value(100)
+    //this._visibilityBackground = new Animated.Value(100)
   }
 
   _handlePressCard (id) {
@@ -59,13 +60,13 @@ class Profile extends React.Component {
   handleCardChanges = (stateFunc, id) => {
     Animated.timing(this._visibility, {
       toValue: 0,
-      duration: 300
-    }).start( () => {
+      duration: 450
+    }).start(() => {
       stateFunc(id)
       Animated.timing(this._visibility, {
         toValue: 100,
-        duration: 300,
-        delay: 300
+        duration: 450,
+        //delay: 300
       }).start()
     })
   }
@@ -101,7 +102,7 @@ class Profile extends React.Component {
     return (
       <TouchableOpacity style={[styles.card, styles.cardBox, {}]} key={Math.round(Math.random() * Math.random() * 10000)} activeOpacity={0.8} onPress={() => this._handlePressCard(skillType.id)}>
         <View style={[{alignItems: 'center', flexDirection: 'row', width: '100%'}]}>
-          <CircularSkill currentSkill={skillType.nbUnlocked} totalSkill={skillType.skills.length} size={100} width={3} img={imageList.profile.skills[index]} animationDelay={700}/>
+          <CircularSkill currentSkill={skillType.nbUnlocked} totalSkill={skillType.skills.length} size={100} width={3} img={imageList.profile.skills[index]} animationDelay={450} animationDuration={700}/>
           <View style={{marginLeft: 20}}>
             <Text style={[styles.cardTitle]}>{skillType.title}</Text>
             <Text style={[styles.cardSubTitle]}>{skillType.name}</Text>
@@ -120,14 +121,14 @@ class Profile extends React.Component {
           <Text style={[styles.cardTitle]}>{skillType.title}</Text>
           <Text style={[styles.cardSubTitle]}>{skillType.name}</Text>
         </View>
-        <TouchableOpacity onPress={this._handleCloseCard} style={{position: 'absolute', right: 20, top: 20}}>
-          <Image source={imageList.others.close} style={{ width: 15, height: 15, resizeMode: 'contain'}} />
+        <TouchableOpacity onPress={this._handleCloseCard} style={{position:'absolute', alignItems: 'center', justifyContent: 'center',  width: 40, height: 40, right: 15, top: 15}}>
+          <Image source={imageList.others.close} style={{ width: 20, height: 20, resizeMode: 'contain'}} />
         </TouchableOpacity>
         <View style={{paddingHorizontal: 20,  flexDirection: 'row', marginTop: 30}}>
           <View style={{marginHorizontal: 10, justifyContent: 'space-between'}}>
-              {this._renderSkillNumber(skillType)}
+            {this._renderSkillNumber(skillType)}
           </View>
-          <ProgressBar progress={skillType.nbUnlocked} nbSteps={skillType.skills.length} height={260} width={8} isReversed={true} animationDelay={700} />
+          <ProgressBar progress={skillType.nbUnlocked} nbSteps={skillType.skills.length} height={260} width={8} isReversed={true} animationDelay={450} animationDuration={700}/>
           <View style={{marginLeft: 40, marginTop: -5, justifyContent: 'space-between'}}>
             {this._renderSkillName(skillType)}
           </View>
@@ -171,7 +172,7 @@ class Profile extends React.Component {
     })
   }
 
-   _renderRight () {
+  _renderRight () {
     return this.state.skillProgress.map( (skillType, index) => {
       // if all skills are closed render 2 skills closed
       if(!this.state.showActiveSkill) {
@@ -196,7 +197,7 @@ class Profile extends React.Component {
       <View style={styles.container}>
         <Animated.View style={[{width: '100%',
           opacity: this._visibility.interpolate({
-            inputRange: [0, 2],
+            inputRange: [0, 100],
             outputRange: [0, 1],
           })}
         ]}>
@@ -212,19 +213,19 @@ class Profile extends React.Component {
               <Animated.View style={[styles.cardContainer,
                 {opacity: visibilityInterpolation}
               ]}>
-                  <View style={styles.cardWrapperLeft}>
-                    {this._renderLeft()}
-                  </View>
-                  <View style={styles.cardWrapperRight}>
-                    {this._renderRight()}
-                  </View>
+                <View style={styles.cardWrapperLeft}>
+                  {this._renderLeft()}
+                </View>
+                <View style={styles.cardWrapperRight}>
+                  {this._renderRight()}
+                </View>
               </Animated.View>
               <View style={styles.progressBarContainer}>
                 <View style={styles.progressBarTextContainer}>
                   <Text style={styles.progressBarText}>Naissance</Text>
                   <Text style={styles.progressBarText}>Âge adulte</Text>
                 </View>
-                <ProgressBar nbSteps={100} progress={this.props.progress.chapter} height={8} width={680} isHorizontal={true} animationDelay={700} />
+                <ProgressBar nbSteps={100} progress={this.props.progress.chapter} height={8} width={680} isHorizontal={true} animationDelay={450} animationDuration={700}/>
               </View>
             </View>
           </View>

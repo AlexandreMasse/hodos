@@ -12,7 +12,7 @@ class OpenDrawerButton extends React.Component {
 
   render() {
     return (
-        <TouchableOpacity onPress={this._handleOpen} activeOpacity={0.8} style={styles.openContainer}>
+        <TouchableOpacity onPress={this._handleOpen} activeOpacity={0.9} style={styles.openContainer}>
           <Image source={imageList.menu.logo} style={styles.open}/>
           {/*<Button title="Open" onPress={() => {this.props.navigation.navigate('DrawerOpen') }} />;*/}
         </TouchableOpacity>
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     position:'absolute',
     width: 50,
     height: 50,
-    top: 30,
+    top: 25,
     left: 25,
     backgroundColor: 'white',
     borderRadius: 30,

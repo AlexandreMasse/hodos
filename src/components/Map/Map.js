@@ -138,7 +138,7 @@ class Map extends React.Component {
             onPress={() => {this._showCard(mapPlace)} }
             style={[styles.button, {top: mapPlace.y, left: mapPlace.x, width: mapPlace.width, height: mapPlace.height}]}
             underlayColor={null}>
-            <View />
+            <View/>
           </TouchableHighlight>
         )
       })
@@ -163,7 +163,7 @@ class Map extends React.Component {
             <TouchableHighlight
               key={'mapIndicator_'+index}
               onPress={() => {this._showCard(mapPlace)} }
-              style={[styles.button, {top: mapPlace.indicator.y.toString() + '%', left: mapPlace.indicator.x.toString() + '%', width: 16, height: 16}]}
+              style={[styles.button, {top: mapPlace.indicator.y.toString() + '%', left: mapPlace.indicator.x.toString() + '%', width: 20, height: 20}]}
               underlayColor={null}>
               <Image source={imageList.map.mapIndicator} style={{width: 16, height: 16}}/>
             </TouchableHighlight>
@@ -186,7 +186,7 @@ class Map extends React.Component {
           }
         ]}>
           <TouchableHighlight underlayColor={null} onPress={() => this._hideCard()} style={[styles.closeBtn, {padding: 15}]}>
-            <Image source={imageList.others.close} style={{width: 20, height: 20}} />
+            <Image source={imageList.others.close} style={{width: 20, height: 20}}/>
           </TouchableHighlight>
           <Text style={stylesSheet.title}>{this.state.activePlace.name}</Text>
           <Text style={stylesSheet.subTitle}>{this.state.activePlace.description}</Text>
@@ -293,8 +293,8 @@ const styles = StyleSheet.create({
   },
   buttonRead: {
     position: 'absolute',
-    top: 50,
-    right: 15,
+    top: 30,
+    right: 30,
   },
   whiteButton: {
     backgroundColor: '#fff',

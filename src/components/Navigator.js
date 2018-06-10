@@ -63,7 +63,7 @@ export const IntroStackNavigator = StackNavigator({
     screen: Intro
   }
 },{
-  initialRouteName: 'HomeScreen',
+  initialRouteName: 'Intro',
   headerMode: 'none',
   navigationOptions: {
     gesturesEnabled: false,
@@ -125,7 +125,7 @@ export const MainDrawerNavigator = DrawerNavigator(
   },
   {
     drawerWidth: 300,
-    initialRouteName: 'Chapter',
+    initialRouteName: 'Map',
     drawerPosition: 'left',
     drawerBackgroundColor: 'white',
     contentComponent: SideMenu,
@@ -163,16 +163,16 @@ export const AppStackNavigator = StackNavigator({
     screen: MainDrawerNavigator
   }
 },{
-  initialRouteName: 'MainDrawerNavigator',
+  initialRouteName: 'IntroStackNavigator',
   headerMode: 'none',
   navigationOptions: {
     gesturesEnabled: false,
   },
   transitionConfig: () => ({
     transitionSpec: {
-      duration: 1000,
-      //easing: Easing.out(Easing.poly(4)),
-      //timing: Animated.timing,
+      duration: 1500,
+      easing: Easing.cubic,
+      timing: Animated.timing,
     },
     screenInterpolator: (props) => {
       return fade(props)

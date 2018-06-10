@@ -182,7 +182,6 @@ export default imageList = {
   },
   others: {
     'splash':  require('./images/splash/splash.png'),
-    'logo': require('./images/logo.png'),
     'whiteArrowRight': require('./images/white-arrow-right.png'),
     'whiteArrowLeft': require('./images/white-arrow-left.png'),
     'arrowLeft': require('./images/arrow-left.png'),

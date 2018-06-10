@@ -3,6 +3,10 @@
 # expo
 .expo/
 
+# detach folders
+/ios
+/android
+
 # dependencies
 /node_modules
 

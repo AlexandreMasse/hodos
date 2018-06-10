@@ -138,13 +138,13 @@ export default class Place extends React.Component {
             <View style={[styles.placeContent]}>
               <View>
                 <Text style={styles.listTitle}>Chapitres</Text>
-                <ScrollView horizontal={true} style={styles.listContent} showsHorizontalScrollIndicator={false}>
+                <ScrollView horizontal={true} style={styles.listContent} showsHorizontalScrollIndicator={false} contentInset={{left: 50}} contentOffset={{x: -50}}>
                   {this._renderChapterList()}
                 </ScrollView>
               </View>
               <View>
                 <Text style={styles.listTitle}>Personnages</Text>
-                <ScrollView horizontal={true} style={styles.listContent} showsHorizontalScrollIndicator={false}>
+                <ScrollView horizontal={true} style={styles.listContent} showsHorizontalScrollIndicator={false} contentInset={{left: 50}} contentOffset={{x: -50}}>
                 {this._renderCharacterList()}
                 </ScrollView>
               </View>
@@ -186,7 +186,8 @@ const styles = StyleSheet.create({
     marginBottom: 20
   },
   placeWrapper: {
-    marginLeft: 50,
+    // marginLeft: 50,
+    marginLeft: 0,
     marginBottom: 70,
     height: '100%',
   },
@@ -206,6 +207,7 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
   },
   listTitle: {
+    marginLeft: 50,
     fontFamily: fonts.RubikMedium,
     fontSize: 30,
     marginBottom: 15,
@@ -258,11 +260,11 @@ const styles = StyleSheet.create({
   buttonLeft: {
     position: 'absolute',
     top: -50,
-    left: 20
+    left: 50
   },
   buttonRight: {
     position: 'absolute',
     top: -50,
-    right: 20
+    right: 50
   }
 })

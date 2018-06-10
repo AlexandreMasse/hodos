@@ -1,6 +1,6 @@
 // React
 import React from 'react';
-import {StyleSheet, YellowBox, TouchableOpacity, Text, View} from 'react-native';
+import {StyleSheet, YellowBox, TouchableOpacity, Text, View, StatusBar} from 'react-native';
 // Store / data
 import {store} from './src/store/reducers/index'
 import {Provider} from 'react-redux'
@@ -122,7 +122,10 @@ class App extends React.Component {
     } else {
       return (
         <Provider store={store}>
+          <View style={{flex: 1}}>
+            <StatusBar hidden={true}/>
             <AppStackNavigator/>
+          </View>
         </Provider>
       )
     }
