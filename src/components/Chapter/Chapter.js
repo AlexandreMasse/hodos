@@ -24,16 +24,18 @@ const windowWidth = Dimensions.get('window').width
 class Chapter extends React.Component {
 
   static propTypes = {
-    chapterId: PropTypes.number
+    //chapterId: PropTypes.number
   }
 
   static defaultProps = {
-    chapterId: 26
+    //chapterId: 26
+    // chapterId: this.props.navigation.getParam('chapterId', 26)
   }
 
   constructor(props) {
     super(props)
     this.state = {
+      chapterId: this.props.navigation.getParam('chapterId', 26),
       scalingRatio: 1,
       totalWidth: 0,
       maxScrollX: 0,
@@ -50,10 +52,10 @@ class Chapter extends React.Component {
     //Retrieves current chapter data in store
     this.currentChapter = {}
     this.props.chapterList.map(val => {
-      if (val.id === this.props.chapterId) {
+      if (val.id === this.state.chapterId) {
         this.currentChapter = val
         //Set progress if chapter wasn't read before
-        if (this.props.chapterId > this.props.progress.chapter) {
+        if (this.state.chapterId > this.props.progress.chapter) {
           this.props._setChapterRomanProgress(val.numberRoman)
         }
       } else if (this.currentChapter && Number(val.numberInt) === (Number(this.currentChapter.numberInt) + 1)) {
@@ -101,8 +103,9 @@ class Chapter extends React.Component {
 
   componentWillMount() {
     //Calcul scaling ratio from original height
-    // TODO : render this calcul dynamic with chapter number
-    const sourceBackground = Image.resolveAssetSource(imageList.chapters.chapter27.scene01.Chap27_scene01)
+    //const sourceBackground = Image.resolveAssetSource(imageList.chapters.chapter27.scene01.Chap27_scene01)
+    console.log(this.currentChapter.numberInt);
+    const sourceBackground = Image.resolveAssetSource(chapterList['chapter'+this.currentChapter.numberInt].scenes[0].src)
 
     this.setState({scalingRatio: windowHeight / sourceBackground.height})
 
@@ -354,6 +357,7 @@ class Chapter extends React.Component {
   }
 
   render () {
+    const chapterNumber = this.currentChapter.numberInt
     return (
       <View style={styles.container}>
         <Animated.ScrollView
@@ -384,13 +388,12 @@ class Chapter extends React.Component {
         )}>
           {this._renderScenes()}
           {this._renderSwipeGesture()}
-          {this._renderBeginText()}
+          {chapterList['chapter'+chapterNumber].beginText && this._renderBeginText()}
           {this._renderParallaxedImages()}
           {this._renderLottieAnimations()}
           {this._renderTexts()}
-          {this._renderAudio()}
-          {this._renderObjectAudio()}
-          {/*<LottieAnimation source={require('../../assets/animations/chapter27/eclair-palais')}/>*/}
+          {chapterList['chapter'+chapterNumber].sounds.length && this._renderAudio()}
+          {chapterList['chapter'+chapterNumber].sounds.length && this._renderObjectAudio()}
         </Animated.ScrollView>
         {this._renderChapterEnd()}
         <View style={styles.absoluteContent}>

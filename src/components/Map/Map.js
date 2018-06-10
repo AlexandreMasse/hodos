@@ -124,7 +124,10 @@ class Map extends React.Component {
     if (this.state.showReadingButton) {
       return (
         <View  style={styles.buttonRead} src={imageList.others.arrowRight}>
-          <ButtonWhite text={'Reprendre la lecture'} source={imageList.others.arrowRight} iconLeft={false} onTouch={this._handleReading} />
+          <ButtonWhite text={'Reprendre la lecture'} source={imageList.others.arrowRight} iconLeft={false}
+                       /*onTouch={this._handleReading}*/
+                       onTouch={() => this.props.navigation.navigate('Chapter', { chapterId: 67})}
+          />
         </View>
       );
     }

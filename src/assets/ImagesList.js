@@ -114,6 +114,24 @@ export default imageList = {
     },
     chapter62: {
       'thumbnail': require('./images/chapters/62/thumbnail.png'),
+    },
+    chapter68: {
+      scene01: {
+        scene01: require('./images/chapters/68/scene01/scene01.png')
+      },
+      scene02: {
+        scene02: require('./images/chapters/68/scene02/scene02.png')
+      },
+      scene03: {
+        scene03: require('./images/chapters/68/scene03/scene03.png')
+      },
+      scene04: {
+        scene04: require('./images/chapters/68/scene04/scene04.png')
+      },
+      scene05: {
+        scene05: require('./images/chapters/68/scene05/scene05.png')
+      },
+
     }
   },
   map: {

@@ -2,9 +2,6 @@ import imageList from '../../../assets/ImagesList'
 import soundsList from '../../../assets/SoundsList'
 import animationList from '../../../assets/AnimationsList'
 
-// TODO: place texts
-// TODO: string in object is not necessary now ?
-
 export default {
   "previouslyBannerImage":  imageList.chapters.chapter27.previously,
   "scenes": [
@@ -501,7 +498,7 @@ export default {
     {
       "source": animationList.chapters.chapter27.nuagesBlanc,
       "speedX": 0,
-      "speedAnimation": 15,
+      "speedAnimation": 1,
       "styles": {
         "width": "5%",
         "height": "120%",
