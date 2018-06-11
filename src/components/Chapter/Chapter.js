@@ -38,7 +38,7 @@ class Chapter extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      chapterId: this.props.navigation.getParam('chapterId', 26),
+      chapterId: this.props.navigation.getParam('chapterId', 67),
       scalingRatio: 1,
       totalWidth: 0,
       maxScrollX: 0,
@@ -222,7 +222,7 @@ class Chapter extends React.Component {
                            top={image.top || image.top >= 0 ? image.top : undefined}
                            speedX={image.speedX || image.speedX === 0 ? image.speedX : undefined}
                            speedY={image.speedY || image.speedY === 0 ? image.speedY : undefined}
-                           rotate={image.rotate || image.rotate === 0 ? image.rotate : undefined}
+                           // rotate={image.rotate || image.rotate === 0 ? image.rotate : undefined}
                            scalingRatio={scallingRatio}
                            scrollX={this.state.scrollX}
                            src={image.src}
@@ -230,6 +230,10 @@ class Chapter extends React.Component {
                            parentWidth={this.state.totalWidth}
                            opacityInputRange={image.opacityInputRange ? image.opacityInputRange : undefined }
                            opacityOutputRange={image.opacityOutputRange ? image.opacityOutputRange : undefined }
+                           scaleInputRange={image.scaleInputRange ? image.scaleInputRange : undefined }
+                           scaleOutputRange={image.scaleOutputRange ? image.scaleOutputRange : undefined }
+                           rotateInputRange={image.rotateInputRange ? image.rotateInputRange : undefined }
+                           rotateOutputRange={image.rotateOutputRange ? image.rotateOutputRange : undefined }
                            key={index}
           />
         )

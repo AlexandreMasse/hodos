@@ -117,7 +117,14 @@ export default imageList = {
     },
     chapter68: {
       scene01: {
-        scene01: require('./images/chapters/68/scene01/scene01.png')
+        persee1: require('./images/chapters/68/scene01/persee1.png'),
+        persee2: require('./images/chapters/68/scene01/persee2.png'),
+        scene01: require('./images/chapters/68/scene01/scene01.png'),
+        nuages01: require('./images/chapters/68/scene01/nuages01.png'),
+        nuages02: require('./images/chapters/68/scene01/nuages02.png'),
+        nuages03: require('./images/chapters/68/scene01/nuages03.png'),
+        nuages04: require('./images/chapters/68/scene01/nuages04.png'),
+        nuages05: require('./images/chapters/68/scene01/nuages05.png'),
       },
       scene02: {
         scene02: require('./images/chapters/68/scene02/scene02.png')

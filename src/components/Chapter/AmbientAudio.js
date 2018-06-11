@@ -42,7 +42,7 @@ export default class AmbientAudio extends React.Component {
     //this.scrollXAnimated = new Animated.Value(0)
 
     AudioManager.prepareSound(this.props.source, {
-      isLooping: true
+      isLooping: true,
     }).then((data) => {
       this.setState({
         audio: data,

@@ -11,12 +11,17 @@ export default class ParallaxedImage extends React.Component {
     left: PropTypes.any,
     top: PropTypes.any,
     zIndex: PropTypes.number,
-    rotate: PropTypes.number,
+    // rotate: PropTypes.number,
     scalingRatio: PropTypes.number,
     speedX: PropTypes.number,
     speedY: PropTypes.number,
     parentWidth: PropTypes.number,
-    opacityInputRange: PropTypes.array
+    opacityInputRange: PropTypes.array,
+    opacityOutputRange: PropTypes.array,
+    scaleInputRange: PropTypes.array,
+    scaleOutputRange: PropTypes.array,
+    rotateInputRange: PropTypes.array,
+    rotateOutputRange: PropTypes.array,
   }
 
   static defaultProps = {
@@ -24,13 +29,17 @@ export default class ParallaxedImage extends React.Component {
     top: undefined,
     bottom: undefined,
     zIndex: undefined,
-    rotate: 0,
+    // rotate: 0,
     scalingRatio: 1,
     speedX: 0,
     speedY: 0,
     parentWidth: 0,
-    opacityInputRange: [1, 2],
-    opacityOutputRange: [1, 1]
+    opacityInputRange: [0, 1],
+    opacityOutputRange: [1, 1],
+    scaleInputRange: [0, 1],
+    scaleOutputRange: [1, 1],
+    rotateInputRange: [0, 1],
+    rotateOutputRange: ['0deg', '0deg'],
   }
 
   constructor(props) {
@@ -59,11 +68,23 @@ export default class ParallaxedImage extends React.Component {
             outputRange: [0, this.props.speedY]
           })
         }, {
-          rotate: this.props.rotate + 'deg'
+          scale: this.props.scrollX.interpolate({
+            inputRange: this.props.scaleInputRange.map((val) => (val / 100) * this.props.parentWidth),
+            outputRange: this.props.scaleOutputRange,
+            extrapolate: 'clamp',
+          })
+        },{
+          // rotate: this.props.rotate + 'deg'
+          rotate: this.props.scrollX.interpolate({
+            inputRange: this.props.rotateInputRange.map((val) => (val / 100) * this.props.parentWidth),
+            outputRange: this.props.rotateOutputRange,
+            extrapolate: 'clamp',
+          })
         }],
         opacity: this.props.scrollX.interpolate({
           inputRange: this.props.opacityInputRange.map((val) => (val / 100) * this.props.parentWidth),
-          outputRange: this.props.opacityOutputRange
+          outputRange: this.props.opacityOutputRange,
+          extrapolate: 'clamp',
         })
       },
 

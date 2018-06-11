@@ -96,7 +96,7 @@ export default {
       "speedX": 21,
       "speedY": 4,
       "zIndex": 18,
-      "rotate": -8
+      "rotateOutputRange": ['-8deg', '-8deg']
     },
     {
       "src": imageList.chapters.chapter27.scene01.Chap27_scene01_pilier3,

@@ -34,7 +34,9 @@ class Map extends React.Component {
     }
     this.mapImage = imageList.map.map
 
-    AudioManager.prepareSounds(SoundsList.map).then((data) => {
+    AudioManager.prepareSounds(SoundsList.map, {
+      volume: 1
+    }).then((data) => {
       this.audio = data
       this.setState({audioLoaded: true})
       this.audio.play.background()

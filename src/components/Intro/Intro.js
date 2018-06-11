@@ -29,7 +29,9 @@ class Intro extends React.Component {
       buttonOpacity: new Animated.Value(0),
       audioLoaded: false
     }
-    AudioManager.prepareSounds(SoundsList.intro).then((data) => {
+    AudioManager.prepareSounds(SoundsList.intro, {
+      volume: 1
+    }).then((data) => {
       this.audio = data
       this.setState({audioLoaded: true})
       this.audio.play.background()
