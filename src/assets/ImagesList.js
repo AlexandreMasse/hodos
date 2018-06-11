@@ -127,7 +127,31 @@ export default imageList = {
         nuages05: require('./images/chapters/68/scene01/nuages05.png'),
       },
       scene02: {
-        scene02: require('./images/chapters/68/scene02/scene02.png')
+        scene02: require('./images/chapters/68/scene02/scene02.png'),
+        gorgone: require('./images/chapters/68/scene02/gorgone.png'),
+        nuage1Droite: require('./images/chapters/68/scene02/nuage1Droite.png'),
+        nuage1Gauche: require('./images/chapters/68/scene02/nuage1Gauche.png'),
+        nuage2Gauche: require('./images/chapters/68/scene02/nuage2Gauche.png'),
+        nuage3Gauche: require('./images/chapters/68/scene02/nuage3Gauche.png'),
+        nuage4Centre: require('./images/chapters/68/scene02/nuage4Centre.png'),
+        nuage4Droite: require('./images/chapters/68/scene02/nuage4Droite.png'),
+        nuage5Droite: require('./images/chapters/68/scene02/nuage5Droite.png'),
+        nuage6Droite: require('./images/chapters/68/scene02/nuage6Droite.png'),
+        nuage7Droite: require('./images/chapters/68/scene02/nuage7Droite.png'),
+        nuage8: require('./images/chapters/68/scene02/nuage8.png'),
+
+        palmier1: require('./images/chapters/68/scene02/palmier1.png'),
+        palmier2: require('./images/chapters/68/scene02/palmier2.png'),
+        rocher1: require('./images/chapters/68/scene02/rocher1.png'),
+        rocher2: require('./images/chapters/68/scene02/rocher2.png'),
+        rocher3: require('./images/chapters/68/scene02/rocher3.png'),
+        rocher4: require('./images/chapters/68/scene02/rocher4.png'),
+        rocher5: require('./images/chapters/68/scene02/rocher5.png'),
+        montain: require('./images/chapters/68/scene02/montain.png'),
+        beach: require('./images/chapters/68/scene02/beach.png'),
+        sea: require('./images/chapters/68/scene02/sea.png'),
+        sun: require('./images/chapters/68/scene02/sun.png'),
+
       },
       scene03: {
         scene03: require('./images/chapters/68/scene03/scene03.png')

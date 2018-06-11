@@ -11,7 +11,8 @@ export default animationList = {
       'forge': require('./animations/chapter27/forge'),
     },
     chapter68: {
-      'persee': require('./animations/chapter68/persee'),
+      'nuagesPersee1': require('./animations/chapter68/nuages-persee1'),
+      'nuagesPersee2': require('./animations/chapter68/nuages-persee2'),
     }
   },
 };

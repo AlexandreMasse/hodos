@@ -206,6 +206,7 @@ class Chapter extends React.Component {
                windowHeight={windowHeight}
                key={index}
                zIndex={10}
+               styles={{opacity: 1}}
         />
       )
     })

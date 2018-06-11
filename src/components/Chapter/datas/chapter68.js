@@ -62,7 +62,7 @@ export default {
       "top" : "70%",
       "speedX": 10,
       "speedY": -10,
-      "zIndex": 20,
+      "zIndex": 25,
       "opacityInputRange": [17, 20],
       "opacityOutputRange": [0, 1],
       "scaleInputRange": [17, 25],
@@ -71,20 +71,185 @@ export default {
       "rotateOutputRange": ['20deg', '35deg']
     },
 
+    // SCENE 02
+    {
+      "src": imageList.chapters.chapter68.scene02.gorgone,
+      "left" : "27.8%",
+      "top" : "22%",
+      "speedX": 0,
+      "zIndex": 15,
+      "opacityInputRange": [25, 27],
+      "opacityOutputRange": [1, 0],
+    },
+    {
+      "src": imageList.chapters.chapter68.scene02.nuage1Gauche,
+      "left" : "23.5%",
+      "top" : "0%",
+      "speedX": 5,
+      "zIndex": 23,
+    },
+    {
+      "src": imageList.chapters.chapter68.scene02.nuage2Gauche,
+      "left": "22.5%",
+      "top": "0%",
+      "speedX": 10,
+      "zIndex": 22,
+    },
+    {
+      "src": imageList.chapters.chapter68.scene02.nuage3Gauche,
+      "left": "22%",
+      "top": "0%",
+      "speedX": 15,
+      "zIndex": 21,
+    },
+    {
+      "src": imageList.chapters.chapter68.scene02.nuage4Centre,
+      "left": "29%",
+      "top": "5%",
+      "speedX": -10,
+      "zIndex": 20,
+    },
+     {
+      "src": imageList.chapters.chapter68.scene02.nuage1Droite,
+      "left": "29.2%",
+      "bottom": "0%",
+      "speedX": -7,
+      "zIndex": 22,
+    },
+    {
+      "src": imageList.chapters.chapter68.scene02.nuage4Droite,
+      "left": "33%",
+      "top": "25%",
+      "speedX": -15,
+      "zIndex": 22,
+    },
+    {
+      "src": imageList.chapters.chapter68.scene02.nuage5Droite,
+      "left": "25%",
+      "top": "10%",
+      "speedX": 20,
+    },
+    {
+      "src": imageList.chapters.chapter68.scene02.nuage6Droite,
+      "left": "31%",
+      "bottom": "20%",
+      "speedX": 5,
+    },
+    {
+      "src": imageList.chapters.chapter68.scene02.nuage7Droite,
+      "left": "32%",
+      "top": "12%",
+      "speedX": 10,
+      "zIndex": 15
+    },
+    {
+      "src": imageList.chapters.chapter68.scene02.palmier1,
+      "left": "36%",
+      "bottom": "-30%",
+      "speedX": -10,
+
+    },
+    {
+      "src": imageList.chapters.chapter68.scene02.palmier2,
+      "left": "42%",
+      "bottom": "-30%",
+      "speedX": -20,
+      "zIndex": 21
+    },
+    {
+      "src": imageList.chapters.chapter68.scene02.rocher1,
+      "left": "39.5%",
+      "bottom": "-0.15%",
+      "speedX": -8,
+    },
+    {
+      "src": imageList.chapters.chapter68.scene02.beach,
+      "left": "33%",
+      "bottom": "-2%",
+      "speedX": 0,
+      "zIndex": 17
+    },
+    {
+      "src": imageList.chapters.chapter68.scene02.nuage8,
+      "left": "39%",
+      "top": "22%",
+      "speedX": 7,
+      "zIndex": 16
+    },
+    {
+      "src": imageList.chapters.chapter68.scene02.sea,
+      "left": "38.3%",
+      "bottom": "-2%",
+      "speedX": 0,
+      "zIndex": 16
+    },
+    {
+      "src": imageList.chapters.chapter68.scene02.montain,
+      "left": "31.2%",
+      "bottom": "25%",
+      "speedX": 15,
+      "zIndex": 15
+    },
+    {
+      "src": imageList.chapters.chapter68.scene02.rocher2,
+      "left": "46.5%",
+      "bottom": "-0.1%",
+      "speedX": -15,
+    },
+    {
+      "src": imageList.chapters.chapter68.scene02.rocher3,
+      "left": "54%",
+      "bottom": "-8%",
+      "speedX": -25,
+    },
+    {
+      "src": imageList.chapters.chapter68.scene02.sun,
+      "left": "38.8%",
+      "bottom": "22.5%",
+      "speedX": 10,
+      "zIndex": 17
+    },
+    {
+      "src": imageList.chapters.chapter68.scene02.rocher4,
+      "left": "53.2%",
+      "bottom": "-2%",
+      "speedX": -15
+    },
+    {
+      "src": imageList.chapters.chapter68.scene02.rocher5,
+      "left": "49%",
+      "bottom": "5%",
+      "speedX": -5,
+      "zIndex": 19
+    },
+
+
   ],
   "lottieAnimations": [
     // SCENE 01
-    // {
-    //   "source": animationList.chapters.chapter27.palais,
-    //   "styles": {
-    //     "width": "3.4%",
-    //     "height": "88%",
-    //     "left": "0.050%",
-    //     "top": "7%",
-    //     "zIndex": 18
-    //   },
-    //   "speedX": 10
-    // },
+    {
+      "source": animationList.chapters.chapter68.nuagesPersee1,
+      "styles": {
+        "width": "6%",
+        "height": "100%",
+        "left": "0%",
+        "top": "0%",
+        "zIndex": 30
+      },
+      "speedX": 0
+    },
+    {
+      "source": animationList.chapters.chapter68.nuagesPersee2,
+      "styles": {
+        "width": "6%",
+        "height": "100%",
+        "left": "0%",
+        "top": "0%",
+        "zIndex": 19
+      },
+      "progress": 0.5,
+      "speedX": 0
+    },
   ],
   "beginText": {
     "viewStyles": {

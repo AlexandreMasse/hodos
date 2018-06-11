@@ -9,11 +9,13 @@ export default class Scene extends React.Component {
   static propTypes = {
     windowHeight: PropType.number,
     zIndex: PropType.number,
-    src: PropType.any.isRequired
+    src: PropType.any.isRequired,
+    styles: PropType.object
   }
 
   static defaultProps = {
-    windowHeight: Dimensions.get('window').height
+    windowHeight: Dimensions.get('window').height,
+    styles: {}
   }
 
   constructor(props) {
@@ -33,7 +35,7 @@ export default class Scene extends React.Component {
 
   render () {
     return (
-      <Image style={[styles.scene, this.state.styles ]} source={this.props.src} />
+      <Image style={[styles.scene, this.state.styles, this.props.styles ]} source={this.props.src} />
     )
   }
 }
