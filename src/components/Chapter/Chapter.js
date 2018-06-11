@@ -206,7 +206,7 @@ class Chapter extends React.Component {
                windowHeight={windowHeight}
                key={index}
                zIndex={10}
-               styles={{opacity: 1}}
+               styles={{opacity: 0.2}}
         />
       )
     })
@@ -323,7 +323,8 @@ class Chapter extends React.Component {
     const chapterNumber = this.currentChapter.numberInt
     this.beginTextTimeouts = []
     this.beginTextAudio = []
-    if (chapterNumber) {
+    console.log(this.props.currentOffset)
+    if (chapterNumber && this.props.currentOffset <= 0) {
       return chapterList['chapter'+chapterNumber].beginTextAudio.map((audio, index) => {
         AudioManager.prepareSound(audio.source, {
           volume: 1

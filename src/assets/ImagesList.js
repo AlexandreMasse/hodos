@@ -142,19 +142,31 @@ export default imageList = {
 
         palmier1: require('./images/chapters/68/scene02/palmier1.png'),
         palmier2: require('./images/chapters/68/scene02/palmier2.png'),
+        palmier3: require('./images/chapters/68/scene02/palmier3.png'),
         rocher1: require('./images/chapters/68/scene02/rocher1.png'),
         rocher2: require('./images/chapters/68/scene02/rocher2.png'),
         rocher3: require('./images/chapters/68/scene02/rocher3.png'),
         rocher4: require('./images/chapters/68/scene02/rocher4.png'),
         rocher5: require('./images/chapters/68/scene02/rocher5.png'),
-        montain: require('./images/chapters/68/scene02/montain.png'),
+        mountain: require('./images/chapters/68/scene02/mountain.png'),
         beach: require('./images/chapters/68/scene02/beach.png'),
         sea: require('./images/chapters/68/scene02/sea.png'),
         sun: require('./images/chapters/68/scene02/sun.png'),
 
       },
       scene03: {
-        scene03: require('./images/chapters/68/scene03/scene03.png')
+        scene03: require('./images/chapters/68/scene03/scene03.png'),
+        girl: require('./images/chapters/68/scene03/girl.png'),
+        mountain1: require('./images/chapters/68/scene03/mountain1.png'),
+        mountain2: require('./images/chapters/68/scene03/mountain2.png'),
+        nuage1: require('./images/chapters/68/scene03/nuage1.png'),
+        nuage2: require('./images/chapters/68/scene03/nuage2.png'),
+        nuage3: require('./images/chapters/68/scene03/nuage3.png'),
+        nuage4: require('./images/chapters/68/scene03/nuage4.png'),
+        rocher1: require('./images/chapters/68/scene03/rocher1.png'),
+        rocher2: require('./images/chapters/68/scene03/rocher2.png'),
+        rocher3: require('./images/chapters/68/scene03/rocher3.png'),
+        sea: require('./images/chapters/68/scene03/sea.png'),
       },
       scene04: {
         scene04: require('./images/chapters/68/scene04/scene04.png')

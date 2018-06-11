@@ -157,6 +157,13 @@ export default {
       "zIndex": 21
     },
     {
+      "src": imageList.chapters.chapter68.scene02.palmier3,
+      "left": "38.2%",
+      "bottom": "20%",
+      "speedX": -5,
+      "zIndex": 19
+    },
+    {
       "src": imageList.chapters.chapter68.scene02.rocher1,
       "left": "39.5%",
       "bottom": "-0.15%",
@@ -184,7 +191,7 @@ export default {
       "zIndex": 16
     },
     {
-      "src": imageList.chapters.chapter68.scene02.montain,
+      "src": imageList.chapters.chapter68.scene02.mountain,
       "left": "31.2%",
       "bottom": "25%",
       "speedX": 15,
@@ -223,6 +230,49 @@ export default {
       "zIndex": 19
     },
 
+    // SCENE 03
+    {
+      "src": imageList.chapters.chapter68.scene03.sea,
+      "left": "50.1%",
+      "bottom": "-2.3%",
+      "speedX": 0,
+      "zIndex": 18
+    },
+    {
+      "src": imageList.chapters.chapter68.scene03.girl,
+      "left": "63.5%",
+      "bottom": "-125%",
+      "speedX": -20,
+      "speedY": -8,
+    },
+    {
+      "src": imageList.chapters.chapter68.scene03.rocher1,
+      "left": "54.5%",
+      "bottom": "-30%",
+      "speedX": -5,
+      "zIndex": 19
+    },
+    {
+      "src": imageList.chapters.chapter68.scene03.mountain1,
+      "left": "46%",
+      "bottom": "13%",
+      "speedX": 7,
+      "zIndex": 15
+    },
+    {
+      "src": imageList.chapters.chapter68.scene03.mountain2,
+      "left": "43.2%",
+      "bottom": "30%",
+      "speedX": 14,
+      "zIndex": 14
+    },
+    {
+      "src": imageList.chapters.chapter68.scene03.nuage1,
+      "left": "41.5%",
+      "top": "6%",
+      "speedX": 20,
+      "zIndex": 14
+    },
 
   ],
   "lottieAnimations": [
@@ -236,6 +286,7 @@ export default {
         "top": "0%",
         "zIndex": 30
       },
+      "speedAnimation": 2,
       "speedX": 0
     },
     {
@@ -247,6 +298,7 @@ export default {
         "top": "0%",
         "zIndex": 19
       },
+      "speedAnimation": 2,
       "progress": 0.5,
       "speedX": 0
     },
