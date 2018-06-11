@@ -7,6 +7,12 @@ export default imageList = {
     chapter13: {
       'thumbnail': require('./images/chapters/13/thumbnail.png'),
     },
+    chapter14: {
+      'thumbnail': require('./images/chapters/14/thumbnail.png'),
+    },
+    chapter69: {
+      'thumbnail': require('./images/chapters/69/thumbnail.png'),
+    },
     chapter27: {
       'thumbnail': require('./images/chapters/1/thumbnail.png'),
       'previously': require('./images/chapters/27/previously.png'),
@@ -175,7 +181,10 @@ export default imageList = {
         scene05: require('./images/chapters/68/scene05/scene05.png')
       },
 
-    }
+    },
+    chapter69: {
+      'thumbnail': require('./images/chapters/69/thumbnail.png'),
+    },
   },
   map: {
     'map': require('./images/map/map.png'),

@@ -328,6 +328,106 @@ export default {
     },
   ],
   "texts": [
+    {
+      "viewStyles" : {
+        "bottom": "15%",
+        "left": 29.5,
+        "width": 1.9,
+      },
+      "styles": {
+        "color": "#00194d"
+      }
+    },
+    {
+      "viewStyles" : {
+        "top": "16%",
+        "left": 33,
+        "width": 1.9,
+      },
+      "styles": {
+        "color": "#00194d"
+      }
+    },
+    {
+      "viewStyles" : {
+        "top": "16%",
+        "left": 43.5,
+        "width": 1.9,
+      },
+      "styles": {
+        "color": "#00194d"
+      }
+    },
+    {
+      "viewStyles" : {
+        "top": "13.5%",
+        "left": 50.42,
+        "width": 1.9,
+      },
+      "styles": {
+        "color": "#00194d"
+      }
+    },
+    {
+      "viewStyles" : {
+        "top": "5%",
+        "left": 58.8,
+        "width": 1.8,
+      },
+      "styles": {
+        "color": "#00194d"
+      }
+    },
+    {
+      "viewStyles" : {
+        "top": "13%",
+        "left": 65.2,
+        "width": 1.8,
+      },
+      "styles": {
+        "color": "#00194d"
+      }
+    },
+    {
+      "viewStyles" : {
+        "top": "13%",
+        "left": 68.8,
+        "width": 1.9,
+      },
+      "styles": {
+        "color": "#00194d"
+      }
+    },
+    {
+      "viewStyles" : {
+        "top": "13%",
+        "left": 82.2,
+        "width": 1.9,
+      },
+      "styles": {
+        "color": "#00194d"
+      }
+    },
+    {
+      "viewStyles" : {
+        "top": "13%",
+        "left": 87.2,
+        "width": 1.9,
+      },
+      "styles": {
+        "color": "#00194d"
+      }
+    },
+    {
+      "viewStyles" : {
+        "top": "13%",
+        "left": 97.2,
+        "width": 2.1,
+      },
+      "styles": {
+        "color": "#00194d"
+      }
+    },
   ],
   "audio" : [
   ],

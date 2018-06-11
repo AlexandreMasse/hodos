@@ -128,7 +128,7 @@ class Chapter extends React.Component {
       this._handleEndChapter(this.state.currentScrollX)
     }, 500)
 
-    this._playBeginTextAudio()
+    // this._playBeginTextAudio()
   }
 
   componentDidMount() {
@@ -244,9 +244,9 @@ class Chapter extends React.Component {
 
   _renderTexts () {
     const currentChapter = this.currentChapter
-    const chapterNumber = currentChapter.numberInt
     if (currentChapter && currentChapter.textBlocks) {
       return currentChapter.textBlocks.map((text, index) => {
+        const chapterNumber = currentChapter.numberInt
         const textData = chapterList['chapter'+chapterNumber].texts[index]
         if (textData) {
           return (
@@ -323,7 +323,6 @@ class Chapter extends React.Component {
     const chapterNumber = this.currentChapter.numberInt
     this.beginTextTimeouts = []
     this.beginTextAudio = []
-    console.log(this.props.currentOffset)
     if (chapterNumber && this.props.currentOffset <= 0) {
       return chapterList['chapter'+chapterNumber].beginTextAudio.map((audio, index) => {
         AudioManager.prepareSound(audio.source, {
@@ -351,14 +350,14 @@ class Chapter extends React.Component {
 
   _renderChapterEnd() {
     if (this.state.showChapterEnd) {
+      const nextChapterNumber = this.nextChapter.numberInt
       const chapterNumber = this.currentChapter.numberInt
       if (this.nextChapter && chapterNumber) {
         if (this.currentChapter.characterDiscoveredObject &&this.currentChapter.characterDiscoveredObject.length) {
           return(
             <CharacterAdd width={windowWidth} characterDiscovered={this.currentChapter.characterDiscoveredObject} skillDiscovered={this.currentChapter.skillDiscoveredObject}   nextChapter={this.nextChapter} showChapterEnd={this.state.showChapterEnd} texts={chapterList['chapter'+chapterNumber].characterDiscoveredText} />
           )
-        } else {
-          const nextChapterNumber = this.nextChapter.numberInt
+        } else if(imageList.chapters['chapter'+(nextChapterNumber)].thumbnail) {
           return (
             <ChapterEnd width={windowWidth} imageSource={imageList.chapters['chapter'+(nextChapterNumber)].thumbnail} nextChapter={this.nextChapter} showChapterEnd={this.state.showChapterEnd} />
           )
