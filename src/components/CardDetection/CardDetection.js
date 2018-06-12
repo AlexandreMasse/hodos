@@ -10,12 +10,16 @@ export default class CardDetection extends React.Component {
     onPatternRecognition: PropTypes.func,
   }
 
+  static defaultProps = {
+    onPatternRecognition: () => {},
+  }
+
   constructor(props) {
     super(props);
     this.state = {
       points: [],
-      distance: '',
-      getTouchedMatrixCenter: {},
+      //distance: '',
+      //getTouchedMatrixCenter: {},
       characterName: ''
     };
 
@@ -105,9 +109,9 @@ export default class CardDetection extends React.Component {
         maxDistance = 0;
     for (let i = 0; i < points.length; i++) {
       for (let j = 0; j < points.length; j++) {
-        if (i != j) {
+        if (i !== j) {
           const currentDistance = this.getDistance(points[i], points[j])
-          if( currentDistance > maxDistance) {
+          if (currentDistance > maxDistance) {
             maxDistance = currentDistance
             mostDistantPoints = [points[i], points[j]]
           }
@@ -230,7 +234,7 @@ export default class CardDetection extends React.Component {
   }
 
   arrayCompare(a1, a2) {
-    if(a1.length != a2.length) {
+    if(a1.length !== a2.length) {
      return false;
     }
     for(var i in a1) {
@@ -240,7 +244,7 @@ export default class CardDetection extends React.Component {
        return false;
       }
      }
-     else if(a1[i] != a2[i]) {
+     else if(a1[i] !== a2[i]) {
       return false;
      }
     }
@@ -258,7 +262,7 @@ export default class CardDetection extends React.Component {
     for (let i = 0; i < patternList.length; i++) {
       if (this.arrayCompare(pattern, patternList[i])) {
         return i
-      } else if (i == patternList.length - 1) {
+      } else if (i === patternList.length - 1) {
         return null
       }
     }
@@ -284,7 +288,7 @@ export default class CardDetection extends React.Component {
    */
   getMatchingCharacter(patternId) {
     console.log('CardDetection : get matching character')
-    console.log('CardDetection : all Characters => ', this.characters)
+    //console.log('CardDetection : all Characters => ', this.characters)
     for (let i = 0; i < this.characters.length; i++) {
       const patterns = this.characters[i].patterns;
       if (patterns.indexOf(patternId) !== -1) {
@@ -298,7 +302,7 @@ export default class CardDetection extends React.Component {
    * @param {Array} touches
    */
   checkPattern(touches) {
-    console.log('CardDetection : Detected touches in CheckPattern => ', touches)
+    //console.log('CardDetection : Detected touches in CheckPattern => ', touches)
     const touchedCoords = this.getTouchedCoords(touches)
     const mostDistantPoints = this.getMarkpointsCoords(touchedCoords)
     const touchedMatrixWidth = this.getMatrixWidth(mostDistantPoints[0], mostDistantPoints[1])
@@ -312,14 +316,14 @@ export default class CardDetection extends React.Component {
     const patternId = this.getMatchingPatternId(touchedPattern, this.patternsList)
     console.log('CardDetection : touchedPattern => ', touchedPattern)
     console.log('CardDetection : patternId => ', patternId)
-    if (patternId >= 0) {
-      console.log('CardDetection : i have a patternId')
+    if (patternId >= 0 && Number.isInteger(patternId)) {
+      //console.log('CardDetection : i have a patternId')
       const character = this.getMatchingCharacter(patternId);
-      console.log('CardDetection : matching Character Id => ',character)
+      console.log('CardDetection : matching Character name => ',character.name)
       if (character) {
         this.setState({characterName: character.name})
-        if (this.onPatternRecognition) {
-          this.onPatternRecognition(character)
+        if (this.props.onPatternRecognition) {
+          this.props.onPatternRecognition(character.id)
         }
       }
     }
@@ -327,8 +331,8 @@ export default class CardDetection extends React.Component {
 
   _onTouch (evt) {
     const touches =  evt.nativeEvent.touches;
-    console.log('CardDetection : Detected touches => ', touches)
-    if (touches.length >= 2) {
+    //console.log('CardDetection : Detected touches => ', touches)
+    if (touches.length >= 5) {
       this.setState({characterName: ''})
       const character = this.checkPattern(touches);
     }
@@ -360,8 +364,8 @@ export default class CardDetection extends React.Component {
 
     return (
       <View style={style.cardZone} onStartShouldSetResponder={ (evt) => {this._onTouch(evt)} } pointerEvents="box-only">
-        {/* <Image style={style.background} source={imageList.cardDetection.backgroundCharacter}/>
-        <Image style={style.patternGrid} source={imageList.cardDetection.patternGrid}/> */}
+        {/* <Image style={style.background} source={imageList.cardDetection.backgroundCharacter}/>*/}
+        {/*<Image style={style.patternGrid} source={imageList.cardDetection.patternGrid}/>*/}
         {this.renderPoints()}
         {this.renderCharacterName()}
       </View>
@@ -399,8 +403,8 @@ const style = StyleSheet.create({
   },
   patternGrid: {
     position: 'absolute',
-    width: 700,
-    height: 700,
+    width: 300,
+    height: 300,
     left: 50,
     top: 100,
     transform: [{rotate : '180deg'}]
@@ -409,7 +413,7 @@ const style = StyleSheet.create({
     position: 'absolute',
     bottom: 100,
     fontSize: 50,
-    color: '#fff',
+    color: '#75b1ff',
     width: '100%',
     textAlign: 'center'
   }

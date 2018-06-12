@@ -16,11 +16,12 @@ class Characters extends React.Component {
     super(props)
     this.state = {
       showInfo: false,
-      showSkills: true,
+      showSkills: false,
       activeCharacter: {}
     }
     this._visibility = new Animated.Value(50)
     this._visibilitySkills = new Animated.Value(0)
+    this.previousDetection = null
   }
 
   componentWillMount() {
@@ -47,25 +48,43 @@ class Characters extends React.Component {
     this.characters = unlockedCharacters.concat(lockedCharacters)
   }
 
-  _onPatternRecognition (character) {
-    console.log('pattern recognized', character)
+  _onPatternRecognition(characterId) {
+    console.log('Character page, ID recognized', characterId)
+    console.log(this.state.activeCharacter.id, characterId)
+    if (Number(this.state.activeCharacter.id) !== Number(characterId) && this.previousDetection !== Number(characterId)) {
+      this.characters.map((character, index) => {
+        if (Number(character.id) === Number(characterId) && !character.isLocked) {
+          this.previousDetection = Number(characterId)
+          console.log('yeaaah we have a matching character', character)
+          /*this.setState({
+            showInfo: true,
+            activeCharacter: character,
+            showSkills: true
+          })*/
+          this._showCharacterInfo(character, true)
+          // this._showSkillsAnimation()
+        }
+      })
+    } else if (!this.state.showSkills) {
+      this._showSkillsAnimation()
+    }
   }
 
   _showSkillsAnimation = () => {
-    this.setState({
-      showInfo: true,
-      showSkills: true
-    })
-    Animated.timing(this._visibilitySkills, {
-      toValue: 100,
-      duration: 700
-    }).start()
+      this.setState({
+        showSkills: true
+      })
+      console.log(this.state.showSkills)
+      Animated.timing(this._visibilitySkills, {
+        toValue: 100,
+        duration: 700
+      }).start()
   }
 
-  _showCharacterInfosAnimation(character) {
+  _showCharacterInfosAnimation(character, showSkills) {
     this.setState({
       showInfo: true,
-      showSkills: false,
+      showSkills: showSkills,
       activeCharacter: character
     })
     Animated.timing(this._visibility, {
@@ -74,7 +93,8 @@ class Characters extends React.Component {
     }).start()
   }
 
-  _showCharacterInfo(character) {
+  _showCharacterInfo(character, showSkills) {
+    const showSkillsBool = showSkills ? true : false
     if (!this.state.showInfo) {
       this._showCharacterInfosAnimation(character)
     } else {
@@ -82,8 +102,11 @@ class Characters extends React.Component {
         toValue: 0,
         duration: 300
       }).start( () => {
-        this._visibilitySkills = new Animated.Value(0)
-        this._showCharacterInfosAnimation(character)
+        this._visibilitySkills.setValue(0)
+        if (showSkills) {
+          this._showSkillsAnimation()
+        }
+        this._showCharacterInfosAnimation(character, showSkillsBool)
       })
     }
   }
@@ -125,7 +148,7 @@ class Characters extends React.Component {
           ]}>
           <View style={[{flexDirection: 'row', height: '100%'}]}>
             <View style={[styles.characterInfoCard]}>
-              <ScrollView>
+              <ScrollView showsVerticalScrollIndicator={false} >
                 <Text style={[styles.characterInfoName]}>{this.state.activeCharacter.name}</Text>
                 <Text style={[styles.characterInfoRole]}>{this.state.activeCharacter.role}</Text>
                 <View style={{marginTop: 15}}>
@@ -211,7 +234,7 @@ class Characters extends React.Component {
         <View style={[styles.characterInfoWrapper]}>
           {this._renderCharacterInfo()}
           <View style={styles.cardDetection}>
-            <CardDetection onPatternRecognition={this._onPatternRecognition()} />
+            <CardDetection onPatternRecognition={(characterId) => {this._onPatternRecognition(characterId)}} />
             <View style={[{width: 315, height:'95%', position: 'absolute', left: 30, top: 40}]}  pointerEvents= {'none'}>
               <ImageAspectRatio src={imageList.others.cardBack} width={'100%'} />
             </View>
