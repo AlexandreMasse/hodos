@@ -38,7 +38,7 @@ class Chapter extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      chapterId: this.props.navigation.getParam('chapterId', 67),
+      chapterId: this.props.navigation.getParam('chapterId', 26),
       scalingRatio: 1,
       totalWidth: 0,
       maxScrollX: 0,
@@ -100,14 +100,17 @@ class Chapter extends React.Component {
 
   componentWillUnmount() {
     this.props._setCurrentOffsetProgress(this.state.currentScrollX, this._getPercentProgress())
-    clearInterval(this.progressTimeOut)
-    //TODO : bug
-    this.beginTextTimeouts.map(timeout => {
-      clearInterval(timeout)
-    })
-    this.beginTextAudio.map(audio => {
-      AudioManager.stopSound(audio)
-    })
+    //clearInterval(this.progressTimeOut)
+    if (this.beginTextTimeouts && this.beginTextTimeouts.length) {
+      this.beginTextTimeouts.map(timeout => {
+        clearInterval(timeout)
+      })
+    }
+    if (this.beginTextAudio && this.beginTextAudio.length) {
+      this.beginTextAudio.map(audio => {
+        AudioManager.stopSound(audio)
+      })
+    }
   }
 
   componentWillMount() {
@@ -119,15 +122,16 @@ class Chapter extends React.Component {
     this.setState({scalingRatio: windowHeight / sourceBackground.height})
 
     // Save progress
-    this.progressTimeOut = setInterval(() => {
-      if (this._getPercentProgress() < 100) {
-        this.props._setCurrentOffsetProgress(this.state.currentScrollX, this._getPercentProgress())
-      }
-    }, 2000)
-
-    setInterval(() => {
-      this._handleEndChapter(this.state.currentScrollX)
-    }, 500)
+    // this.progressTimeOut = setInterval(() => {
+    //   if (this._getPercentProgress() < 100) {
+    //     this.props._setCurrentOffsetProgress(this.state.currentScrollX, this._getPercentProgress())
+    //   }
+    //   console.log(this.state.scrollX);
+    // }, 2000)
+    //
+    // setInterval(() => {
+    //   this._handleEndChapter(this.state.currentScrollX)
+    // }, 500)
 
     // this._playBeginTextAudio()
   }
@@ -162,15 +166,25 @@ class Chapter extends React.Component {
     })
   }
 
+  _onMomentumScrollEnd = () => {
+    // Save progress
+    if (this._getPercentProgress() < 100) {
+      this.props._setCurrentOffsetProgress(this.state.currentScrollX, this._getPercentProgress())
+    }
+    // check if end
+    this._handleEndChapter(this.state.currentScrollX)
+  }
+
   _handleEndChapter = (scrollX) => {
     if (scrollX === this.state.maxScrollX) {
-      // console.log("end !");
+      console.log("end !");
       this.props._setCurrentOffsetProgress(0, 0)
       this.setState({
         showChapterEnd: true,
       })
 
     } else if (this.state.showChapterEnd) {
+      console.log("not end !");
       this.setState({
         showChapterEnd: false,
       })
@@ -435,6 +449,7 @@ class Chapter extends React.Component {
           scrollEnabled={this.state.scrollEnabled ? true : false}
           style={styles.scrollView}
           bounces={false}
+          onMomentumScrollEnd={this._onMomentumScrollEnd}
           scrollEventThrottle={1}
           onScroll={Animated.event(
             [{ nativeEvent: {
@@ -509,6 +524,7 @@ const styles = StyleSheet.create({
 })
 
 const mapStateToProps = state => {
+  console.log('state update');
   return {
     currentOffset: state.progress.currentOffset,
     chapterList: state.chapterList,
