@@ -101,6 +101,7 @@ class Chapter extends React.Component {
   componentWillUnmount() {
     this.props._setCurrentOffsetProgress(this.state.currentScrollX, this._getPercentProgress())
     clearInterval(this.progressTimeOut)
+    //TODO : bug
     this.beginTextTimeouts.map(timeout => {
       clearInterval(timeout)
     })
@@ -206,7 +207,7 @@ class Chapter extends React.Component {
                windowHeight={windowHeight}
                key={index}
                zIndex={10}
-               styles={{opacity: 0.2}}
+               styles={{opacity: 1}}
         />
       )
     })
@@ -459,9 +460,9 @@ class Chapter extends React.Component {
           {this._renderLottieAnimations()}
           {this._renderTexts()}
           {chapterList['chapter'+chapterNumber].ambientAudio.length && this._renderAmbientAudio()}
-          {chapterList['chapter'+chapterNumber].ambientAudio.length && this._renderObjectAmbientAudio()}
+          {/*{chapterList['chapter'+chapterNumber].ambientAudio.length && this._renderObjectAmbientAudio()}*/}
           {chapterList['chapter'+chapterNumber].audio.length && this._renderAudio()}
-          {chapterList['chapter'+chapterNumber].audio.length && this._renderObjectAudio()}
+          {/*{chapterList['chapter'+chapterNumber].audio.length && this._renderObjectAudio()}*/}
 w        </Animated.ScrollView>
         {this._renderChapterEnd()}
         <View style={styles.absoluteContent}>
