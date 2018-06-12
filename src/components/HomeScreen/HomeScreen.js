@@ -23,9 +23,14 @@ class HomeScreen extends React.Component {
           <ButtonWhite text={'Commencer l\'aventure'}  style={styles.button} source={imageList.others.arrowRight} iconLeft={false} onTouch={this._handleButtonWhiteOnTouch} />
         </View>
         <View style={styles.buttonStorage} >
-          <Button title="empty Local Storage" onPress={ () => StorageSessionManager.clearStorage()} />
-          <Button title="get Data from API" onPress={ () => {
-            StorageSessionManager.getDataFromApi()
+          <Button title="get Data from API with chapter 27" onPress={ () => {
+            StorageSessionManager.getDataFromApi(26)
+          }} />
+          <Button title="get Data from API with chapter 68" onPress={ () => {
+            StorageSessionManager.getDataFromApi(67)
+          } } />
+          <Button title="set progress to chapter 68" onPress={ () => {
+            StorageSessionManager.getDataFromApi(67, this.props.chapterList, this.props.placeList)
           } } />
         </View>
       </View>
@@ -83,6 +88,8 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
   return {
+    placeList: state.placeList,
+    chapterList: state.chapterList
   }
 }
 

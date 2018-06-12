@@ -163,7 +163,7 @@ export const AppStackNavigator = StackNavigator({
     screen: MainDrawerNavigator
   }
 },{
-  initialRouteName: 'MainDrawerNavigator',
+  initialRouteName: 'IntroStackNavigator',
   headerMode: 'none',
   navigationOptions: {
     gesturesEnabled: false,

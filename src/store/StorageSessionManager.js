@@ -44,7 +44,7 @@ class StorageSessionManager {
     Storage.clearStorage()
   }
 
-  getDataFromApi() {
+  getDataFromApi(chapterId) {
     console.log('StorageSessionManager : get data from api')
     Promise.all([
       API.getPlaceList(),
@@ -53,13 +53,19 @@ class StorageSessionManager {
       API.getSkillList(),
       API.getSkillTypeList()
     ]).then((values) => {
-      //Set current progress chapter
-      const chapterProgress = 26
+      this.setCurrentHodosProgress(chapterId, values[2], values[0])
+    })
+  }
+
+  setCurrentHodosProgress (chapterId, chapterList, placeList) {
+    const chapterProgress = chapterId ? chapterId : 26
+    if (chapterProgress) {
       store.dispatch(setChapterProgress(chapterProgress))
       store.dispatch(setChapterRomanProgress('XXVII'))
       store.dispatch(currentOffsetProgress(0, 0))
-      const chapterList = values[2]
+      // const chapterList = values[2]
       const storeSkill = store.getState().skillList
+
       chapterList.forEach(chapter => {
         if (chapter.id <= chapterProgress) {
           //Unlock chapter
@@ -78,8 +84,9 @@ class StorageSessionManager {
           }
         }
       })
+
       //Set discovered places
-      const placeList = values[0]
+      // const placeList = values[0]
       placeList.forEach(place => {
         if (place.chapters && place.chapters.length) {
           place.chapters.forEach(chapter => {
@@ -92,9 +99,7 @@ class StorageSessionManager {
           })
         }
       })
-    })
-
-
+    }
   }
 }
 
