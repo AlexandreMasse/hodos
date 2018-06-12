@@ -12,6 +12,7 @@ import OpenDrawerButton from "../OpenDrawerButton";
 import LottieAnimation from "../LottieAnimation/LottieAnimation";
 import ParallaxedAnimation from "./ParallaxedAnimation";
 import TextApparition from "./../TextApparition"
+import SkillUse from "./SkillUse"
 import ButtonWhite from "./../ButtonWhite"
 import AmbientAudio from './AmbientAudio'
 import Audio from './Audio'
@@ -19,7 +20,7 @@ import chapterList from './datas/chapterList'
 import imageList from '../../assets/ImagesList'
 import soundsList from '../../assets/SoundsList'
 import {fonts} from '../../assets/variables'
-import { AudioManager } from '../utils/AudioManager';
+import { AudioManager } from '../utils/AudioManager'
 
 const windowHeight = Dimensions.get('window').height
 const windowWidth = Dimensions.get('window').width
@@ -46,6 +47,7 @@ class Chapter extends React.Component {
       scrollEnabled: true, //@Todo : switch it off for prez
       showSwipe: false,
       beginTextAnimationCount: 0,
+      showSkill: true,
       scrollX: new Animated.Value(this.props.currentOffset),
       currentScrollX: this.props.currentOffset
     }
@@ -78,7 +80,8 @@ class Chapter extends React.Component {
         })
       })
     }
-    //Retrieves skill
+
+    //Retrieves discovered skill
     const skillDiscovered = this.currentChapter.skillDiscovered
     this.currentChapter.skillDiscoveredObject = []
     if (skillDiscovered.length) {
@@ -96,23 +99,44 @@ class Chapter extends React.Component {
         })
       })
     }
+
+
+    //Retrieves used skill
+    const skillUsed = this.currentChapter.skillUsed
+    if (skillUsed) {
+      this.props.skillList.forEach(val => {
+        if (Number(skillUsed) === Number(val.id)) {
+          const skillUsedObj = val
+          this.props.skillTypeList.forEach(skillType => {
+            if (Number(skillType.id) === Number(val.type)) {
+              skillUsedObj.skillType = skillType
+            }
+          })
+          this.currentChapter.skillUsedObject = skillUsedObj
+        }
+      })
+    }
   }
 
   componentWillUnmount() {
     this.props._setCurrentOffsetProgress(this.state.currentScrollX, this._getPercentProgress())
     clearInterval(this.progressTimeOut)
-    this.beginTextTimeouts.map(timeout => {
-      clearInterval(timeout)
-    })
-    this.beginTextAudio.map(audio => {
-      AudioManager.stopSound(audio)
-    })
+    if (this.beginTextTimeouts && this.beginTextTimeouts.length) {
+      this.beginTextTimeouts.map(timeout => {
+        clearInterval(timeout)
+      })
+    }
+    if (this.beginTextAudio && this.beginTextAudio.length) {
+      this.beginTextAudio.map(audio => {
+        AudioManager.stopSound(audio)
+      })
+    }
   }
 
   componentWillMount() {
     //Calcul scaling ratio from original height
     //const sourceBackground = Image.resolveAssetSource(imageList.chapters.chapter27.scene01.Chap27_scene01)
-    console.log(this.currentChapter.numberInt);
+    console.log("Chapter : ",this.currentChapter.numberInt);
     const sourceBackground = Image.resolveAssetSource(chapterList['chapter'+this.currentChapter.numberInt].scenes[0].src)
 
     this.setState({scalingRatio: windowHeight / sourceBackground.height})
@@ -187,6 +211,12 @@ class Chapter extends React.Component {
       toValue: 100,
       duration: 300,
     }).start()
+  }
+
+  hideSkillUse = () => {
+    this.setState({
+      showSkill: false
+    })
   }
 
   _restartBeginTextAnimation = () => {
@@ -422,6 +452,16 @@ class Chapter extends React.Component {
     }
   }
 
+  _renderSkillNeeded() {
+    const chapterNumber = this.currentChapter.numberInt
+    if (chapterNumber &&  this.currentChapter.skillUsed && this.currentChapter.skillUsedObject) {
+      const chapterDataSkill = chapterList['chapter'+chapterNumber].needSkill
+      return (
+        <SkillUse dataSkill={chapterDataSkill} left={chapterDataSkill.left} skill={this.currentChapter.skillUsedObject} showSkill={this.state.showSkill} width={windowWidth} onDisappear={() => {this.hideSkillUse()}}  />
+      )
+    }
+  }
+
   render () {
     const chapterNumber = this.currentChapter.numberInt
     return (
@@ -458,6 +498,7 @@ class Chapter extends React.Component {
           {this._renderParallaxedImages()}
           {this._renderLottieAnimations()}
           {this._renderTexts()}
+          {this._renderSkillNeeded()}
           {chapterList['chapter'+chapterNumber].ambientAudio.length && this._renderAmbientAudio()}
           {chapterList['chapter'+chapterNumber].ambientAudio.length && this._renderObjectAmbientAudio()}
           {chapterList['chapter'+chapterNumber].audio.length && this._renderAudio()}
@@ -474,7 +515,6 @@ w        </Animated.ScrollView>
   }
 
 }
-
 
 const styles = StyleSheet.create({
   container: {

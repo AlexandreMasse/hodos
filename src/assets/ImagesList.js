@@ -122,6 +122,8 @@ export default imageList = {
       'thumbnail': require('./images/chapters/62/thumbnail.png'),
     },
     chapter68: {
+      thumbnail: require('./images/chapters/69/thumbnail.png'),
+      skillImage: require('./images/chapters/68/helmet.png'),
       scene01: {
         persee1: require('./images/chapters/68/scene01/persee1.png'),
         persee2: require('./images/chapters/68/scene01/persee2.png'),

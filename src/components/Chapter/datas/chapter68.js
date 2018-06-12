@@ -432,5 +432,15 @@ export default {
   "audio" : [
   ],
   "ambientAudio" : [
-  ]
+  ],
+  "needSkill": {
+    "left": "10%",
+    "title": "Persée a besoin de toi !",
+    "subTitle": "Trouve la carte qui pourrait l’aider !",
+    "successTitle": "Félicitations !",
+    "successSubTitle": "Tu as fais appel à l’aptitude de l’invisibilité grâce au personnage Hadès !",
+    "description": "Persée ne pourra pas voler éternellement ! Si seulement il pouvait disparaître... Il semblerait qu’Hermès ait acquis l’aptitude technique de l’invisibilité dans un chapitre précédent. Cette carte pourrait aider Persée dans sa fuite !",
+    "cardTextIndication": "Maintiens la carte du personnage correspondant à cette aptitude dans la zone grisée pour aider Persée à semer ses affreuses assaillantes ! ",
+    "skillImage": imageList.chapters.chapter68.skillImage
+  }
 }
