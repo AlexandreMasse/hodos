@@ -44,7 +44,7 @@ class Chapter extends React.Component {
       totalWidth: 0,
       maxScrollX: 0,
       showChapterEnd: false,
-      scrollEnabled: true, //@Todo : switch it off for prez
+      scrollEnabled: true, //@Todo : switch it off for prez for beginText
       showSwipe: false,
       beginTextAnimationCount: 0,
       showSkill: false,
@@ -119,13 +119,18 @@ class Chapter extends React.Component {
   }
 
   componentWillUnmount() {
+    //Save progression in store
     this.props._setCurrentOffsetProgress(this.state.currentScrollX, this._getPercentProgress())
+
     //clearInterval(this.progressTimeOut)
+    //Clear all audio timeouts of begintext (textapparition)
     if (this.beginTextTimeouts && this.beginTextTimeouts.length) {
       this.beginTextTimeouts.map(timeout => {
         clearInterval(timeout)
       })
     }
+
+    //Stop all sounds of begintext
     if (this.beginTextAudio && this.beginTextAudio.length) {
       this.beginTextAudio.map(audio => {
         AudioManager.stopSound(audio)
@@ -161,12 +166,13 @@ class Chapter extends React.Component {
     this.scrollView.getNode().scrollTo({x: this.state.currentScrollX , animated: false})
     const chapterNumber = this.currentChapter.numberInt
 
-    //Show skillUse if need skills
+    //Show skillUse component if need skills
     if (this.currentChapter.skillUsed &&
       chapterList['chapter'+chapterNumber].needSkill && chapterList['chapter'+chapterNumber].needSkill.left) {
       const leftPercent = chapterList['chapter'+chapterNumber].needSkill.left
       const leftUnit = ((leftPercent / 100) * this.state.totalWidth)
       this.state.scrollX.addListener(({value}) => {
+        //@todo : check if best way is to add a listener
         if (leftUnit - value <= 50 && leftUnit - value >= 0) {
           // this.scrollView.scrollTo({x: leftUnit, y: 0,animated: true})
           this.setState({
@@ -213,14 +219,15 @@ class Chapter extends React.Component {
   }
 
   _handleEndChapter = (scrollX) => {
-    if (scrollX === this.state.maxScrollX) {
+    if (this.state.maxScrollX - scrollX <= 100) {
+      //@todo: Disable scroll (and scroll to this.state.maxScrollX ?)
       console.log("end !");
       this.props._setCurrentOffsetProgress(0, 0)
       this.setState({
         showChapterEnd: true,
       })
-
     } else if (this.state.showChapterEnd) {
+       //@todo: Delete this else if, (used for debug, to scroll back)
       console.log("not end !");
       this.setState({
         showChapterEnd: false,
@@ -245,6 +252,8 @@ class Chapter extends React.Component {
   }
 
   hideSkillUse = () => {
+    //@todo : check behavior
+    //Function called when skill have been found, hide skill then enable scroll
     this.setState({
       showSkill: false,
     })
@@ -356,6 +365,8 @@ class Chapter extends React.Component {
   }
 
   _renderBeginText() {
+    //@todo : Prevent scroll when all timeouts are done (see onAnimationEnd of component TextApparition (used for begintext & actually uses this._enableScroll function) + Show swipe animation (this.state.showSwipe)
+
     const chapterNumber = this.currentChapter.numberInt
     if (this.currentChapter && this.currentChapter.beginText) {
       const beginTextData = chapterList['chapter'+chapterNumber].beginText
@@ -386,6 +397,7 @@ class Chapter extends React.Component {
     const chapterNumber = this.currentChapter.numberInt
     this.beginTextTimeouts = []
     this.beginTextAudio = []
+    //Plays begin text audio if the user didnt read the chapter before (progress.currentOffset = 0)
     if (chapterNumber && this.props.currentOffset <= 0) {
       return chapterList['chapter'+chapterNumber].beginTextAudio.map((audio, index) => {
         AudioManager.prepareSound(audio.source, {
@@ -417,9 +429,9 @@ class Chapter extends React.Component {
       const chapterNumber = this.currentChapter.numberInt
       if (this.nextChapter && chapterNumber) {
         if (this.currentChapter.characterDiscoveredObject &&this.currentChapter.characterDiscoveredObject.length) {
-          console.log('Chapter end: Need to add a character')
+          console.log('Chapter end: Need to add a character', this.state.showChapterEnd)
           return(
-            <CharacterAdd width={windowWidth} characterDiscovered={this.currentChapter.characterDiscoveredObject} skillDiscovered={this.currentChapter.skillDiscoveredObject}   nextChapter={this.nextChapter} showChapterEnd={this.state.showChapterEnd} texts={chapterList['chapter'+chapterNumber].characterDiscoveredText} />
+            <CharacterAdd width={windowWidth} characterDiscovered={this.currentChapter.characterDiscoveredObject} skillDiscovered={this.currentChapter.skillDiscoveredObject} showChapterEnd={this.state.showChapterEnd} texts={chapterList['chapter'+chapterNumber].characterDiscoveredText} />
           )
         } else if (imageList.chapters['chapter'+(nextChapterNumber)].thumbnail) {
           console.log('Chapter end: Next episode', this.state.showChapterEnd)

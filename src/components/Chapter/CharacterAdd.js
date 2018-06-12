@@ -12,7 +12,6 @@ import { withNavigation } from 'react-navigation'
 class CharacterAdd extends React.Component {
 
   static propTypes = {
-    nextChapter: PropType.any,
     characterDiscovered: PropType.any,
     skillDiscovered: PropType.any,
     width: PropType.number,
@@ -31,14 +30,14 @@ class CharacterAdd extends React.Component {
       subTitle: "Tu as débloqué un nouveau personnage !",
     }
     this._visibility =  new Animated.Value(0)
+    this._visibilityCharacter = new Animated.Value(0)
+    this._visibilityInfos = new Animated.Value(100)
   }
 
   componentWillMount() {
-    this._visibilityCharacter = new Animated.Value(0)
-    this._visibilityInfos = new Animated.Value(100)
     Animated.timing(this._visibility, {
       toValue: 100,
-      duration: 1000
+      duration: 500
     }).start()
   }
 
@@ -51,11 +50,11 @@ class CharacterAdd extends React.Component {
   }
 
 
-  // _onPatternRecognition(id) {
-  //   if (id === this.props.characterDiscovered.id) {
-  //     this._renderAnimation()
-  //   }
-  // }
+  _onPatternRecognition(characterId) {
+    if (characterId === this.props.characterDiscovered.id) {
+      this._renderAnimation()
+    }
+  }
 
   _renderAnimation = () => {
     Animated.timing(this._visibilityInfos, {
