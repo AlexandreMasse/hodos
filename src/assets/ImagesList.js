@@ -147,7 +147,6 @@ export default imageList = {
         nuage6Droite: require('./images/chapters/68/scene02/nuage6Droite.png'),
         nuage7Droite: require('./images/chapters/68/scene02/nuage7Droite.png'),
         nuage8: require('./images/chapters/68/scene02/nuage8.png'),
-
         palmier1: require('./images/chapters/68/scene02/palmier1.png'),
         palmier2: require('./images/chapters/68/scene02/palmier2.png'),
         palmier3: require('./images/chapters/68/scene02/palmier3.png'),
@@ -216,30 +215,44 @@ export default imageList = {
   },
   characters: {
     card: {
-      'zeus': require('./images/characters/cards/Zeus.png'),
-      'artemis': require('./images/characters/cards/Artemis.png'),
-      'medee': require('./images/characters/cards/Medee.png'),
       'aphrodite': require('./images/characters/cards/Aphrodite.png'),
+      'artemis': require('./images/characters/cards/Artemis.png'),
+      'athena': require('./images/characters/cards/Athena.png'),
       'charon': require('./images/characters/cards/Charon.png'),
-      'helios': require('./images/characters/cards/Helios.png'),
-      'hades': require('./images/characters/cards/Hades.png'),
+      'chiron': require('./images/characters/cards/Chiron.png'),
       'cronos': require('./images/characters/cards/Cronos.png'),
+      'demeter': require('./images/characters/cards/Demeter.png'),
       'dionysos': require('./images/characters/cards/Dionysos.png'),
+      'hades': require('./images/characters/cards/Hades.png'),
+      'helios': require('./images/characters/cards/Helios.png'),
+      'hera': require('./images/characters/cards/Hera.png'),
+      'hephaistos': require('./images/characters/cards/Hephaistos.png'),
+      'hermes': require('./images/characters/cards/Hermes.png'),
+      'hestia': require('./images/characters/cards/Hestia.png'),
+      'medee': require('./images/characters/cards/Medee.png'),
+      'orphee': require('./images/characters/cards/Orphee.png'),
       'pausania': require('./images/characters/cards/Pausania.png'),
       'poseidon': require('./images/characters/cards/Poseidon.png'),
       'rosanna': require('./images/characters/cards/Rosanna.png'),
-      'hestia': require('./images/characters/cards/Hestia.png'),
+      'zeus': require('./images/characters/cards/Zeus.png'),
     },
     profile: {
-      'zeus':  require('./images/characters/profile/Zeus.png'),
-      'artemis': require('./images/characters/profile/Artemis.png'),
-      'medee': require('./images/characters/profile/Medee.png'),
       'aphrodite': require('./images/characters/profile/Aphrodite.png'),
+      'artemis': require('./images/characters/profile/Artemis.png'),
+      'athena': require('./images/characters/profile/Athena.png'),
       'charon': require('./images/characters/profile/Charon.png'),
-      'helios': require('./images/characters/profile/Helios.png'),
       'cronos': require('./images/characters/profile/Cronos.png'),
+      'dionysos': require('./images/characters/profile/Dionysos.png'),
       'hades': require('./images/characters/profile/Hades.png'),
+      'helios': require('./images/characters/profile/Helios.png'),
+      'hera': require('./images/characters/profile/Hera.png'),
+      'hermes': require('./images/characters/profile/Hermes.png'),
       'hestia': require('./images/characters/profile/Hestia.png'),
+      'medee': require('./images/characters/profile/Medee.png'),
+      'pausania': require('./images/characters/profile/Pausania.png'),
+      'poseidon': require('./images/characters/profile/Poseidon.png'),
+      'rosanna': require('./images/characters/profile/Rosanna.png'),
+      'zeus':  require('./images/characters/profile/Zeus.png'),
     }
   },
   previously: {
@@ -263,5 +276,5 @@ export default imageList = {
     'iconReplay': require('./images/icon-replay.png'),
     'cardBack': require('./images/dos_carte.png')
   }
-};
+}
 
