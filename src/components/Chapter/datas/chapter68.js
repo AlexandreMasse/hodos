@@ -18,7 +18,7 @@ export default {
       "left" : "0.3%",
       "top" : "30%",
       "speedX": 105,
-      "opacityInputRange": [12.5, 17],
+      "opacityInputRange": [10, 15],
       "opacityOutputRange": [1, 0]
     },
     {
@@ -58,17 +58,17 @@ export default {
     },
     {
       "src": imageList.chapters.chapter68.scene01.persee2,
-      "left" : "18.5%",
+      "left" : "17%",
       "top" : "70%",
-      "speedX": 10,
+      "speedX": 20,
       "speedY": -10,
       "zIndex": 25,
-      "opacityInputRange": [17, 20],
-      "opacityOutputRange": [0, 1],
+      "opacityInputRange": [17, 20, 22, 24],
+      "opacityOutputRange": [0, 1, 1, 0],
       "scaleInputRange": [17, 25],
-      "scaleOutputRange": [1, 1.5],
+      "scaleOutputRange": [0.9, 1.5],
       "rotateInputRange": [17, 25],
-      "rotateOutputRange": ['20deg', '35deg']
+      "rotateOutputRange": ['22deg', '36deg']
     },
 
     // SCENE 02
@@ -241,9 +241,9 @@ export default {
     {
       "src": imageList.chapters.chapter68.scene03.girl,
       "left": "63.5%",
-      "bottom": "-125%",
+      "bottom": "-155%",
       "speedX": -20,
-      "speedY": -8,
+      "speedY": -10,
     },
     {
       "src": imageList.chapters.chapter68.scene03.rocher1,
@@ -272,6 +272,39 @@ export default {
       "top": "6%",
       "speedX": 20,
       "zIndex": 14
+    },
+    {
+      "src": imageList.chapters.chapter68.scene03.nuage2,
+      "left": "47.5%",
+      "top": "20%",
+      "speedX": 12,
+      "zIndex": 14
+    },
+    {
+      "src": imageList.chapters.chapter68.scene03.nuage3,
+      "left": "59.5%",
+      "top": "10%",
+      "speedX": -5,
+      "zIndex": 14
+    },
+    {
+      "src": imageList.chapters.chapter68.scene03.nuage4,
+      "left": "58.5%",
+      "top": "25%",
+      "speedX": 5,
+      "zIndex": 14
+    },
+    {
+      "src": imageList.chapters.chapter68.scene03.rocher2,
+      "left": "63.5%",
+      "bottom": "10%",
+      "speedX": -8,
+    },
+    {
+      "src": imageList.chapters.chapter68.scene03.rocher3,
+      "left": "73%",
+      "bottom": "-10%",
+      "speedX": -20,
     },
 
   ],

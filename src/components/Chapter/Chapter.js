@@ -39,7 +39,7 @@ class Chapter extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      chapterId: this.props.navigation.getParam('chapterId', 67),
+      chapterId: this.props.navigation.getParam('chapterId', 26),
       scalingRatio: 1,
       totalWidth: 0,
       maxScrollX: 0,
@@ -120,7 +120,7 @@ class Chapter extends React.Component {
 
   componentWillUnmount() {
     this.props._setCurrentOffsetProgress(this.state.currentScrollX, this._getPercentProgress())
-    clearInterval(this.progressTimeOut)
+    //clearInterval(this.progressTimeOut)
     if (this.beginTextTimeouts && this.beginTextTimeouts.length) {
       this.beginTextTimeouts.map(timeout => {
         clearInterval(timeout)
@@ -142,15 +142,16 @@ class Chapter extends React.Component {
     this.setState({scalingRatio: windowHeight / sourceBackground.height})
 
     // Save progress
-    this.progressTimeOut = setInterval(() => {
-      if (this._getPercentProgress() < 100) {
-        this.props._setCurrentOffsetProgress(this.state.currentScrollX, this._getPercentProgress())
-      }
-    }, 2000)
-
-    setInterval(() => {
-      this._handleEndChapter(this.state.currentScrollX)
-    }, 500)
+    // this.progressTimeOut = setInterval(() => {
+    //   if (this._getPercentProgress() < 100) {
+    //     this.props._setCurrentOffsetProgress(this.state.currentScrollX, this._getPercentProgress())
+    //   }
+    //   console.log(this.state.scrollX);
+    // }, 2000)
+    //
+    // setInterval(() => {
+    //   this._handleEndChapter(this.state.currentScrollX)
+    // }, 500)
 
     // this._playBeginTextAudio()
   }
@@ -202,15 +203,25 @@ class Chapter extends React.Component {
     })
   }
 
+  _onMomentumScrollEnd = () => {
+    // Save progress
+    if (this._getPercentProgress() < 100) {
+      this.props._setCurrentOffsetProgress(this.state.currentScrollX, this._getPercentProgress())
+    }
+    // check if end
+    this._handleEndChapter(this.state.currentScrollX)
+  }
+
   _handleEndChapter = (scrollX) => {
     if (scrollX === this.state.maxScrollX) {
-      // console.log("end !");
+      console.log("end !");
       this.props._setCurrentOffsetProgress(0, 0)
       this.setState({
         showChapterEnd: true,
       })
 
     } else if (this.state.showChapterEnd) {
+      console.log("not end !");
       this.setState({
         showChapterEnd: false,
       })
@@ -258,7 +269,7 @@ class Chapter extends React.Component {
                windowHeight={windowHeight}
                key={index}
                zIndex={10}
-               styles={{opacity: 0.2}}
+               styles={{opacity: 1}}
         />
       )
     })
@@ -496,6 +507,7 @@ class Chapter extends React.Component {
           scrollEnabled={this.state.scrollEnabled ? true : false}
           style={styles.scrollView}
           bounces={false}
+          onMomentumScrollEnd={this._onMomentumScrollEnd}
           scrollEventThrottle={1}
           onScroll={Animated.event(
             [{ nativeEvent: {
@@ -522,9 +534,10 @@ class Chapter extends React.Component {
           {this._renderTexts()}
           {this._renderSkillNeeded()}
           {chapterList['chapter'+chapterNumber].ambientAudio.length && this._renderAmbientAudio()}
-          {chapterList['chapter'+chapterNumber].ambientAudio.length && this._renderObjectAmbientAudio()}
+          {/*{chapterList['chapter'+chapterNumber].ambientAudio.length && this._renderObjectAmbientAudio()}*/}
           {chapterList['chapter'+chapterNumber].audio.length && this._renderAudio()}
-          {chapterList['chapter'+chapterNumber].audio.length && this._renderObjectAudio()}
+          {/*{chapterList['chapter'+chapterNumber].audio.length && this._renderObjectAudio()}*/}
+          
           {/* @todo Delete following debug comp */}
           <View style={{position: 'absolute', top: 0, left: 2220.25, width: 30, height: 20, backgroundColor: 'green', zIndex: 500}}/>
 w        </Animated.ScrollView>
@@ -572,6 +585,7 @@ const styles = StyleSheet.create({
 })
 
 const mapStateToProps = state => {
+  console.log('state update');
   return {
     currentOffset: state.progress.currentOffset,
     chapterList: state.chapterList,

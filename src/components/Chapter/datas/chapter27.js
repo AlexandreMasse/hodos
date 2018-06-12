@@ -477,7 +477,7 @@ export default {
       "styles": {
         "width": "5.5%",
         "height": "142%",
-        "left": "25%",
+        "left": "25.5%",
         "top": "-32%",
       }
     },
@@ -593,7 +593,7 @@ export default {
     },
     {
       "viewStyles" : {
-        "top": "15%",
+        "top": "40%",
         "left": 23,
         "width": 1.53,
       },
