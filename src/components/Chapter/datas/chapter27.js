@@ -782,11 +782,11 @@ export default {
       "range": [0, 5],
       "maxVolume": 1
     },
-    {
-      "source": soundsList.chapters.chapter27.sounds.cronos,
-      "range": [10, 15],
-      "maxVolume": 0.2
-    },
+    // {
+    //   "source": soundsList.chapters.chapter27.sounds.cronos,
+    //   "range": [10, 15],
+    //   "maxVolume": 0.2
+    // },
     {
       "source": soundsList.chapters.chapter27.sounds.eclair1,
       "range": [19, 23],
@@ -797,15 +797,15 @@ export default {
       "range": [24, 29],
       "maxVolume": 1
     },
-    {
-      "source": soundsList.chapters.chapter27.sounds.main,
-      "range": [32, 38],
-      "maxVolume": 1
-    },
+    // {
+    //   "source": soundsList.chapters.chapter27.sounds.main,
+    //   "range": [32, 38],
+    //   "maxVolume": 1
+    // },
     {
       "source": soundsList.chapters.chapter27.sounds.pierres,
       "range": [45, 54],
-      "maxVolume": 0.7,
+      "maxVolume": 0.5,
       "loopDelay": 20000
     },
     {
@@ -818,10 +818,10 @@ export default {
       "range": [80, 85],
       "maxVolume": 1,
     },
-    {
-      "source": soundsList.chapters.chapter27.sounds.zeus,
-      "range": [90, 95],
-      "maxVolume": 1,
-    }
+    // {
+    //   "source": soundsList.chapters.chapter27.sounds.zeus,
+    //   "range": [90, 95],
+    //   "maxVolume": 1,
+    // }
   ]
 }
