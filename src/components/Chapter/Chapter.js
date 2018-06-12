@@ -47,7 +47,7 @@ class Chapter extends React.Component {
       scrollEnabled: true, //@Todo : switch it off for prez
       showSwipe: false,
       beginTextAnimationCount: 0,
-      showSkill: true,
+      showSkill: false,
       scrollX: new Animated.Value(this.props.currentOffset),
       currentScrollX: this.props.currentOffset
     }
@@ -158,6 +158,23 @@ class Chapter extends React.Component {
   componentDidMount() {
     // Go to last OffsetX
     this.scrollView.getNode().scrollTo({x: this.state.currentScrollX , animated: false})
+    const chapterNumber = this.currentChapter.numberInt
+
+    //Show skillUse if need skills
+    if (this.currentChapter.skillUsed &&
+      chapterList['chapter'+chapterNumber].needSkill && chapterList['chapter'+chapterNumber].needSkill.left) {
+      const leftPercent = chapterList['chapter'+chapterNumber].needSkill.left
+      const leftUnit = ((leftPercent / 100) * this.state.totalWidth)
+      this.state.scrollX.addListener(({value}) => {
+        if (leftUnit - value <= 50 && leftUnit - value >= 0) {
+          // this.scrollView.scrollTo({x: leftUnit, y: 0,animated: true})
+          this.setState({
+            showSkill: true,
+            // scrollEnabled: false
+          })
+        }
+      })
+    }
 
     // Simulate scroll for animation
     Animated.timing(this.state.scrollX, {
@@ -200,23 +217,28 @@ class Chapter extends React.Component {
     }
   }
 
-  _enableScroll = () => {
+  _enableScroll = (showReplay) => {
     if (!this.state.scrollEnabled) {
       this.setState({
         scrollEnabled: true,
         showSwipe: true
       })
     }
-    Animated.timing(this._buttonVisibility, {
-      toValue: 100,
-      duration: 300,
-    }).start()
+
+    if (showReplay) {
+      Animated.timing(this._buttonVisibility, {
+        toValue: 100,
+        duration: 300,
+      }).start()
+    }
   }
 
   hideSkillUse = () => {
     this.setState({
-      showSkill: false
+      showSkill: false,
     })
+
+    this._enableScroll()
   }
 
   _restartBeginTextAnimation = () => {
@@ -329,7 +351,7 @@ class Chapter extends React.Component {
       return(
         <View style={[{position: 'absolute'}, beginTextData.viewStyles]}>
           <View style={{width: beginTextData.parentWidth, marginBottom: 50}}>
-            <TextApparition texts={this.currentChapter.beginText} durations={beginTextData.durations}  startDelay={1000} delay={300} styles={[{fontSize: 21}, beginTextData.styles]} onAnimationEnd={ () => this._enableScroll() } restartAnimationCount={this.state.beginTextAnimationCount} />
+            <TextApparition texts={this.currentChapter.beginText} durations={beginTextData.durations}  startDelay={1000} delay={300} styles={[{fontSize: 21}, beginTextData.styles]} onAnimationEnd={ () => this._enableScroll(true) } restartAnimationCount={this.state.beginTextAnimationCount} />
           </View>
             <Animated.View style={
               [{
@@ -457,7 +479,7 @@ class Chapter extends React.Component {
     if (chapterNumber &&  this.currentChapter.skillUsed && this.currentChapter.skillUsedObject) {
       const chapterDataSkill = chapterList['chapter'+chapterNumber].needSkill
       return (
-        <SkillUse dataSkill={chapterDataSkill} left={chapterDataSkill.left} skill={this.currentChapter.skillUsedObject} showSkill={this.state.showSkill} width={windowWidth} onDisappear={() => {this.hideSkillUse()}}  />
+        <SkillUse dataSkill={chapterDataSkill} left={chapterDataSkill.left} skill={this.currentChapter.skillUsedObject} showSkill={this.state.showSkill} width={windowWidth}  totalWidth={this.state.totalWidth} onDisappear={() => {this.hideSkillUse()}}  />
       )
     }
   }
@@ -503,6 +525,8 @@ class Chapter extends React.Component {
           {chapterList['chapter'+chapterNumber].ambientAudio.length && this._renderObjectAmbientAudio()}
           {chapterList['chapter'+chapterNumber].audio.length && this._renderAudio()}
           {chapterList['chapter'+chapterNumber].audio.length && this._renderObjectAudio()}
+          {/* @todo Delete following debug comp */}
+          <View style={{position: 'absolute', top: 0, left: 2220.25, width: 30, height: 20, backgroundColor: 'green', zIndex: 500}}/>
 w        </Animated.ScrollView>
         {this._renderChapterEnd()}
         <View style={styles.absoluteContent}>

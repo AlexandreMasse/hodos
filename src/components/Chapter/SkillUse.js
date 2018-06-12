@@ -16,6 +16,7 @@ class SkillUse extends React.Component {
     left: PropType.any.isRequired,
     dataSkill: PropType.object.isRequired,
     width: PropType.number,
+    totalWidth: PropType.number,
     showSkill: PropType.bool,
     onDisappear: PropType.func
   }
@@ -94,7 +95,7 @@ class SkillUse extends React.Component {
         styles.skillUseContainer,
         {
           width: this.props.width,
-          left: this.props.left,
+          left: (this.props.left / 100) * this.props.totalWidth,
           opacity: this._visibility.interpolate({
             inputRange: [0, 100],
             outputRange: [0, 1],

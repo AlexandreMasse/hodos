@@ -434,7 +434,7 @@ export default {
   "ambientAudio" : [
   ],
   "needSkill": {
-    "left": "10%",
+    "left": 10,
     "title": "Persée a besoin de toi !",
     "subTitle": "Trouve la carte qui pourrait l’aider !",
     "successTitle": "Félicitations !",
