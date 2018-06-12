@@ -187,6 +187,18 @@ class Profile extends React.Component {
     })
   }
 
+  _renderImageProfile() {
+    if (this.props.progress.chapter < 30) {
+      return(
+        <Image source={imageList.profile.hermes[2]} style={[{width: '35%', height: '100%', resizeMode: 'contain'}]} />
+      )
+    } else {
+      return(
+        <Image source={imageList.characters.profile.hermes} style={[{width: '35%', height: '100%', resizeMode: 'contain'}]} />
+      )
+    }
+  }
+
   render () {
     const visibilityInterpolation = this._visibility.interpolate({
       inputRange: [0, 100],
@@ -208,7 +220,8 @@ class Profile extends React.Component {
             <Title title="Profil" subTitle="Aptitudes et traits de caractère acquis" />
           </View>
           <View style={styles.content}>
-            <Image source={imageList.profile.hermes[2]} style={[{width: '35%', height: '100%', resizeMode: 'contain'}]} />
+          {console.log(this.props.progress.chapter <= 30, this.props.progress.chapter > 30)}
+            {this._renderImageProfile()}
             <View style={styles.skillsContainer}>
               <Animated.View style={[styles.cardContainer,
                 {opacity: visibilityInterpolation}
