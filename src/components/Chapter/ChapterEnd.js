@@ -35,15 +35,13 @@ class ChapterEnd extends React.Component {
     }
 
     this._visibility = new Animated.Value(0)
-    this._translation = new Animated.Value(0)
+    this._buttonVisibility = new Animated.Value(0)
   }
 
-  componentWillMount() {
-    this._buttonVisibility = new Animated.Value(0)
+  componentDidMount(nextProps) {
     Animated.timing(this._visibility, {
       toValue: 100,
       duration: 300,
-      delay: 1500
     }).start(this._handleShowNext)
   }
 
@@ -95,15 +93,7 @@ class ChapterEnd extends React.Component {
             inputRange: [0, 100],
             outputRange: [0, 1],
           }),
-          transform: [{
-            translateX: this._translation.interpolate({
-              inputRange: [0, 100],
-              outputRange: [this.props.width , 0],
-            })},
-            {
-              translateY: -225
-            }
-          ]
+          transform: [{translateY: -225}]
         }
       ]} >
         <View style={styles.titleWrapper}>

@@ -417,10 +417,12 @@ class Chapter extends React.Component {
       const chapterNumber = this.currentChapter.numberInt
       if (this.nextChapter && chapterNumber) {
         if (this.currentChapter.characterDiscoveredObject &&this.currentChapter.characterDiscoveredObject.length) {
+          console.log('Chapter end: Need to add a character')
           return(
             <CharacterAdd width={windowWidth} characterDiscovered={this.currentChapter.characterDiscoveredObject} skillDiscovered={this.currentChapter.skillDiscoveredObject}   nextChapter={this.nextChapter} showChapterEnd={this.state.showChapterEnd} texts={chapterList['chapter'+chapterNumber].characterDiscoveredText} />
           )
-        } else if(imageList.chapters['chapter'+(nextChapterNumber)].thumbnail) {
+        } else if (imageList.chapters['chapter'+(nextChapterNumber)].thumbnail) {
+          console.log('Chapter end: Next episode', this.state.showChapterEnd)
           return (
             <ChapterEnd width={windowWidth} imageSource={imageList.chapters['chapter'+(nextChapterNumber)].thumbnail} nextChapter={this.nextChapter} showChapterEnd={this.state.showChapterEnd} />
           )
@@ -537,7 +539,7 @@ class Chapter extends React.Component {
           {/*{chapterList['chapter'+chapterNumber].ambientAudio.length && this._renderObjectAmbientAudio()}*/}
           {chapterList['chapter'+chapterNumber].audio.length && this._renderAudio()}
           {/*{chapterList['chapter'+chapterNumber].audio.length && this._renderObjectAudio()}*/}
-          
+
           {/* @todo Delete following debug comp */}
           <View style={{position: 'absolute', top: 0, left: 2220.25, width: 30, height: 20, backgroundColor: 'green', zIndex: 500}}/>
 w        </Animated.ScrollView>
