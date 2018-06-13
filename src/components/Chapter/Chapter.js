@@ -158,7 +158,7 @@ class Chapter extends React.Component {
     //   this._handleEndChapter(this.state.currentScrollX)
     // }, 500)
 
-    // this._playBeginTextAudio()
+    this._playBeginTextAudio()
   }
 
   componentDidMount() {

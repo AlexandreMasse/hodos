@@ -9,8 +9,9 @@ import Title from './../Title'
 import ButtonWhite from './../ButtonWhite'
 import imageList from './../../assets/ImagesList'
 import ImageAspectRatio from './../utils/ImageAspectRatio'
+import { withNavigation } from 'react-navigation'
 
-export default class Place extends React.Component {
+class Place extends React.Component {
 
   static propTypes = {
     place: PropType.object,
@@ -36,8 +37,10 @@ export default class Place extends React.Component {
     this.props.onReading()
   }
 
-  handleNavigationToChapter = (chapterId) => {
-    // if (chapterId == 26)
+  _handleNavigationToChapter = (chapterId) => {
+    if (Number(chapterId) === 26) {
+      this.props.navigation.navigate('Previously', {chapterId: chapterId})
+    }
   }
 
   componentWillMount() {
@@ -73,7 +76,11 @@ export default class Place extends React.Component {
         console.log(chapterImages)
         if (chapterImages && chapterImages.thumbnail) {
           return (
-            <TouchableOpacity  key={index} onPress={() => {this.handleNavigationToChapter(chapter.id)}}>
+            <TouchableOpacity  key={index} onPress={ () => {
+              // if (Number(chapter.id) === 26) {
+              // this.props.navigation.navigate('Previously', {chapterId: chapter.id})
+              // }
+            }}>
               <View style={[styles.listElement]}>
                 <View style={[styles.listThumbnailWrapper,  styles.listChapterThumbnailWrapper]}>
                   <View style={[styles.listThumbnailContainer, styles.listChapterThumbnailWrapper]}>
@@ -274,3 +281,5 @@ const styles = StyleSheet.create({
     right: 50
   }
 })
+
+export default withNavigation(Place)

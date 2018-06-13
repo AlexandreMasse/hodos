@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View, Text, TouchableHighlight, Image, Button } from 'react-native'
+import { StyleSheet, View, Text, TouchableHighlight, TouchableOpacity, Image, Button } from 'react-native'
 import {connect} from 'react-redux';
 import StorageSessionManager from './../../store/StorageSessionManager'
 import ButtonWhite from './../ButtonWhite'
@@ -22,17 +22,12 @@ class HomeScreen extends React.Component {
         <View style={styles.buttonContainer} >
           <ButtonWhite text={'Commencer l\'aventure'}  style={styles.button} source={imageList.others.arrowRight} iconLeft={false} onTouch={this._handleButtonWhiteOnTouch} />
         </View>
-        <View style={styles.buttonStorage} >
-          <Button title="get Data from API with chapter 27" onPress={ () => {
-            StorageSessionManager.getDataFromApi(26)
-          }} />
-          <Button title="get Data from API with chapter 68" onPress={ () => {
+        <TouchableOpacity style={{position: 'absolute', left: 0, top:0, width: 150, height: 150}} onPress={ () => {
+              StorageSessionManager.getDataFromApi(26)
+        }} />
+        <TouchableOpacity style={{position: 'absolute', right: 0, top:0, width: 150, height: 150}} onPress={ () => {
             StorageSessionManager.getDataFromApi(67)
-          } } />
-          <Button title="set progress to chapter 68" onPress={ () => {
-            StorageSessionManager.getDataFromApi(67, this.props.chapterList, this.props.placeList)
-          } } />
-        </View>
+        }} />
       </View>
     )
   }
