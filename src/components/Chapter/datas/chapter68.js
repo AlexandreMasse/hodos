@@ -300,11 +300,17 @@ export default {
       "bottom": "10%",
       "speedX": -8,
     },
+    // {
+    //   "src": imageList.chapters.chapter68.scene03.rocher4,
+    //   "left": "66%",
+    //   "bottom": "-10%",
+    //   "speedX": -5,
+    // },
     {
       "src": imageList.chapters.chapter68.scene03.rocher3,
-      "left": "73%",
+      "left": "68.4%",
       "bottom": "-10%",
-      "speedX": -20,
+      "speedX": -10,
     },
 
   ],
