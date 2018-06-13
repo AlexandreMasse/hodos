@@ -543,9 +543,24 @@ export default {
     "styles": {
       "color": "#fff"
     },
-    "durations": [18000, 6000, 7000],
+    "startDelay": 4000,
+    "durations": [12500, 6500, 7000],
     "parentWidth": 800
   },
+  "beginTextAudio": [
+    {
+      "source": soundsList.chapters.chapter27.beginTextAudio.phrase1,
+      "timeout": 4500
+    },
+    {
+      "source": soundsList.chapters.chapter27.beginTextAudio.phrase2,
+      "timeout": 17000
+    },
+    {
+      "source": soundsList.chapters.chapter27.beginTextAudio.phrase3,
+      "timeout": 24000
+    }
+  ],
   "characterDiscoveredText": [
     "Dans ce chapitre, Hermès a rencontré un personnage qui, grâce à un casque magique, peut devenir invisible.",
     "Parmis ta collection de cartes, retrouve ce mystérieux personnage et maintiens sa carte dans le cadre gris pour ajouter cette nouvelle aptitude."
@@ -738,20 +753,6 @@ export default {
       "styles": {
         "color": "#fff"
       }
-    }
-  ],
-  "beginTextAudio": [
-    {
-      "source": soundsList.chapters.chapter27.beginTextAudio.phrase1,
-      "timeout": 1000
-    },
-    {
-      "source": soundsList.chapters.chapter27.beginTextAudio.phrase2,
-      "timeout": 12000
-    },
-    {
-      "source": soundsList.chapters.chapter27.beginTextAudio.phrase3,
-      "timeout": 20000
     }
   ],
   "ambientAudio" : [

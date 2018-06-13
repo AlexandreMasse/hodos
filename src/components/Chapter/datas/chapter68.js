@@ -347,17 +347,18 @@ export default {
     "styles": {
       "color": "#00194d"
     },
-    "durations": [9000, 7000],
+    "startDelay": 4000,
+    "durations": [8000, 7000],
     "parentWidth": 800
   },
   "beginTextAudio": [
     {
       "source": soundsList.chapters.chapter68.beginTextAudio.phrase1,
-      "timeout": 1000
+      "timeout": 4000
     },
     {
       "source": soundsList.chapters.chapter68.beginTextAudio.phrase2,
-      "timeout": 9500
+      "timeout": 12500
     },
   ],
   "texts": [

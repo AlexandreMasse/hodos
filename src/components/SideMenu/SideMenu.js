@@ -149,15 +149,15 @@ const styles = StyleSheet.create({
     marginTop: 50,
     alignItems: 'center',
     justifyContent: 'center',
-    width: 30,
-    height: 30
-  },
-  logo: {
     width: 40,
     height: 40
   },
+  logo: {
+    width: 30,
+    height: 30
+  },
   drawerItemsContainer: {
-    marginTop: 50,
+    marginTop: 30,
     width: '100%',
   },
   line : {

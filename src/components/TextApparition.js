@@ -21,7 +21,7 @@ export default class TextApparition extends React.Component {
 
   static defaultProps = {
     delay: 0,
-    startDelay : 0
+    startDelay: 0
   }
 
   constructor(props) {
@@ -76,7 +76,7 @@ export default class TextApparition extends React.Component {
     value = index === nb - 1 ? value - increaseValue * 0.09 : value
     Animated.timing(this._visibility, {
       toValue: value,
-      duration:  durations[index],
+      duration: durations[index],
       delay: this.props.delay + (index === 0 ? this.props.startDelay : 0),
     }).start(() => {
       if (!this.state.stopAnimation) {

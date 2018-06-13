@@ -159,7 +159,6 @@ class Chapter extends React.Component {
     // setInterval(() => {
     //   this._handleEndChapter(this.state.currentScrollX)
     // }, 500)
-
     this._playBeginTextAudio()
   }
 
@@ -388,7 +387,7 @@ class Chapter extends React.Component {
       return(
         <View style={[{position: 'absolute'}, beginTextData.viewStyles]}>
           <View style={{width: beginTextData.parentWidth, marginBottom: 50}}>
-            <TextApparition texts={this.currentChapter.beginText} durations={beginTextData.durations}  startDelay={1000} delay={300} styles={[{fontSize: 21}, beginTextData.styles]} onAnimationEnd={ () => this._enableScroll(true) } restartAnimationCount={this.state.beginTextAnimationCount} />
+            <TextApparition texts={this.currentChapter.beginText} durations={beginTextData.durations} startDelay={beginTextData.startDelay} delay={300} styles={[{fontSize: 21}, beginTextData.styles]} onAnimationEnd={ () => this._enableScroll(true) } restartAnimationCount={this.state.beginTextAnimationCount} />
           </View>
             <Animated.View style={
               [{
