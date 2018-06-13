@@ -233,7 +233,7 @@ export default {
     // SCENE 03
     {
       "src": imageList.chapters.chapter68.scene03.sea,
-      "left": "50.1%",
+      "left": "49.7%",
       "bottom": "-2.3%",
       "speedX": 0,
       "zIndex": 18
@@ -300,11 +300,17 @@ export default {
       "bottom": "10%",
       "speedX": -8,
     },
+    // {
+    //   "src": imageList.chapters.chapter68.scene03.rocher4,
+    //   "left": "66%",
+    //   "bottom": "-10%",
+    //   "speedX": -5,
+    // },
     {
       "src": imageList.chapters.chapter68.scene03.rocher3,
-      "left": "73%",
+      "left": "68.2%",
       "bottom": "-10%",
-      "speedX": -20,
+      "speedX": -10,
     },
 
   ],
@@ -455,7 +461,7 @@ export default {
     {
       "viewStyles" : {
         "top": "13%",
-        "left": 97.2,
+        "left": 90,
         "width": 2.1,
       },
       "styles": {

@@ -174,6 +174,7 @@ export default imageList = {
         rocher1: require('./images/chapters/68/scene03/rocher1.png'),
         rocher2: require('./images/chapters/68/scene03/rocher2.png'),
         rocher3: require('./images/chapters/68/scene03/rocher3.png'),
+        rocher4: require('./images/chapters/68/scene03/rocher4.png'),
         sea: require('./images/chapters/68/scene03/sea.png'),
       },
       scene04: {
