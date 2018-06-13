@@ -168,16 +168,17 @@ class Chapter extends React.Component {
 
     //Show skillUse component if need skills
     if (this.currentChapter.skillUsed &&
-      chapterList['chapter'+chapterNumber].needSkill && chapterList['chapter'+chapterNumber].needSkill.left) {
-      const leftPercent = chapterList['chapter'+chapterNumber].needSkill.left
-      const leftUnit = ((leftPercent / 100) * this.state.totalWidth)
+      chapterList['chapter'+chapterNumber].needSkill &&
+      chapterList['chapter'+chapterNumber].needSkill.left) {
+      // const leftPercent = chapterList['chapter'+chapterNumber].needSkill.left
+      // const leftUnit = ((leftPercent / 100) * this.state.totalWidth)
       this.state.scrollX.addListener(({value}) => {
         //@todo : check if best way is to add a listener
-        if (leftUnit - value <= 50 && leftUnit - value >= 0) {
-          // this.scrollView.scrollTo({x: leftUnit, y: 0,animated: true})
+        if (this.skillUseLeftUnit - value <= 50 && this.skillUseLeftUnit - value >= 0 && this.skillUseLeftUnit > 0) {
+          this.scrollView.getNode().scrollTo({x: this.skillUseLeftUnit, animated: true})
           this.setState({
             showSkill: true,
-            // scrollEnabled: false
+            scrollEnabled: false
           })
         }
       })
@@ -203,6 +204,10 @@ class Chapter extends React.Component {
   }
 
   _onContentSizeChange = (totalWidth) => {
+    const chapterNumber = this.currentChapter.numberInt
+    const leftPercent = chapterList['chapter'+chapterNumber].needSkill.left
+    this.skillUseLeftUnit = ((leftPercent / 100) * totalWidth)
+
     this.setState({
       totalWidth: totalWidth,
       maxScrollX: totalWidth - windowWidth
@@ -504,7 +509,7 @@ class Chapter extends React.Component {
     if (chapterNumber &&  this.currentChapter.skillUsed && this.currentChapter.skillUsedObject) {
       const chapterDataSkill = chapterList['chapter'+chapterNumber].needSkill
       return (
-        <SkillUse dataSkill={chapterDataSkill} left={chapterDataSkill.left} skill={this.currentChapter.skillUsedObject} showSkill={this.state.showSkill} width={windowWidth}  totalWidth={this.state.totalWidth} onDisappear={() => {this.hideSkillUse()}}  />
+        <SkillUse dataSkill={chapterDataSkill} left={chapterDataSkill.left} skill={this.currentChapter.skillUsedObject} showSkill={this.state.showSkill} width={windowWidth}  totalWidth={this.state.totalWidth} pointerEvents={this.state.showSkill ? 'auto' : 'none'} onDisappear={() => {this.hideSkillUse()}}/>
       )
     }
   }
@@ -546,7 +551,6 @@ class Chapter extends React.Component {
           {this._renderParallaxedImages()}
           {this._renderLottieAnimations()}
           {this._renderTexts()}
-          {this._renderSkillNeeded()}
           {chapterList['chapter'+chapterNumber].ambientAudio.length && this._renderAmbientAudio()}
           {/*{chapterList['chapter'+chapterNumber].ambientAudio.length && this._renderObjectAmbientAudio()}*/}
           {chapterList['chapter'+chapterNumber].audio.length && this._renderAudio()}
@@ -555,6 +559,7 @@ class Chapter extends React.Component {
           {/* @todo Delete following debug comp */}
           <View style={{position: 'absolute', top: 0, left: 2220.25, width: 30, height: 20, backgroundColor: 'green', zIndex: 500}}/>
 w        </Animated.ScrollView>
+        {this._renderSkillNeeded()}
         {this._renderChapterEnd()}
         <View style={styles.absoluteContent}>
           {/*<Button title='save' onPress={() => this.props._setCurrentOffsetProgress(this.state.currentScrollX, this._getPercentProgress())}/>*/}

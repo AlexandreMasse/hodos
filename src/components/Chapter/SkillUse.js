@@ -18,21 +18,24 @@ class SkillUse extends React.Component {
     width: PropType.number,
     totalWidth: PropType.number,
     showSkill: PropType.bool,
-    onDisappear: PropType.func
+    onDisappear: PropType.func,
+    pointerEvents: PropType.string
   }
 
   static defaultProps = {
-    showSkill: false
+    showSkill: false,
+    pointerEvents: 'auto'
   }
 
   constructor(props) {
     super(props)
-    this._visibility = new Animated.Value(0)
-    this._visibilityContent = new Animated.Value(0)
 
     this.state = {
+      isSkillUsed: false,
       title: this.props.dataSkill.title,
-      subTitle: this.props.dataSkill.subTitle
+      subTitle: this.props.dataSkill.subTitle,
+      visibility: new Animated.Value(0.3),
+      visibilityContent:  new Animated.Value(0)
     }
 
     if (this.props.showSkill) {
@@ -41,26 +44,40 @@ class SkillUse extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.showSkill) {
-      this.animateShowSkillUse()
-    } else if (this.props.showSkill !== nextProps.showSkill) {
-      this.animateUnshowSkillUse()
+
+    console.log('receive props');
+
+    if(nextProps.showSkill !== this.props.showSkill) {
+      if (nextProps.showSkill) {
+        this.animateShowSkillUse()
+      } else if (this.props.showSkill !== nextProps.showSkill) {
+        this.animateUnshowSkillUse()
+      }
     }
+
   }
 
   animateShowSkillUse() {
-    Animated.timing(this._visibility, {
-      toValue: 100,
-      duration: 300
-    }).start()
+    console.log('show !');
+
+    Animated.timing(this.state.visibility, {
+      toValue: 1,
+      duration: 450,
+      useNativeDriver: true,
+    }).start(() => {
+      console.log('show finish');
+    })
   }
 
   animateUnshowSkillUse() {
-    Animated.timing(this._visibility, {
+    console.log('unshow');
+    Animated.timing(this.state.visibility, {
       toValue: 0,
-      duration: 300,
-      delay: 2000
+      duration: 450,
+      delay: 3000,
+      useNativeDriver: true
     }).start(() => {
+      console.log('unshow finish');
       this.props.onDisappear()
     })
   }
@@ -69,10 +86,11 @@ class SkillUse extends React.Component {
     this.setState({
       title: this.props.dataSkill.successTitle,
       subTitle: this.props.dataSkill.subTitle,
+      isSkillUsed: true
     })
-    Animated.timing(this._visibilityContent, {
+    Animated.timing(this.state.visibilityContent, {
       toValue: 100,
-      duration: 300
+      duration: 450
     }).start()
     this.animateUnshowSkillUse()
   }
@@ -82,8 +100,9 @@ class SkillUse extends React.Component {
     //   title: this.props.dataSkill.successTitle,
     //   subTitle: this.props.dataSkill.subTitle,
     // })
+    console.log('pattern');
     console.log('pattern recognition', character)
-    // Animated.timing(this._visibilityContent, {
+    // Animated.timing(this.state.visibilityContent, {
     //   toValue: 0,
     //   duration: 300
     // }).start()
@@ -91,15 +110,15 @@ class SkillUse extends React.Component {
 
   render () {
     return (
-      <Animated.View style={[
+      <Animated.View pointerEvents={this.props.pointerEvents} style={[
         styles.skillUseContainer,
         {
-          width: this.props.width,
-          left: (this.props.left / 100) * this.props.totalWidth,
-          opacity: this._visibility.interpolate({
-            inputRange: [0, 100],
-            outputRange: [0, 1],
-          })
+          //width: this.props.width,
+          // left: (this.props.left / 100) * this.props.totalWidth,
+          left: 0,
+          top: 0,
+          width: '100%',
+          opacity: this.state.visibility,
         }
       ]} >
         <View style={{marginTop: 30}}>
@@ -115,7 +134,7 @@ class SkillUse extends React.Component {
             left: 0,
             right: 0,
             height: '82%',
-            opacity: this._visibilityContent.interpolate({
+            opacity: this.state.visibilityContent.interpolate({
               inputRange: [0, 100],
               outputRange: [1, 0],
             })
@@ -138,19 +157,19 @@ class SkillUse extends React.Component {
             </View>
             <View style={styles.cardDetection}>
               <CardDetection onPatternRecognition={(character) => { this._onPatternRecognition(character)}} />
-              <View style={[{width: 315, height:'95%', position: 'absolute', left: 30, top: 40}]}  pointerEvents= {'none'}>
+              <View style={[{width: 315, height:'95%', position: 'absolute', left: 30, top: 40}]} pointerEvents={'none'}>
                 <ImageAspectRatio src={imageList.others.cardBack} width={'100%'} />
               </View>
             </View>
           </View>
         </Animated.View>
-        <Animated.View style={[
+        <Animated.View pointerEvent={this.state.isSkillUsed ? 'auto' : 'none'} style={[
           {
             position: 'absolute',
             top: 200,
             marginTop: 20,
             width: '100%',
-            opacity: this._visibilityContent.interpolate({
+            opacity: this.state.visibilityContent.interpolate({
               inputRange: [0, 100],
               outputRange: [0, 1],
             })

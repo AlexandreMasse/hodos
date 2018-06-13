@@ -336,6 +336,7 @@ export default class CardDetection extends React.Component {
       this.setState({characterName: ''})
       const character = this.checkPattern(touches);
     }
+
   }
 
   renderPoints() {
