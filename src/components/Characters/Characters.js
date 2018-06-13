@@ -17,10 +17,12 @@ class Characters extends React.Component {
     this.state = {
       showInfo: false,
       showSkills: false,
-      activeCharacter: {}
+      lockedCharacter: {},
+      activeCharacter: {} //@todo: empty object
     }
     this._visibility = new Animated.Value(50)
     this._visibilitySkills = new Animated.Value(0)
+    this._visibilityLockedCharacter = new Animated.Value(0) //@todo : switch to 0
     this.previousDetection = null
   }
 
@@ -53,16 +55,22 @@ class Characters extends React.Component {
     console.log(this.state.activeCharacter.id, characterId)
     if (Number(this.state.activeCharacter.id) !== Number(characterId) && this.previousDetection !== Number(characterId)) {
       this.characters.map((character, index) => {
-        if (Number(character.id) === Number(characterId) && !character.isLocked) {
-          this.previousDetection = Number(characterId)
-          console.log('yeaaah we have a matching character', character)
-          /*this.setState({
-            showInfo: true,
-            activeCharacter: character,
-            showSkills: true
-          })*/
-          this._showCharacterInfo(character, true)
-          // this._showSkillsAnimation()
+        if (Number(character.id) === Number(characterId)) {
+          if (!character.isLocked) {
+            this.previousDetection = Number(characterId)
+            console.log('yeaaah we have a matching character', character)
+            /*this.setState({
+              showInfo: true,
+              activeCharacter: character,
+              showSkills: true
+            })*/
+            this._showCharacterInfo(character, true)
+            // this._showSkillsAnimation()
+          } else {
+            this.setState({
+              lockedCharacter: character
+            })
+          }
         }
       })
     } else if (!this.state.showSkills) {
@@ -85,6 +93,7 @@ class Characters extends React.Component {
     this.setState({
       showInfo: true,
       showSkills: showSkills,
+      lockedCharacter: false,
       activeCharacter: character
     })
     Animated.timing(this._visibility, {
@@ -108,6 +117,41 @@ class Characters extends React.Component {
         }
         this._showCharacterInfosAnimation(character, showSkillsBool)
       })
+    }
+  }
+
+  _renderLockedCharacter() {
+    if (this.state.lockedCharacter) {
+      return (
+        <Animated.View style={[
+          {
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            zIndex: 10,
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: 'rgba(41, 41, 45, 0.2)',
+            opacity: this._visibilityLockedCharacter.interpolate({
+              inputRange: [0, 100],
+              outputRange: [0, 1],
+            })}
+          ]}>
+          <View style={[styles.cardInfoWrapper, {width: 500, alignItems: 'center',}]}>
+            <View style={[styles.listThumbnailWrapper]}>
+              <View style={[styles.listThumbnailContainer, styles.listCharacterThumbnailWrapper]}>
+                <View style={{position: 'absolute', top: 0, left: 0}}>
+                  <ImageAspectRatio width={120} src={characterList.cards[28]} style={[styles.listThumbnail, styles.listCharacterThumbnailWrapper]} />
+                </View>
+              </View>
+            </View>
+            <Text style={[styles.cardText, {fontFamily: fonts.RubikMedium, fontSize: 22, marginVertical: 15, color: colors.grey }]}>Athena</Text>
+            <Text style={{fontFamily: fonts.RubikRegular, fontSize: 18, color: colors.grey, marginVertical: 15,}}>Ce personnage n'est pas encore débloqué ! Tu le découvriras bientôt, en continuant de lire cette histoire.</Text>
+          </View>
+        </Animated.View>
+      )
     }
   }
 
@@ -147,7 +191,7 @@ class Characters extends React.Component {
             })}
           ]}>
           <View style={[{flexDirection: 'row', height: '100%'}]}>
-            <View style={[styles.characterInfoCard]}>
+            <View style={[styles.characterInfoCard, styles.cardInfoWrapper]}>
               <ScrollView showsVerticalScrollIndicator={false} >
                 <Text style={[styles.characterInfoName]}>{this.state.activeCharacter.name}</Text>
                 <Text style={[styles.characterInfoRole]}>{this.state.activeCharacter.role}</Text>
@@ -240,6 +284,7 @@ class Characters extends React.Component {
             </View>
           </View>
         </View>
+        {this._renderLockedCharacter()}
         <OpenDrawerButton/>
       </View>
     )
@@ -320,13 +365,15 @@ const styles = StyleSheet.create({
     width: 350,
     marginRight: 30,
     height: '100%',
+  },
+  cardInfoWrapper: {
+    paddingVertical: 30,
+    paddingHorizontal: 35,
     borderRadius: 10,
     backgroundColor: '#fff',
     shadowColor: '#000',
     shadowOffset: { width: 1, height: 2 },
     shadowOpacity: 0.2,
-    paddingVertical: 30,
-    paddingHorizontal: 35,
   },
   characterInfoName: {
     fontFamily: fonts.RubikMedium,
