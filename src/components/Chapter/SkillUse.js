@@ -54,7 +54,6 @@ class SkillUse extends React.Component {
         this.animateUnshowSkillUse()
       }
     }
-
   }
 
   animateShowSkillUse() {
@@ -98,6 +97,9 @@ class SkillUse extends React.Component {
   _onPatternRecognition = (characterId) => {
     console.log('pattern recognition', characterId)
     if (Number(characterId) === Number(this.props.skill.character)) {
+      console.log('Good skill use !');
+
+      this._renderSkillUsed()
       // this.setState({
       //   title: this.props.dataSkill.successTitle,
       //   subTitle: this.props.dataSkill.subTitle,
@@ -158,13 +160,13 @@ class SkillUse extends React.Component {
             </View>
             <View style={styles.cardDetection}>
               <CardDetection onPatternRecognition={(characterId) => { this._onPatternRecognition(characterId)}} />
-              <View style={[{width: 315, height:'95%', position: 'absolute', left: 30, top: 40}]}  pointerEvents= {'none'}>
+              <View style={[{width: 315, height:'95%', position: 'absolute', left: 30, top: 40}]} pointerEvents={'none'}>
                 <ImageAspectRatio src={imageList.others.cardBack} width={'100%'} />
               </View>
             </View>
           </View>
         </Animated.View>
-        <Animated.View pointerEvent={this.state.isSkillUsed ? 'auto' : 'none'} style={[
+        <Animated.View pointerEvents={this.state.isSkillUsed ? 'auto' : 'none'} style={[
           {
             position: 'absolute',
             top: 200,

@@ -524,6 +524,8 @@ class Chapter extends React.Component {
   }
 
   render () {
+    console.log('showChapterEnd', this.state.showChapterEnd);
+
     const chapterNumber = this.currentChapter.numberInt
     return (
       <View style={styles.container}>
@@ -568,8 +570,8 @@ class Chapter extends React.Component {
           {/* @todo Delete following debug comp */}
           <View style={{position: 'absolute', top: 0, left: 2220.25, width: 30, height: 20, backgroundColor: 'green', zIndex: 500}}/>
 w        </Animated.ScrollView>
-        {this._renderSkillNeeded()}
         {this._renderChapterEnd()}
+        {this._renderSkillNeeded()}
         <View style={styles.absoluteContent}>
           {/*<Button title='save' onPress={() => this.props._setCurrentOffsetProgress(this.state.currentScrollX, this._getPercentProgress())}/>*/}
           {/*<Text style={styles.textTop}> Current offsetX : {this.props.currentOffset}</Text>*/}
