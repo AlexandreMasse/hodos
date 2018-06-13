@@ -105,10 +105,11 @@ class Place extends React.Component {
           <View key={index} style={[styles.listElement]}>
             <View style={[styles.listThumbnailWrapper, styles.listCharacterThumbnailWrapper]}>
               <View style={[styles.listThumbnailContainer, styles.listCharacterThumbnailWrapper]}>
+              {console.log(character.name, character.isLocked)}
               {character.isLocked &&
                 // <Image source={imageList.others.lock} style={[styles.listThumbnailLocked]} />
-                <View style={{position: 'absolute', top: 0, left: 0}}>
-                  <ImageAspectRatio width={'100%'} src={characterList.cards[character.id] ? characterList.cards[character.id] : characterList.cards[2]} style={[styles.listThumbnail, styles.listCharacterThumbnailWrapper]} />
+                <View style={{alignItems: 'center', justifyContent: 'center'}}>
+                  <ImageAspectRatio width={45} src={imageList.others.lock} style={[styles.listThumbnail, styles.listCharacterThumbnailWrapper]} />
                 </View>
               }
               {!character.isLocked &&

@@ -171,8 +171,8 @@ class Characters extends React.Component {
           <View key={index} style={[{flexDirection: 'row', alignItems: 'center', marginTop: 15}]}>
             <Image source={imageList.profile.skills[skillType.id]} style={[{width: 45, height: 45, resizeMode: 'contain', marginRight: 15}]} />
             <View>
-              <Text style={[styles.characterSkillTypeName]}>{skillType.title} {skillType.name} </Text>
-              <Text style={[styles.characterSkillName]}>{skill.name}</Text>
+              <Text style={[styles.characterSkillTypeName, {width: 225}]}>{skillType.title} {skillType.name} </Text>
+              <Text style={[styles.characterSkillName,  {width: 225}]}>{skill.name}</Text>
             </View>
           </View>
         )
