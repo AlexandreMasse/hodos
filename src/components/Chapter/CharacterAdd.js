@@ -51,7 +51,7 @@ class CharacterAdd extends React.Component {
 
 
   _onPatternRecognition(characterId) {
-    if (characterId === this.props.characterDiscovered.id) {
+    if (characterId === Number(this.props.characterDiscovered.id)) {
       this._renderAnimation()
     }
   }

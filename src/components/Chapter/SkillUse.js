@@ -77,16 +77,18 @@ class SkillUse extends React.Component {
     this.animateUnshowSkillUse()
   }
 
-  _onPatternRecognition = (character) => {
-    // this.setState({
-    //   title: this.props.dataSkill.successTitle,
-    //   subTitle: this.props.dataSkill.subTitle,
-    // })
-    console.log('pattern recognition', character)
-    // Animated.timing(this._visibilityContent, {
-    //   toValue: 0,
-    //   duration: 300
-    // }).start()
+  _onPatternRecognition = (characterId) => {
+    console.log('pattern recognition', characterId)
+    if (Number(characterId) === Number(this.props.skill.character)) {
+      // this.setState({
+      //   title: this.props.dataSkill.successTitle,
+      //   subTitle: this.props.dataSkill.subTitle,
+      // })
+      // Animated.timing(this._visibilityContent, {
+      //   toValue: 0,
+      //   duration: 300
+      // }).start()
+    }
   }
 
   render () {
@@ -137,7 +139,7 @@ class SkillUse extends React.Component {
               <Text style={styles.infoText}>{this.props.dataSkill.cardTextIndication}</Text>
             </View>
             <View style={styles.cardDetection}>
-              <CardDetection onPatternRecognition={(character) => { this._onPatternRecognition(character)}} />
+              <CardDetection onPatternRecognition={(characterId) => { this._onPatternRecognition(characterId)}} />
               <View style={[{width: 315, height:'95%', position: 'absolute', left: 30, top: 40}]}  pointerEvents= {'none'}>
                 <ImageAspectRatio src={imageList.others.cardBack} width={'100%'} />
               </View>
