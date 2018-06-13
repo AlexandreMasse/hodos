@@ -48,6 +48,7 @@ class Chapter extends React.Component {
       showSwipe: false,
       beginTextAnimationCount: 0,
       showSkill: false,
+      isSkillUsed: false,
       scrollX: new Animated.Value(this.props.currentOffset),
       currentScrollX: this.props.currentOffset
     }
@@ -146,7 +147,10 @@ class Chapter extends React.Component {
 
     console.log(sourceBackground);
     console.log(windowHeight / sourceBackground.height);
-    this.setState({scalingRatio: windowHeight / sourceBackground.height})
+
+    //Todo: This is for presentation
+    //this.setState({scalingRatio: windowHeight / sourceBackground.height})
+    this.setState({scalingRatio: 0.40465793304221254})
 
     // Save progress
     // this.progressTimeOut = setInterval(() => {
@@ -175,7 +179,7 @@ class Chapter extends React.Component {
       // const leftUnit = ((leftPercent / 100) * this.state.totalWidth)
       this.state.scrollX.addListener(({value}) => {
         //@todo : check if best way is to add a listener
-        if (this.skillUseLeftUnit - value <= 50 && this.skillUseLeftUnit - value >= 0 && this.skillUseLeftUnit > 0) {
+        if (this.skillUseLeftUnit - value <= 50 && this.skillUseLeftUnit - value >= 0 && this.skillUseLeftUnit > 0 && !this.state.isSkillUsed) {
           this.scrollView.getNode().scrollTo({x: this.skillUseLeftUnit, animated: true})
           this.setState({
             showSkill: true,
@@ -268,6 +272,7 @@ class Chapter extends React.Component {
     //Function called when skill have been found, hide skill then enable scroll
     this.setState({
       showSkill: false,
+      isSkillUsed: true
     })
 
     this._enableScroll()
@@ -515,10 +520,10 @@ class Chapter extends React.Component {
 
   _renderSkillNeeded() {
     const chapterNumber = this.currentChapter.numberInt
-    if (chapterNumber &&  this.currentChapter.skillUsed && this.currentChapter.skillUsedObject) {
+    if (chapterNumber && this.currentChapter.skillUsed && this.currentChapter.skillUsedObject) {
       const chapterDataSkill = chapterList['chapter'+chapterNumber].needSkill
       return (
-        <SkillUse dataSkill={chapterDataSkill} left={chapterDataSkill.left} skill={this.currentChapter.skillUsedObject} showSkill={this.state.showSkill} width={windowWidth}  totalWidth={this.state.totalWidth} pointerEvents={this.state.showSkill ? 'auto' : 'none'} onDisappear={() => {this.hideSkillUse()}}/>
+        <SkillUse dataSkill={chapterDataSkill} left={chapterDataSkill.left} skill={this.currentChapter.skillUsedObject} showSkill={this.state.showSkill} width={windowWidth} totalWidth={this.state.totalWidth} onDisappear={() => {this.hideSkillUse()}}/>
       )
     }
   }

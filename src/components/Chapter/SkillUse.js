@@ -8,6 +8,7 @@ import CardDetection from './../CardDetection/CardDetection'
 import ImageAspectRatio from './../utils/ImageAspectRatio'
 import imageList from './../../assets/ImagesList'
 import { withNavigation } from 'react-navigation'
+import ButtonWhite from "../ButtonWhite";
 
 class SkillUse extends React.Component {
 
@@ -48,7 +49,7 @@ class SkillUse extends React.Component {
     console.log('receive props');
 
     if(nextProps.showSkill !== this.props.showSkill) {
-      if (nextProps.showSkill) {
+      if (nextProps.showSkill && !this.state.isSkillUsed) {
         this.animateShowSkillUse()
       } else if (this.props.showSkill !== nextProps.showSkill) {
         this.animateUnshowSkillUse()
@@ -59,13 +60,16 @@ class SkillUse extends React.Component {
   animateShowSkillUse() {
     console.log('show !');
 
-    Animated.timing(this.state.visibility, {
-      toValue: 1,
-      duration: 450,
-      useNativeDriver: true,
-    }).start(() => {
-      console.log('show finish');
-    })
+    if(!this.state.isSkillUsed) {
+      Animated.timing(this.state.visibility, {
+        toValue: 1,
+        duration: 450,
+        useNativeDriver: true,
+      }).start(() => {
+        console.log('show finish');
+      })
+    }
+
   }
 
   animateUnshowSkillUse() {
@@ -73,7 +77,7 @@ class SkillUse extends React.Component {
     Animated.timing(this.state.visibility, {
       toValue: 0,
       duration: 450,
-      delay: 3000,
+      delay: 0,
       useNativeDriver: true
     }).start(() => {
       console.log('unshow finish');
@@ -89,9 +93,9 @@ class SkillUse extends React.Component {
     })
     Animated.timing(this.state.visibilityContent, {
       toValue: 100,
-      duration: 450
+      duration: 700
     }).start()
-    this.animateUnshowSkillUse()
+    //this.animateUnshowSkillUse()
   }
 
   _onPatternRecognition = (characterId) => {
@@ -113,7 +117,7 @@ class SkillUse extends React.Component {
 
   render () {
     return (
-      <Animated.View pointerEvents={this.props.pointerEvents} style={[
+      <Animated.View pointerEvents={this.props.showSkill ? 'auto' : 'none'} style={[
         styles.skillUseContainer,
         {
           //width: this.props.width,
@@ -169,8 +173,7 @@ class SkillUse extends React.Component {
         <Animated.View pointerEvents={this.state.isSkillUsed ? 'auto' : 'none'} style={[
           {
             position: 'absolute',
-            top: 200,
-            marginTop: 20,
+            top: 160,
             width: '100%',
             opacity: this.state.visibilityContent.interpolate({
               inputRange: [0, 100],
@@ -180,14 +183,17 @@ class SkillUse extends React.Component {
         ]}>
           <View style={[styles.centeredContent, {width: '100%'}]}>
             <ImageAspectRatio src={this.props.dataSkill.skillImage} width={280} />
-            <View style={[styles.cardWrapper, {paddingHorizontal: 100, paddingVertical: 20, marginTop: 50}]}>
+            <View style={[styles.cardWrapper, {paddingHorizontal: 100, paddingVertical: 20, marginTop: 50, marginBottom: 50}]}>
               <View style={{alignItems: 'center', justifyContent: 'center'}}>
                 <Image source={imageList.profile.skills[this.props.skill.type]} style={{width: 50, height: 50, resizeMode: 'contain'}} />
                 <Text style={[styles.cardTitle]}>{this.props.skill.skillType.title} {this.props.skill.skillType.name}</Text>
                 <Text style={[styles.cardSubTitle]}>{this.props.skill.name}</Text>
               </View>
             </View>
+            <ButtonWhite text={'Reprendre la lecture'} source={imageList.others.arrowRight} iconLeft={false}
+                         onTouch={() => this.animateUnshowSkillUse()}/>
           </View>
+
         </Animated.View>
 
       </Animated.View>
