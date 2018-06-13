@@ -50,7 +50,9 @@ class Chapter extends React.Component {
       showSkill: false,
       isSkillUsed: false,
       scrollX: new Animated.Value(this.props.currentOffset),
-      currentScrollX: this.props.currentOffset
+      currentScrollX: this.props.currentOffset,
+      cloudAnimationProgress: new Animated.Value(0),
+      cloudAnimationPlay: true,
     }
 
     this._buttonVisibility = new Animated.Value(0)
@@ -151,6 +153,18 @@ class Chapter extends React.Component {
     //Todo: This is for presentation
     //this.setState({scalingRatio: windowHeight / sourceBackground.height})
     this.setState({scalingRatio: 0.40465793304221254})
+
+    // Play cloud animation
+    setTimeout(() => {
+      this.setState({
+        cloudAnimationPlay: false
+      })
+    }, 8000)
+
+    Animated.timing(this.state.cloudAnimationProgress, {
+      toValue: 1,
+      duration: 4000,
+    }).start()
 
     // Save progress
     // this.progressTimeOut = setInterval(() => {
@@ -582,6 +596,10 @@ w        </Animated.ScrollView>
           {/*<Text style={styles.textTop}> Current offsetX : {this.props.currentOffset}</Text>*/}
         </View>
         <OpenDrawerButton/>
+        {this.state.cloudAnimationPlay &&
+        <LottieAnimation play={this.state.cloudAnimationPlay} source={require('../../assets/animations/intro/nuages-debut.json')} styles={styles.cloudAnimation} isLoop={false}/>
+        }
+
       </View>
     )
   }
@@ -616,7 +634,15 @@ const styles = StyleSheet.create({
     bottom: '10%',
     textAlign: 'center',
     zIndex: 3
-  }
+  },
+  cloudAnimation: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    height: '100%',
+    width: '100%',
+    zIndex: 500,
+  },
 })
 
 const mapStateToProps = state => {

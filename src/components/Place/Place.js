@@ -76,7 +76,7 @@ class Place extends React.Component {
         console.log(chapterImages)
         if (chapterImages && chapterImages.thumbnail) {
           return (
-            <TouchableOpacity  key={index} onPress={ () => {
+            <TouchableOpacity activeOpacity={1} key={index} onPress={ () => {
               // if (Number(chapter.id) === 26) {
               // this.props.navigation.navigate('Previously', {chapterId: chapter.id})
               // }

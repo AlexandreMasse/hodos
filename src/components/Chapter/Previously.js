@@ -9,6 +9,7 @@ import ImageAspectRatio from './../utils/ImageAspectRatio'
 import { colors, fonts } from './../../assets/variables'
 import imageList from "../../assets/ImagesList"
 import chapterList from './datas/chapterList'
+import LottieAnimation from "../LottieAnimation/LottieAnimation";
 
 const bannerHeight = 280
 
@@ -27,8 +28,9 @@ class Previously extends React.Component {
 
     this.state = {
       chapterId: this.props.navigation.getParam('chapterId', 26),
+      cloudAnimationPlay: false,
+      cloudAnimationProgress: new Animated.Value(1)
     }
-
 
     this._translation = new Animated.Value(0)
 
@@ -59,7 +61,19 @@ class Previously extends React.Component {
   }
 
   _handleReading = () => {
-    this.props.navigation.navigate('Chapter', {chapterId: this.state.chapterId})
+    this.setState({
+      cloudAnimationPlay: true
+    })
+
+    Animated.timing(this.state.cloudAnimationProgress, {
+      toValue: 0,
+      duration: 4000,
+    }).start()
+
+    setTimeout(() => {
+      this.props.navigation.navigate('Chapter', {chapterId: this.state.chapterId})
+    }, 3000)
+
   }
 
   _handleBackToMap = () => {
@@ -104,8 +118,9 @@ class Previously extends React.Component {
           </View>
         </View>
         <OpenDrawerButton/>
+        {/* Nuage transition*/}
+        <LottieAnimation source={require('../../assets/animations/intro/nuages-debut.json')} play={this.state.cloudAnimationPlay} progress={this.state.cloudAnimationProgress} styles={styles.cloudAnimation} isLoop={false}/>
       </View>
-
     )
   }
 }
@@ -183,7 +198,15 @@ const styles = StyleSheet.create({
   menu: {
     width: 20,
     resizeMode: 'contain'
-  }
+  },
+  cloudAnimation: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    height: '100%',
+    width: '100%',
+    zIndex: 500,
+  },
 })
 
 const mapStateToProps = state => {

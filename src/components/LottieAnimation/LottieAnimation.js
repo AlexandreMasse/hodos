@@ -14,7 +14,8 @@ export default class LottieAnimation extends React.Component {
     source: PropTypes.any,
     delay: PropTypes.number,
     speed: PropTypes.number,
-    progress: PropTypes.number
+    progress: PropTypes.number,
+    play: PropTypes.bool,
   }
 
   static defaultProps = {
@@ -23,9 +24,10 @@ export default class LottieAnimation extends React.Component {
     styles: {},
     isLoop: true,
     source: require('./olympe-bg.json'),
-    delay: 0,
+    delay: 100,
     speed: 1,
-    progress: 0
+    progress: 0,
+    play: true
   }
 
   constructor(props) {
@@ -36,9 +38,22 @@ export default class LottieAnimation extends React.Component {
   }
 
   componentDidMount() {
-    setTimeout(() => {
-      this.animation.play();
-    }, this.props.delay)
+    if(this.props.play) {
+      setTimeout(() => {
+          this.animation.play();
+      }, this.props.delay)
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+
+    if(this.props !== nextProps){
+      if(nextProps.play) {
+        setTimeout(() => {
+            this.animation.play();
+        }, nextProps.delay)
+      }
+    }
   }
 
   render() {
