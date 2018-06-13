@@ -128,14 +128,16 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'blue'
+    backgroundColor: '#fff'
   },
   backgroundGradient: {
     position: 'absolute',
     top: 0,
     left: 0,
-    height: windowHeight,
-    width: windowWidth,
+    right: 0,
+    bottom: 0
+    // height: windowHeight,
+    // width: windowWidth,
   },
   landscape: {
     position: 'absolute',
@@ -156,8 +158,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 0,
     left: 0,
-    height: windowHeight,
-    width: windowWidth,
+    height: '100%',
+    width: '100%'
   },
   animationNuagesIntro: {
     position: 'absolute',
