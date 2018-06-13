@@ -77,7 +77,7 @@ export default class TextApparition extends React.Component {
     Animated.timing(this._visibility, {
       toValue: value,
       duration:  durations[index],
-      delay: this.props.delay + (index === 0 ? this.props.startDelay : 0)
+      delay: this.props.delay + (index === 0 ? this.props.startDelay : 0),
     }).start(() => {
       if (!this.state.stopAnimation) {
         if (index < nb - 1) {

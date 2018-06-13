@@ -51,6 +51,9 @@ class SideMenu extends React.Component {
     this.props.navigation.dispatch(navigateAction);
   }
 
+  _handleLogo = () => {
+    this.props.navigation.navigate('HomeScreen')
+  }
   _handleClose = () => {
     console.log('close drawer');
     this.props.navigation.navigate('DrawerClose')
@@ -68,7 +71,9 @@ class SideMenu extends React.Component {
         {/*Top container*/}
         <View style={styles.topContainer}>
           {/*Logo*/}
-          <Image source={imageList.menu.logo} style={styles.logo}/>
+          <TouchableOpacity onPress={this._handleLogo} style={styles.logoContainer} activeOpacity={0.8}>
+            <Image source={imageList.menu.logo} style={styles.logo}/>
+          </TouchableOpacity>
           {/*DrawerItems*/}
           <View style={styles.drawerItemsContainer}>
             <DrawerItems {...this.props}/>
@@ -140,10 +145,16 @@ const styles = StyleSheet.create({
     // flex: 1,
     alignItems: 'center',
   },
-  logo: {
+  logoContainer: {
     marginTop: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
     width: 30,
     height: 30
+  },
+  logo: {
+    width: 40,
+    height: 40
   },
   drawerItemsContainer: {
     marginTop: 50,

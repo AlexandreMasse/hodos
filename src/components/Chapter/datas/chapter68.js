@@ -3,7 +3,7 @@ import soundsList from '../../../assets/SoundsList'
 import animationList from '../../../assets/AnimationsList'
 
 export default {
-  // "previouslyBannerImage":  imageList.chapters.chapter27.previously,
+  "previouslyBannerImage":  imageList.chapters.chapter68.previously,
   "scenes": [
     {"src": imageList.chapters.chapter68.scene01.scene01},
     {"src": imageList.chapters.chapter68.scene02.scene02},

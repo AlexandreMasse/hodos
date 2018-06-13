@@ -98,7 +98,8 @@ class Map extends React.Component {
   }
 
   _handleReading = () => {
-    this.props.navigation.navigate('Previously')
+    console.log(this.props.progress.chapter);
+    this.props.navigation.navigate('Previously', {chapterId: this.props.progress.chapter})
     AudioManager.stopSounds(this.audio.sound)
   }
 
@@ -127,8 +128,8 @@ class Map extends React.Component {
       return (
         <View  style={styles.buttonRead} src={imageList.others.arrowRight}>
           <ButtonWhite text={'Reprendre la lecture'} source={imageList.others.arrowRight} iconLeft={false}
-                       /*onTouch={this._handleReading}*/
-                       onTouch={() => this.props.navigation.navigate('Chapter', { chapterId: 67})}
+                       onTouch={this._handleReading}
+                       // onTouch={() => this.props.navigation.navigate('Chapter', { chapterId: 67})}
           />
         </View>
       );

@@ -123,6 +123,7 @@ export default imageList = {
     },
     chapter68: {
       thumbnail: require('./images/chapters/69/thumbnail.png'),
+      previously: require('./images/chapters/68/previously.png'),
       skillImage: require('./images/chapters/68/helmet.png'),
       scene01: {
         persee1: require('./images/chapters/68/scene01/persee1.png'),

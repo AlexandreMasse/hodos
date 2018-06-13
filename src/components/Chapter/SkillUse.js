@@ -34,7 +34,7 @@ class SkillUse extends React.Component {
       isSkillUsed: false,
       title: this.props.dataSkill.title,
       subTitle: this.props.dataSkill.subTitle,
-      visibility: new Animated.Value(0.3),
+      visibility: new Animated.Value(0),
       visibilityContent:  new Animated.Value(0)
     }
 

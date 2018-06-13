@@ -148,7 +148,7 @@ class Place extends React.Component {
         <View style={styles.container}>
           <View style={[styles.placeWrapper]}>
             {this._renderTabHeader()}
-            <View style={[styles.placeContent]}>
+            <View style={[styles.placeContent, {marginTop: -15}]}>
               <View>
                 <Text style={styles.listTitle}>Chapitres</Text>
                 <ScrollView horizontal={true} style={styles.listContent} showsHorizontalScrollIndicator={false} contentInset={{left: 50}} contentOffset={{x: -50}}>
@@ -212,11 +212,11 @@ const styles = StyleSheet.create({
     width: 180,
     flexWrap: 'wrap',
     marginRight: 20,
-    marginBottom: 10,
+    marginBottom: 0,
     borderRadius: 10,
     shadowColor: '#c8cbce',
     shadowOffset: { width: 5, height: 5 },
-    shadowOpacity: 0.3,
+    shadowOpacity: 0.2,
     shadowRadius: 2,
   },
   listTitle: {

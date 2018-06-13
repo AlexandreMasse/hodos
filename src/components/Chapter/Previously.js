@@ -15,33 +15,42 @@ const bannerHeight = 280
 class Previously extends React.Component {
 
   static propTypes = {
-    chapterId: PropTypes.number
+    //chapterId: PropTypes.number
   }
 
   static defaultProps = {
-    chapterId: 26
+    //chapterId: 26
   }
 
   constructor(props) {
     super(props)
 
-    this.props.chapterList.map(val => {
-      if (val.id === this.props.chapterId) {
-        this.currentChapter = val
-      }
-    })
-    this.bannerImage = chapterList['chapter'+this.currentChapter.numberInt].previouslyBannerImage
+    this.state = {
+      chapterId: this.props.navigation.getParam('chapterId', 26),
+    }
+
 
     this._translation = new Animated.Value(0)
 
-    const viewWidth = Dimensions.get('window').width
-    const sourceInfo = Image.resolveAssetSource(this.bannerImage)
-    const ratio = sourceInfo.height / bannerHeight
-    const width = sourceInfo.width / ratio
-    this.translationX = Math.round(width - viewWidth)
+  }
+
+  componentWillMount() {
+    this.props.chapterList.map(val => {
+      if (val.id === this.state.chapterId) {
+        this.currentChapter = val
+        this.bannerImage = chapterList['chapter'+this.currentChapter.numberInt].previouslyBannerImage
+        const viewWidth = Dimensions.get('window').width
+        const sourceInfo = Image.resolveAssetSource(this.bannerImage)
+        const ratio = sourceInfo.height / bannerHeight
+        const width = sourceInfo.width / ratio
+        this.translationX = Math.round(width - viewWidth)
+      }
+    })
+
   }
 
   componentDidMount () {
+
     Animated.timing(this._translation, {
       toValue: 100,
       duration: 4000,
@@ -50,7 +59,7 @@ class Previously extends React.Component {
   }
 
   _handleReading = () => {
-    this.props.navigation.navigate('Chapter')
+    this.props.navigation.navigate('Chapter', {chapterId: this.state.chapterId})
   }
 
   _handleBackToMap = () => {
@@ -91,7 +100,7 @@ class Previously extends React.Component {
             </View>
           </View>
           <View style={styles.buttonRight}>
-            <ButtonWhite text={'Reprendre la lecture'}  source={imageList.others.arrowRight} iconLeft={false} onTouch={this._handleReading} />
+            <ButtonWhite text={'Reprendre la lecture'} source={imageList.others.arrowRight} iconLeft={false} onTouch={this._handleReading} />
           </View>
         </View>
         <OpenDrawerButton/>
@@ -152,7 +161,7 @@ const styles = StyleSheet.create({
   buttonLeft: {
     position: 'absolute',
     left: 20,
-    top: '13%',
+    top: '14.3%',
     zIndex: 10
   },
   buttonRight: {

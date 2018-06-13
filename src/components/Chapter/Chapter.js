@@ -40,7 +40,7 @@ class Chapter extends React.Component {
     super(props)
     this.state = {
       chapterId: this.props.navigation.getParam('chapterId', 26),
-      scalingRatio: 1,
+      scalingRatio: null, //0.40465793304221254
       totalWidth: 0,
       maxScrollX: 0,
       showChapterEnd: false,
@@ -144,6 +144,8 @@ class Chapter extends React.Component {
     console.log("Chapter : ",this.currentChapter.numberInt);
     const sourceBackground = Image.resolveAssetSource(chapterList['chapter'+this.currentChapter.numberInt].scenes[0].src)
 
+    console.log(sourceBackground);
+    console.log(windowHeight / sourceBackground.height);
     this.setState({scalingRatio: windowHeight / sourceBackground.height})
 
     // Save progress
@@ -205,8 +207,14 @@ class Chapter extends React.Component {
 
   _onContentSizeChange = (totalWidth) => {
     const chapterNumber = this.currentChapter.numberInt
-    const leftPercent = chapterList['chapter'+chapterNumber].needSkill.left
-    this.skillUseLeftUnit = ((leftPercent / 100) * totalWidth)
+
+    if (this.currentChapter.skillUsed &&
+      chapterList['chapter'+chapterNumber].needSkill &&
+      chapterList['chapter'+chapterNumber].needSkill.left) {
+      const leftPercent = chapterList['chapter'+chapterNumber].needSkill.left
+      this.skillUseLeftUnit = ((leftPercent / 100) * totalWidth)
+    }
+
 
     this.setState({
       totalWidth: totalWidth,
@@ -291,7 +299,9 @@ class Chapter extends React.Component {
 
   _renderParallaxedImages () {
     const chapterNumber = this.currentChapter.numberInt
+    console.log('scalling ratio', typeof(this.state.scalingRatio), this.state.scallingRatio);
     if (chapterNumber) {
+      console.log('scalling ratio 2', this.state.scalingRatio)
       return chapterList['chapter'+chapterNumber].parallaxedImage.map((image, index) => {
         const scallingRatio = image.scallingRatio ? this.state.scalingRatio + image.scallingRatio : this.state.scalingRatio
         return (
@@ -409,7 +419,7 @@ class Chapter extends React.Component {
           volume: 1
         }).then((data) => {
           const timeout = setTimeout( () => {
-            AudioManager.playSound(data)
+            AudioManager.playSound(data).then(() => console.log("sound play !"))
           }, audio.timeout)
           this.beginTextTimeouts.push(timeout)
           this.beginTextAudio.push(data)
@@ -551,9 +561,9 @@ class Chapter extends React.Component {
           {this._renderParallaxedImages()}
           {this._renderLottieAnimations()}
           {this._renderTexts()}
-          {chapterList['chapter'+chapterNumber].ambientAudio.length && this._renderAmbientAudio()}
+          {/*{chapterList['chapter'+chapterNumber].ambientAudio.length && this._renderAmbientAudio()}*/}
           {/*{chapterList['chapter'+chapterNumber].ambientAudio.length && this._renderObjectAmbientAudio()}*/}
-          {chapterList['chapter'+chapterNumber].audio.length && this._renderAudio()}
+          {/*{chapterList['chapter'+chapterNumber].audio.length && this._renderAudio()}*/}
           {/*{chapterList['chapter'+chapterNumber].audio.length && this._renderObjectAudio()}*/}
 
           {/* @todo Delete following debug comp */}

@@ -743,15 +743,15 @@ export default {
   "beginTextAudio": [
     {
       "source": soundsList.chapters.chapter27.beginTextAudio.phrase1,
-      "timeout": 6000
+      "timeout": 1000
     },
     {
       "source": soundsList.chapters.chapter27.beginTextAudio.phrase2,
-      "timeout": 20000
+      "timeout": 12000
     },
     {
       "source": soundsList.chapters.chapter27.beginTextAudio.phrase3,
-      "timeout": 26000
+      "timeout": 20000
     }
   ],
   "ambientAudio" : [
