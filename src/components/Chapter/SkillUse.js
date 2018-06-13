@@ -127,7 +127,7 @@ class SkillUse extends React.Component {
         <View style={{marginTop: 30}}>
           <Title title={this.state.title} subTitle={this.state.subTitle} willUpdate={true} />
         </View>
-        <TouchableHighlight style={{width: 80, height:80, position: 'absolute', right: 0, top:0}} onPress={() => this._renderSkillUsed()}>
+        <TouchableHighlight style={{width: 80, height:80, position: 'absolute', right: 0, top:0}} underlayColor={'transparent'} onPress={() => this._renderSkillUsed()}>
           <View />
         </TouchableHighlight>
         <Animated.View style={[
