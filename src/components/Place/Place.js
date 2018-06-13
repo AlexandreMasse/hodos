@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View, Text, Button, Image, TouchableHighlight, Dimensions, Animated, ScrollView } from 'react-native'
+import { StyleSheet, View, Text, Button, Image, TouchableHighlight, TouchableOpacity,Dimensions, Animated, ScrollView } from 'react-native'
 import PropType from 'prop-types'
 import {fonts, colors} from './../../assets/variables'
 import {characterList} from '../../assets/characterList'
@@ -36,6 +36,10 @@ export default class Place extends React.Component {
     this.props.onReading()
   }
 
+  handleNavigationToChapter = (chapterId) => {
+    // if (chapterId == 26)
+  }
+
   componentWillMount() {
     this._visibility = new Animated.Value(0);
   }
@@ -67,18 +71,20 @@ export default class Place extends React.Component {
         const chapterNb = chapter.numberInt
         const chapterImages = imageList.chapters['chapter'+chapterNb]
         console.log(chapterImages)
-        if(chapterImages && chapterImages.thumbnail) {
+        if (chapterImages && chapterImages.thumbnail) {
           return (
-            <View key={index} style={[styles.listElement]}>
-              <View style={[styles.listThumbnailWrapper,  styles.listChapterThumbnailWrapper]}>
-                <View style={[styles.listThumbnailContainer, styles.listChapterThumbnailWrapper]}>
-                  {/* <Image source={chapter.isLocked ? imageList.others.lock : chapterImages.thumbnail} style={[chapter.isLocked ? styles.listThumbnailLocked : styles.listThumbnail, styles.listChapterThumbnailWrapper]} /> */}
-                  <Image source={chapterImages.thumbnail} style={[styles.listThumbnail, styles.listChapterThumbnailWrapper]} />
+            <TouchableOpacity  key={index} onPress={() => {this.handleNavigationToChapter(chapter.id)}}>
+              <View style={[styles.listElement]}>
+                <View style={[styles.listThumbnailWrapper,  styles.listChapterThumbnailWrapper]}>
+                  <View style={[styles.listThumbnailContainer, styles.listChapterThumbnailWrapper]}>
+                    {/* <Image source={chapter.isLocked ? imageList.others.lock : chapterImages.thumbnail} style={[chapter.isLocked ? styles.listThumbnailLocked : styles.listThumbnail, styles.listChapterThumbnailWrapper]} /> */}
+                    <Image source={chapterImages.thumbnail} style={[styles.listThumbnail, styles.listChapterThumbnailWrapper]} />
+                  </View>
                 </View>
+                <Text style={[styles.listSubTitle]}>Chapitre {chapter.numberRoman}</Text>
+                <Text style={styles.listDescription}>{chapter.title}</Text>
               </View>
-              <Text style={[styles.listSubTitle]}>Chapitre {chapter.numberRoman}</Text>
-              <Text style={styles.listDescription}>{chapter.title}</Text>
-            </View>
+            </TouchableOpacity>
           )
         }
       })

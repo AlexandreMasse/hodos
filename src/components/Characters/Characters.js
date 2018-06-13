@@ -121,7 +121,7 @@ class Characters extends React.Component {
   }
 
   _renderLockedCharacter() {
-    if (this.state.lockedCharacter) {
+    if (this.state.lockedCharacter && this.state.lockedCharacter.id) {
       return (
         <Animated.View style={[
           {
