@@ -443,7 +443,7 @@ class Chapter extends React.Component {
   }
 
   _renderChapterEnd() {
-    if (this.state.showChapterEnd) {
+    if (this.state.showChapterEnd && Number(this.currentChapter.id) !== 67) {
       const nextChapterNumber = this.nextChapter.numberInt
       const chapterNumber = this.currentChapter.numberInt
       if (this.nextChapter && chapterNumber) {
