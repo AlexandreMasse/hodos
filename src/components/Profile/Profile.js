@@ -60,12 +60,14 @@ class Profile extends React.Component {
   handleCardChanges = (stateFunc, id) => {
     Animated.timing(this._visibility, {
       toValue: 0,
-      duration: 450
+      duration: 450,
+      useNativeDriver: true
     }).start(() => {
       stateFunc(id)
       Animated.timing(this._visibility, {
         toValue: 100,
         duration: 450,
+        useNativeDriver: true,
         //delay: 300
       }).start()
     })

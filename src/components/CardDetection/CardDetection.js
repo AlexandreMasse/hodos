@@ -368,7 +368,7 @@ export default class CardDetection extends React.Component {
         {/* <Image style={style.background} source={imageList.cardDetection.backgroundCharacter}/>*/}
         {/*<Image style={style.patternGrid} source={imageList.cardDetection.patternGrid}/>*/}
         {this.renderPoints()}
-        {this.renderCharacterName()}
+        {/*{this.renderCharacterName()}*/}
       </View>
      );
   }

@@ -39,9 +39,13 @@ export default class LottieAnimation extends React.Component {
 
   componentDidMount() {
     if(this.props.play) {
-      setTimeout(() => {
-          this.animation.play();
-      }, this.props.delay)
+      if (this.animation) {
+        setTimeout(() => {
+          if (this.animation) {
+            this.animation.play();
+          }
+        }, this.props.delay)
+      }
     }
   }
 
@@ -49,9 +53,11 @@ export default class LottieAnimation extends React.Component {
 
     if(this.props !== nextProps){
       if(nextProps.play) {
-        setTimeout(() => {
-            this.animation.play();
-        }, nextProps.delay)
+          setTimeout(() => {
+            if (this.animation) {
+              this.animation.play();
+            }
+          }, nextProps.delay)
       }
     }
   }

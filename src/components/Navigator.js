@@ -103,12 +103,12 @@ export const MainDrawerNavigator = DrawerNavigator(
         title: 'Personnages'
       }
     },
-    Settings: {
-      screen: Settings,
-      navigationOptions : {
-        title: 'Paramètres'
-      }
-    },
+    // Settings: {
+    //   screen: Settings,
+    //   navigationOptions : {
+    //     title: 'Paramètres'
+    //   }
+    // },
     // HIDDEN SCREENS
     Chapter : {
       screen: Chapter,

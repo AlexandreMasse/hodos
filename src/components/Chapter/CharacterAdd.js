@@ -8,6 +8,7 @@ import imageList from './../../assets/ImagesList'
 import CardDetection from './../CardDetection/CardDetection'
 import { characterList } from './../../assets/characterList'
 import { withNavigation } from 'react-navigation'
+import ImageAspectRatio from "../utils/ImageAspectRatio";
 
 class CharacterAdd extends React.Component {
 
@@ -39,6 +40,8 @@ class CharacterAdd extends React.Component {
       toValue: 100,
       duration: 500
     }).start()
+
+    console.log('this.props.characterDiscovered',this.props.characterDiscovered);
   }
 
   _handleBackToMap = () => {
@@ -51,7 +54,10 @@ class CharacterAdd extends React.Component {
 
 
   _onPatternRecognition(characterId) {
-    if (characterId === Number(this.props.characterDiscovered.id)) {
+    console.log('charcaterId', characterId);
+    console.log('this.props.characterDiscovered.id', this.props.characterDiscovered[0].id);
+    if (characterId === Number(this.props.characterDiscovered[0].id)) {
+
       this._renderAnimation()
     }
   }
@@ -148,9 +154,12 @@ class CharacterAdd extends React.Component {
           {this._renderCharacterAddText()}
           </View>
           <View style={[stylesSheet.cardDetection, {borderColor: '#fff', borderWidth: 10}]}>
-            <CardDetection onPatternRecognition={(id) => {this._onPatternRecognition(id)}} />
+            <CardDetection onPatternRecognition={(id) => {this._onPatternRecognition(id)}}/>
             <Text style={stylesSheet.cardDetectionText}>Maintiens la carte du personnage sur cette zone</Text>
+            <View style={[{width: 295, height:'95%', position: 'absolute', left: 30, top: 40}]} pointerEvents= {'none'}>
+              <ImageAspectRatio src={imageList.others.cardBack} width={'100%'}/>
             </View>
+          </View>
         </Animated.View>
       )
     }

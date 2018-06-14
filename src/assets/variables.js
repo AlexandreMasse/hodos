@@ -41,11 +41,11 @@ export const stylesSheet = {
   },
   cardDetectionText: {
     position: 'absolute',
-    bottom: 0,
+    bottom: 15,
     width: '100%',
     fontSize: 14,
     marginVertical: 30,
-    paddingHorizontal: 40,
+    paddingHorizontal: 80,
     textAlign: 'center',
     color: colors.grey,
     opacity: 0.8
