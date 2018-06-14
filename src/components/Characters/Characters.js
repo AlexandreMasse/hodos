@@ -284,7 +284,7 @@ class Characters extends React.Component {
             </View>
           </View>
         </View>
-        {this._renderLockedCharacter()}
+        {/*{this._renderLockedCharacter()}*/}
         <OpenDrawerButton/>
       </View>
     )

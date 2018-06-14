@@ -88,7 +88,7 @@ class SkillUse extends React.Component {
   _renderSkillUsed() {
     this.setState({
       title: this.props.dataSkill.successTitle,
-      subTitle: this.props.dataSkill.subTitle,
+      subTitle: this.props.dataSkill.successSubTitle,
       isSkillUsed: true
     })
     Animated.timing(this.state.visibilityContent, {

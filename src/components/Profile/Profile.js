@@ -28,9 +28,10 @@ class Profile extends React.Component {
       skillProgress: [],
       activeSkill: {},
       showActiveSkill: false,
-      imageBackground: imageList.profile.background.general
+      imageBackground: imageList.profile.background.general,
+      visibility: new Animated.Value(100)
     }
-    this._visibility = new Animated.Value(100)
+    //this._visibility = new Animated.Value(100)
     //this._visibilityBackground = new Animated.Value(100)
   }
 
@@ -58,16 +59,14 @@ class Profile extends React.Component {
   }
 
   handleCardChanges = (stateFunc, id) => {
-    Animated.timing(this._visibility, {
+    Animated.timing(this.state.visibility, {
       toValue: 0,
       duration: 450,
-      useNativeDriver: true
     }).start(() => {
       stateFunc(id)
-      Animated.timing(this._visibility, {
+      Animated.timing(this.state.visibility, {
         toValue: 100,
         duration: 450,
-        useNativeDriver: true,
         //delay: 300
       }).start()
     })
@@ -202,7 +201,7 @@ class Profile extends React.Component {
   }
 
   render () {
-    const visibilityInterpolation = this._visibility.interpolate({
+    const visibilityInterpolation = this.state.visibility.interpolate({
       inputRange: [0, 100],
       outputRange: [0, 1],
     })
@@ -210,7 +209,7 @@ class Profile extends React.Component {
     return (
       <View style={styles.container}>
         <Animated.View style={[{width: '100%',
-          opacity: this._visibility.interpolate({
+          opacity: this.state.visibility.interpolate({
             inputRange: [0, 100],
             outputRange: [0, 1],
           })}
