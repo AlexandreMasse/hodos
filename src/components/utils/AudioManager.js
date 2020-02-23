@@ -1,3 +1,5 @@
+import { Audio } from 'expo-av';
+
 export const AudioManager = {
   prepareSounds: async (soundList) => {
     return new Promise( (resolve, reject) => {
@@ -8,7 +10,7 @@ export const AudioManager = {
       Promise.all(Object.keys(soundList).map(async key => {
         console.log(key)
         const res = soundList[key]
-        const { sound } = await Expo.Audio.Sound.create(res)
+        const { sound } = await Audio.Sound.createAsync(res)
         await sound.setStatusAsync({
           volume: 1,
         })
@@ -31,7 +33,7 @@ export const AudioManager = {
   prepareSound: async (source, config) => {
     return new Promise(async (resolve, reject) => {
       const res = source
-      const { sound } = await Expo.Audio.Sound.create(res)
+      const { sound } = await Audio.Sound.createAsync(res)
 
       await sound.setStatusAsync({
         volume: config && config.volume ? config.volume : 0,

@@ -1,9 +1,9 @@
 import React from 'react'
-import {StyleSheet, View, Text, Image, Button, Dimensions, Animated} from 'react-native'
+import {StyleSheet, View, Dimensions, Animated} from 'react-native'
 import {connect} from 'react-redux';
 import ButtonWhite from "../ButtonWhite";
 import LottieAnimation from "../LottieAnimation/LottieAnimation";
-import {LinearGradient} from "expo";
+import { LinearGradient } from 'expo-linear-gradient';
 import ImageAspectRatio from "../utils/ImageAspectRatio";
 import ImagesList from "../../assets/ImagesList";
 import TextApparition from "./../TextApparition"

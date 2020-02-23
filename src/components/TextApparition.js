@@ -1,8 +1,7 @@
 import React from 'react'
 import PropType from 'prop-types'
-import {StyleSheet, Text, View, Animated} from 'react-native'
-import { colors, fonts, stylesSheet } from './../assets/variables'
-import { LinearGradient } from 'expo'
+import {StyleSheet, Text, Animated} from 'react-native'
+import { colors, fonts } from './../assets/variables'
 
 const increaseValue = 100
 

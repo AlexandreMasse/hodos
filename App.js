@@ -1,6 +1,6 @@
 // React
 import React from 'react';
-import {StyleSheet, YellowBox, TouchableOpacity, Text, View, StatusBar} from 'react-native';
+import {StyleSheet, YellowBox, View, StatusBar} from 'react-native';
 // Store / data
 import {store} from './src/store/reducers/index'
 import {Provider} from 'react-redux'
@@ -11,7 +11,9 @@ import {AppStackNavigator} from './src/components/Navigator'
 import imageList from './src/assets/ImagesList'
 import SoundsList from './src/assets/SoundsList'
 // Expo
-import { Asset, AppLoading, Font, Audio } from 'expo';
+import { AppLoading } from 'expo';
+import { Asset } from 'expo-asset';
+import * as Font from 'expo-font';
 
   _cacheFiles = (files) => {
     return files.map(file => {
@@ -93,6 +95,7 @@ class App extends React.Component {
       {name: 'rubik-light', font: require('./src/assets/fonts/Rubik/Rubik-Light.ttf')}
     ])
 
+    //await Promise.all([...fontAssets])
     await Promise.all([...fontAssets, ...imageAssets, ...soundsAsset])
 
   }

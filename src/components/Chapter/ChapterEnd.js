@@ -1,7 +1,6 @@
 import React from 'react'
 import PropType from 'prop-types'
-import { StyleSheet, View, Text, Image, Animated } from 'react-native'
-import { fonts } from './../../assets/variables'
+import { StyleSheet, View, Image, Animated } from 'react-native'
 import ButtonWhite from './../ButtonWhite'
 import Title from './../Title'
 import imageList from './../../assets/ImagesList'

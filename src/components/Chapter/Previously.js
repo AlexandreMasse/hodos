@@ -1,6 +1,5 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import { StyleSheet, View, Text, Image, TouchableHighlight, Dimensions, Animated } from 'react-native'
+import { StyleSheet, View, Text, Image, Dimensions, Animated } from 'react-native'
 import {connect} from 'react-redux'
 import OpenDrawerButton from "../OpenDrawerButton"
 import ButtonWhite from './../ButtonWhite'

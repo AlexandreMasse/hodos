@@ -1,7 +1,7 @@
 import React from 'react'
-import Audio from 'expo'
+import { Audio } from 'expo-av'
 
-const soundObject = new Expo.Audio.Sound()
+const soundObject = new Audio.Sound()
 
 export default class PlayAudio {
   constructor(audio) {

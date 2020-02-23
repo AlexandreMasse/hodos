@@ -1,8 +1,8 @@
 import React from 'react'
 import PropType from 'prop-types'
 import {StyleSheet, Text, View, Animated} from 'react-native'
-import { colors, fonts, stylesSheet } from './../assets/variables'
-import { LinearGradient } from 'expo'
+import { stylesSheet } from './../assets/variables'
+import { LinearGradient } from 'expo-linear-gradient'
 
 export default class Title extends React.Component {
 

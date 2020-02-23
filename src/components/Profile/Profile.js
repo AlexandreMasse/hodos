@@ -1,16 +1,13 @@
 import React from 'react'
 import {StyleSheet, View, Text, Image, TouchableOpacity, Button, Animated} from 'react-native'
 import {connect} from "react-redux";
-import PropType from 'prop-types'
 import {fonts, colors} from './../../assets/variables'
 import Title from './../Title'
 import CircularSkill from "../Profile/CircularSkill"
-import { LinearGradient } from 'expo'
+import { LinearGradient } from 'expo-linear-gradient'
 import imageList from './../../assets/ImagesList'
-import progress from "../../store/reducers/progress";
 import ProgressBar from './../ProgressBar'
 import ImageAspectRatio from './../utils/ImageAspectRatio'
-import AnimatedCircularProgress from 'react-native-circular-progress/src/AnimatedCircularProgress';
 import OpenDrawerButton from "../OpenDrawerButton";
 
 

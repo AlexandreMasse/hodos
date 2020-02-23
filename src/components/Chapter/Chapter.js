@@ -588,7 +588,7 @@ class Chapter extends React.Component {
 
           {/* @todo Delete following debug comp */}
           {/* <View style={{position: 'absolute', top: 0, left: 2220.25, width: 30, height: 20, backgroundColor: 'green', zIndex: 500}}/> */}
-w        </Animated.ScrollView>
+        </Animated.ScrollView>
         {this._renderChapterEnd()}
         {this._renderSkillNeeded()}
         <View style={styles.absoluteContent}>

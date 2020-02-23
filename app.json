@@ -5,8 +5,10 @@
     "icon": "./src/assets/images/icon.png",
     "version": "1.0.0",
     "privacy": "unlisted",
-    "sdkVersion": "26.0.0",
-    "platforms": ["ios"],
+    "sdkVersion": "35.0.0",
+    "platforms": [
+      "ios"
+    ],
     "orientation": "landscape",
     "ios": {
       "bundleIdentifier": "com.gobelins.hodos",
@@ -24,39 +26,3 @@
     }
   }
 }
-
-
-//{
-//  "expo": {
-//    "name": "Hodos",
-//    "slug": "hodos",
-//    "icon": "./src/assets/images/icon.png",
-//    "version": "1.0.0",
-//    "sdkVersion": "26.0.0",
-//    "orientation": "landscape",
-//    "ios": {
-//      "bundleIdentifier": "com.gobelins.hodos",
-//      "supportsTablet": true,
-//      "isTabletOnly": true,
-//      "splash": {
-//        "resizeMode": "contain",
-//        "image": "./src/assets/images/splash/splash.png",
-//        "tabletImage": "./src/assets/images/splash/splash.png"
-//      },
-//            "publishBundlePath": "ios/hodos/Supporting/shell-app.bundle",
-//            "publishManifestPath": "ios/hodos/Supporting/shell-app-manifest.json"
-//    },
-//        "isDetached": true,
-//        "detach": {
-//          "scheme": "exp94373aea36b84a1f8e002396422879d4",
-//          "iosExpoViewUrl": "https://s3.amazonaws.com/exp-exponent-view-code/ios-v2.4.4-sdk26.0.0-3bd935c7-cdd3-4002-8e44-4df857a675f2.tar.gz",
-//          "androidExpoViewUrl": "https://s3.amazonaws.com/exp-exponent-view-code/android-v2.4.0-sdk26.0.0-e63d9209-070c-4118-b06b-c60e82da0b66.tar.gz"
-//        },
-//        "scheme": "exp94373aea36b84a1f8e002396422879d4",
-//    "android": {
-//      "package": "com.gobelins.hodos",
-//            "publishBundlePath": "android/app/src/main/assets/shell-app.bundle",
-//            "publishManifestPath": "android/app/src/main/assets/shell-app-manifest.json"
-//    }
-//  }
-//}

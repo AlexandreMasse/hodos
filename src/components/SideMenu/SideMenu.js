@@ -7,7 +7,7 @@ import imageList from '../../assets/ImagesList'
 import { colors, fonts } from './../../assets/variables'
 import ProgressBar from './../ProgressBar'
 
-import {LinearGradient} from "expo";
+import { LinearGradient } from 'expo-linear-gradient'
 import ButtonWhite from "../ButtonWhite";
 
 class SideMenu extends React.Component {

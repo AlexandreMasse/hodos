@@ -2,10 +2,10 @@ import React from 'react'
 import { StyleSheet, View, Text } from 'react-native'
 import {connect} from 'react-redux'
 import OpenDrawerButton from "../OpenDrawerButton"
-import Audio from 'expo'
+import { Audio } from 'expo-av'
 import SoundsList from './../../assets/SoundsList'
 
-const soundObject = new Expo.Audio.Sound()
+const soundObject = new Audio.Sound()
 
 class Settings extends React.Component {
 
@@ -16,7 +16,7 @@ class Settings extends React.Component {
       isLoaded: false
     }
   }
-  
+
   render () {
     return (
       <View style={styles.container}>

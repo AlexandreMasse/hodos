@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types'
 import { StyleSheet, View } from 'react-native';
-import { DangerZone } from 'expo';
-const { Lottie } = DangerZone;
+import LottieView from "lottie-react-native";
 
 export default class LottieAnimation extends React.Component {
 
@@ -68,7 +67,7 @@ export default class LottieAnimation extends React.Component {
         width: this.props.width,
         height: this.props.height
       }, this.props.styles]} pointerEvents="none">
-        <Lottie
+        <LottieView
           ref={animation => {
             this.animation = animation;
           }}
