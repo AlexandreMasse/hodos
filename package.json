@@ -19,7 +19,7 @@
     "preset": "jest-expo"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "expo": "^35.0.0",
     "fsevents": "^2.1.2",
     "prop-types": "^15.6.1",
